@@ -1,0 +1,821 @@
+{
+  "name": "视频工作流-生成分镜图片",
+  "nodes": [
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "999349cc-077d-465d-9c08-e762716e11fd",
+              "leftValue": "={{ $json.code }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "65680057-2cb5-43ec-9893-dc3166cc6ebb",
+              "leftValue": "={{ $json.data.taskId }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        976,
+        0
+      ],
+      "id": "f31c2163-bfdf-4bca-9cb4-2843f643c4b0",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1216,
+        0
+      ],
+      "id": "6f983401-1134-4f19-b034-836c257450ef",
+      "name": "Wait",
+      "webhookId": "599da346-6783-4542-853c-81604e135c4c"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "4f4e9ba2-123c-4231-8d59-d297375cf47b",
+              "leftValue": "={{ $json.data }}",
+              "rightValue": "QUEUED",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "4eab6588-e33b-42cb-84d5-bb90adfc6431",
+              "leftValue": "={{ $json.data }}",
+              "rightValue": "RUNNING",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1600,
+        0
+      ],
+      "id": "36910d3d-047b-4e95-a3cb-4f1a596f00e0",
+      "name": "If1",
+      "retryOnFail": false
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "95663f30-5e57-4d3d-88bd-e11abce866ae",
+              "leftValue": "={{ $('查询状态').first().json.data }}",
+              "rightValue": "SUCCESS",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1824,
+        0
+      ],
+      "id": "c274ab08-66ac-4ba4-974e-c94ffae5a2c4",
+      "name": "If2"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.runninghub.cn/task/openapi/status",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"apiKey\": \"{{ $('配置字段').first().json.runninghub_apikey }}\",\n  \"taskId\": \"{{ $('发起任务').item.json.data.taskId }}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1408,
+        0
+      ],
+      "id": "ba2806bf-7fee-419e-879f-be09c63d897a",
+      "name": "查询状态",
+      "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.runninghub.cn/task/openapi/create",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"workflowId\": \"{{ $('配置字段').first().json.workflow_id }}\",\n  \"apiKey\": \"{{ $('配置字段').first().json.runninghub_apikey }}\",\n  \"nodeInfoList\": [\n    {\n      \"nodeId\": \"74\",\n      \"fieldName\": \"image\",\n      \"fieldValue\": \"{{ $('上传图片').first().json.data.fileName }}\",\n      \"description\": \"上传参考图\"\n    },\n    {\n      \"nodeId\": \"138\",\n      \"fieldName\": \"prompt\",\n      \"fieldValue\": {{ $('配置字段').first().json.prompt }},\n      \"description\": \"提示词\"\n    }\n  ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        800,
+        0
+      ],
+      "id": "4d131e45-a21b-453e-a656-8d58f71c1d1e",
+      "name": "发起任务",
+      "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "data",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        144,
+        432
+      ],
+      "id": "ff75d51e-16d8-4613-b90c-e6408cba3cc4",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "86a6b18c-ecca-49a6-9ae2-8270dcc13e89",
+              "leftValue": "={{ $json.fileType }}",
+              "rightValue": "png",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        352,
+        432
+      ],
+      "id": "f2061367-a86d-4ccb-80c0-b1f1cf34232f",
+      "name": "Filter"
+    },
+    {
+      "parameters": {
+        "operation": "write",
+        "fileName": "={{ $('配置字段').item.json.output_folder_path }}image_{{ $now.format('yyyy-MM-dd_hh-mm-ss') }}_{{ Math.floor(Math.random() * 10000) }}.png",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        768,
+        432
+      ],
+      "id": "49d54836-ec7e-4d46-b769-66825fdb5f66",
+      "name": "Read/Write Files from Disk"
+    },
+    {
+      "parameters": {
+        "fieldsToAggregate": {
+          "fieldToAggregate": [
+            {
+              "fieldToAggregate": "fileName",
+              "renameField": true,
+              "outputFieldName": "images_filepath"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        976,
+        432
+      ],
+      "id": "54544db2-02ec-470a-b4c1-8c8f860b464b",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "565c1e1b-70c2-403d-a35f-4f43cfd2c0ae",
+              "name": "prompt",
+              "value": "={{ JSON.stringify($json.prompt) }}",
+              "type": "string"
+            },
+            {
+              "id": "bce999ce-9040-4f70-a70a-6df392427116",
+              "name": "character_filepath",
+              "value": "={{ $json.character_filepath }}",
+              "type": "string"
+            },
+            {
+              "id": "29a10c8a-5f18-4c02-8a47-6be9c25ec1dc",
+              "name": "workflow_id",
+              "value": "1990008698095456257",
+              "type": "string"
+            },
+            {
+              "id": "0d1585fd-c4f6-45fd-ac0c-6463b8c1d415",
+              "name": "runninghub_apikey",
+              "value": "={{ $json.runninghub_apikey }}",
+              "type": "string"
+            },
+            {
+              "id": "b8e90af4-4af6-4a2a-9b2d-d75606073b29",
+              "name": "output_folder_path",
+              "value": "={{ $json.output_folder_path }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        144,
+        0
+      ],
+      "id": "bdf3bcb8-272b-41fb-b338-a11acf9b7a86",
+      "name": "配置字段"
+    },
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "character_filepath"
+            },
+            {
+              "name": "prompt"
+            },
+            {
+              "name": "runninghub_apikey"
+            },
+            {
+              "name": "output_folder_path"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -80,
+        0
+      ],
+      "id": "8deedcd8-5d5c-48bd-87bc-81a371e938c1",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "6491514e-d576-4ea9-bcfb-9d8aa5ab69fc",
+              "name": "character_filepath",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "de858876-b71d-4290-8aa1-5ac20bbd84a2",
+              "name": "prompt",
+              "value": "=生成一张测试图片",
+              "type": "string"
+            },
+            {
+              "id": "f203b1b7-7f19-4963-8232-8ad5e6d93b4a",
+              "name": "runninghub_apikey",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "31bddccc-2b60-4677-b209-0c98f4e16162",
+              "name": "output_folder_path",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        144,
+        -240
+      ],
+      "id": "6785bce8-799b-4077-ae03-632c1869eca7",
+      "name": "Edit Fields",
+      "disabled": true
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -80,
+        -240
+      ],
+      "id": "0c05c8d0-8ab5-4883-b109-90699ce68230",
+      "name": "When clicking ‘Execute workflow’",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.runninghub.cn/task/openapi/upload",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "file",
+              "inputDataFieldName": "data"
+            },
+            {
+              "name": "fileType",
+              "value": "input"
+            },
+            {
+              "name": "apiKey",
+              "value": "={{ $('配置字段').item.json.runninghub_apikey }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        560,
+        0
+      ],
+      "id": "0ababfd0-63c1-4ea2-967a-972646d52d7d",
+      "name": "上传图片"
+    },
+    {
+      "parameters": {
+        "fileSelector": "={{ $json.character_filepath }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        336,
+        0
+      ],
+      "id": "36a0b62d-49e7-4de7-97ae-67860e0b143a",
+      "name": "Read/Write Files from Disk1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.runninghub.cn/task/openapi/outputs",
+        "sendBody": true,
+        "specifyBody": "=json",
+        "bodyParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "jsonBody": "={\n  \"apiKey\": \"{{ $('配置字段').first().json.runninghub_apikey }}\",\n  \"taskId\": \"{{ $('发起任务').item.json.data.taskId }}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -64,
+        432
+      ],
+      "id": "fc0d71c6-8754-4402-8433-2eed19d7dabf",
+      "name": "获取图片地址"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b56d373b-ce89-4280-bb76-745968f4d482",
+              "name": "images_filepath",
+              "value": "={{ $json.images_filepath }}",
+              "type": "array"
+            },
+            {
+              "id": "a67d82bf-80fd-460a-a4bc-28a2c577f111",
+              "name": "images_url",
+              "value": "={{ $('获取图片地址').item.json.data.filter(item => item.fileType === 'png').map(item => item.fileUrl) }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1184,
+        432
+      ],
+      "id": "14d6d40e-5465-45ba-b01c-cac717aff05f",
+      "name": "执行结束返回字段"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "9141348a-7de6-4667-83a0-8b8b78c8d3e7",
+              "leftValue": "={{ `${$('发起任务').first().json.code}` }}",
+              "rightValue": "={{ `${421}` }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "e179a8be-5740-4733-9dd8-2ca625c00e39",
+              "leftValue": "={{ `${$('发起任务').first().json.code}` }}",
+              "rightValue": "={{ `${433}` }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "f7c83032-2903-4596-84d0-ccdd9f2a9f22",
+              "leftValue": "={{ `${$('发起任务').first().json.code}` }}",
+              "rightValue": "={{ `${413}` }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1088,
+        224
+      ],
+      "id": "c21c842c-e359-4a06-bf27-5c7f6d287f9d",
+      "name": "If3"
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1312,
+        208
+      ],
+      "id": "1bd7ad90-b9b9-4970-9b52-7b7e191c98b9",
+      "name": "Wait1",
+      "webhookId": "4c9aba80-255e-4811-b4b0-b3ce16833cda"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.fileUrl }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        560,
+        432
+      ],
+      "id": "d8d60b40-d362-4df8-b77d-410b74e083a3",
+      "name": "下载图片"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "查询状态",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "查询状态": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "发起任务": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "获取图片地址",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "上传图片",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "下载图片",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read/Write Files from Disk": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "配置字段": {
+      "main": [
+        [
+          {
+            "node": "Read/Write Files from Disk1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "配置字段",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        []
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "上传图片": {
+      "main": [
+        [
+          {
+            "node": "发起任务",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read/Write Files from Disk1": {
+      "main": [
+        [
+          {
+            "node": "上传图片",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "获取图片地址": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "执行结束返回字段",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If3": {
+      "main": [
+        [
+          {
+            "node": "Wait1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait1": {
+      "main": [
+        [
+          {
+            "node": "发起任务",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "下载图片": {
+      "main": [
+        [
+          {
+            "node": "Read/Write Files from Disk",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "2ce584d8-7544-492d-8bac-49dbe59a66f4",
+  "meta": {
+    "instanceId": "164b6258852a751ffad2d91c0ef2b3e746122b3f527005a8ac87036f847eae21"
+  },
+  "id": "NrSb0OIY3JcOH7yO",
+  "tags": []
+}

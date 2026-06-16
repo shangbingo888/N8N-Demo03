@@ -1,0 +1,3133 @@
+[
+  {
+    "name": "Unnamed Workflow",
+    "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Automate/1271_Automate.json",
+    "tags": [
+      "automation",
+      "n8n",
+      "production-ready",
+      "excellent",
+      "optimized"
+    ],
+    "description": "Automated workflow: Workflow. This workflow processes data and performs automated tasks.",
+    "node_count": 2,
+    "active": false,
+    "classification": {
+      "primary": "automation-triggers",
+      "primary_label": "自动化触发 (Automation Triggers)",
+      "secondary": [
+        "error-handling",
+        "data-processing"
+      ],
+      "scores": {
+        "text-generation": 0,
+        "image-processing": 0,
+        "data-processing": 2,
+        "automation-triggers": 13,
+        "conditional-loop": 0,
+        "error-handling": 11,
+        "sub-workflow": 0
+      }
+    },
+    "trigger_nodes": [
+      {
+        "id": "trigger-220d6512",
+        "name": "Manual Trigger",
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          100,
+          100
+        ],
+        "has_credentials": false
+      }
+    ],
+    "ai_nodes": [],
+    "integration_nodes": [],
+    "data_nodes": [],
+    "control_nodes": [],
+    "error_nodes": [
+      {
+        "id": "error-fb7edbc5",
+        "name": "Error Handler",
+        "type": "n8n-nodes-base.stopAndError",
+        "typeVersion": 1,
+        "position": [
+          1000,
+          400
+        ],
+        "has_credentials": false
+      }
+    ],
+    "sticky_notes_count": 0,
+    "sticky_experiences": [],
+    "trigger_patterns": [
+      {
+        "name": "Manual Trigger",
+        "type": "manualTrigger"
+      }
+    ],
+    "error_handling": [
+      {
+        "name": "Error Handler",
+        "type": "stopAndError"
+      }
+    ],
+    "settings": {
+      "executionOrder": "v1",
+      "saveManualExecutions": true,
+      "callerPolicy": "workflowsFromSameOwner",
+      "errorWorkflow": null,
+      "timezone": "UTC",
+      "executionTimeout": 3600,
+      "maxExecutions": 1000,
+      "retryOnFail": true,
+      "retryCount": 3,
+      "retryDelay": 1000
+    }
+  },
+  {
+    "name": "Unnamed Workflow",
+    "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Automate/1326_Automate.json",
+    "tags": [
+      "automation",
+      "n8n",
+      "production-ready",
+      "excellent",
+      "optimized"
+    ],
+    "description": "Automated workflow: Workflow. This workflow processes data and performs automated tasks.",
+    "node_count": 2,
+    "active": false,
+    "classification": {
+      "primary": "automation-triggers",
+      "primary_label": "自动化触发 (Automation Triggers)",
+      "secondary": [
+        "error-handling",
+        "data-processing"
+      ],
+      "scores": {
+        "text-generation": 0,
+        "image-processing": 0,
+        "data-processing": 2,
+        "automation-triggers": 13,
+        "conditional-loop": 0,
+        "error-handling": 11,
+        "sub-workflow": 0
+      }
+    },
+    "trigger_nodes": [
+      {
+        "id": "trigger-066fb012",
+        "name": "Manual Trigger",
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          100,
+          100
+        ],
+        "has_credentials": false
+      }
+    ],
+    "ai_nodes": [],
+    "integration_nodes": [],
+    "data_nodes": [],
+    "control_nodes": [],
+    "error_nodes": [
+      {
+        "id": "error-15546bff",
+        "name": "Error Handler",
+        "type": "n8n-nodes-base.stopAndError",
+        "typeVersion": 1,
+        "position": [
+          1000,
+          400
+        ],
+        "has_credentials": false
+      }
+    ],
+    "sticky_notes_count": 0,
+    "sticky_experiences": [],
+    "trigger_patterns": [
+      {
+        "name": "Manual Trigger",
+        "type": "manualTrigger"
+      }
+    ],
+    "error_handling": [
+      {
+        "name": "Error Handler",
+        "type": "stopAndError"
+      }
+    ],
+    "settings": {
+      "executionOrder": "v1",
+      "saveManualExecutions": true,
+      "callerPolicy": "workflowsFromSameOwner",
+      "errorWorkflow": null,
+      "timezone": "UTC",
+      "executionTimeout": 3600,
+      "maxExecutions": 1000,
+      "retryOnFail": true,
+      "retryCount": 3,
+      "retryDelay": 1000
+    }
+  },
+  {
+    "name": "Unnamed Workflow",
+    "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Automation/1250_Automation.json",
+    "tags": [
+      "automation",
+      "n8n",
+      "production-ready",
+      "excellent",
+      "optimized"
+    ],
+    "description": "Automated workflow: Workflow. This workflow processes data and performs automated tasks.",
+    "node_count": 2,
+    "active": false,
+    "classification": {
+      "primary": "automation-triggers",
+      "primary_label": "自动化触发 (Automation Triggers)",
+      "secondary": [
+        "error-handling",
+        "data-processing"
+      ],
+      "scores": {
+        "text-generation": 0,
+        "image-processing": 0,
+        "data-processing": 2,
+        "automation-triggers": 13,
+        "conditional-loop": 0,
+        "error-handling": 11,
+        "sub-workflow": 0
+      }
+    },
+    "trigger_nodes": [
+      {
+        "id": "trigger-9701406d",
+        "name": "Manual Trigger",
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          100,
+          100
+        ],
+        "has_credentials": false
+      }
+    ],
+    "ai_nodes": [],
+    "integration_nodes": [],
+    "data_nodes": [],
+    "control_nodes": [],
+    "error_nodes": [
+      {
+        "id": "error-3cc95e12",
+        "name": "Error Handler",
+        "type": "n8n-nodes-base.stopAndError",
+        "typeVersion": 1,
+        "position": [
+          1000,
+          400
+        ],
+        "has_credentials": false
+      }
+    ],
+    "sticky_notes_count": 0,
+    "sticky_experiences": [],
+    "trigger_patterns": [
+      {
+        "name": "Manual Trigger",
+        "type": "manualTrigger"
+      }
+    ],
+    "error_handling": [
+      {
+        "name": "Error Handler",
+        "type": "stopAndError"
+      }
+    ],
+    "settings": {
+      "executionOrder": "v1",
+      "saveManualExecutions": true,
+      "callerPolicy": "workflowsFromSameOwner",
+      "errorWorkflow": null,
+      "timezone": "UTC",
+      "executionTimeout": 3600,
+      "maxExecutions": 1000,
+      "retryOnFail": true,
+      "retryCount": 3,
+      "retryDelay": 1000
+    }
+  },
+  {
+    "name": "Unnamed Workflow",
+    "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Automation/2047_Automation.json",
+    "tags": [
+      "automation",
+      "n8n",
+      "production-ready",
+      "excellent",
+      "optimized"
+    ],
+    "description": "Automated workflow: Workflow. This workflow processes data and performs automated tasks.",
+    "node_count": 2,
+    "active": false,
+    "classification": {
+      "primary": "automation-triggers",
+      "primary_label": "自动化触发 (Automation Triggers)",
+      "secondary": [
+        "error-handling",
+        "data-processing"
+      ],
+      "scores": {
+        "text-generation": 0,
+        "image-processing": 0,
+        "data-processing": 2,
+        "automation-triggers": 13,
+        "conditional-loop": 0,
+        "error-handling": 11,
+        "sub-workflow": 0
+      }
+    },
+    "trigger_nodes": [
+      {
+        "id": "trigger-6a7d7c05",
+        "name": "Manual Trigger",
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          100,
+          100
+        ],
+        "has_credentials": false
+      }
+    ],
+    "ai_nodes": [],
+    "integration_nodes": [],
+    "data_nodes": [],
+    "control_nodes": [],
+    "error_nodes": [
+      {
+        "id": "error-50df8c59",
+        "name": "Error Handler",
+        "type": "n8n-nodes-base.stopAndError",
+        "typeVersion": 1,
+        "position": [
+          1000,
+          400
+        ],
+        "has_credentials": false
+      }
+    ],
+    "sticky_notes_count": 0,
+    "sticky_experiences": [],
+    "trigger_patterns": [
+      {
+        "name": "Manual Trigger",
+        "type": "manualTrigger"
+      }
+    ],
+    "error_handling": [
+      {
+        "name": "Error Handler",
+        "type": "stopAndError"
+      }
+    ],
+    "settings": {
+      "executionOrder": "v1",
+      "saveManualExecutions": true,
+      "callerPolicy": "workflowsFromSameOwner",
+      "errorWorkflow": null,
+      "timezone": "UTC",
+      "executionTimeout": 3600,
+      "maxExecutions": 1000,
+      "retryOnFail": true,
+      "retryCount": 3,
+      "retryDelay": 1000
+    }
+  },
+  {
+    "name": "Openai Workflow",
+    "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Code/0299_Code_Webhook_Create_Webhook.json",
+    "tags": [
+      "automation",
+      "n8n",
+      "production-ready",
+      "excellent",
+      "optimized"
+    ],
+    "description": "Automated workflow: Openai Workflow. This workflow integrates 15 different services: webhook, stickyNote, code, gmailTrigger, switch. It contains 58 nodes and follows best practices for error handling and security.",
+    "node_count": 49,
+    "active": false,
+    "classification": {
+      "primary": "automation-triggers",
+      "primary_label": "自动化触发 (Automation Triggers)",
+      "secondary": [
+        "conditional-loop",
+        "text-generation",
+        "data-processing"
+      ],
+      "scores": {
+        "text-generation": 19,
+        "image-processing": 0,
+        "data-processing": 14,
+        "automation-triggers": 45,
+        "conditional-loop": 26,
+        "error-handling": 2,
+        "sub-workflow": 0
+      }
+    },
+    "trigger_nodes": [
+      {
+        "id": "7105b689-9f9c-4354-aad9-8f1abb6c0a06",
+        "name": "On email received",
+        "type": "n8n-nodes-base.gmailTrigger",
+        "typeVersion": 1,
+        "position": [
+          -2460,
+          2680
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "8e2f4a3b-d224-4248-9682-184a646e022f",
+        "name": "On feedback given",
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 1,
+        "position": [
+          -2460,
+          2940
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "d2a720d4-8487-4dfa-bdb8-6b59368e44bc",
+        "name": "Show HTML page",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1,
+        "position": [
+          -920,
+          2980
+        ],
+        "has_credentials": false
+      }
+    ],
+    "ai_nodes": [
+      {
+        "id": "88c0f64c-a7cd-4f35-96dd-9eee4b1d6a1a",
+        "name": "Generate reply",
+        "type": "n8n-nodes-base.openAi",
+        "typeVersion": 1,
+        "position": [
+          -480,
+          2260
+        ],
+        "has_credentials": true
+      }
+    ],
+    "integration_nodes": [
+      {
+        "id": "7105b689-9f9c-4354-aad9-8f1abb6c0a06",
+        "name": "On email received",
+        "type": "n8n-nodes-base.gmailTrigger",
+        "typeVersion": 1,
+        "position": [
+          -2460,
+          2680
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "2dc3e403-f2a0-43c2-a1e4-187d901d692f",
+        "name": "Send reply to recipient",
+        "type": "n8n-nodes-base.gmail",
+        "typeVersion": 2,
+        "position": [
+          360,
+          1860
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "ab0348c2-f688-42d3-815b-63290e95baad",
+        "name": "Create spreadsheet",
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 3,
+        "position": [
+          1020,
+          2260
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "ba62fd4d-912b-4b37-9fda-2f80cdeb65f8",
+        "name": "Paste data",
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 3,
+        "position": [
+          1620,
+          2260
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "efdb343d-f5bf-4ba4-bc27-850b9e7935ac",
+        "name": "Create or update rows",
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 3,
+        "position": [
+          1220,
+          2500
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "87506e44-21aa-4f08-82f9-f47a24ddb9ce",
+        "name": "Send feedback for fine-tuned data",
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 3,
+        "position": [
+          -100,
+          2980
+        ],
+        "has_credentials": true
+      }
+    ],
+    "data_nodes": [
+      {
+        "id": "d1425dff-0fc1-4a4b-9202-418ce30d7cd9",
+        "name": "Configure",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 1,
+        "position": [
+          -1940,
+          2800
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "ecf03802-51c8-43b1-84d8-5ed5826fd444",
+        "name": "Format data",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 1,
+        "position": [
+          -40,
+          2380
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "2fd5b109-8a54-4684-a8a3-3f7b2d961ae3",
+        "name": "Identify trigger #2",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 1,
+        "position": [
+          -2240,
+          2940
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "8c27f798-d947-432c-bfc9-d22727d0159e",
+        "name": "Identify trigger #1",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 1,
+        "position": [
+          -2240,
+          2680
+        ],
+        "has_credentials": false
+      }
+    ],
+    "control_nodes": [
+      {
+        "id": "ea18ed9a-0158-45e1-ac1b-1993ace4ff2c",
+        "name": "Only continue for specific emails",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 1,
+        "position": [
+          -1360,
+          2460
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "4f6998f6-88a8-4b8b-acea-33c3f33d04dd",
+        "name": "If spreadsheet doesn't exist",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 1,
+        "position": [
+          1420,
+          2500
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "f3564023-a1c5-42f5-923d-a8e98c95c284",
+        "name": "Successfully created or updated row",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          1660,
+          2640
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "a8be831a-f2be-48c9-a661-bc8c5cde6444",
+        "name": "If no sheet IDs",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 1,
+        "position": [
+          800,
+          2380
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "9eedd7b7-ec4e-4dbf-a257-33e73bdff9c1",
+        "name": "Send email reply",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          -40,
+          1860
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "49d77f89-3c1e-4e86-93e8-ae7a566802b7",
+        "name": "If no spreadsheet in configuration #2",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 1,
+        "position": [
+          -700,
+          2980
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "fae8cbc5-7462-4eb0-9f60-85e8e7cfd10e",
+        "name": "If no spreadsheet in configuration #1",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 1,
+        "position": [
+          180,
+          2380
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "38e0f992-a461-4bc1-9f5c-2ceb0e461708",
+        "name": "Record feedback",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          -1360,
+          2980
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "899a0c63-0333-4dc4-ba83-5615a38ae431",
+        "name": "Fallback route",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          -1360,
+          3280
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "bd8cc1dd-3643-4d2f-9527-cfd740a4072a",
+        "name": "Do not send unfinished email reply",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          -40,
+          2060
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "c8b68fdb-c1c0-4f94-b712-e0570a3ad53c",
+        "name": "If reply is complete",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 1,
+        "position": [
+          -260,
+          1960
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "039714b3-88ac-4ca8-86fc-ec1c109110c3",
+        "name": "Do not send email to this recipient",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          -1140,
+          2560
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "330c67dd-e538-414d-a144-e05dbf5effb3",
+        "name": "Send reply to database",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          -260,
+          2380
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "9d5e780e-4282-4c7e-b083-3f769f7dc740",
+        "name": "Determine which trigger ran",
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 1,
+        "position": [
+          -1660,
+          2800
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "3defbf98-0caa-49b1-9bfd-f4640b43d64b",
+        "name": "Is text within token limit?",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 1,
+        "position": [
+          -700,
+          2360
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "b268b8a3-6361-4515-a995-320cd0979688",
+        "name": "Do nothing",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          -480,
+          2460
+        ],
+        "has_credentials": false
+      }
+    ],
+    "error_nodes": [],
+    "sticky_notes_count": 9,
+    "sticky_experiences": [
+      "### Configuration\nIf you decide to use your own spreadsheet, it is up to you to ensure all columns are present before running this workflow. A good way to do this is to run this workflow once with **empty** `spreadsheetid` and `worksheetId` variables (see the `Configure` node). Then map the output from `Store spreadsheet ID` to this node.\n\nIt is recommended that you specify the `spreadsheetId` and `worksheetId`, since relying solely on a workflow's static data is considered bad practice.\n\n\n\n\n\n\n\n",
+      "### Create spreadsheet and populate with headers and deal information\nA spreadsheet is created if the spreadsheet does not exist. The spreadsheet ID is stored in the `$getWorkflowStaticData('global')` variable. Using `Extract current deal` node, the deal information is formatted for the sending to the new spreadsheet.",
+      "### Tip: Deleting old spreadsheets\nIf you ever want to start over, delete the old spreadsheet, __making sure that it is also deleted from Google Drive's trash__.",
+      "### `Get spreadsheet ID`\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe spreadsheet ID is stored in this workflow's static data. If you want to refresh the static data you will need to copy this entire workflow into a new workflow.",
+      "### `Get spreadsheet ID`\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe spreadsheet ID is stored in this workflow's static data. If you want to refresh the static data you will need to copy this entire workflow into a new workflow.",
+      "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nIf your workflow reaches this stage, you will need to consider increasing the tokens in `Generate reply` node.",
+      "## Send a ChatGPT email reply when email received and save responses to Google Sheets\nThis workflow sends a OpenAI GPT reply when an email is received from specific email recipients. It then saves the initial email and the GPT response to an automatically generated Google spreadsheet. Subsequent GPT responses will be added to the same spreadsheet. Additionally, when feedback is given for any of the GPT responses, it will be recorded to the spreasheet, which can then be used later to fine-tune th",
+      "\n\n\n\n\n\n\n\n\n\n\n\n\n\nThis workflow should never reach this node. It is only here for extending the functionality of this workflow if needed.",
+      "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe email that was received is too large to process, as it exceeds token limit. See more on [token limits]({{ $env.WEBHOOK_URL }}"
+    ],
+    "trigger_patterns": [
+      {
+        "name": "On email received",
+        "type": "gmailTrigger"
+      },
+      {
+        "name": "On feedback given",
+        "type": "webhook"
+      },
+      {
+        "name": "Show HTML page",
+        "type": "respondToWebhook"
+      }
+    ],
+    "error_handling": [],
+    "settings": {
+      "executionOrder": "v1",
+      "saveManualExecutions": true,
+      "callerPolicy": "workflowsFromSameOwner",
+      "errorWorkflow": null,
+      "timezone": "UTC",
+      "executionTimeout": 3600,
+      "maxExecutions": 1000,
+      "retryOnFail": true,
+      "retryCount": 3,
+      "retryDelay": 1000
+    }
+  },
+  {
+    "name": "AI-Powered Information Monitoring with OpenAI, Google Sheets, Jina AI and Slack",
+    "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Code/1278_Code_Schedule_Monitor_Webhook.json",
+    "tags": [
+      "automation",
+      "n8n",
+      "production-ready",
+      "excellent",
+      "optimized"
+    ],
+    "description": "Automated workflow: AI-Powered Information Monitoring with OpenAI, Google Sheets, Jina AI and Slack. This workflow integrates 14 different services: textClassifier, stickyNote, httpRequest, code, scheduleTrigger. It contains 40 nodes and follows best practices for error handling and security.",
+    "node_count": 31,
+    "active": false,
+    "classification": {
+      "primary": "automation-triggers",
+      "primary_label": "自动化触发 (Automation Triggers)",
+      "secondary": [
+        "data-processing",
+        "conditional-loop",
+        "error-handling"
+      ],
+      "scores": {
+        "text-generation": 2,
+        "image-processing": 0,
+        "data-processing": 16,
+        "automation-triggers": 31,
+        "conditional-loop": 13,
+        "error-handling": 4,
+        "sub-workflow": 0
+      }
+    },
+    "trigger_nodes": [
+      {
+        "id": "a3a10ccd-26f9-4b05-a79f-8754f619c153",
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "typeVersion": 1.2,
+        "position": [
+          -840,
+          120
+        ],
+        "has_credentials": false
+      }
+    ],
+    "ai_nodes": [],
+    "integration_nodes": [
+      {
+        "id": "b472f924-81d9-4b99-8620-d95b286800c5",
+        "name": "Google Sheets - Get RSS Feed url followed",
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.5,
+        "position": [
+          260,
+          120
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "3f8a0ce3-d7b3-400b-bc03-1a233f441429",
+        "name": "Slack1",
+        "type": "n8n-nodes-base.slack",
+        "typeVersion": 2.3,
+        "position": [
+          4940,
+          -120
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "d72f505d-2bbf-41db-b404-8a61b8c21452",
+        "name": "Google Sheets - Get article monitored database",
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.5,
+        "position": [
+          -400,
+          120
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "6e2c820d-27da-4d3b-844c-581fb266e04a",
+        "name": "Jina AI - Read URL",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          3240,
+          -120
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "0dbcc872-9afa-4e2c-be24-82d3a2457dd0",
+        "name": "Google Sheets - Add relevant articles",
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.5,
+        "position": [
+          3480,
+          480
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "0c7024b6-dfac-4e97-9d42-198fff6bcc47",
+        "name": "Google Sheets - Add relevant article",
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.5,
+        "position": [
+          5660,
+          520
+        ],
+        "has_credentials": true
+      }
+    ],
+    "data_nodes": [
+      {
+        "id": "3f942518-f75b-4d03-9cd1-b275ad3b91cd",
+        "name": "Set field - existing_url",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          -180,
+          120
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "ccbfe5fc-2e87-4fff-b23d-0c4c6ebd3648",
+        "name": "Set fields - Not relevant articles",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          3060,
+          480
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "e1266606-eaee-4077-be7e-6f08ae9bae39",
+        "name": "Set Fields - Relevant Articles",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          4900,
+          520
+        ],
+        "has_credentials": false
+      }
+    ],
+    "control_nodes": [
+      {
+        "id": "704de862-43e5-4322-ae35-45b505e68bb6",
+        "name": "OpenAI Chat Model",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.1,
+        "position": [
+          4220,
+          380
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "eaae54b0-0500-47a7-ad8f-097e0882d21c",
+        "name": "Basic LLM Chain",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.5,
+        "position": [
+          4180,
+          -120
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "1ec53a9a-ca21-4da2-ab94-55b863a27aff",
+        "name": "Relevance Classification for Topic Monitoring",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          2380,
+          -20
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "9f2d2c87-460b-4872-9538-519d26524475",
+        "name": "No Operation, do nothing",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          1960,
+          240
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "e9ebbce6-a3b4-4f89-9908-3d9b2dd42f44",
+        "name": "If Node",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          1640,
+          120
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "baef0ff9-8bf5-4ecf-9300-0adbad0d1a07",
+        "name": "OpenAI Chat Model1",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.1,
+        "position": [
+          2400,
+          300
+        ],
+        "has_credentials": true
+      }
+    ],
+    "error_nodes": [],
+    "sticky_notes_count": 13,
+    "sticky_experiences": [
+      "## LLM Call 1 - Article Topic Relevance Classification \n\nThis **LLM call** is used to **classify** whether the articles published on the website are **relevant** to the **topics and interests** you want to monitor. \nIt analyzes the **title** and the **content snippet** retrieved from the **RSS Read** node. \n\nIn this template, the monitored articles are related to **data and AI.** \nThe classification is done into **two categories**, which you should modify in the `Description` field under the **C",
+      "## LLM Call 2 - Summarize and Format in Slack Markdown \n\nThis node **uses OpenAI's GPT-4o-mini model** to **summarize the article content**, which is provided as **Markdown text** from Jina AI, and formats it in **Slack Markdown** to enhance readability within Slack. \n\n### Customize to fit your needs \n\nHere are two examples of how you can modify the **System Prompt** of this node to better suit your requirements: \n\n- **Language customization:** \n You can modify the **System Prompt** to instruct ",
+      "## Google Sheets - Get RSS Feed URLs Followed \nThis node **retrieves rows** from the Google Sheet that contains the **RSS feed URLs** you follow. \nIt is configured to run only once per execution, meaning that even if the previous node outputs many items, this node will execute only once. \n\nYou can **add more URLs** to your sheet, but keep in mind that following **more RSS feeds** will increase the **cost of LLM API usage** (e.g., OpenAI). \n\nYou can access the **Google Sheet template** to copy an",
+      "## RSS Read \nThis node **reads** the RSS feed. \nThe RSS URL is **retrieved** from the data you have entered in **Google Sheets**, so make sure the URL provided is indeed a **valid RSS feed**. \n\n### What is an RSS feed? \nAn **RSS feed** is a **web feed** that allows users to **automatically receive updates** from websites, such as **news sites** or **blogs**, in a **standardized format**.\n",
+      "## Jina AI - Read URL\n\nThis node **uses the Jina AI API** to **retrieve the content** of articles that were classified as **\"relevant\"** in the previous step. \nSince this process **involves web scraping**, ensure that it complies with the **scraping regulations** in your country. \n\n### What is Jina AI? \n**Jina AI** is an API that allows you to **extract webpage content** and convert it into a format that is **ready for LLM processing**, such as **Markdown**. \n\nYou can create an account [here]({{",
+      "## Google Sheets - Get Article Monitored Database \nThis node **retrieves rows** from the Google Sheet that contains articles **already monitored and summarized** by the workflow. \nDepending on the RSS feed you monitor, **URLs may remain in the feed for a long time**, and you don't want to monitor the same URL **twice**. \nYou can find the **Google Sheet template** that you can copy and use in this workflow [here]({{ $env.WEBHOOK_URL }}\n\nIn this node, make sure to select the **\"article_database\"**",
+      "## Code Node to Filter Existing URLs\n\nThis code node filters URLs that have **not yet been summarized by AI.** \nIt outputs:\n\n- A **list of URLs** following the RSS Read schema if new URLs are found.\n- An item called **\"message\"** with the value **\"No new articles found\"** if no new articles are available in your RSS feed.\n\n---\n\n## IF Node\n\nThe condition for this node is: `{{ $json.message }}` *not equal to* **\"No new articles found\"**.\n\n- **False** → The workflow executes the \"No Operation, do n",
+      "## Set Fields - Not Relevant Articles \n\nThis node prepares the data to be added to the Google Sheet by defining the following fields: \n\n- **`article_url`** – The article's URL.\n- **`summarized`** – Always set to `\"NO (not relevant)\"`, as it belongs to the **\"not_relevant\"** path. \n- **`website`** – The website where the article URL was published. \n- **`fetched_at`** – The timestamp when the URL was processed by the workflow. \n > *(Note: This timestamp reflects when the scenario was triggered, as",
+      "## OpenAI Chat Model \n\nThis node specifies the **AI model** to be used for processing. \nThe default model is **GPT-4o-mini**, which has been **tested** and proven to perform well for this task. \n\n**GPT-4o-mini** is a **cost-efficient** model, offering a good balance between **performance and affordability**, making it suitable for regular usage without incurring high costs.\n",
+      "## Slack - Send Article Summary \n\nThis node **posts the message** to the designated Slack channel, containing the **output generated by the LLM.** \n\nFor better organization and accessibility, it is recommended to use a **dedicated Slack channel** specifically for topic monitoring. \nThis ensures that team members can easily access relevant summaries without cluttering other discussions. \n\n\n### Why not use Slack Tool Calling? \n\nAfter extensive testing, the output from the previous node has proven ",
+      "## Set Fields - Relevant Articles \n\nThis node prepares the data to be added to the Google Sheet by defining the following fields: \n\n- **`article_url`** – The article's URL. \n- **`summarized`** – Always set to `\"YES\"`, as it follows the **\"relevant\"** path. \n- **`summary`** – The article summary that was posted to Slack. \n- **`website`** – The source website where the article was published. \n- **`fetched_at`** – The timestamp indicating when the URL was processed by the workflow. \n > *(Note: This",
+      "## Scheduler \nThis **trigger** is a **scheduler** that defines **how often the workflow is executed**. \nBy default, the **template is set to every 1 hour**, meaning the workflow will check **every hour** if **new articles** have been added to the **RSS feed** you follow.\n",
+      "# Workflow Overview\n\n## Check Legal Regulations:\nThis workflow involves scraping, so ensure you comply with the legal regulations in your country before getting started. Better safe than sorry!\n\n## 📌 Purpose \nThis workflow enables **automated and AI-driven topic monitoring**, delivering **concise article summaries** directly to a **Slack channel** in a structured and easy-to-read format. \nIt allows users to stay informed on specific topics of interest effortlessly, without manually checking mult"
+    ],
+    "trigger_patterns": [
+      {
+        "name": "Schedule Trigger",
+        "type": "scheduleTrigger"
+      }
+    ],
+    "error_handling": [],
+    "settings": {
+      "executionOrder": "v1",
+      "saveManualExecutions": true,
+      "callerPolicy": "workflowsFromSameOwner",
+      "errorWorkflow": null,
+      "timezone": "UTC",
+      "executionTimeout": 3600,
+      "maxExecutions": 1000,
+      "retryOnFail": true,
+      "retryCount": 3,
+      "retryDelay": 1000
+    }
+  },
+  {
+    "name": "AI-Powered Information Monitoring with OpenAI, Google Sheets, Jina AI and Slack",
+    "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Code/1281_Code_Schedule_Monitor_Webhook.json",
+    "tags": [
+      "automation",
+      "n8n",
+      "production-ready",
+      "excellent",
+      "optimized"
+    ],
+    "description": "Automated workflow: AI-Powered Information Monitoring with OpenAI, Google Sheets, Jina AI and Slack. This workflow integrates 14 different services: textClassifier, stickyNote, httpRequest, code, scheduleTrigger. It contains 40 nodes and follows best practices for error handling and security.",
+    "node_count": 31,
+    "active": false,
+    "classification": {
+      "primary": "automation-triggers",
+      "primary_label": "自动化触发 (Automation Triggers)",
+      "secondary": [
+        "data-processing",
+        "conditional-loop",
+        "error-handling"
+      ],
+      "scores": {
+        "text-generation": 2,
+        "image-processing": 0,
+        "data-processing": 16,
+        "automation-triggers": 31,
+        "conditional-loop": 13,
+        "error-handling": 4,
+        "sub-workflow": 0
+      }
+    },
+    "trigger_nodes": [
+      {
+        "id": "a3a10ccd-26f9-4b05-a79f-8754f619c153",
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "typeVersion": 1.2,
+        "position": [
+          -840,
+          120
+        ],
+        "has_credentials": false
+      }
+    ],
+    "ai_nodes": [],
+    "integration_nodes": [
+      {
+        "id": "b472f924-81d9-4b99-8620-d95b286800c5",
+        "name": "Google Sheets - Get RSS Feed url followed",
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.5,
+        "position": [
+          260,
+          120
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "3f8a0ce3-d7b3-400b-bc03-1a233f441429",
+        "name": "Slack1",
+        "type": "n8n-nodes-base.slack",
+        "typeVersion": 2.3,
+        "position": [
+          4940,
+          -120
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "d72f505d-2bbf-41db-b404-8a61b8c21452",
+        "name": "Google Sheets - Get article monitored database",
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.5,
+        "position": [
+          -400,
+          120
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "6e2c820d-27da-4d3b-844c-581fb266e04a",
+        "name": "Jina AI - Read URL",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          3240,
+          -120
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "0dbcc872-9afa-4e2c-be24-82d3a2457dd0",
+        "name": "Google Sheets - Add relevant articles",
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.5,
+        "position": [
+          3480,
+          480
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "0c7024b6-dfac-4e97-9d42-198fff6bcc47",
+        "name": "Google Sheets - Add relevant article",
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.5,
+        "position": [
+          5660,
+          520
+        ],
+        "has_credentials": true
+      }
+    ],
+    "data_nodes": [
+      {
+        "id": "3f942518-f75b-4d03-9cd1-b275ad3b91cd",
+        "name": "Set field - existing_url",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          -180,
+          120
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "ccbfe5fc-2e87-4fff-b23d-0c4c6ebd3648",
+        "name": "Set fields - Not relevant articles",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          3060,
+          480
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "e1266606-eaee-4077-be7e-6f08ae9bae39",
+        "name": "Set Fields - Relevant Articles",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          4900,
+          520
+        ],
+        "has_credentials": false
+      }
+    ],
+    "control_nodes": [
+      {
+        "id": "704de862-43e5-4322-ae35-45b505e68bb6",
+        "name": "OpenAI Chat Model",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.1,
+        "position": [
+          4220,
+          380
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "eaae54b0-0500-47a7-ad8f-097e0882d21c",
+        "name": "Basic LLM Chain",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.5,
+        "position": [
+          4180,
+          -120
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "1ec53a9a-ca21-4da2-ab94-55b863a27aff",
+        "name": "Relevance Classification for Topic Monitoring",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          2380,
+          -20
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "9f2d2c87-460b-4872-9538-519d26524475",
+        "name": "No Operation, do nothing",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          1960,
+          240
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "e9ebbce6-a3b4-4f89-9908-3d9b2dd42f44",
+        "name": "If Node",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          1640,
+          120
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "baef0ff9-8bf5-4ecf-9300-0adbad0d1a07",
+        "name": "OpenAI Chat Model1",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.1,
+        "position": [
+          2400,
+          300
+        ],
+        "has_credentials": true
+      }
+    ],
+    "error_nodes": [],
+    "sticky_notes_count": 13,
+    "sticky_experiences": [
+      "## LLM Call 1 - Article Topic Relevance Classification  \n\nThis **LLM call** is used to **classify** whether the articles published on the website are **relevant** to the **topics and interests** you want to monitor.  \nIt analyzes the **title** and the **content snippet** retrieved from the **RSS Read** node.  \n\nIn this template, the monitored articles are related to **data and AI.**  \nThe classification is done into **two categories**, which you should modify in the `Description` field under the",
+      "## LLM Call 2 - Summarize and Format in Slack Markdown \n\nThis node **uses OpenAI's GPT-4o-mini model** to **summarize the article content**, which is provided as **Markdown text** from Jina AI, and formats it in **Slack Markdown** to enhance readability within Slack.  \n\n### Customize to fit your needs  \n\nHere are two examples of how you can modify the **System Prompt** of this node to better suit your requirements:  \n\n- **Language customization:**  \n  You can modify the **System Prompt** to inst",
+      "## Google Sheets - Get RSS Feed URLs Followed  \nThis node **retrieves rows** from the Google Sheet that contains the **RSS feed URLs** you follow.  \nIt is configured to run only once per execution, meaning that even if the previous node outputs many items, this node will execute only once.  \n\nYou can **add more URLs** to your sheet, but keep in mind that following **more RSS feeds** will increase the **cost of LLM API usage** (e.g., OpenAI).  \n\nYou can access the **Google Sheet template** to cop",
+      "## RSS Read  \nThis node **reads** the RSS feed.  \nThe RSS URL is **retrieved** from the data you have entered in **Google Sheets**, so make sure the URL provided is indeed a **valid RSS feed**.  \n\n### What is an RSS feed?  \nAn **RSS feed** is a **web feed** that allows users to **automatically receive updates** from websites, such as **news sites** or **blogs**, in a **standardized format**.\n",
+      "## Jina AI - Read URL\n\nThis node **uses the Jina AI API** to **retrieve the content** of articles that were classified as **\"relevant\"** in the previous step.  \nSince this process **involves web scraping**, ensure that it complies with the **scraping regulations** in your country.  \n\n### What is Jina AI?  \n**Jina AI** is an API that allows you to **extract webpage content** and convert it into a format that is **ready for LLM processing**, such as **Markdown**.  \n\nYou can create an account [here",
+      "## Google Sheets - Get Article Monitored Database  \nThis node **retrieves rows** from the Google Sheet that contains articles **already monitored and summarized** by the workflow.  \nDepending on the RSS feed you monitor, **URLs may remain in the feed for a long time**, and you don't want to monitor the same URL **twice**.  \nYou can find the **Google Sheet template** that you can copy and use in this workflow [here]({{ $env.WEBHOOK_URL }}\n\nIn this node, make sure to select the **\"article_database",
+      "## Code Node to Filter Existing URLs\n\nThis code node filters URLs that have **not yet been summarized by AI.**  \nIt outputs:\n\n- A **list of URLs** following the RSS Read schema if new URLs are found.\n- An item called **\"message\"** with the value **\"No new articles found\"** if no new articles are available in your RSS feed.\n\n---\n\n## IF Node\n\nThe condition for this node is: `{{ $json.message }}` *not equal to* **\"No new articles found\"**.\n\n- **False** → The workflow executes the \"No Operation, do ",
+      "## Set Fields - Not Relevant Articles  \n\nThis node prepares the data to be added to the Google Sheet by defining the following fields:  \n\n- **`article_url`** – The article's URL.\n- **`summarized`** – Always set to `\"NO (not relevant)\"`, as it belongs to the **\"not_relevant\"** path.  \n- **`website`** – The website where the article URL was published.  \n- **`fetched_at`** – The timestamp when the URL was processed by the workflow.  \n  > *(Note: This timestamp reflects when the scenario was trigger",
+      "## OpenAI Chat Model  \n\nThis node specifies the **AI model** to be used for processing.  \nThe default model is **GPT-4o-mini**, which has been **tested** and proven to perform well for this task.  \n\n**GPT-4o-mini** is a **cost-efficient** model, offering a good balance between **performance and affordability**, making it suitable for regular usage without incurring high costs.\n",
+      "## Slack - Send Article Summary  \n\nThis node **posts the message** to the designated Slack channel, containing the **output generated by the LLM.**  \n\nFor better organization and accessibility, it is recommended to use a **dedicated Slack channel** specifically for topic monitoring.  \nThis ensures that team members can easily access relevant summaries without cluttering other discussions.  \n\n\n### Why not use Slack Tool Calling?  \n\nAfter extensive testing, the output from the previous node has pr",
+      "## Set Fields - Relevant Articles  \n\nThis node prepares the data to be added to the Google Sheet by defining the following fields:  \n\n- **`article_url`** – The article's URL.  \n- **`summarized`** – Always set to `\"YES\"`, as it follows the **\"relevant\"** path.  \n- **`summary`** – The article summary that was posted to Slack.  \n- **`website`** – The source website where the article was published.  \n- **`fetched_at`** – The timestamp indicating when the URL was processed by the workflow.  \n  > *(No",
+      "## Scheduler \nThis **trigger** is a **scheduler** that defines **how often the workflow is executed**.  \nBy default, the **template is set to every 1 hour**, meaning the workflow will check **every hour** if **new articles** have been added to the **RSS feed** you follow.\n",
+      "# Workflow Overview\n\n## Check Legal Regulations:\nThis workflow involves scraping, so ensure you comply with the legal regulations in your country before getting started. Better safe than sorry!\n\n## 📌 Purpose  \nThis workflow enables **automated and AI-driven topic monitoring**, delivering **concise article summaries** directly to a **Slack channel** in a structured and easy-to-read format.  \nIt allows users to stay informed on specific topics of interest effortlessly, without manually checking mu"
+    ],
+    "trigger_patterns": [
+      {
+        "name": "Schedule Trigger",
+        "type": "scheduleTrigger"
+      }
+    ],
+    "error_handling": [],
+    "settings": {
+      "executionOrder": "v1",
+      "saveManualExecutions": true,
+      "callerPolicy": "workflowsFromSameOwner",
+      "errorWorkflow": null,
+      "timezone": "UTC",
+      "executionTimeout": 3600,
+      "maxExecutions": 1000,
+      "retryOnFail": true,
+      "retryCount": 3,
+      "retryDelay": 1000
+    }
+  },
+  {
+    "name": "🎥 Analyze YouTube Video for Summaries, Transcripts & Content + Google Gemini AI",
+    "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Code/1313_Code_HTTP_Automation_Webhook.json",
+    "tags": [
+      "automation",
+      "n8n",
+      "production-ready",
+      "excellent",
+      "optimized"
+    ],
+    "description": "Automated workflow: 🎥 Analyze YouTube Video for Summaries, Transcripts & Content + Google Gemini AI. This workflow integrates 11 different services: stickyNote, httpRequest, markdown, formTrigger, code. It contains 40 nodes and follows best practices for error handling and security.",
+    "node_count": 33,
+    "active": false,
+    "classification": {
+      "primary": "automation-triggers",
+      "primary_label": "自动化触发 (Automation Triggers)",
+      "secondary": [
+        "conditional-loop",
+        "error-handling"
+      ],
+      "scores": {
+        "text-generation": 0,
+        "image-processing": 0,
+        "data-processing": 0,
+        "automation-triggers": 24,
+        "conditional-loop": 13,
+        "error-handling": 2,
+        "sub-workflow": 0
+      }
+    },
+    "trigger_nodes": [
+      {
+        "id": "dbbae73b-735b-4bb8-bcad-6266c08d9fae",
+        "name": "Start Workflow",
+        "type": "n8n-nodes-base.formTrigger",
+        "typeVersion": 2.2,
+        "position": [
+          2420,
+          540
+        ],
+        "has_credentials": false
+      }
+    ],
+    "ai_nodes": [],
+    "integration_nodes": [
+      {
+        "id": "fdc9aeb2-35b4-4f33-9438-00a10f0cb0d5",
+        "name": "Get Video Audience MetaData",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          3440,
+          540
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "a00048cb-e30c-4b14-9dd3-b986d2ee5f9c",
+        "name": "Get YouTube Information by Prompt Type",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          3440,
+          980
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "e243fe41-26fe-48d3-b215-20e033a0c0aa",
+        "name": "Save to Google Drive as Text File",
+        "type": "n8n-nodes-base.googleDrive",
+        "typeVersion": 3,
+        "position": [
+          3780,
+          1320
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "87ad7860-a364-406a-999b-5b9f9ef356e0",
+        "name": "Send to Gmail as HTML",
+        "type": "n8n-nodes-base.gmail",
+        "typeVersion": 2.1,
+        "position": [
+          4120,
+          1320
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "17daf9d1-4bee-4632-b929-0696e71b9fa2",
+        "name": "Get YouTube Video Details",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          3440,
+          100
+        ],
+        "has_credentials": false
+      }
+    ],
+    "data_nodes": [
+      {
+        "id": "6d96092e-a12e-42e7-9700-63d19c3f2403",
+        "name": "Config",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          2760,
+          540
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "8cd500b5-7c78-4ae0-be2a-79862e599da3",
+        "name": "Compose Prompts",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          2760,
+          980
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "8f80f2f1-c46c-45ef-8468-0eb7dda2814e",
+        "name": "Extract MetaData Object",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          3780,
+          540
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "a66e5240-ad86-47df-8a23-d45eb31e41ce",
+        "name": "Define Audience Meta Prompt",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          3100,
+          540
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "3f3a5e5a-5c15-42a0-81d5-53248b76495e",
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "typeVersion": 3,
+        "position": [
+          4100,
+          540
+        ],
+        "has_credentials": false
+      }
+    ],
+    "control_nodes": [],
+    "error_nodes": [],
+    "sticky_notes_count": 18,
+    "sticky_experiences": [
+      "### Prompt Options\n\n- **default**: Summarizes the video with emphasis on actionable insights, tools, strategies, and resources mentioned.\n\n- **transcribe**: Provides verbatim transcription of all spoken dialogue in the video without additional commentary.\n\n- **timestamps**: Creates a timestamped transcript of the video dialogue in [hh:mm:ss] format.\n\n- **summary**: Generates a concise bullet-point summary of the video's main points.\n\n- **scene**: Provides a comprehensive visual description of th",
+      "# 🎥 Analyze YouTube Video for Summaries, Transcripts & Content + Google Gemini"
+    ],
+    "trigger_patterns": [
+      {
+        "name": "Start Workflow",
+        "type": "formTrigger"
+      }
+    ],
+    "error_handling": [],
+    "settings": {
+      "executionOrder": "v1",
+      "saveManualExecutions": true,
+      "callerPolicy": "workflowsFromSameOwner",
+      "errorWorkflow": null,
+      "timezone": "UTC",
+      "executionTimeout": 3600,
+      "maxExecutions": 1000,
+      "retryOnFail": true,
+      "retryCount": 3,
+      "retryDelay": 1000
+    }
+  },
+  {
+    "name": "Openai Workflow",
+    "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Code/1653_Code_Webhook_Send_Webhook.json",
+    "tags": [
+      "automation",
+      "n8n",
+      "production-ready",
+      "excellent",
+      "optimized"
+    ],
+    "description": "Automated workflow: Openai Workflow. This workflow integrates 15 different services: webhook, stickyNote, code, gmailTrigger, switch. It contains 58 nodes and follows best practices for error handling and security.",
+    "node_count": 49,
+    "active": false,
+    "classification": {
+      "primary": "automation-triggers",
+      "primary_label": "自动化触发 (Automation Triggers)",
+      "secondary": [
+        "conditional-loop",
+        "text-generation",
+        "data-processing"
+      ],
+      "scores": {
+        "text-generation": 19,
+        "image-processing": 0,
+        "data-processing": 14,
+        "automation-triggers": 45,
+        "conditional-loop": 26,
+        "error-handling": 2,
+        "sub-workflow": 0
+      }
+    },
+    "trigger_nodes": [
+      {
+        "id": "7105b689-9f9c-4354-aad9-8f1abb6c0a06",
+        "name": "On email received",
+        "type": "n8n-nodes-base.gmailTrigger",
+        "typeVersion": 1,
+        "position": [
+          -2460,
+          2680
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "8e2f4a3b-d224-4248-9682-184a646e022f",
+        "name": "On feedback given",
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 1,
+        "position": [
+          -2460,
+          2940
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "d2a720d4-8487-4dfa-bdb8-6b59368e44bc",
+        "name": "Show HTML page",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1,
+        "position": [
+          -920,
+          2980
+        ],
+        "has_credentials": false
+      }
+    ],
+    "ai_nodes": [
+      {
+        "id": "88c0f64c-a7cd-4f35-96dd-9eee4b1d6a1a",
+        "name": "Generate reply",
+        "type": "n8n-nodes-base.openAi",
+        "typeVersion": 1,
+        "position": [
+          -480,
+          2260
+        ],
+        "has_credentials": true
+      }
+    ],
+    "integration_nodes": [
+      {
+        "id": "7105b689-9f9c-4354-aad9-8f1abb6c0a06",
+        "name": "On email received",
+        "type": "n8n-nodes-base.gmailTrigger",
+        "typeVersion": 1,
+        "position": [
+          -2460,
+          2680
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "2dc3e403-f2a0-43c2-a1e4-187d901d692f",
+        "name": "Send reply to recipient",
+        "type": "n8n-nodes-base.gmail",
+        "typeVersion": 2,
+        "position": [
+          360,
+          1860
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "ab0348c2-f688-42d3-815b-63290e95baad",
+        "name": "Create spreadsheet",
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 3,
+        "position": [
+          1020,
+          2260
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "ba62fd4d-912b-4b37-9fda-2f80cdeb65f8",
+        "name": "Paste data",
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 3,
+        "position": [
+          1620,
+          2260
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "efdb343d-f5bf-4ba4-bc27-850b9e7935ac",
+        "name": "Create or update rows",
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 3,
+        "position": [
+          1220,
+          2500
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "87506e44-21aa-4f08-82f9-f47a24ddb9ce",
+        "name": "Send feedback for fine-tuned data",
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 3,
+        "position": [
+          -100,
+          2980
+        ],
+        "has_credentials": true
+      }
+    ],
+    "data_nodes": [
+      {
+        "id": "d1425dff-0fc1-4a4b-9202-418ce30d7cd9",
+        "name": "Configure",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 1,
+        "position": [
+          -1940,
+          2800
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "ecf03802-51c8-43b1-84d8-5ed5826fd444",
+        "name": "Format data",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 1,
+        "position": [
+          -40,
+          2380
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "2fd5b109-8a54-4684-a8a3-3f7b2d961ae3",
+        "name": "Identify trigger #2",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 1,
+        "position": [
+          -2240,
+          2940
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "8c27f798-d947-432c-bfc9-d22727d0159e",
+        "name": "Identify trigger #1",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 1,
+        "position": [
+          -2240,
+          2680
+        ],
+        "has_credentials": false
+      }
+    ],
+    "control_nodes": [
+      {
+        "id": "ea18ed9a-0158-45e1-ac1b-1993ace4ff2c",
+        "name": "Only continue for specific emails",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 1,
+        "position": [
+          -1360,
+          2460
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "4f6998f6-88a8-4b8b-acea-33c3f33d04dd",
+        "name": "If spreadsheet doesn't exist",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 1,
+        "position": [
+          1420,
+          2500
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "f3564023-a1c5-42f5-923d-a8e98c95c284",
+        "name": "Successfully created or updated row",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          1660,
+          2640
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "a8be831a-f2be-48c9-a661-bc8c5cde6444",
+        "name": "If no sheet IDs",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 1,
+        "position": [
+          800,
+          2380
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "9eedd7b7-ec4e-4dbf-a257-33e73bdff9c1",
+        "name": "Send email reply",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          -40,
+          1860
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "49d77f89-3c1e-4e86-93e8-ae7a566802b7",
+        "name": "If no spreadsheet in configuration #2",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 1,
+        "position": [
+          -700,
+          2980
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "fae8cbc5-7462-4eb0-9f60-85e8e7cfd10e",
+        "name": "If no spreadsheet in configuration #1",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 1,
+        "position": [
+          180,
+          2380
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "38e0f992-a461-4bc1-9f5c-2ceb0e461708",
+        "name": "Record feedback",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          -1360,
+          2980
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "899a0c63-0333-4dc4-ba83-5615a38ae431",
+        "name": "Fallback route",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          -1360,
+          3280
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "bd8cc1dd-3643-4d2f-9527-cfd740a4072a",
+        "name": "Do not send unfinished email reply",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          -40,
+          2060
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "c8b68fdb-c1c0-4f94-b712-e0570a3ad53c",
+        "name": "If reply is complete",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 1,
+        "position": [
+          -260,
+          1960
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "039714b3-88ac-4ca8-86fc-ec1c109110c3",
+        "name": "Do not send email to this recipient",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          -1140,
+          2560
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "330c67dd-e538-414d-a144-e05dbf5effb3",
+        "name": "Send reply to database",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          -260,
+          2380
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "9d5e780e-4282-4c7e-b083-3f769f7dc740",
+        "name": "Determine which trigger ran",
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 1,
+        "position": [
+          -1660,
+          2800
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "3defbf98-0caa-49b1-9bfd-f4640b43d64b",
+        "name": "Is text within token limit?",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 1,
+        "position": [
+          -700,
+          2360
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "b268b8a3-6361-4515-a995-320cd0979688",
+        "name": "Do nothing",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          -480,
+          2460
+        ],
+        "has_credentials": false
+      }
+    ],
+    "error_nodes": [],
+    "sticky_notes_count": 9,
+    "sticky_experiences": [
+      "### Configuration\nIf you decide to use your own spreadsheet, it is up to you to ensure all columns are present before running this workflow. A good way to do this is to run this workflow once with **empty** `spreadsheetid` and `worksheetId` variables (see the `Configure` node). Then map the output from `Store spreadsheet ID` to this node.\n\nIt is recommended that you specify the `spreadsheetId` and `worksheetId`, since relying solely on a workflow's static data is considered bad practice.\n\n\n\n\n\n\n\n",
+      "### Create spreadsheet and populate with headers and deal information\nA spreadsheet is created if the spreadsheet does not exist. The spreadsheet ID is stored in the `$getWorkflowStaticData('global')` variable. Using `Extract current deal` node, the deal information is formatted for the sending to the new spreadsheet.",
+      "### Tip: Deleting old spreadsheets\nIf you ever want to start over, delete the old spreadsheet, __making sure that it is also deleted from Google Drive's trash__.",
+      "### `Get spreadsheet ID`\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe spreadsheet ID is stored in this workflow's static data. If you want to refresh the static data you will need to copy this entire workflow into a new workflow.",
+      "### `Get spreadsheet ID`\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe spreadsheet ID is stored in this workflow's static data. If you want to refresh the static data you will need to copy this entire workflow into a new workflow.",
+      "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nIf your workflow reaches this stage, you will need to consider increasing the tokens in `Generate reply` node.",
+      "## Send a ChatGPT email reply when email received and save responses to Google Sheets\nThis workflow sends a OpenAI GPT reply when an email is received from specific email recipients. It then saves the initial email and the GPT response to an automatically generated Google spreadsheet. Subsequent GPT responses will be added to the same spreadsheet. Additionally, when feedback is given for any of the GPT responses, it will be recorded to the spreasheet, which can then be used later to fine-tune th",
+      "\n\n\n\n\n\n\n\n\n\n\n\n\n\nThis workflow should never reach this node. It is only here for extending the functionality of this workflow if needed.",
+      "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe email that was received is too large to process, as it exceeds token limit. See more on [token limits]({{ $env.WEBHOOK_URL }}"
+    ],
+    "trigger_patterns": [
+      {
+        "name": "On email received",
+        "type": "gmailTrigger"
+      },
+      {
+        "name": "On feedback given",
+        "type": "webhook"
+      },
+      {
+        "name": "Show HTML page",
+        "type": "respondToWebhook"
+      }
+    ],
+    "error_handling": [],
+    "settings": {
+      "executionOrder": "v1",
+      "saveManualExecutions": true,
+      "callerPolicy": "workflowsFromSameOwner",
+      "errorWorkflow": null,
+      "timezone": "UTC",
+      "executionTimeout": 3600,
+      "maxExecutions": 1000,
+      "retryOnFail": true,
+      "retryCount": 3,
+      "retryDelay": 1000
+    }
+  },
+  {
+    "name": "AI-Generated Summary Block for WordPress Posts - with OpenAI, WordPress, Google Sheets & Slack",
+    "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Datetime/1272_Datetime_Webhook_Create_Webhook.json",
+    "tags": [
+      "automation",
+      "n8n",
+      "production-ready",
+      "excellent",
+      "optimized"
+    ],
+    "description": "Automated workflow: AI-Generated Summary Block for WordPress Posts - with OpenAI, WordPress, Google Sheets & Slack. This workflow integrates 18 different services: textClassifier, webhook, stickyNote, httpRequest, markdown. It contains 41 nodes and follows best practices for error handling and security.",
+    "node_count": 32,
+    "active": false,
+    "classification": {
+      "primary": "automation-triggers",
+      "primary_label": "自动化触发 (Automation Triggers)",
+      "secondary": [
+        "conditional-loop",
+        "data-processing",
+        "text-generation"
+      ],
+      "scores": {
+        "text-generation": 2,
+        "image-processing": 0,
+        "data-processing": 16,
+        "automation-triggers": 51,
+        "conditional-loop": 24,
+        "error-handling": 2,
+        "sub-workflow": 0
+      }
+    },
+    "trigger_nodes": [
+      {
+        "id": "0733b902-6707-4548-9498-44993ed6a16c",
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          500,
+          -780
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "",
+        "name": "Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2,
+        "position": [
+          500,
+          -360
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "4c77eb08-e855-4a07-b76a-d5cea322fbca",
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "typeVersion": 1.2,
+        "position": [
+          500,
+          -600
+        ],
+        "has_credentials": false
+      }
+    ],
+    "ai_nodes": [],
+    "integration_nodes": [
+      {
+        "id": "cb1dce7c-6dfb-4435-aca8-013fdac58d43",
+        "name": "Wordpress - Update Post",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          7920,
+          -820
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "4aa026fd-29c3-4848-bfd1-98efba165b68",
+        "name": "Google Sheets - Get rows",
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.5,
+        "position": [
+          2920,
+          -820
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "f35a0520-9b88-4840-bdff-970a15a8d691",
+        "name": "Google Sheets - Add Row",
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.5,
+        "position": [
+          9680,
+          -820
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "57fd5aaf-4a43-458b-8842-72e3289c7dca",
+        "name": "Slack - Notify Channel",
+        "type": "n8n-nodes-base.slack",
+        "typeVersion": 2.3,
+        "position": [
+          9700,
+          -540
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "64199b71-a5b2-46f1-a761-22b053e95640",
+        "name": "WordPress - Get Post2",
+        "type": "n8n-nodes-base.wordpress",
+        "typeVersion": 1,
+        "position": [
+          4160,
+          -800
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "9522e130-608c-4162-ac2e-3f67e216579e",
+        "name": "WordPress - Get Last Posts",
+        "type": "n8n-nodes-base.wordpress",
+        "typeVersion": 1,
+        "position": [
+          960,
+          -600
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "03e20423-7b5d-43ff-a241-bffa9b4c5172",
+        "name": "WordPress - Get Post1",
+        "type": "n8n-nodes-base.wordpress",
+        "typeVersion": 1,
+        "position": [
+          960,
+          -360
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "43963f56-ba75-4784-aebb-ebf72d075bfc",
+        "name": "WordPress - Get All Posts",
+        "type": "n8n-nodes-base.wordpress",
+        "typeVersion": 1,
+        "position": [
+          1440,
+          -780
+        ],
+        "has_credentials": true
+      }
+    ],
+    "data_nodes": [
+      {
+        "id": "7634cffa-0df8-4c11-84f4-c24cff652432",
+        "name": "Loop Over Items",
+        "type": "n8n-nodes-base.splitInBatches",
+        "typeVersion": 3,
+        "position": [
+          2060,
+          -780
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "29669a57-4104-4328-a834-0b07724fe245",
+        "name": "Set fields - From Webhook input",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          700,
+          -360
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "5e68e256-d089-4a1d-8967-99215b076a5b",
+        "name": "Set fields - Prepare data for Gsheets & Slack",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          8680,
+          -820
+        ],
+        "has_credentials": false
+      }
+    ],
+    "control_nodes": [
+      {
+        "id": "fa1fea27-c44d-4c8b-89ab-e7f84e91048f",
+        "name": "Text Classifier",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          5520,
+          -800
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "258d93f8-50db-4c95-8315-b7284100a426",
+        "name": "OpenAI Chat Model",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.1,
+        "position": [
+          5540,
+          -600
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "1742dc9a-89b7-44f4-8ddb-5658fd34cadf",
+        "name": "If Node",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          3660,
+          -820
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "3272ff54-9c8f-4003-bdf6-c16e8f4ba972",
+        "name": "OpenAI",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.8,
+        "position": [
+          7060,
+          -820
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "81f22a4b-b016-463c-a4e3-8468cab007a9",
+        "name": "No Operation, do nothing",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          2900,
+          -1480
+        ],
+        "has_credentials": false
+      }
+    ],
+    "error_nodes": [],
+    "sticky_notes_count": 11,
+    "sticky_experiences": [
+      "## Trigger - Two Options\nTo use this workflow, you have two trigger options.\n\nThe default trigger is **\"When clicking 'Test workflow'\"**, allowing you to manually test the scenario.\n\nIf you want to use this workflow in production, you can choose one of the following triggers. You'll need to **select the one you prefer and enable it**.:\n\n### Schedule Trigger \nThis trigger checks at regular intervals (e.g., every 5 minutes) if a new post has been published on your WordPress blog and triggers the w",
+      "## WordPress - Get All Posts \n\nThis node is used for the **initial/test run**. In production, you should use the WordPress node that follows the **Scheduled Trigger** or **Webhook Trigger** instead. \n\nIt retrieves all existing WordPress posts to generate an AI Summary. \n\n### 🔹 Considerations: \n- In this template, the query is **limited to 5 posts** to prevent accidental large-scale execution. This makes it easier to fix any issues. \n- You can **add filters** (category, tag, date, etc.) to target",
+      "## Loop Over Items \n\nSince multiple posts may be retrieved from the previous step, a **\"Loop Over Items\"** node is used to process each post individually, optimizing the execution of subsequent nodes. \n\n### 🔹 In Production - Using the \"Schedule Trigger\" \nYou can continue using the **\"Loop Over Items\"** approach in production. Depending on your **publication frequency** and the **schedule interval** you've chosen, multiple posts could be retrieved in a single execution. This ensures each post is ",
+      "## Google Sheets - Get Rows & IF Nodes \n\nThis step is used to **check whether a post already has an AI Summary**. \n\nFor the Google Sheets node, you can **[make a copy of this Google Sheets template]({{ $env.WEBHOOK_URL }} by going to **File → Make a copy**.\n\n\n### 🔹 How It Works: \n1. **On the first execution**, posts retrieved from WordPress and processed for AI summarization are added to a **Google Sheet**. \n2. **On subsequent executions**, when the workflow retrieves new posts, it checks if the",
+      "## WordPress - Get Post & HTML to Markdown Nodes \n\nThis step retrieves the WordPress post data using the `post_id` and converts the HTML content to Markdown. This ensures that the text is formatted in a **clean and structured way** before being sent to the **Text Classifier** node (which works with AI). More details about this step are provided in the next sticky note. \n\n### 🔹 WordPress - Get Post \n- The **`context=edit`** option is enabled to retrieve the **raw** post data. \n- This is necessary",
+      "## Text Classifier \n\nThis step **classifies posts into categories**: \n\n- **`not_summarized`** → If the post **does not** have a summary, the following nodes execute the AI summary generation. \n- **`summarized`** → If the post **already** has a summary, the workflow **skips processing**: \n - The workflow moves to `\"Loop Over Items\"`. \n - The `\"Done\"` branch goes to the `\"Do Nothing\"` node. \n\nThe LLM model used is **`gpt-4o-mini`**—it's efficient and cost-effective, but you can choose another mode",
+      "## OpenAI - Message a Model \n\nThis step sends the **Markdown-formatted post** to **GPT-4o-mini**, using a **System Prompt** to instruct the LLM to generate an AI Summary. \nYou can review and modify the **System Prompt** directly within this node. \n\n### 🔹 Customization Required \nTo ensure optimal results, you should: \n- **Specify your website's theme** in the system prompt. The default example uses **electric mobility**, but you can replace it with a more relevant theme (e.g., **\"sustainable mobi",
+      "## WordPress - Update Post \n\nThis API call updates the **WordPress post** and its **excerpt**. \n\n**https://<your-domain.com>/wp-json/wp/v2/posts/{{ $('Loop Over Items').item.json.id }}**\n\n\n### 🔹 What It Does \n- **Adds the AI Summary** at the **top** of the post. \n- **Updates the post excerpt** using data retrieved from the `WordPress - Get Post2` node: \n- If a **manual excerpt** exists, it is **preserved**. \n- If the excerpt was simply the **beginning of the article**, it remains unchanged. \n- T",
+      "## Set Fields - Prepare Data for Google Sheets & Slack \n\nThis node **sets fields** that will be used in **Google Sheets** and **Slack**. \nYou can **add or modify fields** as needed to fit your specific use case. \n### 🔹 Default Fields in This Template: \nThe following fields are pre-configured: \n- **`post_id`** → The WordPress post ID (`{{ $json.id }}`) \n- **`title`** → The rendered title of the post (`{{ $json.title.rendered }}`) \n- **`post_link`** → The direct URL to the post (`{{ $json.link }}`",
+      "## Google Sheets - Add Row & Slack - Notify \n\nThis step **logs the post with an AI Summary** into **Google Sheets** and **sends a notification** to Slack. \n\nFor the Google Sheets node, you can **[make a copy of this Google Sheets template]({{ $env.WEBHOOK_URL }} by going to **File → Make a copy**.\n\n\n---\n\n### 🔹 Google Sheets - Add Row \n\nThis node **automatically maps the columns** in Google Sheets, meaning you **don't need to manually define each field**. \n\n#### 🛠 **Configuration Details** \n- **G",
+      "# 📝 AI-Generated Summary Block for WordPress Posts \n\n## 🚀 What is this workflow? \nThis **n8n template** automates the process of adding an **AI-generated summary** at the top of your WordPress posts. \nIt **retrieves, processes, and updates** your posts dynamically, ensuring efficiency and flexibility without relying on a heavy WordPress plugin. \n\n## Example of AI Summary Section\n\n![Example of AI Summary Section]({{ $env.WEBHOOK_URL }} \n\n## 🔄 How It Works \n1. **Triggers** → Runs on a **scheduled "
+    ],
+    "trigger_patterns": [
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "manualTrigger"
+      },
+      {
+        "name": "Webhook",
+        "type": "webhook"
+      },
+      {
+        "name": "Schedule Trigger",
+        "type": "scheduleTrigger"
+      }
+    ],
+    "error_handling": [],
+    "settings": {
+      "executionOrder": "v1",
+      "saveManualExecutions": true,
+      "callerPolicy": "workflowsFromSameOwner",
+      "errorWorkflow": null,
+      "timezone": "UTC",
+      "executionTimeout": 3600,
+      "maxExecutions": 1000,
+      "retryOnFail": true,
+      "retryCount": 3,
+      "retryDelay": 1000
+    }
+  },
+  {
+    "name": "AI-Generated Summary Block for WordPress Posts - with OpenAI, WordPress, Google Sheets & Slack",
+    "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Datetime/1273_Datetime_Webhook_Create_Webhook.json",
+    "tags": [
+      "automation",
+      "n8n",
+      "production-ready",
+      "excellent",
+      "optimized"
+    ],
+    "description": "Automated workflow: AI-Generated Summary Block for WordPress Posts - with OpenAI, WordPress, Google Sheets & Slack. This workflow integrates 18 different services: textClassifier, webhook, stickyNote, httpRequest, markdown. It contains 41 nodes and follows best practices for error handling and security.",
+    "node_count": 32,
+    "active": false,
+    "classification": {
+      "primary": "automation-triggers",
+      "primary_label": "自动化触发 (Automation Triggers)",
+      "secondary": [
+        "conditional-loop",
+        "data-processing",
+        "text-generation"
+      ],
+      "scores": {
+        "text-generation": 2,
+        "image-processing": 0,
+        "data-processing": 16,
+        "automation-triggers": 51,
+        "conditional-loop": 24,
+        "error-handling": 2,
+        "sub-workflow": 0
+      }
+    },
+    "trigger_nodes": [
+      {
+        "id": "0733b902-6707-4548-9498-44993ed6a16c",
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          500,
+          -780
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "",
+        "name": "Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2,
+        "position": [
+          500,
+          -360
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "4c77eb08-e855-4a07-b76a-d5cea322fbca",
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "typeVersion": 1.2,
+        "position": [
+          500,
+          -600
+        ],
+        "has_credentials": false
+      }
+    ],
+    "ai_nodes": [],
+    "integration_nodes": [
+      {
+        "id": "cb1dce7c-6dfb-4435-aca8-013fdac58d43",
+        "name": "Wordpress - Update Post",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          7920,
+          -820
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "4aa026fd-29c3-4848-bfd1-98efba165b68",
+        "name": "Google Sheets - Get rows",
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.5,
+        "position": [
+          2920,
+          -820
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "f35a0520-9b88-4840-bdff-970a15a8d691",
+        "name": "Google Sheets - Add Row",
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.5,
+        "position": [
+          9680,
+          -820
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "57fd5aaf-4a43-458b-8842-72e3289c7dca",
+        "name": "Slack - Notify Channel",
+        "type": "n8n-nodes-base.slack",
+        "typeVersion": 2.3,
+        "position": [
+          9700,
+          -540
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "64199b71-a5b2-46f1-a761-22b053e95640",
+        "name": "WordPress - Get Post2",
+        "type": "n8n-nodes-base.wordpress",
+        "typeVersion": 1,
+        "position": [
+          4160,
+          -800
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "9522e130-608c-4162-ac2e-3f67e216579e",
+        "name": "WordPress - Get Last Posts",
+        "type": "n8n-nodes-base.wordpress",
+        "typeVersion": 1,
+        "position": [
+          960,
+          -600
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "03e20423-7b5d-43ff-a241-bffa9b4c5172",
+        "name": "WordPress - Get Post1",
+        "type": "n8n-nodes-base.wordpress",
+        "typeVersion": 1,
+        "position": [
+          960,
+          -360
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "43963f56-ba75-4784-aebb-ebf72d075bfc",
+        "name": "WordPress - Get All Posts",
+        "type": "n8n-nodes-base.wordpress",
+        "typeVersion": 1,
+        "position": [
+          1440,
+          -780
+        ],
+        "has_credentials": true
+      }
+    ],
+    "data_nodes": [
+      {
+        "id": "7634cffa-0df8-4c11-84f4-c24cff652432",
+        "name": "Loop Over Items",
+        "type": "n8n-nodes-base.splitInBatches",
+        "typeVersion": 3,
+        "position": [
+          2060,
+          -780
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "29669a57-4104-4328-a834-0b07724fe245",
+        "name": "Set fields - From Webhook input",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          700,
+          -360
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "5e68e256-d089-4a1d-8967-99215b076a5b",
+        "name": "Set fields - Prepare data for Gsheets & Slack",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          8680,
+          -820
+        ],
+        "has_credentials": false
+      }
+    ],
+    "control_nodes": [
+      {
+        "id": "fa1fea27-c44d-4c8b-89ab-e7f84e91048f",
+        "name": "Text Classifier",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          5520,
+          -800
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "258d93f8-50db-4c95-8315-b7284100a426",
+        "name": "OpenAI Chat Model",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.1,
+        "position": [
+          5540,
+          -600
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "1742dc9a-89b7-44f4-8ddb-5658fd34cadf",
+        "name": "If Node",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          3660,
+          -820
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "3272ff54-9c8f-4003-bdf6-c16e8f4ba972",
+        "name": "OpenAI",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.8,
+        "position": [
+          7060,
+          -820
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "81f22a4b-b016-463c-a4e3-8468cab007a9",
+        "name": "No Operation, do nothing",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          2900,
+          -1480
+        ],
+        "has_credentials": false
+      }
+    ],
+    "error_nodes": [],
+    "sticky_notes_count": 11,
+    "sticky_experiences": [
+      "## Trigger - Two Options\nTo use this workflow, you have two trigger options.\n\nThe default trigger is **\"When clicking 'Test workflow'\"**, allowing you to manually test the scenario.\n\nIf you want to use this workflow in production, you can choose one of the following triggers. You'll need to **select the one you prefer and enable it**.:\n\n### Schedule Trigger  \nThis trigger checks at regular intervals (e.g., every 5 minutes) if a new post has been published on your WordPress blog and triggers the ",
+      "## WordPress - Get All Posts  \n\nThis node is used for the **initial/test run**. In production, you should use the WordPress node that follows the **Scheduled Trigger** or **Webhook Trigger** instead.  \n\nIt retrieves all existing WordPress posts to generate an AI Summary.  \n\n### 🔹 Considerations:  \n- In this template, the query is **limited to 5 posts** to prevent accidental large-scale execution. This makes it easier to fix any issues.  \n- You can **add filters** (category, tag, date, etc.) to t",
+      "## Loop Over Items  \n\nSince multiple posts may be retrieved from the previous step, a **\"Loop Over Items\"** node is used to process each post individually, optimizing the execution of subsequent nodes.  \n\n### 🔹 In Production - Using the \"Schedule Trigger\"  \nYou can continue using the **\"Loop Over Items\"** approach in production. Depending on your **publication frequency** and the **schedule interval** you've chosen, multiple posts could be retrieved in a single execution. This ensures each post ",
+      "## Google Sheets - Get Rows & IF Nodes  \n\nThis step is used to **check whether a post already has an AI Summary**.   \n\nFor the Google Sheets node, you can **[make a copy of this Google Sheets template]({{ $env.WEBHOOK_URL }} by going to **File → Make a copy**.\n\n\n### 🔹 How It Works:  \n1. **On the first execution**, posts retrieved from WordPress and processed for AI summarization are added to a **Google Sheet**.  \n2. **On subsequent executions**, when the workflow retrieves new posts, it checks i",
+      "## WordPress - Get Post & HTML to Markdown Nodes  \n\nThis step retrieves the WordPress post data using the `post_id` and converts the HTML content to Markdown. This ensures that the text is formatted in a **clean and structured way** before being sent to the **Text Classifier** node (which works with AI). More details about this step are provided in the next sticky note.  \n\n### 🔹 WordPress - Get Post  \n- The **`context=edit`** option is enabled to retrieve the **raw** post data.  \n- This is neces",
+      "## Text Classifier  \n\nThis step **classifies posts into categories**:  \n\n- **`not_summarized`** → If the post **does not** have a summary, the following nodes execute the AI summary generation.  \n- **`summarized`** → If the post **already** has a summary, the workflow **skips processing**:  \n  - The workflow moves to `\"Loop Over Items\"`.  \n  - The `\"Done\"` branch goes to the `\"Do Nothing\"` node.  \n\nThe LLM model used is **`gpt-4o-mini`**—it's efficient and cost-effective, but you can choose anot",
+      "## OpenAI - Message a Model  \n\nThis step sends the **Markdown-formatted post** to **GPT-4o-mini**, using a **System Prompt** to instruct the LLM to generate an AI Summary.  \nYou can review and modify the **System Prompt** directly within this node.  \n\n### 🔹 Customization Required  \nTo ensure optimal results, you should:  \n- **Specify your website's theme** in the system prompt. The default example uses **electric mobility**, but you can replace it with a more relevant theme (e.g., **\"sustainable",
+      "## WordPress - Update Post  \n\nThis API call updates the **WordPress post** and its **excerpt**.  \n\n**https://<your-domain.com>/wp-json/wp/v2/posts/{{ $('Loop Over Items').item.json.id }}**\n\n\n### 🔹 What It Does  \n- **Adds the AI Summary** at the **top** of the post.  \n- **Updates the post excerpt** using data retrieved from the `WordPress - Get Post2` node:  \n- If a **manual excerpt** exists, it is **preserved**.  \n- If the excerpt was simply the **beginning of the article**, it remains unchanged",
+      "## Set Fields - Prepare Data for Google Sheets & Slack  \n\nThis node **sets fields** that will be used in **Google Sheets** and **Slack**.  \nYou can **add or modify fields** as needed to fit your specific use case.  \n### 🔹 Default Fields in This Template:  \nThe following fields are pre-configured:  \n- **`post_id`** → The WordPress post ID (`{{ $json.id }}`)  \n- **`title`** → The rendered title of the post (`{{ $json.title.rendered }}`)  \n- **`post_link`** → The direct URL to the post (`{{ $json.l",
+      "## Google Sheets - Add Row & Slack - Notify  \n\nThis step **logs the post with an AI Summary** into **Google Sheets** and **sends a notification** to Slack.  \n\nFor the Google Sheets node, you can **[make a copy of this Google Sheets template]({{ $env.WEBHOOK_URL }} by going to **File → Make a copy**.\n\n\n---\n\n### 🔹 Google Sheets - Add Row  \n\nThis node **automatically maps the columns** in Google Sheets, meaning you **don't need to manually define each field**.  \n\n#### 🛠 **Configuration Details**  \n",
+      "# 📝 AI-Generated Summary Block for WordPress Posts  \n\n## 🚀 What is this workflow?  \nThis **n8n template** automates the process of adding an **AI-generated summary** at the top of your WordPress posts.  \nIt **retrieves, processes, and updates** your posts dynamically, ensuring efficiency and flexibility without relying on a heavy WordPress plugin.  \n\n## Example of AI Summary Section\n\n![Example of AI Summary Section]({{ $env.WEBHOOK_URL }}  \n\n## 🔄 How It Works  \n1. **Triggers** → Runs on a **sche"
+    ],
+    "trigger_patterns": [
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "manualTrigger"
+      },
+      {
+        "name": "Webhook",
+        "type": "webhook"
+      },
+      {
+        "name": "Schedule Trigger",
+        "type": "scheduleTrigger"
+      }
+    ],
+    "error_handling": [],
+    "settings": {
+      "executionOrder": "v1",
+      "saveManualExecutions": true,
+      "callerPolicy": "workflowsFromSameOwner",
+      "errorWorkflow": null,
+      "timezone": "UTC",
+      "executionTimeout": 3600,
+      "maxExecutions": 1000,
+      "retryOnFail": true,
+      "retryCount": 3,
+      "retryDelay": 1000
+    }
+  },
+  {
+    "name": "Store Notion's Pages as Vector Documents into Supabase with OpenAI",
+    "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Filter/1414_Filter_Summarize_Automation_Triggered.json",
+    "tags": [
+      "automation",
+      "n8n",
+      "production-ready",
+      "excellent",
+      "optimized"
+    ],
+    "description": "Automated workflow: Store Notion's Pages as Vector Documents into Supabase with OpenAI. This workflow integrates 10 different services: notionTrigger, stickyNote, filter, textSplitterTokenSplitter, summarize. It contains 10 nodes and follows best practices for error handling and security.",
+    "node_count": 10,
+    "active": false,
+    "classification": {
+      "primary": "automation-triggers",
+      "primary_label": "自动化触发 (Automation Triggers)",
+      "secondary": [
+        "conditional-loop",
+        "error-handling",
+        "text-generation"
+      ],
+      "scores": {
+        "text-generation": 4,
+        "image-processing": 0,
+        "data-processing": 0,
+        "automation-triggers": 18,
+        "conditional-loop": 17,
+        "error-handling": 13,
+        "sub-workflow": 0
+      }
+    },
+    "trigger_nodes": [
+      {
+        "id": "79b3c147-08ca-4db4-9116-958a868cbfd9",
+        "name": "Notion - Page Added Trigger",
+        "type": "n8n-nodes-base.notionTrigger",
+        "typeVersion": 1,
+        "position": [
+          1180,
+          520
+        ],
+        "has_credentials": false
+      }
+    ],
+    "ai_nodes": [],
+    "integration_nodes": [],
+    "data_nodes": [],
+    "control_nodes": [
+      {
+        "id": "3f3e65dc-2b26-407c-87e5-52ba3b315fed",
+        "name": "Embeddings OpenAI",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          2200,
+          760
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "6d2579b8-376f-44c3-82e8-9dc608efd98b",
+        "name": "Token Splitter",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          2340,
+          960
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "bfebc173-8d4b-4f8f-a625-4622949dd545",
+        "name": "Filter Non-Text Content",
+        "type": "n8n-nodes-base.filter",
+        "typeVersion": 2,
+        "position": [
+          1620,
+          520
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "0e64dbb5-20c1-4b90-b818-a1726aaf5112",
+        "name": "Create metadata and load content",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          2320,
+          760
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "187aba6f-eaed-4427-8d40-b9da025fb37d",
+        "name": "Supabase Vector Store",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          2200,
+          520
+        ],
+        "has_credentials": false
+      }
+    ],
+    "error_nodes": [
+      {
+        "id": "error-6e362e80",
+        "name": "Error Handler",
+        "type": "n8n-nodes-base.stopAndError",
+        "typeVersion": 1,
+        "position": [
+          1000,
+          400
+        ],
+        "has_credentials": false
+      }
+    ],
+    "sticky_notes_count": 1,
+    "sticky_experiences": [
+      "## Store Notion's Pages as Vector Documents into Supabase\n\n**This workflow assumes you have a Supabase project with a table that has a vector column. If you don't have it, follow the instructions here:** [Supabase Vector Columns Guide]({{ $env.WEBHOOK_URL }}\n\n## Workflow Description\n\nThis workflow automates the process of storing Notion pages as vector documents in a Supabase database with a vector column. The steps are as follows:\n\n1. **Notion Page Added Trigger**:\n   - Monitors a specified Not"
+    ],
+    "trigger_patterns": [
+      {
+        "name": "Notion - Page Added Trigger",
+        "type": "notionTrigger"
+      }
+    ],
+    "error_handling": [
+      {
+        "name": "Error Handler",
+        "type": "stopAndError"
+      }
+    ],
+    "settings": {
+      "executionOrder": "v1",
+      "saveManualExecutions": true,
+      "callerPolicy": "workflowsFromSameOwner",
+      "errorWorkflow": null,
+      "timezone": "UTC",
+      "executionTimeout": 3600,
+      "maxExecutions": 1000,
+      "retryOnFail": true,
+      "retryCount": 3,
+      "retryDelay": 1000
+    }
+  },
+  {
+    "name": "Store Notion's Pages as Vector Documents into Supabase with OpenAI",
+    "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Filter/1667_Filter_Summarize_Automation_Triggered.json",
+    "tags": [
+      "automation",
+      "n8n",
+      "production-ready",
+      "excellent",
+      "optimized"
+    ],
+    "description": "Automated workflow: Store Notion's Pages as Vector Documents into Supabase with OpenAI. This workflow integrates 10 different services: notionTrigger, stickyNote, filter, textSplitterTokenSplitter, summarize. It contains 10 nodes and follows best practices for error handling and security.",
+    "node_count": 10,
+    "active": false,
+    "classification": {
+      "primary": "automation-triggers",
+      "primary_label": "自动化触发 (Automation Triggers)",
+      "secondary": [
+        "conditional-loop",
+        "error-handling",
+        "text-generation"
+      ],
+      "scores": {
+        "text-generation": 4,
+        "image-processing": 0,
+        "data-processing": 0,
+        "automation-triggers": 18,
+        "conditional-loop": 17,
+        "error-handling": 13,
+        "sub-workflow": 0
+      }
+    },
+    "trigger_nodes": [
+      {
+        "id": "79b3c147-08ca-4db4-9116-958a868cbfd9",
+        "name": "Notion - Page Added Trigger",
+        "type": "n8n-nodes-base.notionTrigger",
+        "typeVersion": 1,
+        "position": [
+          1180,
+          520
+        ],
+        "has_credentials": false
+      }
+    ],
+    "ai_nodes": [],
+    "integration_nodes": [],
+    "data_nodes": [],
+    "control_nodes": [
+      {
+        "id": "3f3e65dc-2b26-407c-87e5-52ba3b315fed",
+        "name": "Embeddings OpenAI",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          2200,
+          760
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "6d2579b8-376f-44c3-82e8-9dc608efd98b",
+        "name": "Token Splitter",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          2340,
+          960
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "bfebc173-8d4b-4f8f-a625-4622949dd545",
+        "name": "Filter Non-Text Content",
+        "type": "n8n-nodes-base.filter",
+        "typeVersion": 2,
+        "position": [
+          1620,
+          520
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "0e64dbb5-20c1-4b90-b818-a1726aaf5112",
+        "name": "Create metadata and load content",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          2320,
+          760
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "187aba6f-eaed-4427-8d40-b9da025fb37d",
+        "name": "Supabase Vector Store",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          2200,
+          520
+        ],
+        "has_credentials": false
+      }
+    ],
+    "error_nodes": [
+      {
+        "id": "error-373ca464",
+        "name": "Error Handler",
+        "type": "n8n-nodes-base.stopAndError",
+        "typeVersion": 1,
+        "position": [
+          1000,
+          400
+        ],
+        "has_credentials": false
+      }
+    ],
+    "sticky_notes_count": 1,
+    "sticky_experiences": [
+      "## Store Notion's Pages as Vector Documents into Supabase\n\n**This workflow assumes you have a Supabase project with a table that has a vector column. If you don't have it, follow the instructions here:** [Supabase Vector Columns Guide]({{ $env.WEBHOOK_URL }}\n\n## Workflow Description\n\nThis workflow automates the process of storing Notion pages as vector documents in a Supabase database with a vector column. The steps are as follows:\n\n1. **Notion Page Added Trigger**:\n - Monitors a specified Notio"
+    ],
+    "trigger_patterns": [
+      {
+        "name": "Notion - Page Added Trigger",
+        "type": "notionTrigger"
+      }
+    ],
+    "error_handling": [
+      {
+        "name": "Error Handler",
+        "type": "stopAndError"
+      }
+    ],
+    "settings": {
+      "executionOrder": "v1",
+      "saveManualExecutions": true,
+      "callerPolicy": "workflowsFromSameOwner",
+      "errorWorkflow": null,
+      "timezone": "UTC",
+      "executionTimeout": 3600,
+      "maxExecutions": 1000,
+      "retryOnFail": true,
+      "retryCount": 3,
+      "retryDelay": 1000
+    }
+  },
+  {
+    "name": "Simple OpenAI Image Generator",
+    "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Form/1316_Form_Stickynote_Automation_Webhook.json",
+    "tags": [
+      "automation",
+      "n8n",
+      "production-ready",
+      "excellent",
+      "optimized"
+    ],
+    "description": "Automated workflow: Simple OpenAI Image Generator. This workflow integrates 6 different services: convertToFile, stickyNote, httpRequest, formTrigger, stopAndError. It contains 8 nodes and follows best practices for error handling and security.",
+    "node_count": 5,
+    "active": false,
+    "classification": {
+      "primary": "automation-triggers",
+      "primary_label": "自动化触发 (Automation Triggers)",
+      "secondary": [
+        "data-processing",
+        "text-generation",
+        "image-processing"
+      ],
+      "scores": {
+        "text-generation": 2,
+        "image-processing": 2,
+        "data-processing": 11,
+        "automation-triggers": 18,
+        "conditional-loop": 2,
+        "error-handling": 2,
+        "sub-workflow": 0
+      }
+    },
+    "trigger_nodes": [
+      {
+        "id": "20fdcc11-5e8a-4788-b3a3-e556996b59f7",
+        "name": "Prompt and options",
+        "type": "n8n-nodes-base.formTrigger",
+        "typeVersion": 2.2,
+        "position": [
+          0,
+          0
+        ],
+        "has_credentials": false
+      }
+    ],
+    "ai_nodes": [],
+    "integration_nodes": [
+      {
+        "id": "eb220b1f-2091-492a-931f-1f2e344b32a6",
+        "name": "OpenAI Image Generation",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          220,
+          0
+        ],
+        "has_credentials": true
+      }
+    ],
+    "data_nodes": [
+      {
+        "id": "526c24bc-3bc5-48c3-ae1e-5b0c0352d07f",
+        "name": "Convert to File",
+        "type": "n8n-nodes-base.convertToFile",
+        "typeVersion": 1.1,
+        "position": [
+          440,
+          0
+        ],
+        "has_credentials": false
+      }
+    ],
+    "control_nodes": [],
+    "error_nodes": [],
+    "sticky_notes_count": 1,
+    "sticky_experiences": [
+      "# Welcome to my Simple OpenAI Image Generator Workflow!\n\nThis workflow creates an image with the new OpenAI image model \"GPT-Image-1\" based on a form input.\n\n## This workflow has the following sequence:\n\n1. Form trigger (image prompt and image size input)\n2. Generate the Image via OpenAI API.\n3. Return the image to the input form for download.\n\n## The following accesses are required for the workflow:\n- OpenAI API access: [Documentation]({{ $env.WEBHOOK_URL }}\n\nYou can contact me via LinkedIn, if"
+    ],
+    "trigger_patterns": [
+      {
+        "name": "Prompt and options",
+        "type": "formTrigger"
+      }
+    ],
+    "error_handling": [],
+    "settings": {
+      "executionOrder": "v1",
+      "saveManualExecutions": true,
+      "callerPolicy": "workflowsFromSameOwner",
+      "errorWorkflow": null,
+      "timezone": "UTC",
+      "executionTimeout": 3600,
+      "maxExecutions": 1000,
+      "retryOnFail": true,
+      "retryCount": 3,
+      "retryDelay": 1000
+    }
+  },
+  {
+    "name": "SEO Blog Generator with GPT-4o, Perplexity, and Telegram Integration",
+    "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Form/1762_Form_Aggregate_Automation_Triggered.json",
+    "tags": [
+      "automation",
+      "n8n",
+      "production-ready",
+      "excellent",
+      "optimized"
+    ],
+    "description": "Automated workflow: SEO Blog Generator with GPT-4o, Perplexity, and Telegram Integration. This workflow integrates 12 different services: stickyNote, formTrigger, telegramTrigger, telegram, agent. It contains 28 nodes and follows best practices for error handling and security.",
+    "node_count": 23,
+    "active": false,
+    "classification": {
+      "primary": "automation-triggers",
+      "primary_label": "自动化触发 (Automation Triggers)",
+      "secondary": [
+        "conditional-loop",
+        "error-handling",
+        "text-generation"
+      ],
+      "scores": {
+        "text-generation": 2,
+        "image-processing": 0,
+        "data-processing": 0,
+        "automation-triggers": 48,
+        "conditional-loop": 24,
+        "error-handling": 13,
+        "sub-workflow": 0
+      }
+    },
+    "trigger_nodes": [
+      {
+        "id": "22e8c044-ed98-495a-957e-c5e3fecc2b7d",
+        "name": "On form submission",
+        "type": "n8n-nodes-base.formTrigger",
+        "typeVersion": 2.2,
+        "position": [
+          -260,
+          260
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "e0d9a29e-2dd9-42ff-a0b8-d81c02014b05",
+        "name": "Tele HoangSP_Social_Media",
+        "type": "n8n-nodes-base.telegramTrigger",
+        "typeVersion": 1.1,
+        "position": [
+          -260,
+          440
+        ],
+        "has_credentials": true
+      }
+    ],
+    "ai_nodes": [],
+    "integration_nodes": [
+      {
+        "id": "e0d9a29e-2dd9-42ff-a0b8-d81c02014b05",
+        "name": "Tele HoangSP_Social_Media",
+        "type": "n8n-nodes-base.telegramTrigger",
+        "typeVersion": 1.1,
+        "position": [
+          -260,
+          440
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "38fd2a3b-bbc3-41d5-9d13-eb61b67709cb",
+        "name": "Telegram",
+        "type": "n8n-nodes-base.telegram",
+        "typeVersion": 1.2,
+        "position": [
+          2620,
+          380
+        ],
+        "has_credentials": true
+      }
+    ],
+    "data_nodes": [
+      {
+        "id": "4756c8f2-406e-4a56-adb0-0c4708dabe6a",
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "typeVersion": 3,
+        "position": [
+          2020,
+          140
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "d2d83cc5-1502-4b04-ac12-0bb351a90e58",
+        "name": "Combine Blog Details",
+        "type": "n8n-nodes-base.aggregate",
+        "typeVersion": 1,
+        "position": [
+          2620,
+          160
+        ],
+        "has_credentials": false
+      }
+    ],
+    "control_nodes": [
+      {
+        "id": "6bf602e0-ad29-47e6-93d7-79fd2a4228c2",
+        "name": "OpenAI Chat Model",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.2,
+        "position": [
+          1480,
+          -120
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "8a3739ac-9492-400c-b5b8-eeb305647752",
+        "name": "Structured Output Parser",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.2,
+        "position": [
+          1740,
+          -100
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "af02ee94-4c26-4be5-bd21-09e020bff876",
+        "name": "Metadata Generator",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.8,
+        "position": [
+          1500,
+          -300
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "f81c9505-111f-473a-94b6-c79364410810",
+        "name": "Blog Content Generator",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.8,
+        "position": [
+          920,
+          260
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "30f0fa84-9918-4bf6-86e4-ef8f1dcf079c",
+        "name": "gpt-4o-mini",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.2,
+        "position": [
+          920,
+          460
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "bbb5b2c7-18a1-49f7-88d5-ebc0c585d128",
+        "name": "Perplexity_Searcher",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 2.1,
+        "position": [
+          700,
+          420
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "95cc8220-d484-4ec9-a191-46a749de94a2",
+        "name": "AI Agent",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.8,
+        "position": [
+          480,
+          260
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "1321ee35-f97d-475f-81cb-de00f833c89b",
+        "name": "OpenAI Chat Model1",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.2,
+        "position": [
+          420,
+          420
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "88ed96de-99da-4e8d-ba61-c7742109bc06",
+        "name": "AI Agent1",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.8,
+        "position": [
+          1520,
+          360
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "cad725b7-9360-4f4a-8f72-1034f09192b5",
+        "name": "OpenAI Chat Model2",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.2,
+        "position": [
+          1480,
+          700
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "5e5e91c5-787e-4c6e-99bf-a2d08638b26f",
+        "name": "Metadata Extractor",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.2,
+        "position": [
+          1740,
+          640
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "6a165afa-074d-4f2c-9f3b-2c8f02f3ae46",
+        "name": "Simple Memory",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.3,
+        "position": [
+          1600,
+          540
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "433b5974-6bd9-4bd8-a718-e9a1970de35b",
+        "name": "Simple Memory1",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.3,
+        "position": [
+          1600,
+          -60
+        ],
+        "has_credentials": false
+      }
+    ],
+    "error_nodes": [
+      {
+        "id": "error-c03e804b",
+        "name": "Error Handler",
+        "type": "n8n-nodes-base.stopAndError",
+        "typeVersion": 1,
+        "position": [
+          1000,
+          400
+        ],
+        "has_credentials": false
+      }
+    ],
+    "sticky_notes_count": 4,
+    "sticky_experiences": [
+      "## Sample Generic Search Terms and write content\n\nYou are part of a marketing team that creates high-quality blog posts for the Men's Health Consulting and Workflow Automation industry based in Da Nang City, Vietnam.\n\nYour goal is to create engaging, SEO-optimized content that positions you as an authority in the Men's Health Consulting industry and attracts leads.\n\nUpon receiving the information, your team will post a blog on the most trending topics in Men's Health Consulting and Care. As a co"
+    ],
+    "trigger_patterns": [
+      {
+        "name": "On form submission",
+        "type": "formTrigger"
+      },
+      {
+        "name": "Tele HoangSP_Social_Media",
+        "type": "telegramTrigger"
+      }
+    ],
+    "error_handling": [
+      {
+        "name": "Error Handler",
+        "type": "stopAndError"
+      }
+    ],
+    "settings": {
+      "executionOrder": "v1",
+      "saveManualExecutions": true,
+      "callerPolicy": "workflowsFromSameOwner",
+      "errorWorkflow": null,
+      "timezone": "UTC",
+      "executionTimeout": 3600,
+      "maxExecutions": 1000,
+      "retryOnFail": true,
+      "retryCount": 3,
+      "retryDelay": 1000
+    }
+  }
+]

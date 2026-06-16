@@ -1,0 +1,277 @@
+{
+  "updatedAt": "2026-06-14T12:18:40.578Z",
+  "createdAt": "2026-06-14T12:16:23.126Z",
+  "id": "Yx6HEeubylg10sVh",
+  "name": "[Webhook] 文字→DeepSeek文案→Mimo语音",
+  "description": null,
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "text-to-speech",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "接收文本Prompt",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "94f5e07b-7bbb-42ea-924c-f964fffcdd1d"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 从 DeepSeek 响应中提取文案\nconst deepseekResponse = $input.first().json;\nconst copywriting = deepseekResponse.choices[0].message.content;\n\n// 构造 Mimo TTS API 请求体\nconst mimoBody = {\n  model: \"mimo-v2.5-tts\",\n  messages: [\n    {\n      role: \"user\",\n      content: \"用温柔亲切的语调朗读，语速适中，像在和朋友聊天一样自然\"\n    },\n    {\n      role: \"assistant\",\n      content: copywriting\n    }\n  ],\n  audio: {\n    format: \"wav\",\n    voice: \"冰糖\"\n  },\n  stream: false\n};\n\nreturn [{\n  json: {\n    mimoBody: mimoBody,\n    copywriting: copywriting,\n    mimoBodyString: JSON.stringify(mimoBody)\n  }\n}];"
+      },
+      "id": "build-mimo-body",
+      "name": "构造Mimo请求体",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        512,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.xiaomimimo.com/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "api-key",
+              "value": "={{ $env.MIMO_API_KEY }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          },
+          "timeout": 120000
+        }
+      },
+      "id": "call-mimo-tts",
+      "name": "调用Mimo语音合成",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        752,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// 从 Mimo 响应中提取 Base64 音频数据\nconst mimoResponse = $input.first().json;\nconst base64Audio = mimoResponse.choices[0].message.audio.data;\n\n// 将 Base64 字符串解码为二进制 Buffer\nconst audioBuffer = Buffer.from(base64Audio, 'base64');\n\n// 输出二进制数据\nreturn [{\n  json: {\n    audioSize: audioBuffer.length,\n    format: 'wav'\n  },\n  binary: {\n    data: {\n      data: audioBuffer.toString('base64'),\n      mimeType: 'audio/wav',\n      fileName: 'speech.wav'\n    }\n  }\n}];"
+      },
+      "id": "decode-base64",
+      "name": "Base64解码为二进制",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        1008,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "fileName": "=/data/audio/speech_{{ $now.format('yyyyMMdd_HHmmss') }}.wav",
+        "options": {}
+      },
+      "id": "save-audio-file",
+      "name": "保存音频文件",
+      "type": "n8n-nodes-base.writeBinaryFile",
+      "typeVersion": 1,
+      "position": [
+        1264,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "bbeaa291-56c9-41e0-8cf0-e8efff8aa159",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+      "typeVersion": 1,
+      "position": [
+        128,
+        192
+      ],
+      "id": "c4307816-4d5c-4972-8c15-548ee514c47e",
+      "name": "DeepSeek Chat Model",
+      "credentials": {
+        "deepSeekApi": {
+          "id": "zDNj0W0LdWxgykyD",
+          "name": "DeepSeek account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "接收文本Prompt": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "构造Mimo请求体": {
+      "main": [
+        [
+          {
+            "node": "调用Mimo语音合成",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "调用Mimo语音合成": {
+      "main": [
+        [
+          {
+            "node": "Base64解码为二进制",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Base64解码为二进制": {
+      "main": [
+        [
+          {
+            "node": "保存音频文件",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "构造Mimo请求体",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DeepSeek Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "87e6ae70-19f2-4c12-ad24-c68544df51dc",
+  "activeVersionId": null,
+  "versionCounter": 6,
+  "triggerCount": 0,
+  "shared": [
+    {
+      "updatedAt": "2026-06-14T12:16:23.134Z",
+      "createdAt": "2026-06-14T12:16:23.134Z",
+      "role": "workflow:owner",
+      "workflowId": "Yx6HEeubylg10sVh",
+      "projectId": "8loJyCJFjIW63a92",
+      "project": {
+        "updatedAt": "2026-06-14T12:08:38.351Z",
+        "createdAt": "2026-06-14T12:07:32.107Z",
+        "id": "8loJyCJFjIW63a92",
+        "name": "Allen Fang <shangbingo888@gmail.com>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "08b2a229-5670-4bc2-8b9e-1d8f92d74956",
+        "projectRelations": [
+          {
+            "updatedAt": "2026-06-14T12:07:32.107Z",
+            "createdAt": "2026-06-14T12:07:32.107Z",
+            "userId": "08b2a229-5670-4bc2-8b9e-1d8f92d74956",
+            "projectId": "8loJyCJFjIW63a92",
+            "user": {
+              "updatedAt": "2026-06-14T12:18:05.270Z",
+              "createdAt": "2026-06-14T12:07:31.865Z",
+              "id": "08b2a229-5670-4bc2-8b9e-1d8f92d74956",
+              "email": "shangbingo888@gmail.com",
+              "firstName": "Allen",
+              "lastName": "Fang",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-06-14T12:09:00.586Z",
+                "personalization_survey_n8n_version": "2.5.0",
+                "automationGoalDevops": [
+                  "ci-cd",
+                  "cloud-infrastructure-orchestration"
+                ],
+                "companySize": "<20",
+                "companyType": "saas",
+                "role": "it",
+                "reportedSource": "youtube"
+              },
+              "settings": {
+                "userActivated": false,
+                "easyAIWorkflowOnboarded": true
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-06-14",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [],
+  "activeVersion": null
+}

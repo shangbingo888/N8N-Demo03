@@ -1,0 +1,64 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# CodeBuddy
+.codebuddy/
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# n8n data (contains sensitive information)
+n8n-data/
+n8n-files/
+
+# Test outputs
+test-outputs/
+
+# Voice files
+voice/
+
+# Compressed files
+*.zip
+*.tar
+*.tar.gz
+*.rar
+*.7z
+
+# Logs
+*.log
+*.journal
+
+# Database files
+*.sqlite
+*.sqlite-journal
+*.sqlite-shm
+*.sqlite-wal
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# IDE
+.vscode/
+.idea/
+*.sublime-*
+
+# Node modules (if any)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build outputs
+dist/
+build/
+.cache/

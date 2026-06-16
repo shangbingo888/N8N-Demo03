@@ -1,0 +1,1970 @@
+{
+  "text-generation": {
+    "label": "文本生成 (Text Generation)",
+    "description": "使用 OpenAI/LLM 模型进行文本生成、对话、摘要、翻译等自然语言处理任务",
+    "count": 4,
+    "workflows": [
+      {
+        "name": "Summarize Google Sheets form feedback via OpenAI's GPT-4",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Manual/1543_Manual_Openai_Automation_Triggered.json",
+        "node_count": 11,
+        "secondary": [
+          "automation-triggers",
+          "data-processing",
+          "conditional-loop"
+        ]
+      },
+      {
+        "name": "Summarize Google Sheets form feedback via OpenAI's GPT-4",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Manual/1669_Manual_Openai_Automation_Triggered.json",
+        "node_count": 11,
+        "secondary": [
+          "automation-triggers",
+          "data-processing",
+          "conditional-loop"
+        ]
+      },
+      {
+        "name": "OpenAI-model-examples",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Readbinaryfiles/0171_Readbinaryfiles_Code_Automation_Webhook.json",
+        "node_count": 27,
+        "secondary": [
+          "automation-triggers",
+          "data-processing",
+          "conditional-loop"
+        ]
+      },
+      {
+        "name": "OpenAI-model-examples",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Readbinaryfiles/1583_Readbinaryfiles_Code_Automation_Webhook.json",
+        "node_count": 27,
+        "secondary": [
+          "automation-triggers",
+          "data-processing",
+          "conditional-loop"
+        ]
+      }
+    ]
+  },
+  "image-processing": {
+    "label": "图像处理 (Image Processing)",
+    "description": "通过 ComfyUI/Stable Diffusion 等 API 进行 AI 图像生成与处理",
+    "count": 0,
+    "workflows": []
+  },
+  "data-processing": {
+    "label": "数据处理 (Data Processing)",
+    "description": "与 Google Sheets、PostgreSQL、BigQuery 等数据源集成，进行 ETL、导入导出、数据清洗等操作",
+    "count": 14,
+    "workflows": [
+      {
+        "name": "Lmchatopenai Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Converttofile/0889_Converttofile_HTTP_Create_Webhook.json",
+        "node_count": 18,
+        "secondary": [
+          "automation-triggers",
+          "conditional-loop",
+          "text-generation"
+        ]
+      },
+      {
+        "name": "Extract text from PDF and image using Vertex AI (Gemini) into CSV",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Extractfromfile/1444_Extractfromfile_Converttofile_Automation_Webhook.json",
+        "node_count": 16,
+        "secondary": [
+          "automation-triggers",
+          "conditional-loop",
+          "text-generation"
+        ]
+      },
+      {
+        "name": "Automated Resume Review System Using OpenAI + Google Sheets",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Extractfromfile/1501_Extractfromfile_Form_Automate_Triggered.json",
+        "node_count": 18,
+        "secondary": [
+          "automation-triggers",
+          "conditional-loop",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Extract text from PDF and image using Vertex AI (Gemini) into CSV",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Extractfromfile/1978_Extractfromfile_Converttofile_Automation_Webhook.json",
+        "node_count": 16,
+        "secondary": [
+          "automation-triggers",
+          "conditional-loop",
+          "text-generation"
+        ]
+      },
+      {
+        "name": "Generate AI-Ready llms.txt Files from Screaming Frog Website Crawls",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Filter/1791_Filter_Summarize_Create_Triggered.json",
+        "node_count": 24,
+        "secondary": [
+          "automation-triggers",
+          "conditional-loop",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Structured Data Extract, Data Mining with Bright Data & Google Gemini",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Manual/0337_Manual_Stickynote_Automation_Webhook.json",
+        "node_count": 18,
+        "secondary": [
+          "automation-triggers",
+          "text-generation",
+          "conditional-loop"
+        ]
+      },
+      {
+        "name": "Scrape Web Data with Bright Data, Google Gemini and MCP Automated AI Agent",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Manual/1707_Manual_Stickynote_Automate_Webhook.json",
+        "node_count": 19,
+        "secondary": [
+          "automation-triggers",
+          "text-generation",
+          "conditional-loop"
+        ]
+      },
+      {
+        "name": "Qualify new leads in Google Sheets via OpenAI's GPT-4",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Openai/1177_Openai_GoogleSheets_Create_Triggered.json",
+        "node_count": 10,
+        "secondary": [
+          "text-generation",
+          "conditional-loop",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Qualify new leads in Google Sheets via OpenAI's GPT-4",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Openai/1618_Openai_GoogleSheets_Create_Triggered.json",
+        "node_count": 10,
+        "secondary": [
+          "text-generation",
+          "conditional-loop",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Openai Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Postgres/0666_Postgres_Webhook_Create_Webhook.json",
+        "node_count": 19,
+        "secondary": [
+          "automation-triggers",
+          "conditional-loop",
+          "text-generation"
+        ]
+      },
+      {
+        "name": "Openai Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Postgres/1249_Postgres_Webhook_Automation_Webhook.json",
+        "node_count": 19,
+        "secondary": [
+          "automation-triggers",
+          "conditional-loop",
+          "text-generation"
+        ]
+      },
+      {
+        "name": "Enrich Company Data from Google Sheet with OpenAI Agent and Scraper Tool",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Webhook/1694_Webhook_HTTP_Automation_Webhook.json",
+        "node_count": 13,
+        "secondary": [
+          "conditional-loop",
+          "sub-workflow",
+          "automation-triggers"
+        ]
+      },
+      {
+        "name": "Automate Content Generator for WordPress with DeepSeek R1",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Wordpress/1327_Wordpress_Manual_Automate_Webhook.json",
+        "node_count": 17,
+        "secondary": [
+          "automation-triggers",
+          "conditional-loop",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Automate Content Generator for WordPress with DeepSeek R1",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Wordpress/1949_Wordpress_Manual_Automate_Webhook.json",
+        "node_count": 17,
+        "secondary": [
+          "automation-triggers",
+          "conditional-loop",
+          "error-handling"
+        ]
+      }
+    ]
+  },
+  "automation-triggers": {
+    "label": "自动化触发 (Automation Triggers)",
+    "description": "通过 Webhook、定时调度、Telegram Bot、表单提交等方式触发自动化流程",
+    "count": 120,
+    "workflows": [
+      {
+        "name": "Unnamed Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Automate/1271_Automate.json",
+        "node_count": 2,
+        "secondary": [
+          "error-handling",
+          "data-processing"
+        ]
+      },
+      {
+        "name": "Unnamed Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Automate/1326_Automate.json",
+        "node_count": 2,
+        "secondary": [
+          "error-handling",
+          "data-processing"
+        ]
+      },
+      {
+        "name": "Unnamed Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Automation/1250_Automation.json",
+        "node_count": 2,
+        "secondary": [
+          "error-handling",
+          "data-processing"
+        ]
+      },
+      {
+        "name": "Unnamed Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Automation/2047_Automation.json",
+        "node_count": 2,
+        "secondary": [
+          "error-handling",
+          "data-processing"
+        ]
+      },
+      {
+        "name": "Openai Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Code/0299_Code_Webhook_Create_Webhook.json",
+        "node_count": 49,
+        "secondary": [
+          "conditional-loop",
+          "text-generation",
+          "data-processing"
+        ]
+      },
+      {
+        "name": "AI-Powered Information Monitoring with OpenAI, Google Sheets, Jina AI and Slack",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Code/1278_Code_Schedule_Monitor_Webhook.json",
+        "node_count": 31,
+        "secondary": [
+          "data-processing",
+          "conditional-loop",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "AI-Powered Information Monitoring with OpenAI, Google Sheets, Jina AI and Slack",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Code/1281_Code_Schedule_Monitor_Webhook.json",
+        "node_count": 31,
+        "secondary": [
+          "data-processing",
+          "conditional-loop",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "🎥 Analyze YouTube Video for Summaries, Transcripts & Content + Google Gemini AI",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Code/1313_Code_HTTP_Automation_Webhook.json",
+        "node_count": 33,
+        "secondary": [
+          "conditional-loop",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Openai Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Code/1653_Code_Webhook_Send_Webhook.json",
+        "node_count": 49,
+        "secondary": [
+          "conditional-loop",
+          "text-generation",
+          "data-processing"
+        ]
+      },
+      {
+        "name": "AI-Generated Summary Block for WordPress Posts - with OpenAI, WordPress, Google Sheets & Slack",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Datetime/1272_Datetime_Webhook_Create_Webhook.json",
+        "node_count": 32,
+        "secondary": [
+          "conditional-loop",
+          "data-processing",
+          "text-generation"
+        ]
+      },
+      {
+        "name": "AI-Generated Summary Block for WordPress Posts - with OpenAI, WordPress, Google Sheets & Slack",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Datetime/1273_Datetime_Webhook_Create_Webhook.json",
+        "node_count": 32,
+        "secondary": [
+          "conditional-loop",
+          "data-processing",
+          "text-generation"
+        ]
+      },
+      {
+        "name": "Store Notion's Pages as Vector Documents into Supabase with OpenAI",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Filter/1414_Filter_Summarize_Automation_Triggered.json",
+        "node_count": 10,
+        "secondary": [
+          "conditional-loop",
+          "error-handling",
+          "text-generation"
+        ]
+      },
+      {
+        "name": "Store Notion's Pages as Vector Documents into Supabase with OpenAI",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Filter/1667_Filter_Summarize_Automation_Triggered.json",
+        "node_count": 10,
+        "secondary": [
+          "conditional-loop",
+          "error-handling",
+          "text-generation"
+        ]
+      },
+      {
+        "name": "Simple OpenAI Image Generator",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Form/1316_Form_Stickynote_Automation_Webhook.json",
+        "node_count": 5,
+        "secondary": [
+          "data-processing",
+          "text-generation",
+          "image-processing"
+        ]
+      },
+      {
+        "name": "SEO Blog Generator with GPT-4o, Perplexity, and Telegram Integration",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Form/1762_Form_Aggregate_Automation_Triggered.json",
+        "node_count": 23,
+        "secondary": [
+          "conditional-loop",
+          "error-handling",
+          "text-generation"
+        ]
+      },
+      {
+        "name": "Agent Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Gmailtool/0677_Gmailtool_Splitout_Create_Webhook.json",
+        "node_count": 18,
+        "secondary": [
+          "sub-workflow",
+          "conditional-loop",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "DeepSeek v3.1",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Gmailtool/1142_Gmailtool_Stickynote_Automation_Triggered.json",
+        "node_count": 11,
+        "secondary": [
+          "error-handling",
+          "conditional-loop"
+        ]
+      },
+      {
+        "name": "Agent Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Gmailtool/1248_Gmailtool_Splitout_Automation_Webhook.json",
+        "node_count": 18,
+        "secondary": [
+          "sub-workflow",
+          "conditional-loop",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "AI Agent : Google calendar assistant using OpenAI",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Googlecalendartool/1247_Googlecalendartool_Stickynote_Automation_Triggered.json",
+        "node_count": 15,
+        "secondary": [
+          "error-handling",
+          "text-generation",
+          "conditional-loop"
+        ]
+      },
+      {
+        "name": "Transform Image to Lego Style Using Line and Dall-E",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Http/0688_HTTP_Webhook_Process_Webhook.json",
+        "node_count": 5,
+        "secondary": [
+          "image-processing",
+          "data-processing"
+        ]
+      },
+      {
+        "name": "Daily AI News Translation & Summary with GPT-4 and Telegram Delivery",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Http/0970_HTTP_Schedule_Create_Webhook.json",
+        "node_count": 12,
+        "secondary": [
+          "conditional-loop",
+          "text-generation",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "OpenAI ImageGen1 Template",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Http/1152_HTTP_Stickynote_Automation_Webhook.json",
+        "node_count": 7,
+        "secondary": [
+          "data-processing",
+          "text-generation",
+          "image-processing"
+        ]
+      },
+      {
+        "name": "🐋DeepSeek V3 Chat & R1 Reasoning Quick Start",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Http/1519_HTTP_Stickynote_Automation_Webhook.json",
+        "node_count": 16,
+        "secondary": [
+          "text-generation",
+          "conditional-loop",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "💥🛠️Automate Blog Content Creation with GPT-4, Perplexity & WordPress",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Http/1535_HTTP_Form_Automate_Webhook.json",
+        "node_count": 17,
+        "secondary": [
+          "text-generation",
+          "conditional-loop",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Telegram AI Langchain bot",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Http/1687_HTTP_Telegram_Automate_Webhook.json",
+        "node_count": 12,
+        "secondary": [
+          "sub-workflow",
+          "conditional-loop",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Transform Image to Lego Style Using Line and Dall-E",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Http/1700_HTTP_Webhook_Process_Webhook.json",
+        "node_count": 5,
+        "secondary": [
+          "image-processing",
+          "data-processing"
+        ]
+      },
+      {
+        "name": "Telegram AI Langchain bot",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Http/1808_HTTP_Telegram_Automate_Webhook.json",
+        "node_count": 12,
+        "secondary": [
+          "sub-workflow",
+          "conditional-loop",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Line_Chatbot_Extract_Text_from_Pay_Slip_with_Gemini",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Http/1811_HTTP_GoogleSheets_Automate_Webhook.json",
+        "node_count": 17,
+        "secondary": [
+          "data-processing",
+          "conditional-loop",
+          "text-generation"
+        ]
+      },
+      {
+        "name": "🎥 Gemini AI Video Analysis",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Http/1876_HTTP_Manual_Automation_Webhook.json",
+        "node_count": 10,
+        "secondary": [
+          "error-handling",
+          "conditional-loop"
+        ]
+      },
+      {
+        "name": "🐋DeepSeek V3 Chat & R1 Reasoning Quick Start",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Http/2043_HTTP_Stickynote_Automation_Webhook.json",
+        "node_count": 16,
+        "secondary": [
+          "text-generation",
+          "conditional-loop",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Lmchatopenai Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Jiratool/0604_Jiratool_Schedule_Create_Scheduled.json",
+        "node_count": 37,
+        "secondary": [
+          "sub-workflow",
+          "conditional-loop",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Lmchatopenai Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Jiratool/1328_Jiratool_Schedule_Automate_Scheduled.json",
+        "node_count": 37,
+        "secondary": [
+          "sub-workflow",
+          "conditional-loop",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "AI Voice Chat using Webhook, Memory Manager, OpenAI, Google Gemini & ElevenLabs",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Limit/1262_Limit_Webhook_Automation_Webhook.json",
+        "node_count": 15,
+        "secondary": [
+          "conditional-loop",
+          "text-generation",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "AI Voice Chat using Webhook, Memory Manager, OpenAI, Google Gemini & ElevenLabs",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Limit/1289_Limit_Webhook_Automation_Webhook.json",
+        "node_count": 15,
+        "secondary": [
+          "conditional-loop",
+          "text-generation",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Create AI-Ready Vector Datasets for LLMs with Bright Data, Gemini & Pinecone",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Manual/0933_Manual_Stickynote_Create_Webhook.json",
+        "node_count": 21,
+        "secondary": [
+          "conditional-loop",
+          "data-processing",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Text to Speech (OpenAI)",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Manual/1105_Manual_Stickynote_Automation_Webhook.json",
+        "node_count": 8,
+        "secondary": [
+          "text-generation",
+          "conditional-loop",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Enhance Chat Responses with Real-Time Search Data via Bright Data & Gemini AI",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Manual/1183_Manual_Stickynote_Automation_Webhook.json",
+        "node_count": 18,
+        "secondary": [
+          "text-generation",
+          "data-processing",
+          "conditional-loop"
+        ]
+      },
+      {
+        "name": "Google Trend Data Extract, Summarization with Bright Data & Google Gemini",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Manual/1235_Manual_HTTP_Automation_Webhook.json",
+        "node_count": 16,
+        "secondary": [
+          "data-processing",
+          "text-generation",
+          "conditional-loop"
+        ]
+      },
+      {
+        "name": "3D Figurine Orthographic Views with Midjourney and GPT-4o-Image API",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Manual/1238_Manual_Code_Automation_Webhook.json",
+        "node_count": 10,
+        "secondary": [
+          "conditional-loop",
+          "error-handling",
+          "image-processing"
+        ]
+      },
+      {
+        "name": "LangChain - Example - Workflow Retriever",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Manual/1285_Manual_Stickynote_Import_Triggered.json",
+        "node_count": 8,
+        "secondary": [
+          "error-handling",
+          "conditional-loop"
+        ]
+      },
+      {
+        "name": "Build an OpenAI Assistant with Google Drive Integration",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Manual/1303_Manual_Stickynote_Create_Triggered.json",
+        "node_count": 13,
+        "secondary": [
+          "error-handling",
+          "text-generation",
+          "conditional-loop"
+        ]
+      },
+      {
+        "name": "Extract & Summarize Bing Copilot Search Results with Gemini AI and Bright Data",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Manual/1314_Manual_Stickynote_Automation_Webhook.json",
+        "node_count": 19,
+        "secondary": [
+          "conditional-loop",
+          "error-handling",
+          "text-generation"
+        ]
+      },
+      {
+        "name": "Fine-tuning with OpenAI models",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Manual/1339_Manual_HTTP_Automation_Webhook.json",
+        "node_count": 9,
+        "secondary": [
+          "text-generation",
+          "conditional-loop",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Build an OpenAI Assistant with Google Drive Integration",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Manual/1360_Manual_Stickynote_Create_Triggered.json",
+        "node_count": 13,
+        "secondary": [
+          "error-handling",
+          "text-generation",
+          "conditional-loop"
+        ]
+      },
+      {
+        "name": "Chat with GitHub OpenAPI Specification using RAG (Pinecone and OpenAI)",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Manual/1373_Manual_Stickynote_Automation_Webhook.json",
+        "node_count": 17,
+        "secondary": [
+          "text-generation",
+          "conditional-loop",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Text to Speech (OpenAI)",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Manual/1390_Manual_Stickynote_Automation_Webhook.json",
+        "node_count": 8,
+        "secondary": [
+          "text-generation",
+          "conditional-loop",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "LangChain - Example - Code Node Example",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Manual/1397_Manual_Stickynote_Automation_Triggered.json",
+        "node_count": 11,
+        "secondary": [
+          "error-handling",
+          "conditional-loop"
+        ]
+      },
+      {
+        "name": "Extract Amazon Best Seller Electronic Information with Bright Data and Google Gemini",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Manual/1445_Manual_Stickynote_Automation_Webhook.json",
+        "node_count": 8,
+        "secondary": [
+          "text-generation",
+          "data-processing",
+          "conditional-loop"
+        ]
+      },
+      {
+        "name": "[AI/LangChain] Output Parser 4",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Manual/1457_Manual_Stickynote_Process_Triggered.json",
+        "node_count": 12,
+        "secondary": [
+          "error-handling",
+          "conditional-loop"
+        ]
+      },
+      {
+        "name": "OpenAI Assistant workflow: uploa file, create an Assistant, chat with it!",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Manual/1581_Manual_Stickynote_Create_Triggered.json",
+        "node_count": 11,
+        "secondary": [
+          "error-handling",
+          "text-generation",
+          "conditional-loop"
+        ]
+      },
+      {
+        "name": "Search & Summarize Web Data with Perplexity, Gemini AI & Bright Data to Webhooks",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Manual/1650_Manual_Stickynote_Automation_Webhook.json",
+        "node_count": 17,
+        "secondary": [
+          "conditional-loop",
+          "error-handling",
+          "text-generation"
+        ]
+      },
+      {
+        "name": "Summarize Glassdoor Company Info with Google Gemini and Bright Data Web Scraper",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Manual/1676_Manual_Wait_Automation_Webhook.json",
+        "node_count": 14,
+        "secondary": [
+          "conditional-loop",
+          "error-handling",
+          "text-generation"
+        ]
+      },
+      {
+        "name": "Lmchatopenai Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Manual/1702_Manual_Stickynote_Automation_Webhook.json",
+        "node_count": 12,
+        "secondary": [
+          "text-generation",
+          "conditional-loop",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Extract & Summarize Yelp Business Review with Bright Data and Google Gemini",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Manual/1821_Manual_Stickynote_Automation_Webhook.json",
+        "node_count": 12,
+        "secondary": [
+          "conditional-loop",
+          "text-generation",
+          "data-processing"
+        ]
+      },
+      {
+        "name": "Fine-tuning with OpenAI models",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Manual/1863_Manual_HTTP_Automation_Webhook.json",
+        "node_count": 9,
+        "secondary": [
+          "text-generation",
+          "conditional-loop",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Extract & Summarize Indeed Company Info with Bright Data and Google Gemini",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Manual/1882_Manual_Markdown_Automation_Webhook.json",
+        "node_count": 15,
+        "secondary": [
+          "text-generation",
+          "data-processing",
+          "conditional-loop"
+        ]
+      },
+      {
+        "name": "Generate Company Stories from LinkedIn with Bright Data & Google Gemini",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Manual/1960_Manual_Stickynote_Create_Webhook.json",
+        "node_count": 19,
+        "secondary": [
+          "conditional-loop",
+          "error-handling",
+          "text-generation"
+        ]
+      },
+      {
+        "name": "Extract & Summarize Wikipedia Data with Bright Data and Gemini AI",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Manual/1979_Manual_Stickynote_Automation_Webhook.json",
+        "node_count": 12,
+        "secondary": [
+          "text-generation",
+          "data-processing",
+          "conditional-loop"
+        ]
+      },
+      {
+        "name": "OpenAI e-mail classification - application",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Noop/0929_Noop_Extractfromfile_Automation.json",
+        "node_count": 11,
+        "secondary": [
+          "data-processing",
+          "text-generation",
+          "conditional-loop"
+        ]
+      },
+      {
+        "name": "Extract personal data with a self-hosted LLM Mistral NeMo",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Noop/1442_Noop_Stickynote_Automation_Triggered.json",
+        "node_count": 15,
+        "secondary": [
+          "error-handling",
+          "data-processing",
+          "conditional-loop"
+        ]
+      },
+      {
+        "name": "Extract personal data with a self-hosted LLM Mistral NeMo",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Noop/1486_Noop_Stickynote_Automation_Triggered.json",
+        "node_count": 15,
+        "secondary": [
+          "error-handling",
+          "data-processing",
+          "conditional-loop"
+        ]
+      },
+      {
+        "name": "Dynamically switch between LLMs Template",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Noop/1838_Noop_Stickynote_Automation_Triggered.json",
+        "node_count": 24,
+        "secondary": [
+          "conditional-loop",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Lmchatopenai Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Respondtowebhook/0586_Respondtowebhook_Stickynote_Automate_Webhook.json",
+        "node_count": 7,
+        "secondary": [
+          "text-generation",
+          "conditional-loop",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Lmchatopenai Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Respondtowebhook/0590_Respondtowebhook_Stickynote_Send_Webhook.json",
+        "node_count": 28,
+        "secondary": [
+          "text-generation",
+          "conditional-loop",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Image Generation API",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Respondtowebhook/1387_Respondtowebhook_Stickynote_Automation_Webhook.json",
+        "node_count": 7,
+        "secondary": [
+          "text-generation",
+          "image-processing",
+          "conditional-loop"
+        ]
+      },
+      {
+        "name": "Generate audio from text using OpenAI - text-to-speech Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Respondtowebhook/1474_Respondtowebhook_Stickynote_Create_Webhook.json",
+        "node_count": 5,
+        "secondary": [
+          "text-generation",
+          "conditional-loop",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Generate audio from text using OpenAI - text-to-speech Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Respondtowebhook/1577_Respondtowebhook_Stickynote_Create_Webhook.json",
+        "node_count": 5,
+        "secondary": [
+          "text-generation",
+          "conditional-loop",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Lmchatopenai Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Respondtowebhook/1662_Respondtowebhook_Stickynote_Automation_Webhook.json",
+        "node_count": 7,
+        "secondary": [
+          "text-generation",
+          "conditional-loop",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Image Generation API",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Respondtowebhook/1997_Respondtowebhook_Stickynote_Automation_Webhook.json",
+        "node_count": 7,
+        "secondary": [
+          "text-generation",
+          "image-processing",
+          "conditional-loop"
+        ]
+      },
+      {
+        "name": "Lmchatopenai Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Schedule/0486_Schedule_Telegram_Create_Scheduled.json",
+        "node_count": 15,
+        "secondary": [
+          "error-handling",
+          "text-generation",
+          "conditional-loop"
+        ]
+      },
+      {
+        "name": "Lmchatopenai Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Schedule/0487_Schedule_Telegram_Create_Scheduled.json",
+        "node_count": 16,
+        "secondary": [
+          "error-handling",
+          "text-generation",
+          "conditional-loop"
+        ]
+      },
+      {
+        "name": "Lmchatopenai Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Schedule/1275_Schedule_Telegram_Automation_Scheduled.json",
+        "node_count": 16,
+        "secondary": [
+          "error-handling",
+          "text-generation",
+          "conditional-loop"
+        ]
+      },
+      {
+        "name": "Lmchatopenai Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Schedule/1276_Schedule_Telegram_Automation_Scheduled.json",
+        "node_count": 15,
+        "secondary": [
+          "error-handling",
+          "text-generation",
+          "conditional-loop"
+        ]
+      },
+      {
+        "name": "Daily meetings summarization with Gemini AI",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Schedule/1406_Schedule_Slack_Automation_Scheduled.json",
+        "node_count": 10,
+        "secondary": [
+          "error-handling",
+          "text-generation",
+          "conditional-loop"
+        ]
+      },
+      {
+        "name": "Daily meetings summarization with Gemini AI",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Schedule/1891_Schedule_Slack_Automation_Scheduled.json",
+        "node_count": 10,
+        "secondary": [
+          "error-handling",
+          "text-generation",
+          "conditional-loop"
+        ]
+      },
+      {
+        "name": "Creating an Onfleet Task for a new Shopify Fulfillment",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Shopify/0152_Shopify_Onfleet_Create_Triggered.json",
+        "node_count": 3,
+        "secondary": [
+          "error-handling",
+          "conditional-loop",
+          "data-processing"
+        ]
+      },
+      {
+        "name": "LLM Chaining examples",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Splitout/0958_Splitout_Webhook_Automation_Webhook.json",
+        "node_count": 38,
+        "secondary": [
+          "conditional-loop",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Automate PDF Image Extraction & Analysis with GPT-4o and Google Drive",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Splitout/1559_Splitout_Code_Automate_Webhook.json",
+        "node_count": 12,
+        "secondary": [
+          "conditional-loop",
+          "data-processing",
+          "text-generation"
+        ]
+      },
+      {
+        "name": "Personalized AI Tech Newsletter Using RSS, OpenAI and Gmail",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Splitout/1934_Splitout_Schedule_Create_Scheduled.json",
+        "node_count": 25,
+        "secondary": [
+          "conditional-loop",
+          "error-handling",
+          "text-generation"
+        ]
+      },
+      {
+        "name": "Lmchatopenai Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Stickynote/0755_Stickynote_Send_Webhook.json",
+        "node_count": 7,
+        "secondary": [
+          "text-generation",
+          "conditional-loop",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "💥🛠️Build a Web Search Chatbot with GPT-4o and MCP Brave Search",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Stickynote/1104_Stickynote_Create_Triggered.json",
+        "node_count": 17,
+        "secondary": [
+          "error-handling",
+          "text-generation",
+          "conditional-loop"
+        ]
+      },
+      {
+        "name": "Chat with local LLMs using n8n and Ollama",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Stickynote/1379_Stickynote_Automation_Triggered.json",
+        "node_count": 7,
+        "secondary": [
+          "error-handling",
+          "text-generation",
+          "conditional-loop"
+        ]
+      },
+      {
+        "name": "🔐🦙🤖 Private & Local Ollama Self-Hosted LLM Router",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Stickynote/1557_Stickynote_Automation_Triggered.json",
+        "node_count": 18,
+        "secondary": [
+          "error-handling",
+          "text-generation",
+          "conditional-loop"
+        ]
+      },
+      {
+        "name": "Travel Planning Agent with Couchbase Vector Search, Gemini 2.0 Flash and OpenAI",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Stickynote/1703_Stickynote_Webhook_Automation_Webhook.json",
+        "node_count": 13,
+        "secondary": [
+          "text-generation",
+          "conditional-loop",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Use any LLM-Model via OpenRouter",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Stickynote/1719_Stickynote_Automation_Triggered.json",
+        "node_count": 10,
+        "secondary": [
+          "error-handling",
+          "text-generation",
+          "conditional-loop"
+        ]
+      },
+      {
+        "name": "Use any LLM-Model via OpenRouter",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Stickynote/1734_Stickynote_Automation_Triggered.json",
+        "node_count": 10,
+        "secondary": [
+          "error-handling",
+          "text-generation",
+          "conditional-loop"
+        ]
+      },
+      {
+        "name": "Chat with local LLMs using n8n and Ollama",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Stickynote/1804_Stickynote_Automation_Triggered.json",
+        "node_count": 7,
+        "secondary": [
+          "error-handling",
+          "text-generation",
+          "conditional-loop"
+        ]
+      },
+      {
+        "name": "Build Custom AI Agent with LangChain & Gemini (Self-Hosted)",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Stickynote/2023_Stickynote_Create_Triggered.json",
+        "node_count": 11,
+        "secondary": [
+          "error-handling",
+          "text-generation",
+          "conditional-loop"
+        ]
+      },
+      {
+        "name": "Lmchatopenai Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Telegram/0462_Telegram_Code_Create_Webhook.json",
+        "node_count": 43,
+        "secondary": [
+          "conditional-loop",
+          "data-processing",
+          "text-generation"
+        ]
+      },
+      {
+        "name": "Lmchatopenai Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Telegram/0768_Telegram_Stickynote_Create_Triggered.json",
+        "node_count": 14,
+        "secondary": [
+          "conditional-loop",
+          "error-handling",
+          "text-generation"
+        ]
+      },
+      {
+        "name": "Chattrigger Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Telegram/0864_Telegram_Splitout_Create_Triggered.json",
+        "node_count": 24,
+        "secondary": [
+          "conditional-loop",
+          "data-processing",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "🤖 AI Powered RAG Chatbot for Your Docs + Google Drive + Gemini + Qdrant",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Telegram/1185_Telegram_Wait_Automate_Webhook.json",
+        "node_count": 50,
+        "secondary": [
+          "conditional-loop",
+          "error-handling",
+          "data-processing"
+        ]
+      },
+      {
+        "name": "💥AI Social Video Generator with GPT-4, Kling & Blotato —Auto-Post to Instagram, Facebook,, TikTok...",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Telegram/1288_Telegram_Wait_Automation_Webhook.json",
+        "node_count": 38,
+        "secondary": [
+          "data-processing",
+          "error-handling",
+          "text-generation"
+        ]
+      },
+      {
+        "name": "Agentic Telegram AI bot with LangChain nodes and new tools",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Telegram/1300_Telegram_Stickynote_Create_Webhook.json",
+        "node_count": 8,
+        "secondary": [
+          "conditional-loop",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Automated Research Report Generation with OpenAI, Wikipedia, Google Search, and Gmail/Telegram",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Telegram/1341_Telegram_Splitout_Automate_Webhook.json",
+        "node_count": 26,
+        "secondary": [
+          "conditional-loop",
+          "sub-workflow",
+          "data-processing"
+        ]
+      },
+      {
+        "name": "🦜✨Use OpenAI to Transcribe Audio + Summarize with AI + Save to Google Drive",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Telegram/1368_Telegram_Limit_Export_Triggered.json",
+        "node_count": 34,
+        "secondary": [
+          "conditional-loop",
+          "error-handling",
+          "text-generation"
+        ]
+      },
+      {
+        "name": "Lmchatopenai Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Telegram/1439_Telegram_Code_Create_Webhook.json",
+        "node_count": 43,
+        "secondary": [
+          "conditional-loop",
+          "data-processing",
+          "text-generation"
+        ]
+      },
+      {
+        "name": "Summarize YouTube Videos & Chat About Content with GPT-4o-mini via Telegram",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Telegram/1533_Telegram_Splitout_Automation_Webhook.json",
+        "node_count": 22,
+        "secondary": [
+          "conditional-loop",
+          "text-generation",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Agentic Telegram AI bot with LangChain nodes and new tools",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Telegram/1708_Telegram_Stickynote_Create_Webhook.json",
+        "node_count": 8,
+        "secondary": [
+          "conditional-loop",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Auto-create and publish AI social videos with Telegram, GPT-4 and Blotato",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Telegram/1878_Telegram_Wait_Create_Webhook.json",
+        "node_count": 42,
+        "secondary": [
+          "data-processing",
+          "conditional-loop",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Academic Assistant Chatbot (Telegram + OpenAI)",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Telegram/Academic Assistant Chatbot (Telegram + OpenAI).json",
+        "node_count": 5,
+        "secondary": [
+          "error-handling",
+          "text-generation",
+          "data-processing"
+        ]
+      },
+      {
+        "name": "AI Summarizer (LLM-ready)",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Templates/9004_AI_Summarizer_Template_Webhook.json",
+        "node_count": 6,
+        "secondary": [
+          "text-generation"
+        ]
+      },
+      {
+        "name": "Lmchatopenai Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Wait/0542_Wait_Redis_Create_Triggered.json",
+        "node_count": 19,
+        "secondary": [
+          "error-handling",
+          "conditional-loop",
+          "text-generation"
+        ]
+      },
+      {
+        "name": "AI-Powered Short-Form Video Generator with OpenAI, Flux, Kling, and ElevenLabs and upload to all ...",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Wait/1282_Wait_Code_Import_Webhook.json",
+        "node_count": 51,
+        "secondary": [
+          "conditional-loop",
+          "data-processing",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Lmchatopenai Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Wait/1431_Wait_Redis_Send_Triggered.json",
+        "node_count": 19,
+        "secondary": [
+          "error-handling",
+          "conditional-loop",
+          "text-generation"
+        ]
+      },
+      {
+        "name": "Flux Dev Image Generation Fal.ai",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Wait/1456_Wait_HTTP_Automation_Webhook.json",
+        "node_count": 12,
+        "secondary": [
+          "conditional-loop",
+          "error-handling",
+          "image-processing"
+        ]
+      },
+      {
+        "name": "Motion-illustration Workflow Generated with Midjourney and Kling API",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Wait/1484_Wait_Code_Create_Webhook.json",
+        "node_count": 13,
+        "secondary": [
+          "conditional-loop",
+          "error-handling",
+          "image-processing"
+        ]
+      },
+      {
+        "name": "Resume Screening & Behavioral Interviews with Gemini, Elevenlabs, & Notion ATS copy",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Wait/1639_Wait_Webhook_Automation_Webhook.json",
+        "node_count": 67,
+        "secondary": [
+          "data-processing",
+          "conditional-loop",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Flux Dev Image Generation Fal.ai",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Wait/1931_Wait_HTTP_Automation_Webhook.json",
+        "node_count": 12,
+        "secondary": [
+          "conditional-loop",
+          "error-handling",
+          "image-processing"
+        ]
+      },
+      {
+        "name": "Lmchatopenai Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Webhook/0834_Webhook_Slack_Create_Webhook.json",
+        "node_count": 16,
+        "secondary": [
+          "conditional-loop",
+          "text-generation",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "AI Agent to chat with you Search Console Data, using OpenAI and Postgres",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Webhook/1252_Webhook_Respondtowebhook_Automation_Webhook.json",
+        "node_count": 30,
+        "secondary": [
+          "conditional-loop",
+          "sub-workflow",
+          "text-generation"
+        ]
+      },
+      {
+        "name": "Voice RAG Chatbot with ElevenLabs and OpenAI",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Webhook/1263_Webhook_Respondtowebhook_Automate_Webhook.json",
+        "node_count": 23,
+        "secondary": [
+          "text-generation",
+          "conditional-loop",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Dynamically generate HTML page from user request using OpenAI Structured Output",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Webhook/1415_Webhook_Respondtowebhook_Create_Webhook.json",
+        "node_count": 7,
+        "secondary": [
+          "text-generation",
+          "conditional-loop",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Dynamically generate HTML page from user request using OpenAI Structured Output",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Webhook/1416_Webhook_Respondtowebhook_Create_Webhook.json",
+        "node_count": 7,
+        "secondary": [
+          "text-generation",
+          "conditional-loop",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Dynamically generate HTML page from user request using OpenAI Structured Output",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Webhook/1417_Webhook_Respondtowebhook_Create_Webhook.json",
+        "node_count": 7,
+        "secondary": [
+          "text-generation",
+          "conditional-loop",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "AI Agent to chat with you Search Console Data, using OpenAI and Postgres",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Webhook/1601_Webhook_Respondtowebhook_Automation_Webhook.json",
+        "node_count": 30,
+        "secondary": [
+          "conditional-loop",
+          "sub-workflow",
+          "text-generation"
+        ]
+      },
+      {
+        "name": "Image-Based Data Extraction API using Gemini AI",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Webhook/1770_Webhook_Extractfromfile_Automation_Webhook.json",
+        "node_count": 9,
+        "secondary": [
+          "data-processing",
+          "image-processing",
+          "conditional-loop"
+        ]
+      },
+      {
+        "name": "Voice RAG Chatbot with ElevenLabs and OpenAI",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Webhook/1887_Webhook_Respondtowebhook_Automate_Webhook.json",
+        "node_count": 23,
+        "secondary": [
+          "text-generation",
+          "conditional-loop",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "OpenAI Personal Shopper with RAG and WooCommerce",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Woocommercetool/1599_Woocommercetool_Manual_Automation_Webhook.json",
+        "node_count": 25,
+        "secondary": [
+          "conditional-loop",
+          "text-generation",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "OpenAI Personal Shopper with RAG and WooCommerce",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Woocommercetool/1857_Woocommercetool_Manual_Automation_Webhook.json",
+        "node_count": 25,
+        "secondary": [
+          "conditional-loop",
+          "text-generation",
+          "error-handling"
+        ]
+      }
+    ]
+  },
+  "conditional-loop": {
+    "label": "条件分支与循环 (Conditional & Loop)",
+    "description": "使用条件判断、分支选择、循环处理等控制流节点实现复杂业务逻辑",
+    "count": 48,
+    "workflows": [
+      {
+        "name": "Lmchatopenai Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Aggregate/0681_Aggregate_HTTP_Create_Webhook.json",
+        "node_count": 41,
+        "secondary": [
+          "sub-workflow",
+          "automation-triggers",
+          "text-generation"
+        ]
+      },
+      {
+        "name": "LinkedIn Web Scraping with Bright Data MCP Server & Google Gemini",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Code/1402_Code_Manual_Automation_Webhook.json",
+        "node_count": 20,
+        "secondary": [
+          "data-processing",
+          "automation-triggers",
+          "text-generation"
+        ]
+      },
+      {
+        "name": "Testing Mulitple Local LLM with LM Studio",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Datetime/1755_Datetime_Code_Automation_Webhook.json",
+        "node_count": 22,
+        "secondary": [
+          "data-processing",
+          "automation-triggers",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Testing Mulitple Local LLM with LM Studio",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Datetime/2050_Datetime_Code_Automation_Webhook.json",
+        "node_count": 22,
+        "secondary": [
+          "data-processing",
+          "automation-triggers",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Scrape Trustpilot Reviews with DeepSeek, Analyze Sentiment with OpenAI",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Limit/1645_Limit_Splitout_Automation_Webhook.json",
+        "node_count": 20,
+        "secondary": [
+          "automation-triggers",
+          "data-processing",
+          "text-generation"
+        ]
+      },
+      {
+        "name": "Scrape Trustpilot Reviews with DeepSeek, Analyze Sentiment with OpenAI",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Limit/1995_Limit_Splitout_Automation_Webhook.json",
+        "node_count": 20,
+        "secondary": [
+          "automation-triggers",
+          "data-processing",
+          "text-generation"
+        ]
+      },
+      {
+        "name": "Prepare CSV files with GPT-4",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Manual/1102_Manual_Openai_Automation_Triggered.json",
+        "node_count": 12,
+        "secondary": [
+          "text-generation",
+          "data-processing",
+          "automation-triggers"
+        ]
+      },
+      {
+        "name": "Prepare CSV files with GPT-4",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Manual/1604_Manual_Openai_Automation_Triggered.json",
+        "node_count": 12,
+        "secondary": [
+          "text-generation",
+          "data-processing",
+          "automation-triggers"
+        ]
+      },
+      {
+        "name": "Lmchatopenai Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Splitout/0530_Splitout_GoogleCalendar_Create_Webhook.json",
+        "node_count": 28,
+        "secondary": [
+          "sub-workflow",
+          "automation-triggers",
+          "data-processing"
+        ]
+      },
+      {
+        "name": "Embeddingsopenai Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Splitout/0554_Splitout_Code_Create_Webhook.json",
+        "node_count": 42,
+        "secondary": [
+          "sub-workflow",
+          "automation-triggers",
+          "data-processing"
+        ]
+      },
+      {
+        "name": "Splitout Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Splitout/0663_Splitout_Schedule_Update_Scheduled.json",
+        "node_count": 20,
+        "secondary": [
+          "automation-triggers",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Manualtrigger Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Splitout/0664_Splitout_Limit_Create_Webhook.json",
+        "node_count": 27,
+        "secondary": [
+          "automation-triggers",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Lmchatgooglegemini Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Splitout/0680_Splitout_HTTP_Send_Webhook.json",
+        "node_count": 10,
+        "secondary": [
+          "automation-triggers",
+          "text-generation",
+          "data-processing"
+        ]
+      },
+      {
+        "name": "Lmchatopenai Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Splitout/0860_Splitout_Limit_Send_Webhook.json",
+        "node_count": 22,
+        "secondary": [
+          "automation-triggers",
+          "text-generation",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Make OpenAI Citation for File Retrieval RAG",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Splitout/1059_Splitout_Code_Automation_Webhook.json",
+        "node_count": 20,
+        "secondary": [
+          "automation-triggers",
+          "text-generation",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Lmchatopenai Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Splitout/1297_Splitout_GoogleCalendar_Automation_Webhook.json",
+        "node_count": 28,
+        "secondary": [
+          "sub-workflow",
+          "automation-triggers",
+          "data-processing"
+        ]
+      },
+      {
+        "name": "Hugging Face to Notion",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Splitout/1306_Splitout_Schedule_Automation_Webhook.json",
+        "node_count": 11,
+        "secondary": [
+          "automation-triggers",
+          "data-processing"
+        ]
+      },
+      {
+        "name": "Manualtrigger Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Splitout/1325_Splitout_Limit_Automate_Webhook.json",
+        "node_count": 27,
+        "secondary": [
+          "automation-triggers",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Hugging Face  to Notion",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Splitout/1451_Splitout_Schedule_Automation_Webhook.json",
+        "node_count": 11,
+        "secondary": [
+          "automation-triggers",
+          "data-processing"
+        ]
+      },
+      {
+        "name": "New OpenAI Image Generation",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Splitout/1459_Splitout_Converttofile_Create_Webhook.json",
+        "node_count": 6,
+        "secondary": [
+          "automation-triggers",
+          "data-processing",
+          "text-generation"
+        ]
+      },
+      {
+        "name": "Lmchatgooglegemini Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Splitout/1542_Splitout_HTTP_Create_Webhook.json",
+        "node_count": 10,
+        "secondary": [
+          "automation-triggers",
+          "text-generation",
+          "data-processing"
+        ]
+      },
+      {
+        "name": "Make OpenAI Citation for File Retrieval RAG",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Splitout/1548_Splitout_Code_Automation_Webhook.json",
+        "node_count": 20,
+        "secondary": [
+          "automation-triggers",
+          "text-generation",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "RAG:Context-Aware Chunking | Google Drive to Pinecone via OpenRouter & Gemini",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Splitout/1627_Splitout_Code_Automation_Triggered.json",
+        "node_count": 18,
+        "secondary": [
+          "automation-triggers",
+          "error-handling",
+          "data-processing"
+        ]
+      },
+      {
+        "name": "Splitout Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Splitout/1657_Splitout_Schedule_Monitor_Scheduled.json",
+        "node_count": 20,
+        "secondary": [
+          "automation-triggers",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Splitout Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Splitout/1658_Splitout_Schedule_Monitor_Scheduled.json",
+        "node_count": 20,
+        "secondary": [
+          "automation-triggers",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Embeddingsopenai Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Splitout/1678_Splitout_Code_Automation_Webhook.json",
+        "node_count": 42,
+        "secondary": [
+          "sub-workflow",
+          "automation-triggers",
+          "data-processing"
+        ]
+      },
+      {
+        "name": "Automate Etsy Data Mining with Bright Data Scrape & Google Gemini",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Splitout/1721_Splitout_Manual_Automate_Webhook.json",
+        "node_count": 19,
+        "secondary": [
+          "data-processing",
+          "automation-triggers",
+          "text-generation"
+        ]
+      },
+      {
+        "name": "Easily Compare LLMs Using OpenAI and Google Sheets",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Splitout/1790_Splitout_Summarize_Automation_Triggered.json",
+        "node_count": 23,
+        "secondary": [
+          "data-processing",
+          "automation-triggers",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "LinkedIn Profile Finder via Form using Bright Data & GPT-4o-mini",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Splitout/1937_Splitout_Limit_Automation_Triggered.json",
+        "node_count": 19,
+        "secondary": [
+          "automation-triggers",
+          "text-generation",
+          "data-processing"
+        ]
+      },
+      {
+        "name": "template-demo-chatgpt-image-1-with-drive-and-sheet copy",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Splitout/1983_Splitout_Converttofile_Automation_Webhook.json",
+        "node_count": 16,
+        "secondary": [
+          "data-processing",
+          "automation-triggers",
+          "text-generation"
+        ]
+      },
+      {
+        "name": "OpenAI Assistant with custom n8n tools",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Summarize/1582_Summarize_Stickynote_Automation_Triggered.json",
+        "node_count": 15,
+        "secondary": [
+          "sub-workflow",
+          "error-handling",
+          "text-generation"
+        ]
+      },
+      {
+        "name": "Chainllm Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Telegram/0679_Telegram_Splitout_Create_Webhook.json",
+        "node_count": 13,
+        "secondary": [
+          "automation-triggers",
+          "data-processing"
+        ]
+      },
+      {
+        "name": "Generate Instagram Content from Top Trends with AI Image Generation",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Telegram/1470_Telegram_Code_Create_Webhook.json",
+        "node_count": 44,
+        "secondary": [
+          "automation-triggers",
+          "data-processing",
+          "image-processing"
+        ]
+      },
+      {
+        "name": "Generate Instagram Content from Top Trends with AI Image Generation",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Telegram/1482_Telegram_Code_Create_Webhook.json",
+        "node_count": 44,
+        "secondary": [
+          "automation-triggers",
+          "data-processing",
+          "image-processing"
+        ]
+      },
+      {
+        "name": "Chainllm Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Telegram/1490_Telegram_Splitout_Create_Webhook.json",
+        "node_count": 13,
+        "secondary": [
+          "automation-triggers",
+          "data-processing"
+        ]
+      },
+      {
+        "name": "🐋🤖 DeepSeek AI Agent + Telegram + LONG TERM Memory 🧠",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Telegram/1975_Telegram_Googledocs_Automation_Webhook.json",
+        "node_count": 23,
+        "secondary": [
+          "automation-triggers",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "🐋🤖 DeepSeek AI Agent + Telegram + LONG TERM Memory 🧠",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Telegram/2044_Telegram_Googledocs_Automation_Webhook.json",
+        "node_count": 23,
+        "secondary": [
+          "automation-triggers",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Lmopenai Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Wait/0523_Wait_Splitout_Create_Webhook.json",
+        "node_count": 26,
+        "secondary": [
+          "automation-triggers",
+          "data-processing",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Lmchatopenai Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Wait/0603_Wait_Splitout_Create_Webhook.json",
+        "node_count": 21,
+        "secondary": [
+          "automation-triggers",
+          "error-handling",
+          "image-processing"
+        ]
+      },
+      {
+        "name": "OpenAI Assistant for Hubspot Chat",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Wait/1366_Wait_Code_Automation_Webhook.json",
+        "node_count": 34,
+        "secondary": [
+          "automation-triggers",
+          "error-handling",
+          "text-generation"
+        ]
+      },
+      {
+        "name": "Create Animated Stories using GPT-4o-mini, Midjourney, Kling and Creatomate API",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Wait/1395_Wait_Code_Create_Webhook.json",
+        "node_count": 51,
+        "secondary": [
+          "automation-triggers",
+          "error-handling",
+          "text-generation"
+        ]
+      },
+      {
+        "name": "Indeed Company Data Scraper & Summarization with Airtable, Bright Data and Google Gemini",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Wait/1508_Wait_Manual_Automation_Webhook.json",
+        "node_count": 19,
+        "secondary": [
+          "automation-triggers",
+          "error-handling",
+          "data-processing"
+        ]
+      },
+      {
+        "name": "Lmopenai Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Wait/1512_Wait_Splitout_Process_Webhook.json",
+        "node_count": 26,
+        "secondary": [
+          "automation-triggers",
+          "data-processing",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Lmopenai Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Wait/1513_Wait_Splitout_Process_Webhook.json",
+        "node_count": 26,
+        "secondary": [
+          "automation-triggers",
+          "data-processing",
+          "error-handling"
+        ]
+      },
+      {
+        "name": "Lmchatopenai Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Wait/1566_Wait_Splitout_Automation_Webhook.json",
+        "node_count": 21,
+        "secondary": [
+          "automation-triggers",
+          "error-handling",
+          "image-processing"
+        ]
+      },
+      {
+        "name": "Generate Graphic Wallpaper with Midjourney, GPT-4o-mini and Canvas APIs",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Wait/1917_Wait_Code_Create_Webhook.json",
+        "node_count": 14,
+        "secondary": [
+          "automation-triggers",
+          "error-handling",
+          "text-generation"
+        ]
+      },
+      {
+        "name": "OpenAI Assistant for Hubspot Chat",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Wait/1990_Wait_Code_Automation_Webhook.json",
+        "node_count": 34,
+        "secondary": [
+          "automation-triggers",
+          "error-handling",
+          "text-generation"
+        ]
+      },
+      {
+        "name": "Openai Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Webhook/0892_Webhook_Code_Create_Webhook.json",
+        "node_count": 20,
+        "secondary": [
+          "automation-triggers",
+          "text-generation",
+          "error-handling"
+        ]
+      }
+    ]
+  },
+  "error-handling": {
+    "label": "错误处理与监控 (Error Handling & Monitoring)",
+    "description": "包含错误捕获、异常处理、重试机制等保障工作流稳定性的配置",
+    "count": 0,
+    "workflows": []
+  },
+  "sub-workflow": {
+    "label": "子工作流调用 (Sub-Workflow)",
+    "description": "通过 Execute Workflow 节点实现模块化工作流组合与复用",
+    "count": 9,
+    "workflows": [
+      {
+        "name": "🤖Contact Agent",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Executeworkflow/1793_Executeworkflow_Airtabletool_Automation_Triggered.json",
+        "node_count": 8,
+        "secondary": [
+          "error-handling",
+          "data-processing",
+          "automation-triggers"
+        ]
+      },
+      {
+        "name": "🤖Email Agent",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Gmailtool/1795_Gmailtool_Executeworkflow_Send_Triggered.json",
+        "node_count": 13,
+        "secondary": [
+          "error-handling",
+          "data-processing",
+          "automation-triggers"
+        ]
+      },
+      {
+        "name": "Lmchatopenai Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Googlebigquery/0806_Googlebigquery_Stickynote_Automate_Triggered.json",
+        "node_count": 13,
+        "secondary": [
+          "error-handling",
+          "data-processing",
+          "text-generation"
+        ]
+      },
+      {
+        "name": "🤖Calendar Agent",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Googlecalendartool/1792_Googlecalendartool_Executeworkflow_Automation_Triggered.json",
+        "node_count": 11,
+        "secondary": [
+          "error-handling",
+          "data-processing",
+          "automation-triggers"
+        ]
+      },
+      {
+        "name": "Lmchatopenai Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Http/0636_HTTP_Stickynote_Create_Webhook.json",
+        "node_count": 19,
+        "secondary": [
+          "text-generation",
+          "automation-triggers",
+          "conditional-loop"
+        ]
+      },
+      {
+        "name": "AI Agent with charts capabilities using OpenAI Structured Output",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Http/1112_HTTP_Stickynote_Automation_Webhook.json",
+        "node_count": 11,
+        "secondary": [
+          "text-generation",
+          "automation-triggers",
+          "conditional-loop"
+        ]
+      },
+      {
+        "name": "Lmchatopenai Workflow",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Http/1737_HTTP_Stickynote_Automation_Webhook.json",
+        "node_count": 19,
+        "secondary": [
+          "text-generation",
+          "automation-triggers",
+          "conditional-loop"
+        ]
+      },
+      {
+        "name": "Vision-Based AI Agent Scraper - with Google Sheets, ScrapingBee, and Gemini",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Splitout/1603_Splitout_Manual_Automation_Webhook.json",
+        "node_count": 29,
+        "secondary": [
+          "data-processing",
+          "automation-triggers",
+          "conditional-loop"
+        ]
+      },
+      {
+        "name": "Vision-Based AI Agent Scraper - with Google Sheets, ScrapingBee, and Gemini",
+        "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Splitout/2041_Splitout_Manual_Automation_Webhook.json",
+        "node_count": 29,
+        "secondary": [
+          "data-processing",
+          "automation-triggers",
+          "conditional-loop"
+        ]
+      }
+    ]
+  }
+}

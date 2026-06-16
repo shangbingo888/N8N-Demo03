@@ -1,0 +1,759 @@
+{
+  "name": "视频工作流-生成视频",
+  "nodes": [
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "999349cc-077d-465d-9c08-e762716e11fd",
+              "leftValue": "={{ $json.code }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "65680057-2cb5-43ec-9893-dc3166cc6ebb",
+              "leftValue": "={{ $json.data.taskId }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        992,
+        0
+      ],
+      "id": "0ab8f74c-5dce-4af5-8dc0-3e6d19b8b191",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "amount": 15
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1264,
+        0
+      ],
+      "id": "bad58fcc-ac64-47c0-9629-5e3c9794a4da",
+      "name": "Wait",
+      "webhookId": "f6b1a4c3-bfa4-40c9-8800-0b68bf104863"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "4f4e9ba2-123c-4231-8d59-d297375cf47b",
+              "leftValue": "={{ $json.data }}",
+              "rightValue": "QUEUED",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "4eab6588-e33b-42cb-84d5-bb90adfc6431",
+              "leftValue": "={{ $json.data }}",
+              "rightValue": "RUNNING",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1648,
+        0
+      ],
+      "id": "e698094e-0dc9-489b-becc-24d4bc8226f1",
+      "name": "If1",
+      "retryOnFail": false
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "95663f30-5e57-4d3d-88bd-e11abce866ae",
+              "leftValue": "={{ $('查询状态').first().json.data }}",
+              "rightValue": "SUCCESS",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1872,
+        0
+      ],
+      "id": "5431f6d0-d0dd-450c-9725-2f7d6e5a36ba",
+      "name": "If2"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.runninghub.cn/task/openapi/status",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"apiKey\": \"{{ $('配置字段').first().json.runninghub_apikey }}\",\n  \"taskId\": \"{{ $('发起任务').item.json.data.taskId }}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1456,
+        0
+      ],
+      "id": "a90b54bf-c268-49e3-89d0-263a0cb98877",
+      "name": "查询状态",
+      "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.runninghub.cn/task/openapi/create",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"workflowId\": \"{{ $('配置字段').first().json.workflow_id }}\",\n  \"apiKey\": \"{{ $('配置字段').first().json.runninghub_apikey }}\",\n  \"nodeInfoList\": [\n  {\n    \"nodeId\": \"37\",\n    \"fieldName\": \"image\",\n    \"fieldValue\": \"{{ $json.data.fileName }}\",\n    \"description\": \"上传图片\"\n  },\n  {\n    \"nodeId\": \"18\",\n    \"fieldName\": \"value\",\n    \"fieldValue\": \"{{ $('配置字段').item.json.width }}\",\n    \"description\": \"宽度\"\n  },\n  {\n    \"nodeId\": \"16\",\n    \"fieldName\": \"value\",\n    \"fieldValue\": \"{{ $('配置字段').item.json.height }}\",\n    \"description\": \"高度\"\n  },\n  {\n    \"nodeId\": \"17\",\n    \"fieldName\": \"value\",\n    \"fieldValue\": \"{{ $('配置字段').item.json.duration }}\",\n    \"description\": \"视频时长【秒】\"\n  },\n  {\n    \"nodeId\": \"36\",\n    \"fieldName\": \"value\",\n    \"fieldValue\": \"{{ $('配置字段').item.json.prompt }}\",\n    \"description\": \"图生视频提示词\"\n  }\n  ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        752,
+        0
+      ],
+      "id": "bd01f3c8-dd93-45c8-86ef-25eec44e5b1f",
+      "name": "发起任务",
+      "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "operation": "write",
+        "fileName": "={{ $('配置字段').item.json.output_folder_path }}video_fragment_{{ $now.format('yyyy-MM-dd_hh-mm-ss') }}_{{ Math.floor(Math.random() * 10000) }}.mp4",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        368,
+        464
+      ],
+      "id": "8e8a53f0-3295-4267-a17a-65f778e118c9",
+      "name": "Read/Write Files from Disk"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "565c1e1b-70c2-403d-a35f-4f43cfd2c0ae",
+              "name": "prompt",
+              "value": "={{ $json.prompt }}",
+              "type": "string"
+            },
+            {
+              "id": "bce999ce-9040-4f70-a70a-6df392427116",
+              "name": "image_filepath",
+              "value": "={{ $json.image_filepath }}",
+              "type": "string"
+            },
+            {
+              "id": "29a10c8a-5f18-4c02-8a47-6be9c25ec1dc",
+              "name": "workflow_id",
+              "value": "1990685073034928130",
+              "type": "string"
+            },
+            {
+              "id": "0d1585fd-c4f6-45fd-ac0c-6463b8c1d415",
+              "name": "runninghub_apikey",
+              "value": "={{ $json.runninghub_apikey }}",
+              "type": "string"
+            },
+            {
+              "id": "d36957ef-16da-4724-b3d9-199b7fa3a34b",
+              "name": "duration",
+              "value": "={{ $json.duration }}",
+              "type": "number"
+            },
+            {
+              "id": "77b39440-3503-46b9-9faa-58750f5b1106",
+              "name": "width",
+              "value": "={{ $json.width }}",
+              "type": "number"
+            },
+            {
+              "id": "7b40152f-de25-43b8-b339-b9a30c39d404",
+              "name": "height",
+              "value": "={{ $json.height }}",
+              "type": "number"
+            },
+            {
+              "id": "bc65e7b6-5c1a-4145-995f-548bc3350432",
+              "name": "output_folder_path",
+              "value": "={{ $json.output_folder_path }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        144,
+        0
+      ],
+      "id": "b43d7a07-df94-4e03-846f-ed0bd7ed3a2f",
+      "name": "配置字段"
+    },
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "image_filepath"
+            },
+            {
+              "name": "prompt"
+            },
+            {
+              "name": "duration",
+              "type": "number"
+            },
+            {
+              "name": "width",
+              "type": "number"
+            },
+            {
+              "name": "height",
+              "type": "number"
+            },
+            {
+              "name": "runninghub_apikey"
+            },
+            {
+              "name": "output_folder_path"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -80,
+        0
+      ],
+      "id": "90b9c8a2-e9c7-491f-9d93-fb7ef2814aa5",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "6491514e-d576-4ea9-bcfb-9d8aa5ab69fc",
+              "name": "image_filepath",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "de858876-b71d-4290-8aa1-5ac20bbd84a2",
+              "name": "prompt",
+              "value": "角色面带灿烂笑容，眼神充满好奇和兴奋，整个人散发着无忧无虑的快乐气息（主体动态）。阳光明媚的郊外草地，绿草如茵，野花点缀其间，远处有高大的树木和蓝天白云（场景）。蹦蹦跳跳地向前跑，双手张开像小鸟翅膀，时不时停下来弯腰观察地上的小昆虫（动作）。自然阳光照明，柔和均匀的光线，中远景，中心构图，标准焦距镜头，手持跟随镜头，温暖明亮的色调（美学控制）。3D皮克斯风格，圆润可爱的角色造型，鲜艳的色彩搭配，充满童趣的质感（风格化）",
+              "type": "string"
+            },
+            {
+              "id": "9678b06a-6c7c-4328-a296-b23062c460b0",
+              "name": "duration",
+              "value": 4,
+              "type": "number"
+            },
+            {
+              "id": "ab8e0bfe-d2e1-418a-8ddb-4d5b0b176a73",
+              "name": "width",
+              "value": 360,
+              "type": "number"
+            },
+            {
+              "id": "a238f8ae-4a01-4fa0-af3f-67997bd3e3b9",
+              "name": "height",
+              "value": 480,
+              "type": "number"
+            },
+            {
+              "id": "b2a26b61-96de-4459-9748-7c9ade8aab37",
+              "name": "output_folder_path",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "080981a0-5311-4b0e-a62d-9d34175cb91d",
+              "name": "runninghub_apikey",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        144,
+        -240
+      ],
+      "id": "bcfc5ce2-51ca-4326-b625-23b6fcfbbf25",
+      "name": "Edit Fields",
+      "disabled": true
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -80,
+        -240
+      ],
+      "id": "2b974514-706e-47d3-9e79-0b9e32533df4",
+      "name": "When clicking ‘Execute workflow’",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.runninghub.cn/task/openapi/upload",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "file",
+              "inputDataFieldName": "data"
+            },
+            {
+              "name": "fileType",
+              "value": "input"
+            },
+            {
+              "name": "apiKey",
+              "value": "={{ $('配置字段').item.json.runninghub_apikey }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        560,
+        0
+      ],
+      "id": "13022e95-2577-4a79-9f29-32d458124e46",
+      "name": "上传图片"
+    },
+    {
+      "parameters": {
+        "fileSelector": "={{ $json.image_filepath }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        336,
+        0
+      ],
+      "id": "067715ae-121a-4297-b1d5-84c857bbb04f",
+      "name": "Read/Write Files from Disk1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b56d373b-ce89-4280-bb76-745968f4d482",
+              "name": "video_filepath",
+              "value": "={{ $json.fileName }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        576,
+        464
+      ],
+      "id": "322d5471-0000-4497-b8dd-96355c7546e3",
+      "name": "执行结束返回字段"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "e3a570fc-ef9e-4fcf-8aee-0ee7bd22ba0b",
+              "leftValue": "={{ `${$('发起任务').first().json.code}` }}",
+              "rightValue": "={{ `${421}` }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "3fadea42-cf10-4249-becb-075c04ea3d66",
+              "leftValue": "={{ `${$('发起任务').first().json.code}` }}",
+              "rightValue": "={{ `${433}` }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "a207e82c-0251-464b-b429-c115a9de9eae",
+              "leftValue": "={{ `${$('发起任务').first().json.code}` }}",
+              "rightValue": "={{ `${413}` }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1104,
+        240
+      ],
+      "id": "68bd8596-68c1-4839-9320-b9b68a61ac8c",
+      "name": "If3"
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1360,
+        224
+      ],
+      "id": "20ed1b0e-4397-4f85-92f1-f5b505d69f03",
+      "name": "Wait1",
+      "webhookId": "19535b08-d749-4cb1-a14c-4aaeeb3685b3"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.runninghub.cn/task/openapi/outputs",
+        "sendBody": true,
+        "specifyBody": "=json",
+        "bodyParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "jsonBody": "={\n  \"apiKey\": \"{{ $('配置字段').first().json.runninghub_apikey }}\",\n  \"taskId\": \"{{ $('发起任务').item.json.data.taskId }}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -64,
+        464
+      ],
+      "id": "5ab623da-458d-4628-8b21-977f2fd23647",
+      "name": "获取视频地址"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.data[0].fileUrl }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        160,
+        464
+      ],
+      "id": "f3a7471f-7b98-4155-8c37-37429aa6f239",
+      "name": "下载视频"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "查询状态",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "查询状态": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "发起任务": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "获取视频地址",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "上传图片",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read/Write Files from Disk": {
+      "main": [
+        [
+          {
+            "node": "执行结束返回字段",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "配置字段": {
+      "main": [
+        [
+          {
+            "node": "Read/Write Files from Disk1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "配置字段",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        []
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "上传图片": {
+      "main": [
+        [
+          {
+            "node": "发起任务",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read/Write Files from Disk1": {
+      "main": [
+        [
+          {
+            "node": "上传图片",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If3": {
+      "main": [
+        [
+          {
+            "node": "Wait1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait1": {
+      "main": [
+        [
+          {
+            "node": "发起任务",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "获取视频地址": {
+      "main": [
+        [
+          {
+            "node": "下载视频",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "下载视频": {
+      "main": [
+        [
+          {
+            "node": "Read/Write Files from Disk",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "e723e600-12d6-4fe5-a079-4407587a0282",
+  "meta": {
+    "instanceId": "164b6258852a751ffad2d91c0ef2b3e746122b3f527005a8ac87036f847eae21"
+  },
+  "id": "BIgQ9RmvnljUwTMd",
+  "tags": []
+}

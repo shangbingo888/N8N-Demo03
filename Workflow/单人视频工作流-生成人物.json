@@ -1,0 +1,379 @@
+{
+  "name": "单人视频工作流-生成人物",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "write",
+        "fileName": "={{ $('配置字段').item.json.output_folder_path }}character_{{ $now.format('yyyy-MM-dd_hh-mm-ss') }}_{{ Math.floor(Math.random() * 10000) }}.png",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        1600,
+        224
+      ],
+      "id": "7bb15d96-674a-4a18-9782-456a0d4fa5e3",
+      "name": "Read/Write Files from Disk"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "565c1e1b-70c2-403d-a35f-4f43cfd2c0ae",
+              "name": "prompt",
+              "value": "={{ $json.prompt }}",
+              "type": "string"
+            },
+            {
+              "id": "9a6fc81d-bcce-4652-a2ee-aeef432586c3",
+              "name": "output_folder_path",
+              "value": "={{ $json.output_folder_path }}",
+              "type": "string"
+            },
+            {
+              "id": "335ce323-fe4c-4f68-b8d9-db1cb63f2d39",
+              "name": "width",
+              "value": "={{ $json.width }}",
+              "type": "string"
+            },
+            {
+              "id": "2e42c1d8-4fc3-41c9-91e1-4f5c6f4a2754",
+              "name": "height",
+              "value": "={{ $json.height }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        240,
+        240
+      ],
+      "id": "cc0c1843-80d6-4916-afed-aee137ed4537",
+      "name": "配置字段"
+    },
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "prompt"
+            },
+            {
+              "name": "output_folder_path"
+            },
+            {
+              "name": "width",
+              "type": "number"
+            },
+            {
+              "name": "height",
+              "type": "number"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -48,
+        240
+      ],
+      "id": "e60d1e8b-861d-4756-8f68-46f4b69bdca4",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "de858876-b71d-4290-8aa1-5ac20bbd84a2",
+              "name": "prompt",
+              "value": "=新海诚动漫风格，全身形象。一位年轻职场女性，约25岁，身高165cm左右，身材匀称。她有着柔顺的及肩棕色短发，发梢微微内扣，几缕发丝自然地垂在脸颊两侧。穿着米白色的宽松针织开衫，内搭浅蓝色的衬衫，下身是深灰色的修身长裤，脚踩舒适的浅棕色平底皮鞋。整体气质温婉知性，眼神清澈明亮，嘴角带着淡淡的微笑，透露出一种安静而坚韧的温柔力量。",
+              "type": "string"
+            },
+            {
+              "id": "bb0e18ce-d908-4d04-a570-58ce7aae28e3",
+              "name": "output_folder_path",
+              "value": "=/root/n8n/custom_output/test/",
+              "type": "string"
+            },
+            {
+              "id": "ba148f83-d4f6-4943-ad6f-49d1dbebcdd9",
+              "name": "width",
+              "value": 1136,
+              "type": "string"
+            },
+            {
+              "id": "26c1389a-d430-4507-96b2-6292e7af58cf",
+              "name": "height",
+              "value": 1472,
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        240,
+        0
+      ],
+      "id": "b404274b-cebc-4890-be98-e8dceb906e3a",
+      "name": "Edit Fields",
+      "disabled": true
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "115de5c6-95b1-41bb-bc3c-b0d2908d5d8d",
+      "name": "When clicking ‘Execute workflow’",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b56d373b-ce89-4280-bb76-745968f4d482",
+              "name": "character_filepath",
+              "value": "={{ $json.fileName }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1824,
+        224
+      ],
+      "id": "6320d3d0-e4ad-466f-8477-02316bc21a45",
+      "name": "执行结束返回字段"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://host.docker.internal:8188/prompt",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"prompt\": {\n  \"2\": {\n    \"inputs\": {\n      \"unet_name\": \"qwen_image_fp8_e4m3fn.safetensors\",\n      \"weight_dtype\": \"fp8_e4m3fn\"\n    },\n    \"class_type\": \"UNETLoader\",\n    \"_meta\": {\n      \"title\": \"UNet加载器\"\n    }\n  },\n  \"3\": {\n    \"inputs\": {\n      \"clip_name\": \"qwen_2.5_vl_7b_fp8_scaled.safetensors\",\n      \"type\": \"qwen_image\",\n      \"device\": \"default\"\n    },\n    \"class_type\": \"CLIPLoader\",\n    \"_meta\": {\n      \"title\": \"加载CLIP\"\n    }\n  },\n  \"4\": {\n    \"inputs\": {\n      \"vae_name\": \"qwen_image_vae.safetensors\"\n    },\n    \"class_type\": \"VAELoader\",\n    \"_meta\": {\n      \"title\": \"加载VAE\"\n    }\n  },\n  \"6\": {\n    \"inputs\": {\n      \"shift\": 3.1000000000000005,\n      \"model\": [\n        \"12\",\n        0\n      ]\n    },\n    \"class_type\": \"ModelSamplingAuraFlow\",\n    \"_meta\": {\n      \"title\": \"采样算法（AuraFlow）\"\n    }\n  },\n  \"7\": {\n    \"inputs\": {\n      \"text\": \"{{ $json.prompt }}\",\n      \"clip\": [\n        \"3\",\n        0\n      ]\n    },\n    \"class_type\": \"CLIPTextEncode\",\n    \"_meta\": {\n      \"title\": \"CLIP文本编码\"\n    }\n  },\n  \"8\": {\n    \"inputs\": {\n      \"text\": \"\",\n      \"clip\": [\n        \"3\",\n        0\n      ]\n    },\n    \"class_type\": \"CLIPTextEncode\",\n    \"_meta\": {\n      \"title\": \"CLIP文本编码\"\n    }\n  },\n  \"9\": {\n    \"inputs\": {\n      \"width\": {{ $json.width }},\n      \"height\": {{ $json.height }},\n      \"batch_size\": 1\n    },\n    \"class_type\": \"EmptyLatentImage\",\n    \"_meta\": {\n      \"title\": \"空Latent图像\"\n    }\n  },\n  \"10\": {\n    \"inputs\": {\n      \"seed\": 24325271221905,\n      \"steps\": 8,\n      \"cfg\": 1,\n      \"sampler_name\": \"res_multistep\",\n      \"scheduler\": \"sgm_uniform\",\n      \"denoise\": 1,\n      \"model\": [\n        \"6\",\n        0\n      ],\n      \"positive\": [\n        \"7\",\n        0\n      ],\n      \"negative\": [\n        \"8\",\n        0\n      ],\n      \"latent_image\": [\n        \"9\",\n        0\n      ]\n    },\n    \"class_type\": \"KSampler\",\n    \"_meta\": {\n      \"title\": \"K采样器\"\n    }\n  },\n  \"12\": {\n    \"inputs\": {\n      \"lora_name\": \"Qwen-Image-Lightning-8steps-V1.0.safetensors\",\n      \"strength_model\": 1,\n      \"model\": [\n        \"2\",\n        0\n      ]\n    },\n    \"class_type\": \"LoraLoaderModelOnly\",\n    \"_meta\": {\n      \"title\": \"LoRA加载器（仅模型）\"\n    }\n  },\n  \"14\": {\n    \"inputs\": {\n      \"filename_prefix\": \"ComfyUI\",\n      \"images\": [\n        \"15\",\n        0\n      ]\n    },\n    \"class_type\": \"SaveImage\",\n    \"_meta\": {\n      \"title\": \"保存图像\"\n    }\n  },\n  \"15\": {\n    \"inputs\": {\n      \"samples\": [\n        \"10\",\n        0\n      ],\n      \"vae\": [\n        \"4\",\n        0\n      ]\n    },\n    \"class_type\": \"VAEDecode\",\n    \"_meta\": {\n      \"title\": \"VAE解码\"\n    }\n  }\n}\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        464,
+        240
+      ],
+      "id": "67d9714f-4019-4af0-b142-c4df6e12ae27",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        688,
+        240
+      ],
+      "id": "809ff744-ad5b-4d5d-a9d9-171af47e6a52",
+      "name": "Wait",
+      "webhookId": "0a4675d5-4a1b-48af-82f0-49903aa5c606"
+    },
+    {
+      "parameters": {
+        "url": "=http://host.docker.internal:8188/history/{{ $('HTTP Request').item.json.prompt_id }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        912,
+        240
+      ],
+      "id": "be8fee98-24a0-4763-a3a9-6806f1cbb199",
+      "name": "HTTP Request1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "95b5670e-5019-45a7-b701-08a608311038",
+              "leftValue": "={{ $json.values()[0].status.status_str }}",
+              "rightValue": "success",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1120,
+        240
+      ],
+      "id": "4489a10a-62a8-440b-84fc-5c7e4faca20d",
+      "name": "If",
+      "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "fileSelector": "=/comfyuidata/{{ $json.values()[0].outputs['14'].images[0].filename }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        1392,
+        224
+      ],
+      "id": "f14b96bd-863d-462e-8635-02afa129ca57",
+      "name": "Read/Write Files from Disk1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Read/Write Files from Disk": {
+      "main": [
+        [
+          {
+            "node": "执行结束返回字段",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "配置字段": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "配置字段",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Read/Write Files from Disk1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read/Write Files from Disk1": {
+      "main": [
+        [
+          {
+            "node": "Read/Write Files from Disk",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "7451c85b-d082-4d28-be9d-83a33b160852",
+  "meta": {
+    "instanceId": "164b6258852a751ffad2d91c0ef2b3e746122b3f527005a8ac87036f847eae21"
+  },
+  "id": "PsxSgm6mUaDz4agx",
+  "tags": []
+}

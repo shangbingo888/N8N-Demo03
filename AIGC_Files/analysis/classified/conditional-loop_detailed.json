@@ -1,0 +1,3327 @@
+[
+  {
+    "name": "Lmchatopenai Workflow",
+    "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Aggregate/0681_Aggregate_HTTP_Create_Webhook.json",
+    "tags": [
+      "automation",
+      "n8n",
+      "production-ready",
+      "excellent",
+      "optimized"
+    ],
+    "description": "Automated workflow: Lmchatopenai Workflow. This workflow integrates 16 different services: stickyNote, httpRequest, airtable, agent, merge. It contains 58 nodes and follows best practices for error handling and security.",
+    "node_count": 41,
+    "active": false,
+    "classification": {
+      "primary": "conditional-loop",
+      "primary_label": "条件分支与循环 (Conditional & Loop)",
+      "secondary": [
+        "sub-workflow",
+        "automation-triggers",
+        "text-generation"
+      ],
+      "scores": {
+        "text-generation": 4,
+        "image-processing": 0,
+        "data-processing": 0,
+        "automation-triggers": 8,
+        "conditional-loop": 46,
+        "error-handling": 2,
+        "sub-workflow": 17
+      }
+    },
+    "trigger_nodes": [
+      {
+        "id": "259e3d13-ca92-4756-af69-34065dbe08f3",
+        "name": "Execute Workflow Trigger",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1,
+        "position": [
+          760,
+          1340
+        ],
+        "has_credentials": false
+      }
+    ],
+    "ai_nodes": [],
+    "integration_nodes": [
+      {
+        "id": "45c8b2eb-f43a-48b1-a270-9caeda9da0b0",
+        "name": "Get Bases",
+        "type": "n8n-nodes-base.airtable",
+        "typeVersion": 2.1,
+        "position": [
+          1580,
+          980
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "bb8036bc-1c23-461b-bd03-2461e31c6cb6",
+        "name": "Get Base/Tables schema",
+        "type": "n8n-nodes-base.airtable",
+        "typeVersion": 2.1,
+        "position": [
+          1580,
+          1140
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "4cc416aa-50bd-4b60-ae51-887c4ee97c88",
+        "name": "Airtable - Search records",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          2100,
+          1360
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "9dc71d31-8499-4b69-b87c-898217447d50",
+        "name": "OpenAI - Generate search filter",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          1760,
+          1420
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "6e670074-8508-4282-9c40-600cc445b10f",
+        "name": "Upload file to get link",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          2580,
+          1720
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "b7569d19-3a10-41e5-932b-4be04260a58e",
+        "name": "OpenAI - Download File",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          2360,
+          1720
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "bf378b21-07fb-4f9e-bfc5-9623ebcb8236",
+        "name": "OpenAI - Get messages",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          1960,
+          1720
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "9874eec1-61e2-45fe-8c57-556957a15473",
+        "name": "OpenAI - Run assistant",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          1760,
+          1720
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "e5339ad2-36c7-40c5-846b-2bd242f41ea5",
+        "name": "OpenAI - Send message",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          1560,
+          1720
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "5b822c15-af63-43f6-ac30-61a34dcd91ee",
+        "name": "OpenAI - Create thread",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          1360,
+          1720
+        ],
+        "has_credentials": true
+      }
+    ],
+    "data_nodes": [
+      {
+        "id": "5b80c2c8-7649-40f2-b9be-d090d8bd5ae9",
+        "name": "Response",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          2740,
+          1360
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "d6252c5b-a820-4ded-b59b-ab2fb2e277c3",
+        "name": "Aggregate",
+        "type": "n8n-nodes-base.aggregate",
+        "typeVersion": 1,
+        "position": [
+          1780,
+          980
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "1442ca2e-1793-4029-b398-61d6e6f1c346",
+        "name": "Aggregate1",
+        "type": "n8n-nodes-base.aggregate",
+        "typeVersion": 1,
+        "position": [
+          1780,
+          1140
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "a81b4dcc-c999-43be-a0ea-e37f3c7c9f9d",
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "typeVersion": 3,
+        "position": [
+          1960,
+          1360
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "8029213c-fd8a-4673-a2a0-11b90fd23971",
+        "name": "Aggregate2",
+        "type": "n8n-nodes-base.aggregate",
+        "typeVersion": 1,
+        "position": [
+          2260,
+          1360
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "abc7ddae-9ca9-4cf6-89a4-a63da8c1e036",
+        "name": "Response1",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          2760,
+          1720
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "16e4ea97-ea73-45a0-aa88-0f9a2969a6a3",
+        "name": "Set schema and prompt",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1560,
+          1420
+        ],
+        "has_credentials": false
+      }
+    ],
+    "control_nodes": [
+      {
+        "id": "799d2e0c-29b9-494c-b11a-d79c7ed4a06d",
+        "name": "OpenAI Chat Model",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          920,
+          480
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "6254ef4e-9699-404e-96a4-569326cce48d",
+        "name": "AI Agent",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.6,
+        "position": [
+          1160,
+          200
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "a9cdec25-4167-44a9-9d3c-fb04aac7bb32",
+        "name": "Window Buffer Memory",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.3,
+        "position": [
+          1080,
+          480
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "dfab4eb2-ba30-4756-8a52-5d73de9fba53",
+        "name": "When chat message received",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.1,
+        "position": [
+          940,
+          200
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "761f5593-f85c-44cd-abbd-aeac78bc31f8",
+        "name": "Switch",
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 3.2,
+        "position": [
+          980,
+          1320
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "f5f99038-9d19-49ed-9f50-3cd0270bf9ce",
+        "name": "If1",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          2120,
+          1720
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "0c86638f-7220-415d-a920-13761da925a6",
+        "name": "Search records",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.2,
+        "position": [
+          1500,
+          480
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "7ba1d6ac-f1a2-4b8d-a9a5-ce92eaa4e7fa",
+        "name": "Process data with code",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.2,
+        "position": [
+          1640,
+          480
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "3754175c-6f74-4750-b2e7-00e2bd3caf6d",
+        "name": "Create map image",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.1,
+        "position": [
+          1800,
+          480
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "135078ea-6a3f-4aee-9f60-c6d5832e446e",
+        "name": "Get list of bases",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.2,
+        "position": [
+          1220,
+          480
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "cd4781d0-f873-4aea-951c-6809358c1db6",
+        "name": "Get base schema",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.2,
+        "position": [
+          1360,
+          480
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "dab309d9-3629-44ba-9f0a-ede55f96488f",
+        "name": "If filter description exists",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          1340,
+          1360
+        ],
+        "has_credentials": false
+      }
+    ],
+    "error_nodes": [],
+    "sticky_notes_count": 11,
+    "sticky_experiences": [
+      "### Replace Mapbox public key - <your_public_key> in code",
+      "### ... or watch set up video [20 min]\n[![Youtube Thumbnail]({{ $env.WEBHOOK_URL }}]({{ $env.WEBHOOK_URL }}\n",
+      "![5min Logo]({{ $env.WEBHOOK_URL }}\n## AI Agent to chat with Airtable and analyze data\n**Made by [Mark Shcherbakov]({{ $env.WEBHOOK_URL }} from community [5minAI]({{ $env.WEBHOOK_URL }}\n\nEngaging with data stored in Airtable often requires manual navigation and time-consuming searches. This workflow allows users to interact conversationally with their datasets, retrieving essential information quickly while minimizing the need for complex queries.\n\nThis workflow enables an AI agent to facilitate",
+      "### Set up steps\n\n1. **Separate workflows**:\n\t- Create additional workflow and move there Workflow 2.\n\n2. **Replace credentials**:\n\t- Replace connections and credentials in all nodes.\n\n3. **Start chat**:\n\t- Ask questions and don't forget to mention required base name."
+    ],
+    "trigger_patterns": [
+      {
+        "name": "Execute Workflow Trigger",
+        "type": "executeWorkflowTrigger"
+      }
+    ],
+    "error_handling": [],
+    "settings": {
+      "executionOrder": "v1",
+      "saveManualExecutions": true,
+      "callerPolicy": "workflowsFromSameOwner",
+      "errorWorkflow": null,
+      "timezone": "UTC",
+      "executionTimeout": 3600,
+      "maxExecutions": 1000,
+      "retryOnFail": true,
+      "retryCount": 3,
+      "retryDelay": 1000
+    }
+  },
+  {
+    "name": "LinkedIn Web Scraping with Bright Data MCP Server & Google Gemini",
+    "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Code/1402_Code_Manual_Automation_Webhook.json",
+    "tags": [
+      "automation",
+      "n8n",
+      "production-ready",
+      "excellent",
+      "optimized"
+    ],
+    "description": "Automated workflow: LinkedIn Web Scraping with Bright Data MCP Server & Google Gemini. This workflow integrates 13 different services: stickyNote, httpRequest, code, lmChatGoogleGemini, readWriteFile. It contains 27 nodes and follows best practices for error handling and security.",
+    "node_count": 20,
+    "active": false,
+    "classification": {
+      "primary": "conditional-loop",
+      "primary_label": "条件分支与循环 (Conditional & Loop)",
+      "secondary": [
+        "data-processing",
+        "automation-triggers",
+        "text-generation"
+      ],
+      "scores": {
+        "text-generation": 2,
+        "image-processing": 0,
+        "data-processing": 13,
+        "automation-triggers": 13,
+        "conditional-loop": 24,
+        "error-handling": 2,
+        "sub-workflow": 0
+      }
+    },
+    "trigger_nodes": [
+      {
+        "id": "68715d64-ce99-4e23-81ed-fe8f7d08ebd7",
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          -640,
+          -50
+        ],
+        "has_credentials": false
+      }
+    ],
+    "ai_nodes": [],
+    "integration_nodes": [
+      {
+        "id": "99f45d7f-ad79-4ffc-8299-c71bd870f8fb",
+        "name": "Webhook for LinkedIn Company Web Scraper",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          1060,
+          40
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "335efc2b-80e3-4fac-b31f-82fff4ac4e65",
+        "name": "Webhook for LinkedIn Person Web Scraper",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          318,
+          -300
+        ],
+        "has_credentials": false
+      }
+    ],
+    "data_nodes": [
+      {
+        "id": "cdf42164-569e-4140-9847-4751d69c6b7b",
+        "name": "Set the URLs",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          -200,
+          -300
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "e5117eb1-a757-4c28-965e-87ea03213ed1",
+        "name": "Set the LinkedIn Company URL",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          -200,
+          50
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "67036198-4d7d-42d9-93cf-ffc65649bae0",
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "typeVersion": 3.1,
+        "position": [
+          616,
+          50
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "77423290-bd08-4dc8-9f37-cf8fec9f6a63",
+        "name": "Aggregate",
+        "type": "n8n-nodes-base.aggregate",
+        "typeVersion": 1,
+        "position": [
+          836,
+          50
+        ],
+        "has_credentials": false
+      }
+    ],
+    "control_nodes": [
+      {
+        "id": "5dfd2630-17d9-4a13-8cd6-57a564ef4a26",
+        "name": "LinkedIn Data Extractor",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          240,
+          200
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "d1927c08-5ded-4b0b-b60b-bed126040d38",
+        "name": "Google Gemini Chat Model",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          328,
+          420
+        ],
+        "has_credentials": true
+      }
+    ],
+    "error_nodes": [],
+    "sticky_notes_count": 2,
+    "sticky_experiences": [],
+    "trigger_patterns": [
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "manualTrigger"
+      }
+    ],
+    "error_handling": [],
+    "settings": {
+      "executionOrder": "v1",
+      "saveManualExecutions": true,
+      "callerPolicy": "workflowsFromSameOwner",
+      "errorWorkflow": null,
+      "timezone": "UTC",
+      "executionTimeout": 3600,
+      "maxExecutions": 1000,
+      "retryOnFail": true,
+      "retryCount": 3,
+      "retryDelay": 1000
+    }
+  },
+  {
+    "name": "Testing Mulitple Local LLM with LM Studio",
+    "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Datetime/1755_Datetime_Code_Automation_Webhook.json",
+    "tags": [
+      "automation",
+      "n8n",
+      "production-ready",
+      "excellent",
+      "optimized"
+    ],
+    "description": "Automated workflow: Testing Mulitple Local LLM with LM Studio. This workflow integrates 11 different services: stickyNote, httpRequest, code, splitOut, chainLlm. It contains 25 nodes and follows best practices for error handling and security.",
+    "node_count": 22,
+    "active": false,
+    "classification": {
+      "primary": "conditional-loop",
+      "primary_label": "条件分支与循环 (Conditional & Loop)",
+      "secondary": [
+        "data-processing",
+        "automation-triggers",
+        "error-handling"
+      ],
+      "scores": {
+        "text-generation": 0,
+        "image-processing": 0,
+        "data-processing": 14,
+        "automation-triggers": 13,
+        "conditional-loop": 15,
+        "error-handling": 2,
+        "sub-workflow": 0
+      }
+    },
+    "trigger_nodes": [
+      {
+        "id": "trigger-de0775f1",
+        "name": "Manual Trigger",
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          100,
+          100
+        ],
+        "has_credentials": false
+      }
+    ],
+    "ai_nodes": [],
+    "integration_nodes": [
+      {
+        "id": "7801734c-5eb9-4abd-b234-e406462931f7",
+        "name": "Get Models",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          20,
+          180
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "adef5d92-cb7e-417e-acbb-1a5d6c26426a",
+        "name": "Save Results to Google Sheets",
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.5,
+        "position": [
+          2180,
+          160
+        ],
+        "has_credentials": true
+      }
+    ],
+    "data_nodes": [
+      {
+        "id": "c42d1748-a10d-4792-8526-5ea1c542eeec",
+        "name": "Prepare Data for Analysis",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1800,
+          160
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "04679ba8-f13c-4453-99ac-970095bffc20",
+        "name": "Extract Model IDsto Run Separately",
+        "type": "n8n-nodes-base.splitOut",
+        "typeVersion": 1,
+        "position": [
+          300,
+          160
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "5a1558ec-54e8-4860-b3db-edcb47c52413",
+        "name": "Add System Prompt",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          740,
+          160
+        ],
+        "has_credentials": false
+      }
+    ],
+    "control_nodes": [
+      {
+        "id": "f2b6a6ed-0ef1-4f2c-8350-9abd59d08e61",
+        "name": "When chat message received",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.1,
+        "position": [
+          -300,
+          180
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "dd5f7e7b-bc69-4b67-90e6-2077b6b93148",
+        "name": "Run Model with Dunamic Inputs",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          1020,
+          400
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "74df223b-17ab-4189-a171-78224522e1c7",
+        "name": "LLM Response Analysis",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.4,
+        "position": [
+          1000,
+          160
+        ],
+        "has_credentials": false
+      }
+    ],
+    "error_nodes": [],
+    "sticky_notes_count": 9,
+    "sticky_experiences": [
+      "## 🧠Text Analysis\n### Readability Score Ranges:\nWhen testing model responses, readability scores can range across different levels. Here’s a breakdown:\n\n- **90–100**: Very easy to read (5th grade or below)\n- **80–89**: Easy to read (6th grade)\n- **70–79**: Fairly easy to read (7th grade)\n- **60–69**: Standard (8th to 9th grade)\n- **50–59**: Fairly difficult (10th to 12th grade)\n- **30–49**: Difficult (College)\n- **0–29**: Very difficult (College graduate)\n- **Below 0**: Extremely difficult (Post",
+      "##  ⚙️ 2. Update Local IP\nUpdate the **'Base URL'** `{{ $env.WEBHOOK_URL }}` in the workflow to match the IP of your LM Studio server. (Running LM Server)[{{ $env.WEBHOOK_URL }}]\n\nThis node will query the LM Studio server to retrieve a list of all loaded model IDs at the time of the query. If you change or add models to LM Studio, you’ll need to rerun this node to get an updated list of active LLMs.\n",
+      "## 🛠️1. Setup - LM Studio\nFirst, download and install [LM Studio]({{ $env.WEBHOOK_URL }} Identify which LLM models you want to use for testing.\n\nNext, the selected models are loaded into the server capabilities to prepare them for testing. For a detailed guide on how to set up multiple models, refer to the [LM Studio Basics]({{ $env.WEBHOOK_URL }} documentation.\n",
+      "##  3. 💡Update the LM Settings\n\nFrom here, you can modify the following\n parameters to fine-tune model behavior:\n\n- **Temperature**: Controls randomness. Higher values (e.g., 1.0) produce more diverse results, while lower values (e.g., 0.2) make responses more focused and deterministic.\n- **Top P**: Adjusts nucleus sampling, where the model considers only a subset of probable tokens. A lower value (e.g., 0.5) narrows the response range.\n- **Presence Penalty**: Penalizes new tokens based on their",
+      "##  📊4. Create Google Sheet (Optional)\n1. First, create a Google Sheet with the following headers:\n   - Prompt\n   - Time Sent\n   - Time Received\n   - Total Time Spent\n   - Model\n   - Response\n   - Readability Score\n   - Average Word Length\n   - Word Count\n   - Sentence Count\n   - Average Sentence Length\n2. After creating the sheet, update the corresponding Google Sheets node in the workflow to map the data fields correctly.\n",
+      "## 🏗️Setup Steps\n1. **Download and Install LM Studio**: Ensure LM Studio is correctly installed on your machine.\n2. **Update the Base URL**: Replace the base URL with the IP address of your LLM instance. Ensure the connection is established.\n3. **Configure LLM Settings**: Verify that your LLM models are properly set up and configured in LM Studio.\n4. **Create a Google Sheet**: Set up a Google Sheet with the necessary headers (Prompt, Time Sent, Time Received, etc.) to track your testing results.",
+      "## 📖Prompting Multiple LLMs\n\nWhen testing for specific outcomes (such as conciseness or readability), you can add a **System Prompt** in the LLM Chain to guide the models' responses.\n\n**System Prompt Suggestion**:\n- Focus on ensuring that responses are concise, clear, and easily understandable by a 5th-grade reading level. \n- This prompt will help you compare models based on how well they meet readability standards and stay on point.\n  \nAdjust the prompt to fit your desired testing criteria.\n",
+      "### Optional\nYou can just delete the google sheet node, and review the results by hand.  \n\nUtilizing the google sheet, allows you to provide mulitple prompts and review the analysis against all of those runs.",
+      "##  🚀Pro Tip \n\nIf you are getting strange results, ensure that you are Deleting the previous chat (next to the Chat Button) to ensure you aren't bleeding responses into the next chat. "
+    ],
+    "trigger_patterns": [
+      {
+        "name": "Manual Trigger",
+        "type": "manualTrigger"
+      }
+    ],
+    "error_handling": [],
+    "settings": {
+      "timezone": "UTC",
+      "callerPolicy": "workflowsFromSameOwner",
+      "executionOrder": "v1",
+      "saveManualExecutions": true,
+      "errorWorkflow": null,
+      "executionTimeout": 3600,
+      "maxExecutions": 1000,
+      "retryOnFail": true,
+      "retryCount": 3,
+      "retryDelay": 1000
+    }
+  },
+  {
+    "name": "Testing Mulitple Local LLM with LM Studio",
+    "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Datetime/2050_Datetime_Code_Automation_Webhook.json",
+    "tags": [
+      "automation",
+      "n8n",
+      "production-ready",
+      "excellent",
+      "optimized"
+    ],
+    "description": "Automated workflow: Testing Mulitple Local LLM with LM Studio. This workflow integrates 11 different services: stickyNote, httpRequest, code, splitOut, chainLlm. It contains 25 nodes and follows best practices for error handling and security.",
+    "node_count": 22,
+    "active": false,
+    "classification": {
+      "primary": "conditional-loop",
+      "primary_label": "条件分支与循环 (Conditional & Loop)",
+      "secondary": [
+        "data-processing",
+        "automation-triggers",
+        "error-handling"
+      ],
+      "scores": {
+        "text-generation": 0,
+        "image-processing": 0,
+        "data-processing": 14,
+        "automation-triggers": 13,
+        "conditional-loop": 15,
+        "error-handling": 2,
+        "sub-workflow": 0
+      }
+    },
+    "trigger_nodes": [
+      {
+        "id": "trigger-c6db62b9",
+        "name": "Manual Trigger",
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          100,
+          100
+        ],
+        "has_credentials": false
+      }
+    ],
+    "ai_nodes": [],
+    "integration_nodes": [
+      {
+        "id": "7801734c-5eb9-4abd-b234-e406462931f7",
+        "name": "Get Models",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          20,
+          180
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "adef5d92-cb7e-417e-acbb-1a5d6c26426a",
+        "name": "Save Results to Google Sheets",
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.5,
+        "position": [
+          2180,
+          160
+        ],
+        "has_credentials": true
+      }
+    ],
+    "data_nodes": [
+      {
+        "id": "c42d1748-a10d-4792-8526-5ea1c542eeec",
+        "name": "Prepare Data for Analysis",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1800,
+          160
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "04679ba8-f13c-4453-99ac-970095bffc20",
+        "name": "Extract Model IDsto Run Separately",
+        "type": "n8n-nodes-base.splitOut",
+        "typeVersion": 1,
+        "position": [
+          300,
+          160
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "5a1558ec-54e8-4860-b3db-edcb47c52413",
+        "name": "Add System Prompt",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          740,
+          160
+        ],
+        "has_credentials": false
+      }
+    ],
+    "control_nodes": [
+      {
+        "id": "f2b6a6ed-0ef1-4f2c-8350-9abd59d08e61",
+        "name": "When chat message received",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.1,
+        "position": [
+          -300,
+          180
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "dd5f7e7b-bc69-4b67-90e6-2077b6b93148",
+        "name": "Run Model with Dunamic Inputs",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          1020,
+          400
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "74df223b-17ab-4189-a171-78224522e1c7",
+        "name": "LLM Response Analysis",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.4,
+        "position": [
+          1000,
+          160
+        ],
+        "has_credentials": false
+      }
+    ],
+    "error_nodes": [],
+    "sticky_notes_count": 9,
+    "sticky_experiences": [
+      "## 🧠Text Analysis\n### Readability Score Ranges:\nWhen testing model responses, readability scores can range across different levels. Here’s a breakdown:\n\n- **90–100**: Very easy to read (5th grade or below)\n- **80–89**: Easy to read (6th grade)\n- **70–79**: Fairly easy to read (7th grade)\n- **60–69**: Standard (8th to 9th grade)\n- **50–59**: Fairly difficult (10th to 12th grade)\n- **30–49**: Difficult (College)\n- **0–29**: Very difficult (College graduate)\n- **Below 0**: Extremely difficult (Post",
+      "## ⚙️ 2. Update Local IP\nUpdate the **'Base URL'** `{{ $env.WEBHOOK_URL }}` in the workflow to match the IP of your LM Studio server. (Running LM Server)[{{ $env.WEBHOOK_URL }}]\n\nThis node will query the LM Studio server to retrieve a list of all loaded model IDs at the time of the query. If you change or add models to LM Studio, you’ll need to rerun this node to get an updated list of active LLMs.\n",
+      "## 🛠️1. Setup - LM Studio\nFirst, download and install [LM Studio]({{ $env.WEBHOOK_URL }} Identify which LLM models you want to use for testing.\n\nNext, the selected models are loaded into the server capabilities to prepare them for testing. For a detailed guide on how to set up multiple models, refer to the [LM Studio Basics]({{ $env.WEBHOOK_URL }} documentation.\n",
+      "## 3. 💡Update the LM Settings\n\nFrom here, you can modify the following\n parameters to fine-tune model behavior:\n\n- **Temperature**: Controls randomness. Higher values (e.g., 1.0) produce more diverse results, while lower values (e.g., 0.2) make responses more focused and deterministic.\n- **Top P**: Adjusts nucleus sampling, where the model considers only a subset of probable tokens. A lower value (e.g., 0.5) narrows the response range.\n- **Presence Penalty**: Penalizes new tokens based on their ",
+      "## 📊4. Create Google Sheet (Optional)\n1. First, create a Google Sheet with the following headers:\n - Prompt\n - Time Sent\n - Time Received\n - Total Time Spent\n - Model\n - Response\n - Readability Score\n - Average Word Length\n - Word Count\n - Sentence Count\n - Average Sentence Length\n2. After creating the sheet, update the corresponding Google Sheets node in the workflow to map the data fields correctly.\n",
+      "## 🏗️Setup Steps\n1. **Download and Install LM Studio**: Ensure LM Studio is correctly installed on your machine.\n2. **Update the Base URL**: Replace the base URL with the IP address of your LLM instance. Ensure the connection is established.\n3. **Configure LLM Settings**: Verify that your LLM models are properly set up and configured in LM Studio.\n4. **Create a Google Sheet**: Set up a Google Sheet with the necessary headers (Prompt, Time Sent, Time Received, etc.) to track your testing results.",
+      "## 📖Prompting Multiple LLMs\n\nWhen testing for specific outcomes (such as conciseness or readability), you can add a **System Prompt** in the LLM Chain to guide the models' responses.\n\n**System Prompt Suggestion**:\n- Focus on ensuring that responses are concise, clear, and easily understandable by a 5th-grade reading level. \n- This prompt will help you compare models based on how well they meet readability standards and stay on point.\n \nAdjust the prompt to fit your desired testing criteria.\n",
+      "### Optional\nYou can just delete the google sheet node, and review the results by hand. \n\nUtilizing the google sheet, allows you to provide mulitple prompts and review the analysis against all of those runs.",
+      "## 🚀Pro Tip \n\nIf you are getting strange results, ensure that you are Deleting the previous chat (next to the Chat Button) to ensure you aren't bleeding responses into the next chat. "
+    ],
+    "trigger_patterns": [
+      {
+        "name": "Manual Trigger",
+        "type": "manualTrigger"
+      }
+    ],
+    "error_handling": [],
+    "settings": {
+      "timezone": "UTC",
+      "callerPolicy": "workflowsFromSameOwner",
+      "executionOrder": "v1",
+      "saveManualExecutions": true,
+      "errorWorkflow": null,
+      "executionTimeout": 3600,
+      "maxExecutions": 1000,
+      "retryOnFail": true,
+      "retryCount": 3,
+      "retryDelay": 1000
+    }
+  },
+  {
+    "name": "Scrape Trustpilot Reviews with DeepSeek, Analyze Sentiment with OpenAI",
+    "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Limit/1645_Limit_Splitout_Automation_Webhook.json",
+    "tags": [
+      "automation",
+      "n8n",
+      "production-ready",
+      "excellent",
+      "optimized"
+    ],
+    "description": "Automated workflow: Scrape Trustpilot Reviews with DeepSeek, Analyze Sentiment with OpenAI. This workflow integrates 13 different services: stickyNote, httpRequest, splitOut, informationExtractor, set. It contains 29 nodes and follows best practices for error handling and security.",
+    "node_count": 20,
+    "active": false,
+    "classification": {
+      "primary": "conditional-loop",
+      "primary_label": "条件分支与循环 (Conditional & Loop)",
+      "secondary": [
+        "automation-triggers",
+        "data-processing",
+        "text-generation"
+      ],
+      "scores": {
+        "text-generation": 2,
+        "image-processing": 0,
+        "data-processing": 14,
+        "automation-triggers": 16,
+        "conditional-loop": 37,
+        "error-handling": 2,
+        "sub-workflow": 0
+      }
+    },
+    "trigger_nodes": [
+      {
+        "id": "5423b55d-eb6c-41c6-9b26-410e3c92b85d",
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          -700,
+          -380
+        ],
+        "has_credentials": false
+      }
+    ],
+    "ai_nodes": [],
+    "integration_nodes": [
+      {
+        "id": "cd7e9d36-7ecd-4d9c-b552-8f46b0cfcc03",
+        "name": "Get reviews",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          -200,
+          -380
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "a2a35455-7d3e-4c4c-aa66-6cbbd48d867a",
+        "name": "Get rows",
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.5,
+        "position": [
+          -200,
+          -100
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "2d507fe6-a4fc-42ff-97ff-dfd552c651ab",
+        "name": "Get Google Sheets",
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.5,
+        "position": [
+          -440,
+          -100
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "0a1fab6e-96b7-403b-884e-f67be6e23fa5",
+        "name": "Get Single review",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          320,
+          -120
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "952484e5-8e87-4eb3-99a6-5bf26c701ba8",
+        "name": "Update sheet",
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.5,
+        "position": [
+          520,
+          120
+        ],
+        "has_credentials": true
+      }
+    ],
+    "data_nodes": [
+      {
+        "id": "095a8e10-1630-4a1a-b6c9-7950ae1ed803",
+        "name": "Split Out",
+        "type": "n8n-nodes-base.splitOut",
+        "typeVersion": 1,
+        "position": [
+          320,
+          -380
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "506cdaa1-e0ba-4f29-b137-69d321b13c94",
+        "name": "Limit1",
+        "type": "n8n-nodes-base.limit",
+        "typeVersion": 1,
+        "position": [
+          540,
+          -380
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "52757ade-4206-40f9-bf4f-c3aefb004d2e",
+        "name": "Set Parameters",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          -440,
+          -380
+        ],
+        "has_credentials": false
+      }
+    ],
+    "control_nodes": [
+      {
+        "id": "6ff4dd9d-eedd-4d84-b13a-b3c0db717409",
+        "name": "Information Extractor",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          -440,
+          140
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "0036f3b1-4832-4a35-8694-0893475a4119",
+        "name": "If Node",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          60,
+          -100
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "eb853885-816d-4df7-b5ac-900fa89d3df9",
+        "name": "Sentiment Analysis",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          60,
+          140
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "79f1b9ea-6297-4735-9c0f-9f28dd65efa0",
+        "name": "DeepSeek Chat Model",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          -460,
+          320
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "159cc88e-1dd3-4bba-a3c8-59a9aad14c88",
+        "name": "OpenAI Chat Model",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.1,
+        "position": [
+          40,
+          320
+        ],
+        "has_credentials": true
+      }
+    ],
+    "error_nodes": [],
+    "sticky_notes_count": 4,
+    "sticky_experiences": [
+      "Change to the name of the company registered on Trustpilot and the maximum number of pages to scrape",
+      "Extract all information with DeepSeek (remember to change base_url with {{ $env.API_BASE_URL }}",
+      "Check if the review has already been saved to Google Drive"
+    ],
+    "trigger_patterns": [
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "manualTrigger"
+      }
+    ],
+    "error_handling": [],
+    "settings": {
+      "executionOrder": "v1",
+      "saveManualExecutions": true,
+      "callerPolicy": "workflowsFromSameOwner",
+      "errorWorkflow": null,
+      "timezone": "UTC",
+      "executionTimeout": 3600,
+      "maxExecutions": 1000,
+      "retryOnFail": true,
+      "retryCount": 3,
+      "retryDelay": 1000
+    }
+  },
+  {
+    "name": "Scrape Trustpilot Reviews with DeepSeek, Analyze Sentiment with OpenAI",
+    "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Limit/1995_Limit_Splitout_Automation_Webhook.json",
+    "tags": [
+      "automation",
+      "n8n",
+      "production-ready",
+      "excellent",
+      "optimized"
+    ],
+    "description": "Automated workflow: Scrape Trustpilot Reviews with DeepSeek, Analyze Sentiment with OpenAI. This workflow integrates 13 different services: stickyNote, httpRequest, splitOut, informationExtractor, set. It contains 29 nodes and follows best practices for error handling and security.",
+    "node_count": 20,
+    "active": false,
+    "classification": {
+      "primary": "conditional-loop",
+      "primary_label": "条件分支与循环 (Conditional & Loop)",
+      "secondary": [
+        "automation-triggers",
+        "data-processing",
+        "text-generation"
+      ],
+      "scores": {
+        "text-generation": 2,
+        "image-processing": 0,
+        "data-processing": 14,
+        "automation-triggers": 16,
+        "conditional-loop": 37,
+        "error-handling": 2,
+        "sub-workflow": 0
+      }
+    },
+    "trigger_nodes": [
+      {
+        "id": "5423b55d-eb6c-41c6-9b26-410e3c92b85d",
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          -700,
+          -380
+        ],
+        "has_credentials": false
+      }
+    ],
+    "ai_nodes": [],
+    "integration_nodes": [
+      {
+        "id": "cd7e9d36-7ecd-4d9c-b552-8f46b0cfcc03",
+        "name": "Get reviews",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          -200,
+          -380
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "a2a35455-7d3e-4c4c-aa66-6cbbd48d867a",
+        "name": "Get rows",
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.5,
+        "position": [
+          -200,
+          -100
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "2d507fe6-a4fc-42ff-97ff-dfd552c651ab",
+        "name": "Get Google Sheets",
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.5,
+        "position": [
+          -440,
+          -100
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "0a1fab6e-96b7-403b-884e-f67be6e23fa5",
+        "name": "Get Single review",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          320,
+          -120
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "952484e5-8e87-4eb3-99a6-5bf26c701ba8",
+        "name": "Update sheet",
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.5,
+        "position": [
+          520,
+          120
+        ],
+        "has_credentials": true
+      }
+    ],
+    "data_nodes": [
+      {
+        "id": "095a8e10-1630-4a1a-b6c9-7950ae1ed803",
+        "name": "Split Out",
+        "type": "n8n-nodes-base.splitOut",
+        "typeVersion": 1,
+        "position": [
+          320,
+          -380
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "506cdaa1-e0ba-4f29-b137-69d321b13c94",
+        "name": "Limit1",
+        "type": "n8n-nodes-base.limit",
+        "typeVersion": 1,
+        "position": [
+          540,
+          -380
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "52757ade-4206-40f9-bf4f-c3aefb004d2e",
+        "name": "Set Parameters",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          -440,
+          -380
+        ],
+        "has_credentials": false
+      }
+    ],
+    "control_nodes": [
+      {
+        "id": "6ff4dd9d-eedd-4d84-b13a-b3c0db717409",
+        "name": "Information Extractor",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          -440,
+          140
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "0036f3b1-4832-4a35-8694-0893475a4119",
+        "name": "If Node",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          60,
+          -100
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "eb853885-816d-4df7-b5ac-900fa89d3df9",
+        "name": "Sentiment Analysis",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          60,
+          140
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "79f1b9ea-6297-4735-9c0f-9f28dd65efa0",
+        "name": "DeepSeek Chat Model",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          -460,
+          320
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "159cc88e-1dd3-4bba-a3c8-59a9aad14c88",
+        "name": "OpenAI Chat Model",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.1,
+        "position": [
+          40,
+          320
+        ],
+        "has_credentials": true
+      }
+    ],
+    "error_nodes": [],
+    "sticky_notes_count": 4,
+    "sticky_experiences": [
+      "Change to the name of the company registered on Trustpilot and the maximum number of pages to scrape",
+      "Extract all information with DeepSeek (remember to change base_url with {{ $env.API_BASE_URL }}",
+      "Check if the review has already been saved to Google Drive"
+    ],
+    "trigger_patterns": [
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "manualTrigger"
+      }
+    ],
+    "error_handling": [],
+    "settings": {
+      "executionOrder": "v1",
+      "saveManualExecutions": true,
+      "callerPolicy": "workflowsFromSameOwner",
+      "errorWorkflow": null,
+      "timezone": "UTC",
+      "executionTimeout": 3600,
+      "maxExecutions": 1000,
+      "retryOnFail": true,
+      "retryCount": 3,
+      "retryDelay": 1000
+    }
+  },
+  {
+    "name": "Prepare CSV files with GPT-4",
+    "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Manual/1102_Manual_Openai_Automation_Triggered.json",
+    "tags": [
+      "automation",
+      "n8n",
+      "production-ready",
+      "excellent",
+      "optimized"
+    ],
+    "description": "Automated workflow: Prepare CSV files with GPT-4. This workflow integrates 10 different services: writeBinaryFile, stickyNote, itemLists, spreadsheetFile, set. It contains 14 nodes and follows best practices for error handling and security.",
+    "node_count": 12,
+    "active": false,
+    "classification": {
+      "primary": "conditional-loop",
+      "primary_label": "条件分支与循环 (Conditional & Loop)",
+      "secondary": [
+        "text-generation",
+        "data-processing",
+        "automation-triggers"
+      ],
+      "scores": {
+        "text-generation": 19,
+        "image-processing": 0,
+        "data-processing": 15,
+        "automation-triggers": 13,
+        "conditional-loop": 24,
+        "error-handling": 13,
+        "sub-workflow": 0
+      }
+    },
+    "trigger_nodes": [
+      {
+        "id": "5b43e57d-1fe1-4ea6-bf3d-661f7e5fc4b0",
+        "name": "When clicking \"Execute Workflow\"",
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          960,
+          240
+        ],
+        "has_credentials": false
+      }
+    ],
+    "ai_nodes": [
+      {
+        "id": "291466e8-1592-4080-a675-5e9f486d0d05",
+        "name": "OpenAI",
+        "type": "n8n-nodes-base.openAi",
+        "typeVersion": 1,
+        "position": [
+          1160,
+          240
+        ],
+        "has_credentials": true
+      }
+    ],
+    "integration_nodes": [],
+    "data_nodes": [
+      {
+        "id": "edd5bed7-a8a1-4298-b026-3b0061c5064a",
+        "name": "Split In Batches",
+        "type": "n8n-nodes-base.splitInBatches",
+        "typeVersion": 2,
+        "position": [
+          1340,
+          240
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "f1c2891f-5110-423c-9fb4-37e0a0d0f750",
+        "name": "Parse JSON",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3,
+        "position": [
+          1520,
+          240
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "ce59d3e1-3916-48ad-a811-fa19ad66284a",
+        "name": "Make JSON Table",
+        "type": "n8n-nodes-base.itemLists",
+        "typeVersion": 3,
+        "position": [
+          1700,
+          240
+        ],
+        "has_credentials": false
+      }
+    ],
+    "control_nodes": [],
+    "error_nodes": [
+      {
+        "id": "error-80e2f1cf",
+        "name": "Error Handler",
+        "type": "n8n-nodes-base.stopAndError",
+        "typeVersion": 1,
+        "position": [
+          1000,
+          400
+        ],
+        "has_credentials": false
+      }
+    ],
+    "sticky_notes_count": 2,
+    "sticky_experiences": [
+      "## This is a helper workflow to create 3 CSV files\n### Feel free to adapt as needed\n### Some mock data from GPT is pinned for convenience",
+      "### These 2 nodes fix an issue with BOM bytes in the beginning of the file.\nWithout them reading the CSV file back becomes tricky"
+    ],
+    "trigger_patterns": [
+      {
+        "name": "When clicking \"Execute Workflow\"",
+        "type": "manualTrigger"
+      }
+    ],
+    "error_handling": [
+      {
+        "name": "Error Handler",
+        "type": "stopAndError"
+      }
+    ],
+    "settings": {
+      "executionOrder": "v1",
+      "saveManualExecutions": true,
+      "callerPolicy": "workflowsFromSameOwner",
+      "errorWorkflow": null,
+      "timezone": "UTC",
+      "executionTimeout": 3600,
+      "maxExecutions": 1000,
+      "retryOnFail": true,
+      "retryCount": 3,
+      "retryDelay": 1000
+    }
+  },
+  {
+    "name": "Prepare CSV files with GPT-4",
+    "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Manual/1604_Manual_Openai_Automation_Triggered.json",
+    "tags": [
+      "automation",
+      "n8n",
+      "production-ready",
+      "excellent",
+      "optimized"
+    ],
+    "description": "Automated workflow: Prepare CSV files with GPT-4. This workflow integrates 10 different services: writeBinaryFile, stickyNote, itemLists, spreadsheetFile, set. It contains 14 nodes and follows best practices for error handling and security.",
+    "node_count": 12,
+    "active": false,
+    "classification": {
+      "primary": "conditional-loop",
+      "primary_label": "条件分支与循环 (Conditional & Loop)",
+      "secondary": [
+        "text-generation",
+        "data-processing",
+        "automation-triggers"
+      ],
+      "scores": {
+        "text-generation": 19,
+        "image-processing": 0,
+        "data-processing": 15,
+        "automation-triggers": 13,
+        "conditional-loop": 24,
+        "error-handling": 13,
+        "sub-workflow": 0
+      }
+    },
+    "trigger_nodes": [
+      {
+        "id": "5b43e57d-1fe1-4ea6-bf3d-661f7e5fc4b0",
+        "name": "When clicking \"Execute Workflow\"",
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          960,
+          240
+        ],
+        "has_credentials": false
+      }
+    ],
+    "ai_nodes": [
+      {
+        "id": "291466e8-1592-4080-a675-5e9f486d0d05",
+        "name": "OpenAI",
+        "type": "n8n-nodes-base.openAi",
+        "typeVersion": 1,
+        "position": [
+          1160,
+          240
+        ],
+        "has_credentials": true
+      }
+    ],
+    "integration_nodes": [],
+    "data_nodes": [
+      {
+        "id": "edd5bed7-a8a1-4298-b026-3b0061c5064a",
+        "name": "Split In Batches",
+        "type": "n8n-nodes-base.splitInBatches",
+        "typeVersion": 2,
+        "position": [
+          1340,
+          240
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "f1c2891f-5110-423c-9fb4-37e0a0d0f750",
+        "name": "Parse JSON",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3,
+        "position": [
+          1520,
+          240
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "ce59d3e1-3916-48ad-a811-fa19ad66284a",
+        "name": "Make JSON Table",
+        "type": "n8n-nodes-base.itemLists",
+        "typeVersion": 3,
+        "position": [
+          1700,
+          240
+        ],
+        "has_credentials": false
+      }
+    ],
+    "control_nodes": [],
+    "error_nodes": [
+      {
+        "id": "error-b87b2a05",
+        "name": "Error Handler",
+        "type": "n8n-nodes-base.stopAndError",
+        "typeVersion": 1,
+        "position": [
+          1000,
+          400
+        ],
+        "has_credentials": false
+      }
+    ],
+    "sticky_notes_count": 2,
+    "sticky_experiences": [
+      "## This is a helper workflow to create 3 CSV files\n### Feel free to adapt as needed\n### Some mock data from GPT is pinned for convenience",
+      "### These 2 nodes fix an issue with BOM bytes in the beginning of the file.\nWithout them reading the CSV file back becomes tricky"
+    ],
+    "trigger_patterns": [
+      {
+        "name": "When clicking \"Execute Workflow\"",
+        "type": "manualTrigger"
+      }
+    ],
+    "error_handling": [
+      {
+        "name": "Error Handler",
+        "type": "stopAndError"
+      }
+    ],
+    "settings": {
+      "executionOrder": "v1",
+      "saveManualExecutions": true,
+      "callerPolicy": "workflowsFromSameOwner",
+      "errorWorkflow": null,
+      "timezone": "UTC",
+      "executionTimeout": 3600,
+      "maxExecutions": 1000,
+      "retryOnFail": true,
+      "retryCount": 3,
+      "retryDelay": 1000
+    }
+  },
+  {
+    "name": "Lmchatopenai Workflow",
+    "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Splitout/0530_Splitout_GoogleCalendar_Create_Webhook.json",
+    "tags": [
+      "automation",
+      "n8n",
+      "production-ready",
+      "excellent",
+      "optimized"
+    ],
+    "description": "Automated workflow: Lmchatopenai Workflow. This workflow integrates 15 different services: stickyNote, httpRequest, agent, splitOut, googleDrive. It contains 38 nodes and follows best practices for error handling and security.",
+    "node_count": 28,
+    "active": false,
+    "classification": {
+      "primary": "conditional-loop",
+      "primary_label": "条件分支与循环 (Conditional & Loop)",
+      "secondary": [
+        "sub-workflow",
+        "automation-triggers",
+        "data-processing"
+      ],
+      "scores": {
+        "text-generation": 4,
+        "image-processing": 0,
+        "data-processing": 11,
+        "automation-triggers": 16,
+        "conditional-loop": 26,
+        "error-handling": 2,
+        "sub-workflow": 17
+      }
+    },
+    "trigger_nodes": [
+      {
+        "id": "40d1e969-3a04-4fb0-98c3-59865f317e07",
+        "name": "When clicking \"Test workflow\"",
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          -480,
+          540
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "e73ab051-1763-4130-bf44-f1461886e5f4",
+        "name": "Execute Workflow Trigger",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1,
+        "position": [
+          640,
+          1200
+        ],
+        "has_credentials": false
+      }
+    ],
+    "ai_nodes": [],
+    "integration_nodes": [
+      {
+        "id": "d3e057d1-df44-4ac3-ac46-fc2b04e3de78",
+        "name": "Get Meeting ConferenceRecords",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          20,
+          580
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "831668fd-04ab-4144-bec0-c733902f2a13",
+        "name": "Get Meeting Transcript Location",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          200,
+          580
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "0a1c3386-1456-4abd-a67c-4f2084efb1f1",
+        "name": "Get Transcript File",
+        "type": "n8n-nodes-base.googleDrive",
+        "typeVersion": 3,
+        "position": [
+          380,
+          580
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "08b2d0ce-0f59-45d8-b010-53910a1bc746",
+        "name": "Get Calendar Event",
+        "type": "n8n-nodes-base.googleCalendar",
+        "typeVersion": 1.1,
+        "position": [
+          -280,
+          540
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "c285a0fa-4b0b-4775-83bb-5acb597dd9a8",
+        "name": "Add Attendee to Invite",
+        "type": "n8n-nodes-base.googleCalendar",
+        "typeVersion": 1.1,
+        "position": [
+          1620,
+          1080
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "06b0b3ae-344a-4150-9fa1-bdbcfe80b000",
+        "name": "Create Calendar Event1",
+        "type": "n8n-nodes-base.googleCalendar",
+        "typeVersion": 1.1,
+        "position": [
+          1240,
+          1080
+        ],
+        "has_credentials": true
+      }
+    ],
+    "data_nodes": [
+      {
+        "id": "1d277cc0-9f51-43a2-9d17-17d535b4dd53",
+        "name": "PDF Loader",
+        "type": "n8n-nodes-base.extractFromFile",
+        "typeVersion": 1,
+        "position": [
+          660,
+          520
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "c940c9e1-8236-45b8-bdb2-39a326004680",
+        "name": "Response",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.3,
+        "position": [
+          1780,
+          1080
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "daa3e96f-bcc1-4f99-a050-c09189041ce5",
+        "name": "Edit Fields",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.3,
+        "position": [
+          800,
+          1200
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "4e492c9f-6be3-4b7c-a8f7-e18dd94cd158",
+        "name": "Fallback Response",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.3,
+        "position": [
+          960,
+          1340
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "8cc6b737-2867-4fca-93d1-8973f14a9f00",
+        "name": "Get Attendees",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.3,
+        "position": [
+          1440,
+          1080
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "1b3bb8f7-3775-48be-8b73-5c9f0db37ebf",
+        "name": "Attendees List",
+        "type": "n8n-nodes-base.splitOut",
+        "typeVersion": 1,
+        "position": [
+          1444,
+          1212
+        ],
+        "has_credentials": false
+      }
+    ],
+    "control_nodes": [
+      {
+        "id": "bec5c6c1-52d4-4665-b814-56a6bb82ea6b",
+        "name": "OpenAI Chat Model1",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          800,
+          660
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "35a68444-15da-4b6e-a3c8-d296971b0fc0",
+        "name": "Structured Output Parser",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.1,
+        "position": [
+          1040,
+          660
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "7af68b6d-75ef-4332-8193-eb810179ec90",
+        "name": "Actions Router",
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 3,
+        "position": [
+          960,
+          1200
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "3833bb1c-1145-4abd-a371-bce4c0543fb6",
+        "name": "Schedule Meeting",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.1,
+        "position": [
+          920,
+          740
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "ac955f91-9aa1-4ce8-9a5a-740c4d48dd18",
+        "name": "AI Agent",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.5,
+        "position": [
+          820,
+          520
+        ],
+        "has_credentials": false
+      }
+    ],
+    "error_nodes": [],
+    "sticky_notes_count": 9,
+    "sticky_experiences": [
+      "## 4. This Tool Creates Calendar Events\nThis tool, given event details and a list of attendees, will create a new Google calendar event and add the attendees to it.",
+      "## 1. Retrieve Meeting Transcript\n[Read more about working with HTTP node]({{ $env.WEBHOOK_URL }}\n\nThere's no built-in support for Google Meets transcript API however, we can solve this problem with the HTTP node. Note you may also need to setup a separate Google OAuth API Credential to obtain the required scopes.",
+      "## 2. Let AI Agent Carry Out Follow-Up Actions\n[Read more about working with AI Agents]({{ $env.WEBHOOK_URL }}\n\nThe big difference between Basic LLM chains and AI Agents is that AI agents are given the automony to perform actions. Provided the right tool exists, AI Agents can send emails, book flights and even order pizza! Here we're leaving it up to our agent to book any follow-up meetings after the call and invite all interested parties.",
+      "## 3: Using the Custom Workflow Tool\n[Read more about Workflow Triggers]({{ $env.WEBHOOK_URL }}\n\nOne common implementation of tool use is to set them up as workflows which are intended triggered via other workflows. With this, we can either build a tool per workflow or for efficiency, take an API approach where multiple tools can exist behind a router (in this case our \"switch\" node).\n\nOur AI agent will therefore only passing through the parameters of the request and won't have to learn/know how",
+      "## Try It Out!\n### This workflow does the following:\n* Retrieves a meeting transcript\n* Sends transcript to an AI Agent to parse and carry out follow up actions if necessary.\n* If transcript mentions a follow up meeting is required, the AI Agent will call a tool to create the meeting.\n* Additionally if able, the AI Agent will also assign attendees it thinks should attend the meeting. \n\n### Need Help?\nJoin the [Discord]({{ $env.WEBHOOK_URL }} or ask in the [Forum]({{ $env.WEBHOOK_URL }}\n\nHappy Ha",
+      "## 1. Get Calendar Event\n[Read more about working with Google Calendar]({{ $env.WEBHOOK_URL }}\n\nIn this demo, we've decided to go with google meet as transcripts are stored in the user google drive. First, we'll need to get the calendar event of which the google meet was attached.\nIf the meet was not arranged through Google calendar, you may need to skip this step and just reference the transcripts in google drive directly.",
+      "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n🚨**Required**\n* Set your calendar event ID here.",
+      "### 💡 Can't find your transcript?\nOnly meetings which own and were recorded and had transcription enabled will be available.\n",
+      "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n🚨**Required**\n* Set your calendar ID here."
+    ],
+    "trigger_patterns": [
+      {
+        "name": "When clicking \"Test workflow\"",
+        "type": "manualTrigger"
+      },
+      {
+        "name": "Execute Workflow Trigger",
+        "type": "executeWorkflowTrigger"
+      }
+    ],
+    "error_handling": [],
+    "settings": {
+      "executionOrder": "v1",
+      "saveManualExecutions": true,
+      "callerPolicy": "workflowsFromSameOwner",
+      "errorWorkflow": null,
+      "timezone": "UTC",
+      "executionTimeout": 3600,
+      "maxExecutions": 1000,
+      "retryOnFail": true,
+      "retryCount": 3,
+      "retryDelay": 1000
+    }
+  },
+  {
+    "name": "Embeddingsopenai Workflow",
+    "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Splitout/0554_Splitout_Code_Create_Webhook.json",
+    "tags": [
+      "automation",
+      "n8n",
+      "production-ready",
+      "excellent",
+      "optimized"
+    ],
+    "description": "Automated workflow: Embeddingsopenai Workflow. This workflow integrates 19 different services: stickyNote, textSplitterRecursiveCharacterTextSplitter, vectorStoreQdrant, lmChatOpenAi, executeWorkflow. It contains 55 nodes and follows best practices for error handling and security.",
+    "node_count": 42,
+    "active": false,
+    "classification": {
+      "primary": "conditional-loop",
+      "primary_label": "条件分支与循环 (Conditional & Loop)",
+      "secondary": [
+        "sub-workflow",
+        "automation-triggers",
+        "data-processing"
+      ],
+      "scores": {
+        "text-generation": 4,
+        "image-processing": 0,
+        "data-processing": 14,
+        "automation-triggers": 16,
+        "conditional-loop": 48,
+        "error-handling": 2,
+        "sub-workflow": 33
+      }
+    },
+    "trigger_nodes": [
+      {
+        "id": "9b29e850-b9d0-4358-af62-92c20ab3b088",
+        "name": "Execute Workflow Trigger",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1,
+        "position": [
+          20,
+          900
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "fa0c14be-03f4-4ed2-bd60-e93817382ded",
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          240,
+          100
+        ],
+        "has_credentials": false
+      }
+    ],
+    "ai_nodes": [],
+    "integration_nodes": [
+      {
+        "id": "da9a8ee8-5e3f-49db-8d1f-26a61ca82344",
+        "name": "Get Survey Results",
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.4,
+        "position": [
+          540,
+          160
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "4bad90b2-eefe-49c8-8caa-41cd4cb5e60f",
+        "name": "Get Survey Headers",
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.4,
+        "position": [
+          740,
+          940
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "7f44a770-4c5d-4404-ae95-d9dee8348380",
+        "name": "Find All Answers",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          1460,
+          1120
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "2b6dc317-f8f3-4201-a9e1-d35ee578e79e",
+        "name": "Get Payload of Points",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          2380,
+          800
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "14784dff-a8ea-4b6b-8379-b0c9051a8f98",
+        "name": "Export To Sheets",
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.4,
+        "position": [
+          3360,
+          1300
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "779b9411-db3e-44f3-ad2a-c9d40a70580d",
+        "name": "Export To Sheets1",
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.4,
+        "position": [
+          2360,
+          1300
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "70a0dcec-9f74-4af2-bd64-0ab762a77e51",
+        "name": "Create Insights Sheet",
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.4,
+        "position": [
+          420,
+          900
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "30323019-59ba-4a19-a46e-196d469f097d",
+        "name": "Get Sheet Details",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          200,
+          900
+        ],
+        "has_credentials": true
+      }
+    ],
+    "data_nodes": [
+      {
+        "id": "7663c3dd-f713-4034-bef6-0c000285f54f",
+        "name": "Convert to Question Answer Pairs",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          720,
+          160
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "47c64994-9d1f-42ca-a849-3eeab5335b66",
+        "name": "Extract Questions",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          940,
+          940
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "c237d523-b290-41ca-b323-4cc7c7f6ff37",
+        "name": "Questions to List",
+        "type": "n8n-nodes-base.splitOut",
+        "typeVersion": 1,
+        "position": [
+          940,
+          1120
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "d4a37d97-975a-4243-a7ea-81b3e30558a5",
+        "name": "Clusters To List",
+        "type": "n8n-nodes-base.splitOut",
+        "typeVersion": 1,
+        "position": [
+          2180,
+          800
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "c78f1bf6-8390-48ee-88f4-7d1a893a8ade",
+        "name": "Set Variables",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          200,
+          1060
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "83d3b413-a661-4c4c-9b8d-6ee395a15348",
+        "name": "Prep Output For Export",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          3160,
+          1300
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "a31ab677-f57c-4b78-a290-d4a913ed4f8e",
+        "name": "For Each Question...",
+        "type": "n8n-nodes-base.splitInBatches",
+        "typeVersion": 3,
+        "position": [
+          1280,
+          940
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "2579adf0-9c00-4b87-b53e-740044577ab0",
+        "name": "Prep Values For Trigger",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1800,
+          160
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "f31400fb-dd7a-4c62-90ec-e9d78bbaa5e8",
+        "name": "Prep Values For Export",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          2180,
+          1300
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "bddcafa8-6f54-4829-93c9-37bbb9e7edf3",
+        "name": "QA Pairs to List",
+        "type": "n8n-nodes-base.splitOut",
+        "typeVersion": 1,
+        "position": [
+          900,
+          160
+        ],
+        "has_credentials": false
+      }
+    ],
+    "control_nodes": [
+      {
+        "id": "0404384b-10b6-4666-84a4-8870db30c607",
+        "name": "Embeddings OpenAI",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          1220,
+          280
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "a6741f04-5a5b-47a9-ac08-eb562f9f6052",
+        "name": "Default Data Loader",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          1340,
+          280
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "84873f0c-81ce-442f-a33c-d7c6c2efa11b",
+        "name": "Recursive Character Text Splitter",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          1340,
+          420
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "fbb1f3c3-06ad-44b5-b020-6fc3c8eda7c4",
+        "name": "OpenAI Chat Model",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          2560,
+          980
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "450f89c5-ef0f-4bf8-8db9-6347247c7f4d",
+        "name": "Has Clusters?",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2,
+        "position": [
+          1820,
+          1120
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "6ced8012-1dd3-4da3-8c27-e4f4dfc959f6",
+        "name": "Only Clusters With 3+ points",
+        "type": "n8n-nodes-base.filter",
+        "typeVersion": 2,
+        "position": [
+          2180,
+          960
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "cbb42384-d46b-471f-a7d8-27e3de042492",
+        "name": "Qdrant Vector Store",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          1220,
+          100
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "17584901-15d6-421f-ad69-3ba872276055",
+        "name": "Survey Insights Agent",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          2580,
+          800
+        ],
+        "has_credentials": false
+      }
+    ],
+    "error_nodes": [],
+    "sticky_notes_count": 12,
+    "sticky_experiences": [
+      "## Step 1. Import Survey Responses\n[Read more about Google Sheets]({{ $env.WEBHOOK_URL }}\n\nOur approach requires to import all participant responses as vectors with metadata linking them to the questions being answered. To do this, we'll generate questiona and answer pairs from the survey.",
+      "## Step 2. Vectorize Each Response Into Qdrant\n[Read more about using Qdrant]({{ $env.WEBHOOK_URL }}\n\nSpecial attention is given to how metadata is captured as it becomes key to this workflow is being able to retrieve subsets of the data for analysis.",
+      "## Step 3. Trigger Insights SubWorkflow\n[Learn more about Workflow Triggers]({{ $env.WEBHOOK_URL }}\n\nA subworkflow is used to trigger the analysis for the survey. This separation is optional but used here to better demonstrate the two part process.",
+      "## Step 4. Create Insights Sheet\n[Learn more about Workflow Triggers]({{ $env.WEBHOOK_URL }}\n\nTo capture the generated insights, we'll create a new unique sheet within the survey spreadsheet. This is optional and you may want to capture in other datastores depending on your needs.",
+      "## Step 5. Get List Of Questions From Survey\n[Read more about using Google Sheets]({{ $env.WEBHOOK_URL }}\n\nNext we'll fetch the survey for metadata and questions, splitting them into separate workflow items. Our intention is to process each question end-to-end before moving to the next. This approach is a little \"safer\" in the scenario where an interruption occurs we won't lose all our work.",
+      "## Step 6. Find Groups of Similar Answers For Each Question\n[Learn more about using the Code Node]({{ $env.WEBHOOK_URL }}\n\nGiving all the responses to an LLM to analyse is the common but naive approach; the summarisation is usually too high level for real insights and loses a lot of detail such as the number and identity of respondants. What we want to do instead is find and group popular answers for each question to ensure all perspectives are considered.\n\nOur approach does this by mapping our ",
+      "## Step 7b. Skip If No Clusters Found\nWhere no clusters were found, it means the answers were unique enough to not show any pattern. eg. \"What's you name?\"",
+      "## Step 7a. Summarise the Top Groups of Similar Answers\n[Read more about using the Information Extractor Node]({{ $env.WEBHOOK_URL }}\n\nEach discovered cluster will return a reference vector which is used to fetch all related answers in the group.\nThe group is then sent to the LLM to summarise as well as assign a sentiment score.",
+      "## Step 8. Write To Insights Sheet\nFinally, our completed insights to appended to\nthe Insights Sheet we created earlier in the workflow.",
+      "### Run this once! \nIf for any reason you need to run more than once, be sure to clear the existing data first.",
+      "## Try It Out!\n\n### This workflow generates highly-detailed insights from survey responses. Works best when dealing with a large number of participants.\n\n* Import survey responses and vectorise in Qdrant vectorstore.\n* Identify clusters of popular responses to questions using K-means clustering algorithm. \n* Each valid cluster is analysed and summarised by LLM.\n* Export LLM response and cluster results back into sheet.\n\nCheck out the reference google sheet here: {{ $env.WEBHOOK_URL }}\n\n### Need ",
+      "### First Time Running?\nThere is a slight delay on first run because the code node has to download the required packages."
+    ],
+    "trigger_patterns": [
+      {
+        "name": "Execute Workflow Trigger",
+        "type": "executeWorkflowTrigger"
+      },
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "manualTrigger"
+      }
+    ],
+    "error_handling": [],
+    "settings": {
+      "executionOrder": "v1",
+      "saveManualExecutions": true,
+      "callerPolicy": "workflowsFromSameOwner",
+      "errorWorkflow": null,
+      "timezone": "UTC",
+      "executionTimeout": 3600,
+      "maxExecutions": 1000,
+      "retryOnFail": true,
+      "retryCount": 3,
+      "retryDelay": 1000
+    }
+  },
+  {
+    "name": "Splitout Workflow",
+    "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Splitout/0663_Splitout_Schedule_Update_Scheduled.json",
+    "tags": [
+      "automation",
+      "n8n",
+      "production-ready",
+      "excellent",
+      "optimized"
+    ],
+    "description": "Automated workflow: Splitout Workflow. This workflow integrates 14 different services: airtableTrigger, stickyNote, airtable, scheduleTrigger, splitOut. It contains 21 nodes and follows best practices for error handling and security.",
+    "node_count": 20,
+    "active": false,
+    "classification": {
+      "primary": "conditional-loop",
+      "primary_label": "条件分支与循环 (Conditional & Loop)",
+      "secondary": [
+        "automation-triggers",
+        "error-handling"
+      ],
+      "scores": {
+        "text-generation": 0,
+        "image-processing": 0,
+        "data-processing": 0,
+        "automation-triggers": 42,
+        "conditional-loop": 48,
+        "error-handling": 13,
+        "sub-workflow": 0
+      }
+    },
+    "trigger_nodes": [
+      {
+        "id": "e6fb0b8f-2469-4b66-b9e2-f4f3c0a613af",
+        "name": "Airtable Trigger",
+        "type": "n8n-nodes-base.airtableTrigger",
+        "typeVersion": 1,
+        "position": [
+          1900,
+          -40
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "aaf1c25e-c398-4715-88bf-bd98daafc10f",
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "typeVersion": 1.2,
+        "position": [
+          -340,
+          -100
+        ],
+        "has_credentials": false
+      }
+    ],
+    "ai_nodes": [],
+    "integration_nodes": [
+      {
+        "id": "032702d9-27d8-4735-b978-20b55bc1a74f",
+        "name": "Get Existing Sentiment",
+        "type": "n8n-nodes-base.airtable",
+        "typeVersion": 2.1,
+        "position": [
+          1380,
+          -60
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "f2ded6fa-8b0f-4a34-868c-13c19f725c98",
+        "name": "Update Row",
+        "type": "n8n-nodes-base.airtable",
+        "typeVersion": 2.1,
+        "position": [
+          1560,
+          -60
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "e6fb0b8f-2469-4b66-b9e2-f4f3c0a613af",
+        "name": "Airtable Trigger",
+        "type": "n8n-nodes-base.airtableTrigger",
+        "typeVersion": 1,
+        "position": [
+          1900,
+          -40
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "2a116475-32cd-4c9d-bfc1-3bd494f79a49",
+        "name": "Report Issue Negative Transition",
+        "type": "n8n-nodes-base.slack",
+        "typeVersion": 2.3,
+        "position": [
+          2480,
+          -40
+        ],
+        "has_credentials": true
+      }
+    ],
+    "data_nodes": [
+      {
+        "id": "82fd6023-2cc3-416e-83b7-fda24d07d77a",
+        "name": "Issues to List",
+        "type": "n8n-nodes-base.splitOut",
+        "typeVersion": 1,
+        "position": [
+          40,
+          -100
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "821d4a60-81a4-4915-9c13-3d978cc0114b",
+        "name": "Combine Sentiment Analysis",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          700,
+          -80
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "4fd0345d-e5bf-426d-8403-e2217e19bbea",
+        "name": "Copy of Issue",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1200,
+          -60
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "6d103d67-451e-4780-8f52-f4dba4b42860",
+        "name": "For Each Issue...",
+        "type": "n8n-nodes-base.splitInBatches",
+        "typeVersion": 3,
+        "position": [
+          1020,
+          -60
+        ],
+        "has_credentials": false
+      }
+    ],
+    "control_nodes": [
+      {
+        "id": "9cc77786-e14f-47c6-a3cf-60c2830612e6",
+        "name": "OpenAI Chat Model",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          360,
+          80
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "fe6560f6-2e1b-4442-a2af-bd5a1623f213",
+        "name": "Sentiment over Issue Comments",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          360,
+          -80
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "669762c4-860b-43ad-b677-72d4564e1c29",
+        "name": "Sentiment Transition",
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 3.2,
+        "position": [
+          2080,
+          -40
+        ],
+        "has_credentials": false
+      }
+    ],
+    "error_nodes": [
+      {
+        "id": "error-b48de6f9",
+        "name": "Error Handler",
+        "type": "n8n-nodes-base.stopAndError",
+        "typeVersion": 1,
+        "position": [
+          1000,
+          400
+        ],
+        "has_credentials": false
+      }
+    ],
+    "sticky_notes_count": 5,
+    "sticky_experiences": [
+      "## 1. Continuously Monitor Active Linear Issues\n[Learn more about the GraphQL node]({{ $env.WEBHOOK_URL }}\n\nTo keep up with the latest changes in our active Linear tickets, we'll need to use Linear's GraphQL endpoint because filtering is currently unavailable in the official Linear.app node.\n\nFor this demonstration, we'll check for updated tickets every 30mins.",
+      "## 2. Sentiment Analysis on Current Issue Activity\n[Learn more about the Information Extractor node]({{ $env.WEBHOOK_URL }}\n\nWith our recently updated posts, we can use our AI to perform a quick sentiment analysis on the ongoing conversation to check the overall mood of the support issue. This is a great way to check how things are generally going in the support queue; positive should be normal but negative could indicate some uncomfortableness or even frustration.",
+      "## 3. Capture and Track Results in Airtable\n[Learn more about the Airtable node]({{ $env.WEBHOOK_URL }}\n\nNext, we can capture this analysis in our insights database as means for human review. When the issue is new, we can create a new row but if the issue exists, we will update it's existing row instead.\n\nWhen updating an existing row, we move its previous \"current sentiment\" value into the \"previous sentiment\" column and replace with our new current sentiment. This gives us a \"sentiment transit",
+      "## 4. Get Notified when Sentiment becomes Negative\n[Learn more about the Slack node]({{ $env.WEBHOOK_URL }}\n\nA good use-case for tracking sentiment transitions could be to be alerted if ever an issue moves from a non-negative sentiment to a negative one. This could be a signal of issue handling troubles which may require attention before it escalates.\n\nIn this demonstration, we use the Airtable trigger to catch rows which have their sentiment column updated and check for the non-negative-to-nega",
+      "## Try It Out!\n### This n8n template performs continous monitoring on Linear Issue conversations performing sentiment analysis and alerting when the sentiment becomes negative.\nThis is helpful to quickly identify difficult customer support situations early and prioritising them before they get out of hand.\n\n## How it works\n* A scheduled trigger is used to fetch recently updated issues in Linear using the GraphQL node.\n* Each issue's comments thread is passed into a simple Information Extractor n"
+    ],
+    "trigger_patterns": [
+      {
+        "name": "Airtable Trigger",
+        "type": "airtableTrigger"
+      },
+      {
+        "name": "Schedule Trigger",
+        "type": "scheduleTrigger"
+      }
+    ],
+    "error_handling": [
+      {
+        "name": "Error Handler",
+        "type": "stopAndError"
+      }
+    ],
+    "settings": {
+      "executionOrder": "v1",
+      "saveManualExecutions": true,
+      "callerPolicy": "workflowsFromSameOwner",
+      "errorWorkflow": null,
+      "timezone": "UTC",
+      "executionTimeout": 3600,
+      "maxExecutions": 1000,
+      "retryOnFail": true,
+      "retryCount": 3,
+      "retryDelay": 1000
+    }
+  },
+  {
+    "name": "Manualtrigger Workflow",
+    "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Splitout/0664_Splitout_Limit_Create_Webhook.json",
+    "tags": [
+      "automation",
+      "n8n",
+      "production-ready",
+      "excellent",
+      "optimized"
+    ],
+    "description": "Automated workflow: Manualtrigger Workflow. This workflow integrates 15 different services: wordpress, httpRequest, stickyNote, markdown, splitOut. It contains 34 nodes and follows best practices for error handling and security.",
+    "node_count": 27,
+    "active": false,
+    "classification": {
+      "primary": "conditional-loop",
+      "primary_label": "条件分支与循环 (Conditional & Loop)",
+      "secondary": [
+        "automation-triggers",
+        "error-handling"
+      ],
+      "scores": {
+        "text-generation": 0,
+        "image-processing": 0,
+        "data-processing": 0,
+        "automation-triggers": 15,
+        "conditional-loop": 48,
+        "error-handling": 2,
+        "sub-workflow": 0
+      }
+    },
+    "trigger_nodes": [
+      {
+        "id": "d3159589-dbb7-4cca-91f5-09e8b2e4cba8",
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          240,
+          500
+        ],
+        "has_credentials": false
+      }
+    ],
+    "ai_nodes": [],
+    "integration_nodes": [
+      {
+        "id": "8cca272c-b912-40f1-ba08-aa7c5ff7599c",
+        "name": "Get Blog",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          480,
+          500
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "aa1e2a02-2e2b-4e8d-aef8-f5f7a54d9562",
+        "name": "Get Article",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          1120,
+          500
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "024efee2-5a2f-455c-a150-4b9bdce650b2",
+        "name": "Save as Draft",
+        "type": "n8n-nodes-base.wordpress",
+        "typeVersion": 1,
+        "position": [
+          3460,
+          320
+        ],
+        "has_credentials": true
+      }
+    ],
+    "data_nodes": [
+      {
+        "id": "3b2b6fea-ed2f-43ba-b6d1-e0666b88c65b",
+        "name": "Split Out URLs",
+        "type": "n8n-nodes-base.splitOut",
+        "typeVersion": 1,
+        "position": [
+          800,
+          500
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "68bb20b1-2177-4c0f-9ada-d1de69bdc2a0",
+        "name": "Latest Articles",
+        "type": "n8n-nodes-base.limit",
+        "typeVersion": 1,
+        "position": [
+          960,
+          500
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "299a04be-fe9b-47d9-b2c6-e2e4628f77e0",
+        "name": "Combine Articles",
+        "type": "n8n-nodes-base.aggregate",
+        "typeVersion": 1,
+        "position": [
+          1780,
+          540
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "8480ece7-0dc1-4682-ba9e-ded2c138d8b8",
+        "name": "Article Style & Brand Voice",
+        "type": "n8n-nodes-base.merge",
+        "typeVersion": 3,
+        "position": [
+          2560,
+          320
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "1510782d-0f88-40ca-99a8-44f984022c8e",
+        "name": "New Article Instruction",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          2820,
+          320
+        ],
+        "has_credentials": false
+      }
+    ],
+    "control_nodes": [
+      {
+        "id": "b4b42b3f-ef30-4fc8-829d-59f8974c4168",
+        "name": "OpenAI Chat Model",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          2180,
+          700
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "032c3012-ed8d-44eb-94f0-35790f4b616f",
+        "name": "OpenAI Chat Model1",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          2980,
+          460
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "bf922785-7e8f-4f93-bfff-813c16d93278",
+        "name": "OpenAI Chat Model2",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          2020,
+          520
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "d8d4b26f-270f-4b39-a4cd-a6e4361da591",
+        "name": "Extract Voice Characteristics",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          2160,
+          540
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "515fe69f-061e-4dfc-94ed-4cf2fbe10b7b",
+        "name": "Capture Existing Article Structure",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.4,
+        "position": [
+          2020,
+          380
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "4e6fbe4e-869e-4bef-99ba-7b18740caecf",
+        "name": "Content Generation Agent",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          3000,
+          320
+        ],
+        "has_credentials": false
+      }
+    ],
+    "error_nodes": [],
+    "sticky_notes_count": 9,
+    "sticky_experiences": [
+      "## 1. Import Existing Content\n[Read more about the HTML node]({{ $env.WEBHOOK_URL }}\n\nFirst, we'll need to gather existing content for the brand voice we want to replicate. This content can be blogs, social media posts or internal documents - the idea is to use this content to \"train\" our AI to produce content from the provided examples. One call out is that the quality and consistency of the content is important to get the desired results.\n\nIn this demonstration, we'll grab the latest blog post",
+      "## 2. Convert HTML to Markdown\n[Learn more about the Markdown node]({{ $env.WEBHOOK_URL }}\n\nMarkdown is a great way to optimise the article data we're sending to the LLM because it reduces the amount of tokens required but keeps all relevant writing structure information.\n\nAlso useful to get Markdown output as a response because typically it's the format authors will write in.",
+      "## 3. Using AI to Analyse Article Structure and Writing Styles\n[Read more about the Basic LLM Chain node]({{ $env.WEBHOOK_URL }}\n\nOur approach is to first perform a high-level analysis of all available articles in order to replicate their content layout and writing styles. This will act as a guideline to help the AI to structure our future articles.",
+      "## 4. Using AI to Extract Voice Characteristics and Traits\n[Read more about the Information Extractor node]({{ $env.WEBHOOK_URL }}\n\nSecond, we'll use AI to analysis the brand voice characteristics of the previous articles. This picks out the tone, style and choice of language used and identifies them into categories. These categories will be used as guidelines for the AI to keep the future article consistent in tone and voice. ",
+      "## 5. Automate On-Brand Articles Using AI\n[Read more about the Information Extractor node]({{ $env.WEBHOOK_URL }}\n\nFinally with this approach, we can feed both content and voice guidelines into our final LLM - our content generation agent - to produce any number of on-brand articles, social media posts etc.\n\nWhen it comes to assessing the output, note the AI does a pretty good job at simulating format and reusing common phrases and wording for the target article. However, this could become repet",
+      "## 6. Save Draft to Wordpress\n[Learn more about the Wordpress node]({{ $env.WEBHOOK_URL }}\n\nTo close out the template, we'll simple save our generated article as a draft which could allow human team members to review and validate the article before publishing.",
+      "### Q. Do I need to analyse Brand Voice for every article?\nA. No! I would recommend storing the results of the AI's analysis and re-use for a list of planned articles rather than generate anew every time.",
+      "### Q. Can I use other media than blog articles?\nA. Yes! This approach can use other source materials such as PDFs, as long as they can be produces in a text format to give to the LLM.",
+      "## Try It Out!\n### This n8n template demonstrates how to use AI to generate new on-brand written content by analysing previously published content.\n\nWith such an approach, it's possible to generate a steady stream of blog article drafts quickly with high consistency with your brand and existing content.\n\n### How it works\n* In this demonstration, the n8n.io blog is used as the source of existing published content and 5 of the latest articles are imported via the HTTP node.\n* The HTML node is extr"
+    ],
+    "trigger_patterns": [
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "manualTrigger"
+      }
+    ],
+    "error_handling": [],
+    "settings": {
+      "executionOrder": "v1",
+      "saveManualExecutions": true,
+      "callerPolicy": "workflowsFromSameOwner",
+      "errorWorkflow": null,
+      "timezone": "UTC",
+      "executionTimeout": 3600,
+      "maxExecutions": 1000,
+      "retryOnFail": true,
+      "retryCount": 3,
+      "retryDelay": 1000
+    }
+  },
+  {
+    "name": "Lmchatgooglegemini Workflow",
+    "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Splitout/0680_Splitout_HTTP_Send_Webhook.json",
+    "tags": [
+      "automation",
+      "n8n",
+      "production-ready",
+      "excellent",
+      "optimized"
+    ],
+    "description": "Automated workflow: Lmchatgooglegemini Workflow. This workflow processes data and performs automated tasks.",
+    "node_count": 10,
+    "active": false,
+    "classification": {
+      "primary": "conditional-loop",
+      "primary_label": "条件分支与循环 (Conditional & Loop)",
+      "secondary": [
+        "automation-triggers",
+        "text-generation",
+        "data-processing"
+      ],
+      "scores": {
+        "text-generation": 2,
+        "image-processing": 0,
+        "data-processing": 2,
+        "automation-triggers": 13,
+        "conditional-loop": 22,
+        "error-handling": 0,
+        "sub-workflow": 0
+      }
+    },
+    "trigger_nodes": [
+      {
+        "id": "6fe68a4b-744b-48c8-9320-d2b19e3eb92b",
+        "name": "GetTopicFromToLearn",
+        "type": "n8n-nodes-base.formTrigger",
+        "typeVersion": 2.2,
+        "position": [
+          -340,
+          560
+        ],
+        "has_credentials": false
+      }
+    ],
+    "ai_nodes": [],
+    "integration_nodes": [
+      {
+        "id": "eee4dfdf-53ab-42be-91ae-7b6c405df7c2",
+        "name": "FindHNComments",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          260,
+          560
+        ],
+        "has_credentials": false
+      }
+    ],
+    "data_nodes": [
+      {
+        "id": "e57d86ae-d7c1-4354-9e3c-528c76160cd9",
+        "name": "CombineIntoSingleText",
+        "type": "n8n-nodes-base.aggregate",
+        "typeVersion": 1,
+        "position": [
+          480,
+          560
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "b2086d29-1de5-48f4-8c1e-affd509fb5f7",
+        "name": "SplitOutChildrenIDs",
+        "type": "n8n-nodes-base.splitOut",
+        "typeVersion": 1,
+        "position": [
+          40,
+          560
+        ],
+        "has_credentials": false
+      }
+    ],
+    "control_nodes": [
+      {
+        "id": "41183066-0045-4a75-ba23-42f4efcfeccc",
+        "name": "Google Gemini Chat Model",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          720,
+          720
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "eb061c39-7a4d-42e7-bb42-806504731b11",
+        "name": "Basic LLM Chain",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.5,
+        "position": [
+          700,
+          560
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "b79e867a-ea3b-4a94-9809-b5a01ee2820f",
+        "name": "Finished",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          1540,
+          560
+        ],
+        "has_credentials": false
+      }
+    ],
+    "error_nodes": [],
+    "sticky_notes_count": 0,
+    "sticky_experiences": [],
+    "trigger_patterns": [
+      {
+        "name": "GetTopicFromToLearn",
+        "type": "formTrigger"
+      }
+    ],
+    "error_handling": [],
+    "settings": {
+      "executionOrder": "v1",
+      "saveManualExecutions": true,
+      "callerPolicy": "workflowsFromSameOwner",
+      "errorWorkflow": null,
+      "timezone": "UTC",
+      "executionTimeout": 3600,
+      "maxExecutions": 1000,
+      "retryOnFail": true,
+      "retryCount": 3,
+      "retryDelay": 1000
+    }
+  },
+  {
+    "name": "Lmchatopenai Workflow",
+    "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Splitout/0860_Splitout_Limit_Send_Webhook.json",
+    "tags": [
+      "automation",
+      "n8n",
+      "production-ready",
+      "excellent",
+      "optimized"
+    ],
+    "description": "Automated workflow: Lmchatopenai Workflow. This workflow integrates 15 different services: stickyNote, httpRequest, textSplitterRecursiveCharacterTextSplitter, chainRetrievalQa, splitOut. It contains 29 nodes and follows best practices for error handling and security.",
+    "node_count": 22,
+    "active": false,
+    "classification": {
+      "primary": "conditional-loop",
+      "primary_label": "条件分支与循环 (Conditional & Loop)",
+      "secondary": [
+        "automation-triggers",
+        "text-generation",
+        "error-handling"
+      ],
+      "scores": {
+        "text-generation": 4,
+        "image-processing": 0,
+        "data-processing": 0,
+        "automation-triggers": 13,
+        "conditional-loop": 26,
+        "error-handling": 2,
+        "sub-workflow": 0
+      }
+    },
+    "trigger_nodes": [
+      {
+        "id": "dd97266d-a039-4d8f-bc7d-fb439ad5a6d7",
+        "name": "When clicking \"Execute Workflow\"",
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          -180,
+          0
+        ],
+        "has_credentials": false
+      }
+    ],
+    "ai_nodes": [],
+    "integration_nodes": [
+      {
+        "id": "c4d4a979-3182-46c9-b145-fa4e6ba57011",
+        "name": "Fetch Essay List",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          80,
+          0
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "5644c48d-62b6-4e2d-ad25-013b55f5ec71",
+        "name": "Fetch essay texts",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          880,
+          0
+        ],
+        "has_credentials": false
+      }
+    ],
+    "data_nodes": [
+      {
+        "id": "c121dc65-37e3-49d4-b449-f28491e19a6f",
+        "name": "Split out into items",
+        "type": "n8n-nodes-base.splitOut",
+        "typeVersion": 1,
+        "position": [
+          480,
+          0
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "cd84596e-4046-4d33-9f43-cf464e5c5c01",
+        "name": "Limit to first 3",
+        "type": "n8n-nodes-base.limit",
+        "typeVersion": 1,
+        "position": [
+          680,
+          0
+        ],
+        "has_credentials": false
+      }
+    ],
+    "control_nodes": [
+      {
+        "id": "33e94ee1-4244-4075-bb4b-93a99a2cacd9",
+        "name": "OpenAI Chat Model",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.2,
+        "position": [
+          20,
+          560
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "95e9a59d-1832-4eb7-b58d-ba391c1acb1c",
+        "name": "When chat message received",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.1,
+        "position": [
+          -200,
+          380
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "e90a069e-cfd8-49f1-8fe6-a334bb920027",
+        "name": "Milvus Vector Store",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.1,
+        "position": [
+          1420,
+          0
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "d786c471-d564-4f25-beab-f1c7f4559f7a",
+        "name": "Default Data Loader",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          1460,
+          220
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "26730b7b-2bb9-46f8-83c3-3d4ffdfdef57",
+        "name": "Embeddings OpenAI",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.2,
+        "position": [
+          1320,
+          240
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "de836110-4073-44d5-bbf3-d57f57525f69",
+        "name": "Recursive Character Text Splitter",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          1540,
+          340
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "f5b7410f-37c7-40ff-b841-12ed04252317",
+        "name": "Embeddings OpenAI1",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.2,
+        "position": [
+          80,
+          860
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "7a5d1b3f-9b2c-4943-9b40-2a213e30159c",
+        "name": "Milvus Vector Store1",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.1,
+        "position": [
+          120,
+          720
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "3665ef25-e464-496a-84d6-980b96e78e9a",
+        "name": "Q&A Chain to Retrieve from Milvus and Answer Question",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.5,
+        "position": [
+          120,
+          380
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "10bf4a2c-ee2b-4185-b1e5-29b8664078fb",
+        "name": "Milvus Vector Store Retriever",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          260,
+          580
+        ],
+        "has_credentials": false
+      }
+    ],
+    "error_nodes": [],
+    "sticky_notes_count": 5,
+    "sticky_experiences": [
+      "## Step 1\n1. Set up a Milvus server based on [this guide]({{ $env.WEBHOOK_URL }} And then create a collection named `my_collection`.\n2. Click this workflow to load scrape and load Paul Graham essays to Milvus collection.\n",
+      "## Step 2\nChat with this QA Chain with Milvus retriever\n"
+    ],
+    "trigger_patterns": [
+      {
+        "name": "When clicking \"Execute Workflow\"",
+        "type": "manualTrigger"
+      }
+    ],
+    "error_handling": [],
+    "settings": {
+      "executionOrder": "v1",
+      "saveManualExecutions": true,
+      "callerPolicy": "workflowsFromSameOwner",
+      "errorWorkflow": null,
+      "timezone": "UTC",
+      "executionTimeout": 3600,
+      "maxExecutions": 1000,
+      "retryOnFail": true,
+      "retryCount": 3,
+      "retryDelay": 1000
+    }
+  },
+  {
+    "name": "Make OpenAI Citation for File Retrieval RAG",
+    "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Splitout/1059_Splitout_Code_Automation_Webhook.json",
+    "tags": [
+      "automation",
+      "n8n",
+      "production-ready",
+      "excellent",
+      "optimized"
+    ],
+    "description": "Automated workflow: Make OpenAI Citation for File Retrieval RAG. This workflow integrates 11 different services: stickyNote, httpRequest, markdown, code, splitOut. It contains 24 nodes and follows best practices for error handling and security.",
+    "node_count": 20,
+    "active": false,
+    "classification": {
+      "primary": "conditional-loop",
+      "primary_label": "条件分支与循环 (Conditional & Loop)",
+      "secondary": [
+        "automation-triggers",
+        "text-generation",
+        "error-handling"
+      ],
+      "scores": {
+        "text-generation": 2,
+        "image-processing": 0,
+        "data-processing": 0,
+        "automation-triggers": 13,
+        "conditional-loop": 26,
+        "error-handling": 2,
+        "sub-workflow": 0
+      }
+    },
+    "trigger_nodes": [
+      {
+        "id": "trigger-945e1889",
+        "name": "Manual Trigger",
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          100,
+          100
+        ],
+        "has_credentials": false
+      }
+    ],
+    "ai_nodes": [],
+    "integration_nodes": [
+      {
+        "id": "16429226-e850-4698-b419-fd9805a03fb7",
+        "name": "Get ALL Thread Content",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          1260,
+          -520
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "98af62f5-adb0-4e07-a146-fc2f13b851ce",
+        "name": "Retrieve file name from a file ID",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          220,
+          120
+        ],
+        "has_credentials": true
+      }
+    ],
+    "data_nodes": [
+      {
+        "id": "b9033511-3421-467a-9bfa-73af01b99c4f",
+        "name": "Aggregate",
+        "type": "n8n-nodes-base.aggregate",
+        "typeVersion": 1,
+        "position": [
+          740,
+          120
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "0f51e09f-2782-4e2d-b797-d4d58fcabdaf",
+        "name": "Split all message iterations from a thread",
+        "type": "n8n-nodes-base.splitOut",
+        "typeVersion": 1,
+        "position": [
+          220,
+          -300
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "4d569993-1ce3-4b32-beaf-382feac25da9",
+        "name": "Split all content from a single message",
+        "type": "n8n-nodes-base.splitOut",
+        "typeVersion": 1,
+        "position": [
+          460,
+          -300
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "999e1c2b-1927-4483-aac1-6e8903f7ed25",
+        "name": "Split all citations from a single message",
+        "type": "n8n-nodes-base.splitOut",
+        "typeVersion": 1,
+        "position": [
+          700,
+          -300
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "b11f0d3d-bdc4-4845-b14b-d0b0de214f01",
+        "name": "Regularize output",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          480,
+          120
+        ],
+        "has_credentials": false
+      }
+    ],
+    "control_nodes": [
+      {
+        "id": "a61dd9d3-4faa-4878-a6f3-ba8277279002",
+        "name": "Window Buffer Memory",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.3,
+        "position": [
+          980,
+          -320
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "539a4e40-9745-4a26-aba8-2cc2b0dd6364",
+        "name": "Create a simple Trigger to have the Chat button within N8N",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.1,
+        "position": [
+          260,
+          -520
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "aa5b2951-df32-43ac-9939-83b02d818e73",
+        "name": "OpenAI Assistant with Vector Store",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.7,
+        "position": [
+          580,
+          -520
+        ],
+        "has_credentials": true
+      }
+    ],
+    "error_nodes": [],
+    "sticky_notes_count": 7,
+    "sticky_experiences": [
+      "## Make OpenAI Citation for File Retrieval RAG\n\n## Use case\n\nIn this example, we will ensure that all texts from the OpenAI assistant search for citations and sources in the vector store files. We can also format the output for Markdown or HTML tags.\n\nThis is necessary because the assistant sometimes generates strange characters, and we can also use dynamic references such as citations 1, 2, 3, for example.\n\n## What this workflow does\n\nIn this workflow, we will use an OpenAI assistant created wi",
+      "## Setup\n\n- Configure OpenAI Key\n\n### In this step, we will use an assistant created within the OpenAI platform that contains a vector store a.k.a file retrieval",
+      "### Retrieving all thread content is necessary because the OpenAI tool does not retrieve all citations upon request.",
+      "### A file retrieval request contains a lot of information, and we want only the text that will be substituted and the file name.\n\n- id\n- filename\n- text\n",
+      "### With the last three splits, we may have many citations and texts to substitute. By doing an aggregation, it will be possible to handle everything as a single request.",
+      "### This simple code will take all the previous files and citations and alter the original text, formatting the output. In this way, we can use Markdown tags to create links, or if you prefer, we can add an HTML transformation node."
+    ],
+    "trigger_patterns": [
+      {
+        "name": "Manual Trigger",
+        "type": "manualTrigger"
+      }
+    ],
+    "error_handling": [],
+    "settings": {
+      "executionOrder": "v1",
+      "saveManualExecutions": true,
+      "callerPolicy": "workflowsFromSameOwner",
+      "errorWorkflow": null,
+      "timezone": "UTC",
+      "executionTimeout": 3600,
+      "maxExecutions": 1000,
+      "retryOnFail": true,
+      "retryCount": 3,
+      "retryDelay": 1000
+    }
+  }
+]

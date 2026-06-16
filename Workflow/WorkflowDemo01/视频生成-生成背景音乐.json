@@ -1,0 +1,751 @@
+{
+  "name": "视频生成-生成背景音乐",
+  "nodes": [
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "999349cc-077d-465d-9c08-e762716e11fd",
+              "leftValue": "={{ $json.code }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "65680057-2cb5-43ec-9893-dc3166cc6ebb",
+              "leftValue": "={{ $json.data.taskId }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1200,
+        224
+      ],
+      "id": "dd370eb9-bdc9-4119-9da9-6ba47e608801",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1616,
+        224
+      ],
+      "id": "43d0e9af-2d06-4fb1-9a17-40c09b229173",
+      "name": "Wait",
+      "webhookId": "599da346-6783-4542-853c-81604e135c4c"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "4f4e9ba2-123c-4231-8d59-d297375cf47b",
+              "leftValue": "={{ $json.data }}",
+              "rightValue": "QUEUED",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "4eab6588-e33b-42cb-84d5-bb90adfc6431",
+              "leftValue": "={{ $json.data }}",
+              "rightValue": "RUNNING",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2000,
+        224
+      ],
+      "id": "2bf5732c-7bfa-4445-addc-5755970fedbd",
+      "name": "If1",
+      "retryOnFail": false
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "95663f30-5e57-4d3d-88bd-e11abce866ae",
+              "leftValue": "={{ $('查询状态').first().json.data }}",
+              "rightValue": "SUCCESS",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2224,
+        224
+      ],
+      "id": "72bc6067-45cd-4b9a-9c19-c3afa71c37dd",
+      "name": "If2"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.runninghub.cn/task/openapi/status",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"apiKey\": \"{{ $('配置字段').first().json.runninghub_apikey }}\",\n  \"taskId\": \"{{ $('发起任务').item.json.data.taskId }}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1808,
+        224
+      ],
+      "id": "cc12e179-65fb-453b-b80c-967d6df3422a",
+      "name": "查询状态",
+      "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.runninghub.cn/task/openapi/create",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"workflowId\": \"{{ $('配置字段').first().json.workflow_id }}\",\n  \"apiKey\": \"{{ $('配置字段').first().json.runninghub_apikey }}\",\n  \"nodeInfoList\": [\n    {\n      \"nodeId\": \"3\",\n      \"fieldName\": \"tags\",\n      \"fieldValue\": \"{{ $json.output.prompt }}\",\n      \"description\": \"提示词\"\n    },\n    {\n      \"nodeId\": \"5\",\n      \"fieldName\": \"seconds\",\n      \"fieldValue\": {{ $('Code in JavaScript').first().json.duration }},\n      \"description\": \"时长\"\n    }\n  ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        896,
+        224
+      ],
+      "id": "4b6cc502-a6eb-4a94-8c37-47d4b66402a4",
+      "name": "发起任务",
+      "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "operation": "write",
+        "fileName": "={{ $('配置字段').item.json.output_folder_path }}music_{{ $now.format('yyyy-MM-dd_hh-mm-ss') }}_{{ Math.floor(Math.random() * 10000) }}.flac",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        512,
+        672
+      ],
+      "id": "c4e9e971-7940-4ac3-97d7-e85bfdaa6b64",
+      "name": "Read/Write Files from Disk"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "cf873743-1c07-494d-99c9-678cade473bf",
+              "name": "character",
+              "value": "={{ $json.character }}",
+              "type": "string"
+            },
+            {
+              "id": "565c1e1b-70c2-403d-a35f-4f43cfd2c0ae",
+              "name": "storyboard_prompts",
+              "value": "={{ $json.storyboard_prompts }}",
+              "type": "array"
+            },
+            {
+              "id": "29a10c8a-5f18-4c02-8a47-6be9c25ec1dc",
+              "name": "workflow_id",
+              "value": "1990596837553967106",
+              "type": "string"
+            },
+            {
+              "id": "0d1585fd-c4f6-45fd-ac0c-6463b8c1d415",
+              "name": "runninghub_apikey",
+              "value": "={{ $json.runninghub_apikey }}",
+              "type": "string"
+            },
+            {
+              "id": "b8e90af4-4af6-4a2a-9b2d-d75606073b29",
+              "name": "output_folder_path",
+              "value": "={{ $json.output_folder_path }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -16,
+        224
+      ],
+      "id": "d6ccde83-8f28-4bf4-be2d-1666cd8b5274",
+      "name": "配置字段"
+    },
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "storyboard_prompts",
+              "type": "array"
+            },
+            {
+              "name": "character"
+            },
+            {
+              "name": "runninghub_apikey"
+            },
+            {
+              "name": "output_folder_path"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -240,
+        224
+      ],
+      "id": "84955394-49ae-420a-ac41-52ebcf6f11cd",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f203b1b7-7f19-4963-8232-8ad5e6d93b4a",
+              "name": "runninghub_apikey",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "31bddccc-2b60-4677-b209-0c98f4e16162",
+              "name": "output_folder_path",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "ed0d8cc5-6680-4b2d-a5b1-32bfe32fe4db",
+              "name": "character",
+              "value": "3d皮克斯风格风格，全身形象。一位7-8岁左右的亚洲小女孩，齐肩棕色卷发扎成两个蓬松的小丸子头，发丝间点缀着几片小树叶。圆润的脸庞，明亮的大眼睛，小巧的鼻子。娇小匀称的身材，身穿浅黄色棉麻连衣裙，裙摆印有绿色小树叶图案，材质柔软舒适，袖口和领口有轻微磨损。外搭一件深绿色小马甲，胸前口袋插着一朵小野花，脚穿棕色小皮靴，鞋带松散。整体散发出活泼好奇的气质，充满探索自然的童真气息。",
+              "type": "string"
+            },
+            {
+              "id": "de858876-b71d-4290-8aa1-5ac20bbd84a2",
+              "name": "storyboard_prompts",
+              "value": "=[\n  {\n    \"prompt\": \"角色面带灿烂笑容，眼神充满好奇和期待，散发出活泼兴奋的情绪状态（主体动态）。阳光明媚的森林边缘，高大的树木投下斑驳光影，草地上点缀着各色野花，远处可见蜿蜒的小径通向密林深处（场景）。蹦蹦跳跳地向前走，时而蹲下观察地上的小昆虫，时而抬头张望四周（动作）。自然阳光透过树叶形成斑驳光影，中远景，三分法构图，人物位于画面左侧，35mm广角镜头捕捉完整环境，手持跟随镜头，温暖的高饱和色调（美学控制）。3d皮克斯风格，色彩鲜艳明亮，充满童真趣味（风格化）\",\n    \"duration\": 4,\n    \"description\": \"展现小女孩初入森林的兴奋好奇状态\"\n  },\n  {\n    \"prompt\": \"角色瞪大眼睛，嘴巴微张露出惊喜表情，眼神闪烁着发现宝藏般的兴奋光芒（主体动态）。森林深处的神秘角落，一束金色阳光穿透茂密树冠照亮地面，古老的树根盘绕形成天然座椅，周围环绕着发光的小蘑菇和晶莹露珠（场景）。小心翼翼地蹲下，伸出右手轻轻触碰发光蘑菇，身体前倾充满专注（动作）。戏剧性的顶光照明形成神圣氛围，特写镜头，中心构图突出发现瞬间，50mm标准镜头浅景深背景虚化，静止镜头，金色暖色调高光（美学控制）。3d皮克斯风格，魔法森林般的梦幻质感（风格化）\",\n    \"duration\": 5,\n    \"description\": \"发现森林中神奇生物的惊喜时刻\"\n  }\n]",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        16,
+        -16
+      ],
+      "id": "01d4273f-9ad1-4823-9f7c-042e33392d85",
+      "name": "Edit Fields",
+      "disabled": true
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -208,
+        -16
+      ],
+      "id": "e1368876-71da-44b6-8323-7daa73d231eb",
+      "name": "When clicking ‘Execute workflow’",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b56d373b-ce89-4280-bb76-745968f4d482",
+              "name": "music_filepath",
+              "value": "={{ $json.fileName }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        752,
+        672
+      ],
+      "id": "74cb7295-5be8-41ff-b68f-f4b757e993b6",
+      "name": "执行结束返回字段"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "9141348a-7de6-4667-83a0-8b8b78c8d3e7",
+              "leftValue": "={{ `${$('发起任务').first().json.code}` }}",
+              "rightValue": "={{ `${421}` }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "e179a8be-5740-4733-9dd8-2ca625c00e39",
+              "leftValue": "={{ `${$('发起任务').first().json.code}` }}",
+              "rightValue": "={{ `${433}` }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "f7c83032-2903-4596-84d0-ccdd9f2a9f22",
+              "leftValue": "={{ `${$('发起任务').first().json.code}` }}",
+              "rightValue": "={{ `${413}` }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1328,
+        448
+      ],
+      "id": "4ee22e86-8bdd-433a-ab35-48e2f1e18f2f",
+      "name": "If3"
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1712,
+        432
+      ],
+      "id": "aa8c5290-83c0-4848-b196-33a048b45486",
+      "name": "Wait1",
+      "webhookId": "4c9aba80-255e-4811-b4b0-b3ce16833cda"
+    },
+    {
+      "parameters": {
+        "jsCode": "const story = $input.first().json.storyboard_prompts.map(item => item.prompt)\n\nconst duration = $input.first().json.storyboard_prompts.reduce((sum, item) => sum + item.duration, 0);\n\nreturn {\n  \"story\": story,\n  \"duration\": duration,\n  \"character\": $input.first().json.character\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        192,
+        224
+      ],
+      "id": "b923f278-adc4-4a33-880b-f494856b5c5a",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=你是一个专业的音乐配乐师，需要为动画视频创作背景音乐提示词。\n\n【输入内容】\n角色描述：{{ $json.character }}\n\n视频分镜脚本：{{ $json.story }}\n\n视频时长：{{ $json.duration }}秒\n\n【分析任务】\n第一步 - 角色分析（核心优先级）：\n   - 角色年龄段（儿童/少年/青年/成年/老年）\n   - 角色性格气质（活泼/文静/勇敢/温柔/神秘等）\n   - 角色整体感觉（童真/成熟/梦幻/严肃等）\n   - 目标受众定位（基于角色年龄和气质判断）\n\n第二步 - 故事分析：\n   - 整体情绪基调（欢快/温馨/神秘/冒险等）\n   - 视觉风格特征（皮克斯3D/手绘/写实等）\n   - 场景氛围（自然/魔法/都市/奇幻等）\n   - 情绪强度（轻松/中等/紧张）\n\n第三步 - 综合判断（角色优先原则）：\n   - 以角色年龄和气质为主导确定音乐基调\n   - 故事情节作为辅助调整音乐细节\n   - 如果角色与故事氛围有冲突，优先匹配角色特征\n   - 例如：儿童角色+悲伤故事 = 温柔但仍保持童趣感\n\n第四步 - 确定音乐方向：\n   - 选择1种主导乐器（钢琴/吉他/竖琴/长笛/大提琴/马林巴/木琴/音乐盒等）\n   - BPM范围（根据角色和情绪综合判断）\n   - 氛围关键词（2-3个形容词）\n\n【输出要求】\n生成一个英文音乐prompt，结构包括：\n- 音乐风格/类型\n- 1种主要乐器（仅限1种）\n- BPM（具体数值）\n- 氛围形容词（2-3个）\n- 其他特征（如：soft, gentle, minimal, ambient等）\n\n【核心原则】\n- 角色年龄/气质 > 故事情节：音乐必须首先匹配角色特征\n- 极简主义：只用1种乐器，保持风格统一\n- 音乐必须是纯音乐（instrumental）\n- 作为背景音乐，不喧宾夺主（subtle, understated）\n- 避免复杂编曲和激烈元素\n- 使用逗号分隔各元素\n\n## 示例\n### 输入数据\n```json\n{\n  \"character\": \"3d皮克斯风格，全身形象。一位7-8岁左右的亚洲小女孩，齐肩棕色卷发扎成两个蓬松的小丸子头，发丝间点缀着几片小树叶。圆润的脸庞，明亮的大眼睛，小巧的鼻子。娇小匀称的身材，身穿浅黄色棉麻连衣裙，裙摆印有绿色小树叶图案，材质柔软舒适，袖口和领口有轻微磨损。外搭一件深绿色小马甲，胸前口袋插着一朵小野花，脚穿棕色小皮靴，鞋带松散。整体散发出活泼好奇的气质，充满探索自然的童真气息。\",\n  \"story\": \"角色面带灿烂笑容，眼神充满好奇和期待，散发出活泼兴奋的情绪状态（主体动态）。阳光明媚的森林边缘，高大的树木投下斑驳光影，草地上点缀着各色野花，远处可见蜿蜒的小径通向密林深处（场景）。蹦蹦跳跳地向前走，时而蹲下观察地上的小昆虫，时而抬头张望四周（动作）。自然阳光透过树叶形成斑驳光影，中远景，三分法构图，人物位于画面左侧，35mm广角镜头捕捉完整环境，手持跟随镜头，温暖的高饱和色调（美学控制）。3d皮克斯风格，色彩鲜艳明亮，充满童真趣味（风格化）,角色瞪大眼睛，嘴巴微张露出惊喜表情，眼神闪烁着发现宝藏般的兴奋光芒（主体动态）。森林深处的神秘角落，一束金色阳光穿透茂密树冠照亮地面，古老的树根盘绕形成天然座椅，周围环绕着发光的小蘑菇和晶莹露珠（场景）。小心翼翼地蹲下，伸出右手轻轻触碰发光蘑菇，身体前倾充满专注（动作）。戏剧性的顶光照明形成神圣氛围，特写镜头，中心构图突出发现瞬间，50mm标准镜头浅景深背景虚化，静止镜头，金色暖色调高光（美学控制）。3d皮克斯风格，魔法森林般的梦幻质感（风格化）\",\n  \"duration\": \"60\"\n}\n```\n\n### 预期输出（基于儿童角色+探索故事，偏童趣欢快）\n```json\n{\n  \"prompt\": \"playful xylophone, 108 bpm, cheerful, bright, whimsical, lighthearted melody, minimal arrangement, instrumental background music\"\n}\n```\n\n或\n```json\n{\n  \"prompt\": \"joyful marimba, 105 bpm, playful, sunny, innocent, simple tune, gentle dynamics, ambient background music\"\n}\n```\n\n### 角色-乐器匹配参考\n| 角色类型 | 推荐乐器 | 音乐特征 |\n|---------|---------|---------|\n| 儿童角色（活泼） | Xylophone, Marimba, Glockenspiel | 明快、跳跃、童趣 |\n| 儿童角色（文静） | Music Box, Kalimba, Celesta | 温柔、梦幻、纯真 |\n| 少年角色 | Acoustic Guitar, Ukulele, Piano | 清新、轻快、成长感 |\n| 成年角色（温柔） | Harp, Flute, Acoustic Guitar | 优雅、温暖、柔和 |\n| 成年角色（严肃） | Cello, Violin, Piano | 深沉、稳重、内敛 |\n| 老年角色 | Classical Guitar, Harmonica, Piano | 怀旧、温暖、智慧 |\n| 神秘角色 | Music Box, Theremin, Celesta | 空灵、神秘、飘渺 |\n\n### BPM速度参考（结合角色年龄）\n- **儿童角色**：\n  - 活泼场景：100-115 BPM（跳跃、欢快）\n  - 安静场景：85-95 BPM（温柔、童真）\n- **少年/青年角色**：\n  - 动态场景：95-110 BPM（轻快、活力）\n  - 静态场景：75-90 BPM（抒情、柔和）\n- **成年/老年角色**：\n  - 日常场景：70-85 BPM（平稳、温暖）\n  - 紧张场景：85-100 BPM（克制、内敛）\n\n【输出格式】\n严格按照以下JSON格式输出，不要添加任何其他文字，注意生成的prompt必须使用英文：\n{\n  \"prompt\": \"\"\n}",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        400,
+        224
+      ],
+      "id": "200845a0-ff20-4955-a1a0-9a906f43aa7d",
+      "name": "AI Agent",
+      "retryOnFail": true,
+      "maxTries": 5
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"prompt\": \"\"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        576,
+        432
+      ],
+      "id": "f60e6eb0-5521-4f23-aed8-d9a70e82bfcc",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.runninghub.cn/task/openapi/outputs",
+        "sendBody": true,
+        "specifyBody": "=json",
+        "bodyParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "jsonBody": "={\n  \"apiKey\": \"{{ $('配置字段').first().json.runninghub_apikey }}\",\n  \"taskId\": \"{{ $('发起任务').item.json.data.taskId }}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        0,
+        672
+      ],
+      "id": "e2833e17-bd5e-449d-8029-1e4b9c3ca242",
+      "name": "获取音频地址"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.data[0].fileUrl }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        304,
+        672
+      ],
+      "id": "e9c94408-94da-4e8a-a69b-dd9a7b466ddb",
+      "name": "下载背景音乐"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+      "typeVersion": 1,
+      "position": [
+        336,
+        432
+      ],
+      "id": "870079b6-6dfe-4e5b-9576-95ac91fd1808",
+      "name": "DeepSeek Chat Model",
+      "credentials": {
+        "deepSeekApi": {
+          "id": "azKeo8dWCSJUyCgS",
+          "name": "DeepSeek account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "查询状态",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "获取音频地址",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "发起任务",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "查询状态": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "发起任务": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read/Write Files from Disk": {
+      "main": [
+        [
+          {
+            "node": "执行结束返回字段",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "配置字段": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "配置字段",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If3": {
+      "main": [
+        [
+          {
+            "node": "Wait1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait1": {
+      "main": [
+        [
+          {
+            "node": "发起任务",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        []
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "发起任务",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "获取音频地址": {
+      "main": [
+        [
+          {
+            "node": "下载背景音乐",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "下载背景音乐": {
+      "main": [
+        [
+          {
+            "node": "Read/Write Files from Disk",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DeepSeek Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "5444ab42-d96e-4ec2-b139-f8d2fd9c7bc3",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "164b6258852a751ffad2d91c0ef2b3e746122b3f527005a8ac87036f847eae21"
+  },
+  "id": "95zRg5w3oIdNynPt",
+  "tags": []
+}

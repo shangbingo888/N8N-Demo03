@@ -1,0 +1,1080 @@
+{
+  "name": "视频工作流-生成音频",
+  "nodes": [
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "999349cc-077d-465d-9c08-e762716e11fd",
+              "leftValue": "={{ $json.code }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "65680057-2cb5-43ec-9893-dc3166cc6ebb",
+              "leftValue": "={{ $json.data.taskId }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -816,
+        480
+      ],
+      "id": "1df63233-447c-4a92-b8e7-cfce1392a625",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -544,
+        464
+      ],
+      "id": "c1ba5f51-3250-4cf1-ad9c-10ce040bdf29",
+      "name": "Wait",
+      "webhookId": "f000c5ff-92b7-49ea-a7c6-2d1ac71a21c8"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "4f4e9ba2-123c-4231-8d59-d297375cf47b",
+              "leftValue": "={{ $json.data }}",
+              "rightValue": "QUEUED",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "4eab6588-e33b-42cb-84d5-bb90adfc6431",
+              "leftValue": "={{ $json.data }}",
+              "rightValue": "RUNNING",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -48,
+        464
+      ],
+      "id": "2311e739-67a9-4597-ac1a-3a661946d955",
+      "name": "If1",
+      "retryOnFail": false
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "95663f30-5e57-4d3d-88bd-e11abce866ae",
+              "leftValue": "={{ $('查询状态').first().json.data }}",
+              "rightValue": "SUCCESS",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        192,
+        480
+      ],
+      "id": "7bbe3461-5d80-49da-a783-2a59a36ba6bf",
+      "name": "If2"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.runninghub.cn/task/openapi/status",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"apiKey\": \"{{ $('配置字段').first().json.runninghub_apikey }}\",\n  \"taskId\": \"{{ $('发起任务').item.json.data.taskId }}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -288,
+        464
+      ],
+      "id": "7b1c8979-a385-4a11-b7fa-6c5a32897e4e",
+      "name": "查询状态",
+      "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.runninghub.cn/task/openapi/create",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"workflowId\": \"{{ $('配置字段').first().json.workflow_id }}\",\n  \"apiKey\": \"{{ $('配置字段').first().json.runninghub_apikey }}\",\n  \"nodeInfoList\": [\n  {\n    \"nodeId\": \"6\",\n    \"fieldName\": \"text\",\n    \"fieldValue\": \"{{ $json.text }}\",\n    \"description\": \"文本\"\n  },\n  {\n    \"nodeId\": \"9\",\n    \"fieldName\": \"audio\",\n    \"fieldValue\": \"{{ $json.voice_fileName }}\",\n    \"description\": \"待克隆音频\"\n  }\n  ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1056,
+        496
+      ],
+      "id": "ecff6237-6c4f-4427-bc7b-295fc9acf943",
+      "name": "发起任务",
+      "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "operation": "write",
+        "fileName": "={{ $('配置字段').item.json.output_folder_path }}audio_{{ $now.format('yyyy-MM-dd_hh-mm-ss') }}_{{ Math.floor(Math.random() * 10000) }}.flac",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        832,
+        480
+      ],
+      "id": "ea805871-170e-438e-ad9d-6dbcc1725e54",
+      "name": "Read/Write Files from Disk"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "565c1e1b-70c2-403d-a35f-4f43cfd2c0ae",
+              "name": "voice_script",
+              "value": "={{ $json.voice_script }}",
+              "type": "object"
+            },
+            {
+              "id": "29a10c8a-5f18-4c02-8a47-6be9c25ec1dc",
+              "name": "workflow_id",
+              "value": "=1990236925644730369",
+              "type": "string"
+            },
+            {
+              "id": "0d1585fd-c4f6-45fd-ac0c-6463b8c1d415",
+              "name": "runninghub_apikey",
+              "value": "={{ $json.runninghub_apikey }}",
+              "type": "string"
+            },
+            {
+              "id": "e0b8e9bb-3a9b-41fb-bf9b-f29ab48c8921",
+              "name": "output_folder_path",
+              "value": "={{ $json.output_folder_path }}",
+              "type": "string"
+            },
+            {
+              "id": "0f40e198-e8d1-4808-8675-f76e9b28b98e",
+              "name": "voice_example_folder_path",
+              "value": "={{ $json.voice_example_folder_path }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1120,
+        0
+      ],
+      "id": "c277a0b4-bd37-4ebc-949d-71b20587974a",
+      "name": "配置字段"
+    },
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "voice_script",
+              "type": "object"
+            },
+            {
+              "name": "runninghub_apikey"
+            },
+            {
+              "name": "output_folder_path"
+            },
+            {
+              "name": "voice_example_folder_path"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -1520,
+        0
+      ],
+      "id": "4a8ce6fc-9ed2-48a4-a98f-83d1077d6701",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "de858876-b71d-4290-8aa1-5ac20bbd84a2",
+              "name": "voice_script",
+              "value": "={\n      \"characters_timbre\": [\n        {\n          \"timbre_name\": \"旁白\",\n          \"timbre_des\": \"温暖沉稳的男中音，语速平缓富有感染力，带有诗意的叙述感，适合营造温馨治愈的氛围\",\n          \"timbre_id\": 0\n        },\n        {\n          \"timbre_name\": \"主角\",\n          \"timbre_des\": \"25岁女性的清亮温柔嗓音，略带甜美但不腻，语速轻快自然，充满生活气息和幸福感\",\n          \"timbre_id\": 1\n        }\n      ],\n      \"voice_scripts\": [\n        {\n          \"text\": \"夜色中的城市，灯火温柔地迎接归家的人\",\n          \"timbre_id\": 0,\n          \"start_time\": 500,\n          \"end_time\": 3500\n        },\n        {\n          \"text\": \"今天的西红柿真新鲜呢\",\n          \"timbre_id\": 1,\n          \"start_time\": 4500,\n          \"end_time\": 6500\n        },\n        {\n          \"text\": \"厨房里飘散的香气，是家的味道\",\n          \"timbre_id\": 0,\n          \"start_time\": 7500,\n          \"end_time\": 12000\n        }\n      ]\n    }",
+              "type": "object"
+            },
+            {
+              "id": "ead201e7-5554-4604-8cfb-27d33c6f6e40",
+              "name": "output_folder_path",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "97c12f94-f2e6-46f8-9af3-ccf988dca611",
+              "name": "runninghub_apikey",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "ef914d94-3a55-442c-ad8b-477e1dac00c8",
+              "name": "voice_example_folder_path",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1312,
+        -208
+      ],
+      "id": "bd2af553-db9b-4d5f-9f01-aff066a6e055",
+      "name": "Edit Fields",
+      "disabled": true
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1520,
+        -208
+      ],
+      "id": "dd1e55fc-25b4-4f37-910e-3d68025734ed",
+      "name": "When clicking ‘Execute workflow’",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b56d373b-ce89-4280-bb76-745968f4d482",
+              "name": "data",
+              "value": "={{ $json.data }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1232,
+        1088
+      ],
+      "id": "362d07e2-e2ec-4667-abd4-aa242983709c",
+      "name": "执行结束返回字段"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "e3a570fc-ef9e-4fcf-8aee-0ee7bd22ba0b",
+              "leftValue": "={{ `${$('发起任务').first().json.code}` }}",
+              "rightValue": "={{ `${421}` }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "3fadea42-cf10-4249-becb-075c04ea3d66",
+              "leftValue": "={{ `${$('发起任务').first().json.code}` }}",
+              "rightValue": "={{ `${433}` }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "a207e82c-0251-464b-b429-c115a9de9eae",
+              "leftValue": "={{ `${$('发起任务').first().json.code}` }}",
+              "rightValue": "={{ `${413}` }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -704,
+        752
+      ],
+      "id": "f21650e3-155e-4102-baba-fe076c547dae",
+      "name": "If3"
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -432,
+        736
+      ],
+      "id": "4133ccd6-2f34-4248-9a15-9da2942e7c8b",
+      "name": "Wait1",
+      "webhookId": "53a38d73-d3ab-4aeb-adb4-56a8bc88410e"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"timbre_list\":[\n    {\n        \"voice_id\": \"{{ $json.voice_example_folder_path }}活力女声.flac\",\n        \"voice_description\": \"有活力的青年女性声音\"\n    },\n    {\n        \"voice_id\": \"{{ $json.voice_example_folder_path }}不羁男声.flac\",\n        \"voice_description\": \"潇洒不羁的青年男性声音\"\n    },\n    {\n        \"voice_id\": \"{{ $json.voice_example_folder_path }}沉稳男声.flac\",\n        \"voice_description\": \"沉稳可靠的青年男性声音\"\n    },\n    {\n        \"voice_id\": \"{{ $json.voice_example_folder_path }}成熟女声.flac\",\n        \"voice_description\": \"成熟稳重的中年女性声音\"\n    },\n    {\n        \"voice_id\": \"{{ $json.voice_example_folder_path }}聪明儿童男声.flac\",\n        \"voice_description\": \"聪明的男孩声音\"\n    },\n    {\n        \"voice_id\": \"{{ $json.voice_example_folder_path }}淡雅女声.flac\",\n        \"voice_description\": \"淡雅坚定的青年女性声音\"\n    },\n    {\n        \"voice_id\": \"{{ $json.voice_example_folder_path }}搞笑大爷.flac\",\n        \"voice_description\": \"搞笑的中年男性声音\"\n    },\n    {\n        \"voice_id\": \"{{ $json.voice_example_folder_path }}可爱儿童男声.flac\",\n        \"voice_description\": \"可爱的男孩声音\"\n    },\n    {\n        \"voice_id\": \"{{ $json.voice_example_folder_path }}可爱儿童女声.flac\",\n        \"voice_description\": \"可爱的女孩声音\"\n    },\n    {\n        \"voice_id\": \"{{ $json.voice_example_folder_path }}老年女声.flac\",\n        \"voice_description\": \"老年女性的声音\"\n    },\n    {\n        \"voice_id\": \"{{ $json.voice_example_folder_path }}少年男声.flac\",\n        \"voice_description\": \"少年男性声音\"\n    },\n    {\n        \"voice_id\": \"{{ $json.voice_example_folder_path }}甜美女声.flac\",\n        \"voice_description\": \"甜美的青年女性声音\"\n    },\n    {\n        \"voice_id\": \"{{ $json.voice_example_folder_path }}温暖少女.flac\",\n        \"voice_description\": \"温暖的少年女性声音\"\n    },\n    {\n        \"voice_id\": \"{{ $json.voice_example_folder_path }}温润男声.flac\",\n        \"voice_description\": \"温暖的青年男性声音\"\n    },\n]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -832,
+        0
+      ],
+      "id": "52caac7e-36b8-4191-94cd-edee9e521ac6",
+      "name": "音色列表"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "voice_timbre_list",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        1296,
+        -16
+      ],
+      "id": "3486fd86-c990-4b26-b84e-dfd23a5fc4b5",
+      "name": "Split Out2"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=你是一位角色配音挑选专家，你的任务是根据我给出的'音色列表'和'角色描述'，为每个角色选择一个最匹配的音色，以json格式返回。\n- ** trimbre_id字段取值为'角色描述中的'中的trimbre_id值；\n- ** voice_id的取值逻辑为：根据'角色描述'中每个元素的timbre_des字段，和'音色列表'中的音色描述voice_description字段进行匹配，挑选最适合的音色，然后将'音色列表'中的voice_id作为voice_id **\n- ** 音色要和角色形象匹配，例如性别、年龄、特质等，如果实在找不到完全匹配的，可以使用近似的音色，一定要为每个角色找到一个音色 **\n- 数组中每个元素要和'角色描述'一一对应。\n\n以下是'角色描述'：\n{{ JSON.stringify($('配置字段').item.json.voice_script.characters_timbre) }}\n\n以下是'音色列表'：\n{{ JSON.stringify( $json.timbre_list ) }}\n\n你的返回数据格式示例为：\n{\n\"data\":[\n    {\n    \"voice_id\": \"\",\n    \"timbre_id\": 0\n    }\n  ]\n}\n\n\n",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -624,
+        0
+      ],
+      "id": "52cf0f99-e869-45e3-b893-fc5eb0e53604",
+      "name": "音色匹配",
+      "retryOnFail": true,
+      "maxTries": 5
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n\"data\":[\n    {\n    \"voice_id\": \"\",\n    \"timbre_id\": 0\n    }\n  ]\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        -448,
+        224
+      ],
+      "id": "dc68ed0d-cd4b-4070-b169-f4021c5c6cb1",
+      "name": "Structured Output Parser5"
+    },
+    {
+      "parameters": {
+        "jsCode": "const voice_timbre_list = $('配置字段').first().json.voice_script.voice_scripts.map(item => {\n  const voice = $input.first().json.data.find(d => d.timbre_id === item.timbre_id)\n  return {\n    ...item,\n    \"voice_fileName\": voice.fileName \n  }\n})\n\nreturn {\n  \"voice_timbre_list\": voice_timbre_list\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1072,
+        -16
+      ],
+      "id": "b80ae631-aa6e-4a86-a31d-acb9f4bc4255",
+      "name": "Code in JavaScript3"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -1504,
+        464
+      ],
+      "id": "db69e551-7cea-41a7-a592-d6f74e37cf91",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "output.data",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        -272,
+        0
+      ],
+      "id": "971341cf-fe99-43a8-a82f-ba2dd91dd875",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -64,
+        0
+      ],
+      "id": "e8c20553-7fb8-4ea8-919a-550313536204",
+      "name": "Loop Over Items1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.runninghub.cn/task/openapi/upload",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "file",
+              "inputDataFieldName": "data"
+            },
+            {
+              "name": "fileType",
+              "value": "input"
+            },
+            {
+              "name": "apiKey",
+              "value": "={{ $('配置字段').item.json.runninghub_apikey }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        400,
+        16
+      ],
+      "id": "bdd6d24e-0f0d-45e9-ac21-5e71c8ae64d4",
+      "name": "上传克隆音频"
+    },
+    {
+      "parameters": {
+        "fileSelector": "={{ $json.voice_id }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        160,
+        16
+      ],
+      "id": "b59b8cfb-52ea-4c25-9990-98af363aa8ac",
+      "name": "Read/Write Files from Disk2"
+    },
+    {
+      "parameters": {
+        "jsCode": "return {\n  \"fileName\": $input.first().json.data.fileName,\n  \"voice_id\": $('Loop Over Items1').first().json.voice_id,\n  \"timbre_id\": $('Loop Over Items1').first().json.timbre_id\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        608,
+        16
+      ],
+      "id": "45d852b6-1b1f-42de-b091-76cb6ef778c5",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        832,
+        -16
+      ],
+      "id": "d7e69ab0-2cf5-4b72-b499-76c5093f4deb",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.runninghub.cn/task/openapi/outputs",
+        "sendBody": true,
+        "specifyBody": "=json",
+        "bodyParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "jsonBody": "={\n  \"apiKey\": \"{{ $('配置字段').first().json.runninghub_apikey }}\",\n  \"taskId\": \"{{ $('发起任务').item.json.data.taskId }}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        400,
+        480
+      ],
+      "id": "1602325a-20c6-4a04-8968-b51e25299d8a",
+      "name": "获取音频地址"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.data[0].fileUrl }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        624,
+        480
+      ],
+      "id": "f92a3630-e199-47b7-87f9-e28544abb675",
+      "name": "下载音频"
+    },
+    {
+      "parameters": {
+        "jsCode": "const data = {\n  voice_filepath: $('Read/Write Files from Disk').first().json.fileName,\n  text: $('Loop Over Items').first().json.text,\n  start_time: $('Loop Over Items').first().json.start_time,\n  end_time: $('Loop Over Items').first().json.end_time,\n  audio_length: $input.first().json.duration_ms\n}\n\nreturn data"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1280,
+        496
+      ],
+      "id": "6cfcad3b-d421-40a7-9d13-7209bf316baf",
+      "name": "Code in JavaScript1"
+    },
+    {
+      "parameters": {
+        "jsCode": "function getFlacDurationFromBinary(binaryData) {\n    try {\n        // 从 n8n 的 binary 数据获取 Buffer\n        const buffer = Buffer.from(binaryData.data, 'base64');\n        \n        // 验证 FLAC 文件头\n        if (buffer.toString('utf8', 0, 4) !== 'fLaC') {\n            return { error: '不是有效的 FLAC 文件' };\n        }\n        \n        let offset = 4;\n        \n        // 读取元数据块\n        while (offset < buffer.length) {\n            const blockHeader = buffer.readUInt32BE(offset);\n            offset += 4;\n            \n            const isLast = (blockHeader & 0x80000000) !== 0;\n            const blockType = (blockHeader & 0x7F000000) >>> 24;\n            const blockSize = blockHeader & 0x00FFFFFF;\n            \n            // STREAMINFO 块类型是 0\n            if (blockType === 0) {\n                // 采样率在偏移 10-12 (20位)\n                const sampleRateHigh = buffer.readUInt16BE(offset + 10);\n                const sampleRateLow = buffer.readUInt8(offset + 12);\n                const sampleRate = ((sampleRateHigh << 4) | (sampleRateLow >> 4)) & 0xFFFFF;\n                \n                // 总样本数在偏移 13-17 (36位)\n                const totalSamplesBytes = buffer.slice(offset + 13, offset + 18);\n                const totalSamples =\n                    ((totalSamplesBytes[0] & 0x0F) * 0x100000000) +\n                    (totalSamplesBytes[1] * 0x1000000) +\n                    (totalSamplesBytes[2] * 0x10000) +\n                    (totalSamplesBytes[3] * 0x100) +\n                    totalSamplesBytes[4];\n                \n                if (sampleRate > 0) {\n                    const duration = totalSamples / sampleRate;\n                    const minutes = Math.floor(duration / 60);\n                    const seconds = Math.floor(duration % 60);\n                    \n                    return {\n                        duration_seconds: duration,\n                        duration_formatted: `${minutes}:${seconds.toString().padStart(2, '0')}`,\n                        sample_rate: sampleRate,\n                        total_samples: totalSamples\n                    };\n                }\n                break;\n            }\n            \n            offset += blockSize;\n            if (isLast) break;\n        }\n        \n        return { error: '未找到 STREAMINFO 块' };\n        \n    } catch (error) {\n        return { error: error.message };\n    }\n}\n\n// 从上一个节点获取 binary 数据\nconst binaryData = $input.first().binary.data;\n\nconst result = getFlacDurationFromBinary(binaryData);\n\n// 返回结果\nreturn {\n  duration_ms: Math.floor(result.duration_seconds * 1000)\n};\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1088,
+        496
+      ],
+      "id": "22808369-e6af-4d3e-b97f-f98cbeb3a45e",
+      "name": "获取音频时长"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        -1504,
+        1088
+      ],
+      "id": "76608b3d-8d83-4093-b6d6-4a07368bb75c",
+      "name": "Aggregate1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+      "typeVersion": 1,
+      "position": [
+        -656,
+        208
+      ],
+      "id": "8514b8fa-2637-4204-94b9-52afdeb503e0",
+      "name": "DeepSeek Chat Model",
+      "credentials": {
+        "deepSeekApi": {
+          "id": "azKeo8dWCSJUyCgS",
+          "name": "DeepSeek account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "查询状态",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "查询状态": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "发起任务": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "获取音频地址",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "发起任务",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read/Write Files from Disk": {
+      "main": [
+        [
+          {
+            "node": "获取音频时长",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "配置字段": {
+      "main": [
+        [
+          {
+            "node": "音色列表",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "配置字段",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        []
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If3": {
+      "main": [
+        [
+          {
+            "node": "Wait1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait1": {
+      "main": [
+        [
+          {
+            "node": "发起任务",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "音色列表": {
+      "main": [
+        [
+          {
+            "node": "音色匹配",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "音色匹配": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser5": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "音色匹配",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript3": {
+      "main": [
+        [
+          {
+            "node": "Split Out2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out2": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "Aggregate1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "发起任务",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items1": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Read/Write Files from Disk2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "上传克隆音频": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read/Write Files from Disk2": {
+      "main": [
+        [
+          {
+            "node": "上传克隆音频",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "获取音频地址": {
+      "main": [
+        [
+          {
+            "node": "下载音频",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "下载音频": {
+      "main": [
+        [
+          {
+            "node": "Read/Write Files from Disk",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "获取音频时长": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate1": {
+      "main": [
+        [
+          {
+            "node": "执行结束返回字段",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DeepSeek Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "音色匹配",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "4b721124-4157-4265-b4b9-0e5a8ada1e85",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "164b6258852a751ffad2d91c0ef2b3e746122b3f527005a8ac87036f847eae21"
+  },
+  "id": "hwjfzLwBMnif5vET",
+  "tags": []
+}

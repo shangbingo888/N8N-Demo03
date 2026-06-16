@@ -1,0 +1,77 @@
+{
+  "name": "[Webhook] Mimo TTS",
+  "nodes": [
+    {
+      "id": "wh",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "mimo-tts",
+        "responseMode": "responseNode"
+      }
+    },
+    {
+      "id": "build",
+      "name": "Build Mimo Body",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [600, 300],
+      "parameters": {
+        "jsCode": "const text = $input.first().json.body.text;\nreturn [{ json: {\n  model: 'mimo-v2.5-tts',\n  messages: [\n    { role: 'user', content: '用自然亲切的语气播报' },\n    { role: 'assistant', content: text }\n  ],\n  audio: { format: 'wav', voice: '冰糖' },\n  stream: false\n}}];"
+      }
+    },
+    {
+      "id": "http",
+      "name": "Call Mimo API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [950, 300],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.xiaomimimo.com/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "api-key", "value": "sk-cr9xd5egbxqrme9uetq8uvzezkhyfhf3i09blnjnq398l468" },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "body": "={{ JSON.stringify($json) }}",
+        "options": {}
+      }
+    },
+    {
+      "id": "decode",
+      "name": "Decode Base64",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [1300, 300],
+      "parameters": {
+        "jsCode": "const r = $input.first().json;\nconst b64 = r.choices?.[0]?.message?.audio?.data;\nif (!b64) throw new Error('No audio: ' + JSON.stringify(r).substring(0, 500));\nconst buf = Buffer.from(b64, 'base64');\nreturn [{ json: { ok: true }, binary: { data: { data: buf, mimeType: 'audio/wav', fileName: 'speech.wav' } } }];"
+      }
+    },
+    {
+      "id": "respond",
+      "name": "Respond",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1650, 300],
+      "parameters": {
+        "respondWith": "binary",
+        "inputFieldName": "data"
+      }
+    }
+  ],
+  "connections": {
+    "Webhook": { "main": [[{ "node": "Build Mimo Body", "type": "main", "index": 0 }]] },
+    "Build Mimo Body": { "main": [[{ "node": "Call Mimo API", "type": "main", "index": 0 }]] },
+    "Call Mimo API": { "main": [[{ "node": "Decode Base64", "type": "main", "index": 0 }]] },
+    "Decode Base64": { "main": [[{ "node": "Respond", "type": "main", "index": 0 }]] }
+  },
+  "settings": { "saveManualExecutions": true }
+}

@@ -1,0 +1,1751 @@
+[
+  {
+    "name": "🤖Contact Agent",
+    "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Executeworkflow/1793_Executeworkflow_Airtabletool_Automation_Triggered.json",
+    "tags": [
+      "automation",
+      "n8n",
+      "production-ready",
+      "excellent",
+      "optimized"
+    ],
+    "description": "Automated workflow: 🤖Contact Agent. This workflow processes data and performs automated tasks.",
+    "node_count": 8,
+    "active": false,
+    "classification": {
+      "primary": "sub-workflow",
+      "primary_label": "子工作流调用 (Sub-Workflow)",
+      "secondary": [
+        "error-handling",
+        "data-processing",
+        "automation-triggers"
+      ],
+      "scores": {
+        "text-generation": 0,
+        "image-processing": 0,
+        "data-processing": 2,
+        "automation-triggers": 2,
+        "conditional-loop": 0,
+        "error-handling": 11,
+        "sub-workflow": 17
+      }
+    },
+    "trigger_nodes": [
+      {
+        "id": "ca88c05c-5a68-4a88-b15b-22398fb15d86",
+        "name": "When Executed by Another Workflow",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1.1,
+        "position": [
+          -240,
+          -80
+        ],
+        "has_credentials": false
+      }
+    ],
+    "ai_nodes": [],
+    "integration_nodes": [
+      {
+        "id": "6b3489a8-75be-461b-a4e4-9592a23a138f",
+        "name": "Get Contacts",
+        "type": "n8n-nodes-base.airtableTool",
+        "typeVersion": 2.1,
+        "position": [
+          40,
+          140
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "a0eb4ad0-4e60-41bd-8854-ad20942453a4",
+        "name": "Add or Update Contact",
+        "type": "n8n-nodes-base.airtableTool",
+        "typeVersion": 2.1,
+        "position": [
+          200,
+          140
+        ],
+        "has_credentials": true
+      }
+    ],
+    "data_nodes": [
+      {
+        "id": "c33b944e-cb4f-447b-ad1f-5e199ed078ac",
+        "name": "Response",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          500,
+          -160
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "2df9e0c0-3f4f-4a06-a36f-f552fe99e2b8",
+        "name": "Try Again",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          500,
+          20
+        ],
+        "has_credentials": false
+      }
+    ],
+    "control_nodes": [
+      {
+        "id": "789b640d-a981-43a1-ae88-9dbbd4de92c0",
+        "name": "OpenAI Chat Model",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.2,
+        "position": [
+          -140,
+          140
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "a3b9dae0-1458-4cb1-b17c-9349d41c03b5",
+        "name": "Contact Agent",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.7,
+        "position": [
+          -20,
+          -80
+        ],
+        "has_credentials": false
+      }
+    ],
+    "error_nodes": [
+      {
+        "id": "error-e74cc92e",
+        "name": "Error Handler",
+        "type": "n8n-nodes-base.stopAndError",
+        "typeVersion": 1,
+        "position": [
+          1000,
+          400
+        ],
+        "has_credentials": false
+      }
+    ],
+    "sticky_notes_count": 0,
+    "sticky_experiences": [],
+    "trigger_patterns": [
+      {
+        "name": "When Executed by Another Workflow",
+        "type": "executeWorkflowTrigger"
+      }
+    ],
+    "error_handling": [
+      {
+        "name": "Error Handler",
+        "type": "stopAndError"
+      }
+    ],
+    "settings": {
+      "executionOrder": "v1",
+      "saveManualExecutions": true,
+      "callerPolicy": "workflowsFromSameOwner",
+      "errorWorkflow": null,
+      "timezone": "UTC",
+      "executionTimeout": 3600,
+      "maxExecutions": 1000,
+      "retryOnFail": true,
+      "retryCount": 3,
+      "retryDelay": 1000
+    }
+  },
+  {
+    "name": "🤖Email Agent",
+    "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Gmailtool/1795_Gmailtool_Executeworkflow_Send_Triggered.json",
+    "tags": [
+      "automation",
+      "n8n",
+      "production-ready",
+      "excellent",
+      "optimized"
+    ],
+    "description": "Automated workflow: 🤖Email Agent. This workflow processes data and performs automated tasks.",
+    "node_count": 13,
+    "active": false,
+    "classification": {
+      "primary": "sub-workflow",
+      "primary_label": "子工作流调用 (Sub-Workflow)",
+      "secondary": [
+        "error-handling",
+        "data-processing",
+        "automation-triggers"
+      ],
+      "scores": {
+        "text-generation": 0,
+        "image-processing": 0,
+        "data-processing": 2,
+        "automation-triggers": 2,
+        "conditional-loop": 0,
+        "error-handling": 11,
+        "sub-workflow": 17
+      }
+    },
+    "trigger_nodes": [
+      {
+        "id": "053be115-2ecf-4d22-8f7f-93ad7271bf80",
+        "name": "When Executed by Another Workflow",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1.1,
+        "position": [
+          800,
+          400
+        ],
+        "has_credentials": false
+      }
+    ],
+    "ai_nodes": [],
+    "integration_nodes": [
+      {
+        "id": "9e043f46-3e1a-431a-9495-b34e251de785",
+        "name": "Send Email",
+        "type": "n8n-nodes-base.gmailTool",
+        "typeVersion": 2.1,
+        "position": [
+          720,
+          760
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "fc850981-86fa-4714-a47a-27d5ed2f4944",
+        "name": "Get Emails",
+        "type": "n8n-nodes-base.gmailTool",
+        "typeVersion": 2.1,
+        "position": [
+          1360,
+          860
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "c460b943-04a8-4598-9e70-be4f5d4d2303",
+        "name": "Create Draft",
+        "type": "n8n-nodes-base.gmailTool",
+        "typeVersion": 2.1,
+        "position": [
+          1200,
+          880
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "500202a6-a9be-45ac-be3d-33e0928fb830",
+        "name": "Email Reply",
+        "type": "n8n-nodes-base.gmailTool",
+        "typeVersion": 2.1,
+        "position": [
+          880,
+          820
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "b05ce6a1-ae44-4d46-a32b-c6d2250794b1",
+        "name": "Get Labels",
+        "type": "n8n-nodes-base.gmailTool",
+        "typeVersion": 2.1,
+        "position": [
+          1480,
+          800
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "88c2635f-5088-4f0c-b5f8-c4a5f73ffc79",
+        "name": "Label Emails",
+        "type": "n8n-nodes-base.gmailTool",
+        "typeVersion": 2.1,
+        "position": [
+          1040,
+          860
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "8f3771c3-cf3d-4481-8a6d-4ead60291649",
+        "name": "Mark Unread",
+        "type": "n8n-nodes-base.gmailTool",
+        "typeVersion": 2.1,
+        "position": [
+          1620,
+          740
+        ],
+        "has_credentials": true
+      }
+    ],
+    "data_nodes": [
+      {
+        "id": "0505c1f0-53d1-4988-843f-eb9eac2d7856",
+        "name": "Try Again",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1640,
+          500
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "97393469-bde9-4a13-8d89-68ac6a4305db",
+        "name": "Success",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1640,
+          320
+        ],
+        "has_credentials": false
+      }
+    ],
+    "control_nodes": [
+      {
+        "id": "c98bcc4d-20a9-4b29-a4aa-f6b6e7bb1f1b",
+        "name": "OpenAI Chat Model",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          560,
+          680
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "0f7ba4a7-44b1-41ce-8904-9a78e8e03be4",
+        "name": "Email Agent",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.6,
+        "position": [
+          1040,
+          400
+        ],
+        "has_credentials": false
+      }
+    ],
+    "error_nodes": [
+      {
+        "id": "error-9dab0292",
+        "name": "Error Handler",
+        "type": "n8n-nodes-base.stopAndError",
+        "typeVersion": 1,
+        "position": [
+          1000,
+          400
+        ],
+        "has_credentials": false
+      }
+    ],
+    "sticky_notes_count": 0,
+    "sticky_experiences": [],
+    "trigger_patterns": [
+      {
+        "name": "When Executed by Another Workflow",
+        "type": "executeWorkflowTrigger"
+      }
+    ],
+    "error_handling": [
+      {
+        "name": "Error Handler",
+        "type": "stopAndError"
+      }
+    ],
+    "settings": {
+      "executionOrder": "v1",
+      "saveManualExecutions": true,
+      "callerPolicy": "workflowsFromSameOwner",
+      "errorWorkflow": null,
+      "timezone": "UTC",
+      "executionTimeout": 3600,
+      "maxExecutions": 1000,
+      "retryOnFail": true,
+      "retryCount": 3,
+      "retryDelay": 1000
+    }
+  },
+  {
+    "name": "Lmchatopenai Workflow",
+    "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Googlebigquery/0806_Googlebigquery_Stickynote_Automate_Triggered.json",
+    "tags": [
+      "automation",
+      "n8n",
+      "production-ready",
+      "excellent",
+      "optimized"
+    ],
+    "description": "Automated workflow: Lmchatopenai Workflow. This workflow integrates 10 different services: stickyNote, code, agent, stopAndError, lmChatOpenAi. It contains 14 nodes and follows best practices for error handling and security.",
+    "node_count": 13,
+    "active": false,
+    "classification": {
+      "primary": "sub-workflow",
+      "primary_label": "子工作流调用 (Sub-Workflow)",
+      "secondary": [
+        "error-handling",
+        "data-processing",
+        "text-generation"
+      ],
+      "scores": {
+        "text-generation": 4,
+        "image-processing": 0,
+        "data-processing": 11,
+        "automation-triggers": 2,
+        "conditional-loop": 2,
+        "error-handling": 13,
+        "sub-workflow": 17
+      }
+    },
+    "trigger_nodes": [
+      {
+        "id": "137e4dbc-db8d-4ec7-a3e0-478dde6ef27c",
+        "name": "Trigger Executed by the AI Tool",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1.1,
+        "position": [
+          960,
+          180
+        ],
+        "has_credentials": false
+      }
+    ],
+    "ai_nodes": [],
+    "integration_nodes": [
+      {
+        "id": "bede0624-8923-4af0-8adc-8be22d556066",
+        "name": "Query Database",
+        "type": "n8n-nodes-base.googleBigQuery",
+        "typeVersion": 2.1,
+        "position": [
+          1520,
+          180
+        ],
+        "has_credentials": false
+      }
+    ],
+    "data_nodes": [],
+    "control_nodes": [
+      {
+        "id": "53b36910-966f-45ba-a425-a3260a55059f",
+        "name": "OpenAI Chat Model",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.2,
+        "position": [
+          340,
+          480
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "177235e8-c925-43d0-9695-10f072e26350",
+        "name": "AI Control Tower Agent",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.8,
+        "position": [
+          380,
+          240
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "c5967f58-00e8-4f03-9110-913547f7ab9c",
+        "name": "Call Query Tool",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 2,
+        "position": [
+          640,
+          440
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "7c86fda0-116c-47ad-aaf5-8b83d2c083c6",
+        "name": "Chat Memory",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.3,
+        "position": [
+          480,
+          480
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "e1408ac1-24da-4d38-8fdf-c110a54d3f55",
+        "name": "Chat with the User",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.1,
+        "position": [
+          -60,
+          240
+        ],
+        "has_credentials": false
+      }
+    ],
+    "error_nodes": [
+      {
+        "id": "error-7fe92cc3",
+        "name": "Error Handler",
+        "type": "n8n-nodes-base.stopAndError",
+        "typeVersion": 1,
+        "position": [
+          1000,
+          400
+        ],
+        "has_credentials": false
+      }
+    ],
+    "sticky_notes_count": 4,
+    "sticky_experiences": [
+      "### 1. Workflow Trigger with Chat\nThis workflow uses a simple chat window as a trigger. You can replace it with Telegram, Slack, Teams or a webhook trigger linked to your chat.\n\n#### How to setup?\n*Nothing to do.*\n",
+      "### 2. AI Agent equipped with the query tool\nIn order to have more control on the input of the BigQuery node, we don't use the BigQuery tool. Instead we have a set of nodes to retrieve the SQL query, clean it and send it to a BigQuery Node.\n\n#### How to setup?\n- **AI Agent with the Chat Model**:\n   1. Add a **chat model** with the required credentials *(Example: Open AI 4o-mini)*\n   2. Adapt the **name of your BigQuery table** in the system prompt *(Example: transports.shipments)*\n   3. Adapt th",
+      "### 3. Big Query Workflow\nExecute the SQL query generated by the AI agent in Big Query. Retrieve the results and send them back to the AI Agent.\n\n### How to set up?\n- Paste these nodes in a separate workflow so you can use it with multiple agents.\n- **Google BigQuery API**:\n   1. Add your Google Translate API credentials\n   2. The project in which your table is located\n  [Learn more about the Google BigQuery Node]({{ $env.WEBHOOK_URL }}\n",
+      "### 4. Do you need more details?\nFind a step-by-step guide in this tutorial\n![Guide]({{ $env.WEBHOOK_URL }}\n[🎥 Watch My Tutorial]({{ $env.WEBHOOK_URL }}"
+    ],
+    "trigger_patterns": [
+      {
+        "name": "Trigger Executed by the AI Tool",
+        "type": "executeWorkflowTrigger"
+      }
+    ],
+    "error_handling": [
+      {
+        "name": "Error Handler",
+        "type": "stopAndError"
+      }
+    ],
+    "settings": {
+      "executionOrder": "v1",
+      "saveManualExecutions": true,
+      "callerPolicy": "workflowsFromSameOwner",
+      "errorWorkflow": null,
+      "timezone": "UTC",
+      "executionTimeout": 3600,
+      "maxExecutions": 1000,
+      "retryOnFail": true,
+      "retryCount": 3,
+      "retryDelay": 1000
+    }
+  },
+  {
+    "name": "🤖Calendar Agent",
+    "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Googlecalendartool/1792_Googlecalendartool_Executeworkflow_Automation_Triggered.json",
+    "tags": [
+      "automation",
+      "n8n",
+      "production-ready",
+      "excellent",
+      "optimized"
+    ],
+    "description": "Automated workflow: 🤖Calendar Agent. This workflow processes data and performs automated tasks.",
+    "node_count": 11,
+    "active": false,
+    "classification": {
+      "primary": "sub-workflow",
+      "primary_label": "子工作流调用 (Sub-Workflow)",
+      "secondary": [
+        "error-handling",
+        "data-processing",
+        "automation-triggers"
+      ],
+      "scores": {
+        "text-generation": 0,
+        "image-processing": 0,
+        "data-processing": 2,
+        "automation-triggers": 2,
+        "conditional-loop": 0,
+        "error-handling": 11,
+        "sub-workflow": 17
+      }
+    },
+    "trigger_nodes": [
+      {
+        "id": "8abc645d-345e-4113-966d-0d3373f4141b",
+        "name": "When Executed by Another Workflow",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1.1,
+        "position": [
+          740,
+          280
+        ],
+        "has_credentials": false
+      }
+    ],
+    "ai_nodes": [],
+    "integration_nodes": [
+      {
+        "id": "2d26c039-4756-4a86-b09c-1160b7cd6022",
+        "name": "Create Event with Attendee",
+        "type": "n8n-nodes-base.googleCalendarTool",
+        "typeVersion": 1.3,
+        "position": [
+          1440,
+          540
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "8bd1e7c7-98a0-4cc1-96e3-cfd2107475a9",
+        "name": "Create Event",
+        "type": "n8n-nodes-base.googleCalendarTool",
+        "typeVersion": 1.3,
+        "position": [
+          1300,
+          640
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "b148f124-e2b4-4e47-8053-45d03d77ff6e",
+        "name": "Get Events",
+        "type": "n8n-nodes-base.googleCalendarTool",
+        "typeVersion": 1.3,
+        "position": [
+          1160,
+          680
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "923acc0e-85b5-44e6-a063-f1642f5108b3",
+        "name": "Delete Event",
+        "type": "n8n-nodes-base.googleCalendarTool",
+        "typeVersion": 1.3,
+        "position": [
+          1020,
+          660
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "41941ae4-9cc7-4c96-8e4f-957804fc8be2",
+        "name": "Update Event",
+        "type": "n8n-nodes-base.googleCalendarTool",
+        "typeVersion": 1.3,
+        "position": [
+          880,
+          620
+        ],
+        "has_credentials": true
+      }
+    ],
+    "data_nodes": [
+      {
+        "id": "ec5518af-86f7-4f41-9682-ddddc621f356",
+        "name": "Try Again",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1660,
+          380
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "fc889778-08ca-431e-8109-7133110aa0db",
+        "name": "Success",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1660,
+          180
+        ],
+        "has_credentials": false
+      }
+    ],
+    "control_nodes": [
+      {
+        "id": "a34e2d84-ae30-4bfe-afa9-23dbd5dd3845",
+        "name": "OpenAI Chat Model",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          740,
+          540
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "47814b5d-390b-4d4c-b6ec-578075200739",
+        "name": "Calendar Agent",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.6,
+        "position": [
+          980,
+          280
+        ],
+        "has_credentials": false
+      }
+    ],
+    "error_nodes": [
+      {
+        "id": "error-cd00c98a",
+        "name": "Error Handler",
+        "type": "n8n-nodes-base.stopAndError",
+        "typeVersion": 1,
+        "position": [
+          1000,
+          400
+        ],
+        "has_credentials": false
+      }
+    ],
+    "sticky_notes_count": 0,
+    "sticky_experiences": [],
+    "trigger_patterns": [
+      {
+        "name": "When Executed by Another Workflow",
+        "type": "executeWorkflowTrigger"
+      }
+    ],
+    "error_handling": [
+      {
+        "name": "Error Handler",
+        "type": "stopAndError"
+      }
+    ],
+    "settings": {
+      "executionOrder": "v1",
+      "saveManualExecutions": true,
+      "callerPolicy": "workflowsFromSameOwner",
+      "errorWorkflow": null,
+      "timezone": "UTC",
+      "executionTimeout": 3600,
+      "maxExecutions": 1000,
+      "retryOnFail": true,
+      "retryCount": 3,
+      "retryDelay": 1000
+    }
+  },
+  {
+    "name": "Lmchatopenai Workflow",
+    "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Http/0636_HTTP_Stickynote_Create_Webhook.json",
+    "tags": [
+      "automation",
+      "n8n",
+      "production-ready",
+      "excellent",
+      "optimized"
+    ],
+    "description": "Automated workflow: Lmchatopenai Workflow. This workflow integrates 12 different services: textClassifier, stickyNote, httpRequest, agent, set. It contains 23 nodes and follows best practices for error handling and security.",
+    "node_count": 19,
+    "active": false,
+    "classification": {
+      "primary": "sub-workflow",
+      "primary_label": "子工作流调用 (Sub-Workflow)",
+      "secondary": [
+        "text-generation",
+        "automation-triggers",
+        "conditional-loop"
+      ],
+      "scores": {
+        "text-generation": 4,
+        "image-processing": 0,
+        "data-processing": 0,
+        "automation-triggers": 2,
+        "conditional-loop": 2,
+        "error-handling": 2,
+        "sub-workflow": 31
+      }
+    },
+    "trigger_nodes": [
+      {
+        "id": "49120164-4ffc-4fe0-8ee3-4ae13bda6c8d",
+        "name": "Execute \"Generate a chart\" tool",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1,
+        "position": [
+          1320,
+          1140
+        ],
+        "has_credentials": false
+      }
+    ],
+    "ai_nodes": [],
+    "integration_nodes": [
+      {
+        "id": "0fc6eaf9-8521-44ec-987e-73644d0cba79",
+        "name": "OpenAI - Generate Chart definition with Structured Output",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          1620,
+          1140
+        ],
+        "has_credentials": true
+      }
+    ],
+    "data_nodes": [
+      {
+        "id": "8016a925-7b31-4a49-b5e1-56cf9b5fa7b3",
+        "name": "Set response",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1860,
+          1140
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "2a02c5ee-11e1-4559-bbfb-ea483e914e52",
+        "name": "Set Text output",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          2200,
+          480
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "3b0f455a-ab1d-4dcd-ae97-708218c6c4b0",
+        "name": "Set Text + Chart output",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          2540,
+          280
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "a843845d-e010-4a09-ab50-e169beb67811",
+        "name": "User question + Agent initial response",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          2200,
+          280
+        ],
+        "has_credentials": false
+      }
+    ],
+    "control_nodes": [
+      {
+        "id": "50695e7f-3334-4124-a46e-1b3819412e26",
+        "name": "OpenAI Chat Model",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          1260,
+          560
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "9a2b8eca-5303-4eb0-8115-b0d81bfd1d7c",
+        "name": "When chat message received",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.1,
+        "position": [
+          880,
+          380
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "29e2381a-7650-4e9a-a97f-26c7550ff7ba",
+        "name": "AI Agent",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.7,
+        "position": [
+          1400,
+          380
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "c5fdff53-29fa-474e-abcc-34fa4009250c",
+        "name": "Window Buffer Memory",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.2,
+        "position": [
+          1560,
+          540
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "d8bf0767-faf0-4030-b325-08315188adcb",
+        "name": "OpenAI Chat Model Classifier",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          1900,
+          540
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "256cb28b-0d83-4f6d-bb11-33745c9efa4a",
+        "name": "Text Classifier - Chart required?",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          1800,
+          380
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "12c9dc38-c0fe-4f4c-a101-ec1ff7ea9048",
+        "name": "Information Extractor - User question",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          1060,
+          380
+        ],
+        "has_credentials": false
+      }
+    ],
+    "error_nodes": [],
+    "sticky_notes_count": 5,
+    "sticky_experiences": [
+      "### Overview  \n- This workflow aims to provide data visualization capabilities to a native SQL Agent.  \n- Together, they can help foster data analysis and data visualization within a team.  \n- It uses the native SQL Agent that works well and adds visualization capabilities thanks to OpenAI’s Structured Output and Quickchart.io.  \n\n### How it works  \n1. Information Extraction:  \n   - The Information Extractor identifies and extracts the user's question.  \n   - If the question includes a visualiza",
+      "## Generate a Quickchart definition \n[Original template]({{ $env.WEBHOOK_URL }}\n\n**HTTP Request node**\n- Send the chart query to OpenAI, with a defined JSON response format - *using HTTP Request node as it has not yet been implemented in the OpenAI nodes*\n- The JSON structure is based on ChartJS and Quickchart.io definitions, that let us create nice looking graphs.\n- The output is a JSON containing the chart definition that is passed to the next node.\n\n**Set Response node**\n- Adds the chart defi",
+      "### Information Extractor \n- This Information Extractor is added to extract the user's question\n- In some cases, if the question contains a visualization aspect, the SQL Agent may not responding accurately.\n\n### SQL Agent\n- This SQL Agent is connected to a Database.\n- It queries the Database for each user message.\n- In this example, the prompt has been slightly changed to address an issue with querying a Supabase DB. Feel free to change the `Prefix Prompt` to suit your needs.\n- This example uses",
+      "### Respond with a text only or also include a chart \n- The text classifier determines if the response from the SQL Agent would benefit from a chart\n- If it does, then it executes the subworkflow to dynamically generate a chart, and append the chart to the response from the SQL Agent\n- If it doesn't, then the SQL Agent response is directly outputted. "
+    ],
+    "trigger_patterns": [
+      {
+        "name": "Execute \"Generate a chart\" tool",
+        "type": "executeWorkflowTrigger"
+      }
+    ],
+    "error_handling": [],
+    "settings": {
+      "executionOrder": "v1",
+      "saveManualExecutions": true,
+      "callerPolicy": "workflowsFromSameOwner",
+      "errorWorkflow": null,
+      "timezone": "UTC",
+      "executionTimeout": 3600,
+      "maxExecutions": 1000,
+      "retryOnFail": true,
+      "retryCount": 3,
+      "retryDelay": 1000
+    }
+  },
+  {
+    "name": "AI Agent with charts capabilities using OpenAI Structured Output",
+    "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Http/1112_HTTP_Stickynote_Automation_Webhook.json",
+    "tags": [
+      "automation",
+      "n8n",
+      "production-ready",
+      "excellent",
+      "optimized"
+    ],
+    "description": "Automated workflow: AI Agent with charts capabilities using OpenAI Structured Output. This workflow integrates 10 different services: stickyNote, httpRequest, agent, set, stopAndError. It contains 14 nodes and follows best practices for error handling and security.",
+    "node_count": 11,
+    "active": false,
+    "classification": {
+      "primary": "sub-workflow",
+      "primary_label": "子工作流调用 (Sub-Workflow)",
+      "secondary": [
+        "text-generation",
+        "automation-triggers",
+        "conditional-loop"
+      ],
+      "scores": {
+        "text-generation": 2,
+        "image-processing": 0,
+        "data-processing": 0,
+        "automation-triggers": 2,
+        "conditional-loop": 2,
+        "error-handling": 2,
+        "sub-workflow": 17
+      }
+    },
+    "trigger_nodes": [
+      {
+        "id": "d9ea85d7-3a56-4a95-88c8-60e5c95014e7",
+        "name": "Execute \"Generate a chart\" tool",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1,
+        "position": [
+          580,
+          1100
+        ],
+        "has_credentials": false
+      }
+    ],
+    "ai_nodes": [],
+    "integration_nodes": [
+      {
+        "id": "68d538f7-acce-447f-9ab1-6975639e05f7",
+        "name": "OpenAI - Generate Chart definition with Structured Output",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          880,
+          1100
+        ],
+        "has_credentials": true
+      }
+    ],
+    "data_nodes": [
+      {
+        "id": "0fd4ad08-ad85-4d0b-b75f-0e59f789cbfd",
+        "name": "Set response",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1120,
+          1100
+        ],
+        "has_credentials": false
+      }
+    ],
+    "control_nodes": [
+      {
+        "id": "4b7c314a-d7c5-46cb-af6f-b3ff02a182b7",
+        "name": "OpenAI Chat Model",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          980,
+          600
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "cf4ffa49-8830-4db2-9a7d-b8931e806947",
+        "name": "Window Buffer Memory",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.2,
+        "position": [
+          1120,
+          600
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "22d36226-ca37-4ccc-a2d6-826b78c2f1f3",
+        "name": "Generate a chart",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.1,
+        "position": [
+          1260,
+          600
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "7793a567-c4d4-4745-83c9-adf5397755e9",
+        "name": "AI Agent",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.6,
+        "position": [
+          1020,
+          400
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "71bd2cb5-7b20-4d83-adba-c1fd57511155",
+        "name": "When chat message received",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.1,
+        "position": [
+          840,
+          400
+        ],
+        "has_credentials": false
+      }
+    ],
+    "error_nodes": [],
+    "sticky_notes_count": 3,
+    "sticky_experiences": [
+      "## Workflow: AI Agent with charts capabilities using OpenAI Structured Output\n\n**Overview**\n- This workflow is a experiment to integrate charts into an AI Agent\n- The AI Agent has normal AI conversation and can invoke a tool to integrate a graph in the conversation.\n- It uses OpenAI Structured Output to generate a chart definition according to Quickchart specifications.\n\n\n**How it works**\n- Activate the workflow\n- Start chatting with the AI Agent.\n- When the AI Agent detects that the user needs ",
+      "## Generate a Quickchart definition\n\n**HTTP Request node**\n- Send the chart query to OpenAI, with a defined JSON response format - *using HTTP Request node as it has not yet been implemented in the OpenAI nodes*\n- The JSON structure is based on ChartJS and Quickchart.io definitions, that let us create nice looking graphs.\n- The output is a JSON containing the chart definition that is passed to the next node.\n\n**Set Response node**\n- Adds the chart definition at the end of a Quickchart.io URL ([s",
+      "### Chat Agent\n- This is agent is mostly here to demonstrate how to use the sub workflow.\n- This is a basic agent with a tool \"generate a chart\"\n- The tool calls the sub-workflow\n- The sub-workflow responds with the Quickchart URL that is displayed in the conversation"
+    ],
+    "trigger_patterns": [
+      {
+        "name": "Execute \"Generate a chart\" tool",
+        "type": "executeWorkflowTrigger"
+      }
+    ],
+    "error_handling": [],
+    "settings": {
+      "executionOrder": "v1",
+      "saveManualExecutions": true,
+      "callerPolicy": "workflowsFromSameOwner",
+      "errorWorkflow": null,
+      "timezone": "UTC",
+      "executionTimeout": 3600,
+      "maxExecutions": 1000,
+      "retryOnFail": true,
+      "retryCount": 3,
+      "retryDelay": 1000
+    }
+  },
+  {
+    "name": "Lmchatopenai Workflow",
+    "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Http/1737_HTTP_Stickynote_Automation_Webhook.json",
+    "tags": [
+      "automation",
+      "n8n",
+      "production-ready",
+      "excellent",
+      "optimized"
+    ],
+    "description": "Automated workflow: Lmchatopenai Workflow. This workflow integrates 12 different services: textClassifier, stickyNote, httpRequest, agent, set. It contains 23 nodes and follows best practices for error handling and security.",
+    "node_count": 19,
+    "active": false,
+    "classification": {
+      "primary": "sub-workflow",
+      "primary_label": "子工作流调用 (Sub-Workflow)",
+      "secondary": [
+        "text-generation",
+        "automation-triggers",
+        "conditional-loop"
+      ],
+      "scores": {
+        "text-generation": 4,
+        "image-processing": 0,
+        "data-processing": 0,
+        "automation-triggers": 2,
+        "conditional-loop": 2,
+        "error-handling": 2,
+        "sub-workflow": 31
+      }
+    },
+    "trigger_nodes": [
+      {
+        "id": "49120164-4ffc-4fe0-8ee3-4ae13bda6c8d",
+        "name": "Execute \"Generate a chart\" tool",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1,
+        "position": [
+          1320,
+          1140
+        ],
+        "has_credentials": false
+      }
+    ],
+    "ai_nodes": [],
+    "integration_nodes": [
+      {
+        "id": "0fc6eaf9-8521-44ec-987e-73644d0cba79",
+        "name": "OpenAI - Generate Chart definition with Structured Output",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          1620,
+          1140
+        ],
+        "has_credentials": true
+      }
+    ],
+    "data_nodes": [
+      {
+        "id": "8016a925-7b31-4a49-b5e1-56cf9b5fa7b3",
+        "name": "Set response",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1860,
+          1140
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "2a02c5ee-11e1-4559-bbfb-ea483e914e52",
+        "name": "Set Text output",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          2200,
+          480
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "3b0f455a-ab1d-4dcd-ae97-708218c6c4b0",
+        "name": "Set Text + Chart output",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          2540,
+          280
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "a843845d-e010-4a09-ab50-e169beb67811",
+        "name": "User question + Agent initial response",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          2200,
+          280
+        ],
+        "has_credentials": false
+      }
+    ],
+    "control_nodes": [
+      {
+        "id": "50695e7f-3334-4124-a46e-1b3819412e26",
+        "name": "OpenAI Chat Model",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          1260,
+          560
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "9a2b8eca-5303-4eb0-8115-b0d81bfd1d7c",
+        "name": "When chat message received",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.1,
+        "position": [
+          880,
+          380
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "29e2381a-7650-4e9a-a97f-26c7550ff7ba",
+        "name": "AI Agent",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.7,
+        "position": [
+          1400,
+          380
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "c5fdff53-29fa-474e-abcc-34fa4009250c",
+        "name": "Window Buffer Memory",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.2,
+        "position": [
+          1560,
+          540
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "d8bf0767-faf0-4030-b325-08315188adcb",
+        "name": "OpenAI Chat Model Classifier",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          1900,
+          540
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "256cb28b-0d83-4f6d-bb11-33745c9efa4a",
+        "name": "Text Classifier - Chart required?",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          1800,
+          380
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "12c9dc38-c0fe-4f4c-a101-ec1ff7ea9048",
+        "name": "Information Extractor - User question",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          1060,
+          380
+        ],
+        "has_credentials": false
+      }
+    ],
+    "error_nodes": [],
+    "sticky_notes_count": 5,
+    "sticky_experiences": [
+      "### Overview \n- This workflow aims to provide data visualization capabilities to a native SQL Agent. \n- Together, they can help foster data analysis and data visualization within a team. \n- It uses the native SQL Agent that works well and adds visualization capabilities thanks to OpenAI’s Structured Output and Quickchart.io. \n\n### How it works \n1. Information Extraction: \n - The Information Extractor identifies and extracts the user's question. \n - If the question includes a visualization aspect",
+      "## Generate a Quickchart definition \n[Original template]({{ $env.WEBHOOK_URL }}\n\n**HTTP Request node**\n- Send the chart query to OpenAI, with a defined JSON response format - *using HTTP Request node as it has not yet been implemented in the OpenAI nodes*\n- The JSON structure is based on ChartJS and Quickchart.io definitions, that let us create nice looking graphs.\n- The output is a JSON containing the chart definition that is passed to the next node.\n\n**Set Response node**\n- Adds the chart defi",
+      "### Information Extractor \n- This Information Extractor is added to extract the user's question\n- In some cases, if the question contains a visualization aspect, the SQL Agent may not responding accurately.\n\n### SQL Agent\n- This SQL Agent is connected to a Database.\n- It queries the Database for each user message.\n- In this example, the prompt has been slightly changed to address an issue with querying a Supabase DB. Feel free to change the `Prefix Prompt` to suit your needs.\n- This example uses",
+      "### Respond with a text only or also include a chart \n- The text classifier determines if the response from the SQL Agent would benefit from a chart\n- If it does, then it executes the subworkflow to dynamically generate a chart, and append the chart to the response from the SQL Agent\n- If it doesn't, then the SQL Agent response is directly outputted. "
+    ],
+    "trigger_patterns": [
+      {
+        "name": "Execute \"Generate a chart\" tool",
+        "type": "executeWorkflowTrigger"
+      }
+    ],
+    "error_handling": [],
+    "settings": {
+      "executionOrder": "v1",
+      "saveManualExecutions": true,
+      "callerPolicy": "workflowsFromSameOwner",
+      "errorWorkflow": null,
+      "timezone": "UTC",
+      "executionTimeout": 3600,
+      "maxExecutions": 1000,
+      "retryOnFail": true,
+      "retryCount": 3,
+      "retryDelay": 1000
+    }
+  },
+  {
+    "name": "Vision-Based AI Agent Scraper - with Google Sheets, ScrapingBee, and Gemini",
+    "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Splitout/1603_Splitout_Manual_Automation_Webhook.json",
+    "tags": [
+      "automation",
+      "n8n",
+      "production-ready",
+      "excellent",
+      "optimized"
+    ],
+    "description": "Automated workflow: Vision-Based AI Agent Scraper - with Google Sheets, ScrapingBee, and Gemini. This workflow integrates 13 different services: stickyNote, httpRequest, markdown, lmChatGoogleGemini, agent. It contains 36 nodes and follows best practices for error handling and security.",
+    "node_count": 29,
+    "active": false,
+    "classification": {
+      "primary": "sub-workflow",
+      "primary_label": "子工作流调用 (Sub-Workflow)",
+      "secondary": [
+        "data-processing",
+        "automation-triggers",
+        "conditional-loop"
+      ],
+      "scores": {
+        "text-generation": 2,
+        "image-processing": 0,
+        "data-processing": 16,
+        "automation-triggers": 13,
+        "conditional-loop": 13,
+        "error-handling": 2,
+        "sub-workflow": 17
+      }
+    },
+    "trigger_nodes": [
+      {
+        "id": "90ac8845-342e-4fdb-ae09-cb9d169b4119",
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          160,
+          460
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "79f7b4db-57f1-4004-88b3-51cfcfe9884e",
+        "name": "HTML-Scraping Tool",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1,
+        "position": [
+          1480,
+          1360
+        ],
+        "has_credentials": false
+      }
+    ],
+    "ai_nodes": [],
+    "integration_nodes": [
+      {
+        "id": "7a2bfc41-1527-448d-a52c-794ca4c9e7ee",
+        "name": "ScrapingBee- Get page HTML",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          2280,
+          1360
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "1a59a962-f483-4a27-8686-607a7d375584",
+        "name": "Google Sheets - Get list of URLs",
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.5,
+        "position": [
+          620,
+          460
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "01cbc1eb-2910-49b1-89e6-d32d340e5273",
+        "name": "ScrapingBee - Get page screenshot",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          1440,
+          460
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "226520d1-2edb-4ade-9940-0bae461eb161",
+        "name": "Google Sheets - Create Rows",
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.5,
+        "position": [
+          3340,
+          460
+        ],
+        "has_credentials": true
+      }
+    ],
+    "data_nodes": [
+      {
+        "id": "2054612e-f3e1-4633-9c1a-0644ae07613c",
+        "name": "Split Out",
+        "type": "n8n-nodes-base.splitOut",
+        "typeVersion": 1,
+        "position": [
+          2880,
+          460
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "82dcdc23-3d71-4281-a3d0-fdbc27327dd0",
+        "name": "Set fields",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1040,
+          460
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "f2615921-d060-410b-aef4-cd484edb2897",
+        "name": "Set fields - from AI agent query",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1880,
+          1360
+        ],
+        "has_credentials": false
+      }
+    ],
+    "control_nodes": [
+      {
+        "id": "a0ab6dcb-ffad-40bf-8a22-f2e152e69b00",
+        "name": "Structured Output Parser",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.2,
+        "position": [
+          2480,
+          880
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "34f50603-a969-425d-8a1a-ec8031a5cdfd",
+        "name": "Google Gemini Chat Model",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          1800,
+          900
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "9fe8ee54-755a-44f2-a2bf-a695e3754b3d",
+        "name": "HTML-based Scraping Tool",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.2,
+        "position": [
+          2160,
+          900
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "2c142537-d8fe-4fc1-9758-6a3538c43fc0",
+        "name": "Vision-based Scraping Agent",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.7,
+        "position": [
+          2040,
+          460
+        ],
+        "has_credentials": false
+      }
+    ],
+    "error_nodes": [],
+    "sticky_notes_count": 15,
+    "sticky_experiences": [
+      "## Trigger\nThe default trigger is **When clicking ‘Test workflow’**, meaning the workflow will **need to be triggered manually**. \n\nYou can replace this by selecting a **trigger of your choice**.\n",
+      "## Google Sheets - List of URLs\n\nThe Google Sheet will contain two sheets:  \n- **List of URLs to** scrape  \n- **Results** page, populated with the scraping results and AI-extracted data.\n\nHere is an **[example Google Sheet]({{ $env.WEBHOOK_URL }} you can use. The \"Results\" sheet is pre-configured for e-commerce website scraping. You can adapt it to your specific needs, but remember to adjust the `Structured Output Parser` node accordingly.\n",
+      "## Set Fields\n\nThis node allows you to **define the fields** that will be sent to the **ScrapingBee HTTP Node** and the AI Agent. \n\nIn this template, **only one field** is pre-configured: **url**. You can customize it by adding additional fields as needed.\n",
+      "## ScrapingBee - Get Page Screenshot\n\nThis node uses ScrapingBee, a powerful scraping tool, to capture a screenshot of the desired URL.  \nYou can [try ScrapingBee]({{ $env.API_BASE_URL }} and enjoy 1,000 free requests (non-affiliate link).  \n\nEnsure the `screenshot_full_page` parameter is set to *`true`* for a full-page screenshot. This is crucial for vision-based scraping with the AI Agent.  \n\nAlternatively, you can **choose to screenshot only a specific part of the page**. However, keep in min",
+      "## Vision-Based Scraping AI Agent\n\nThis is the central node of the workflow, powered by an AI Agent with two key prompts:\n\n- **System Prompt**: Instructs the AI on how and what data to extract from the screenshot. You can customize this to suit your needs. It also includes fallback instructions to call a tool for retrieving the HTML page if data extraction from the screenshot fails.  \n- **User Message**: Provides the page URL for context.\n\n### Sub-Nodes\n\n1. **Google Gemini Chat Model**  \n   Chos",
+      "### Google Gemini Chat Model\n\nThe **default model is gemini-1.5-pro**. It offers excellent performance for this use case, but **it’s not the most cost-effective option—use it judiciously**.\n\n",
+      "### HTML-Based Scraping Tool\n\nThis tool is **invoked when the AI Agent requires the HTML** (*converted to Markdown*) to extract data because the **screenshot alone wasn’t sufficient**.\n",
+      "### Structured Output Parser\n\nThis node **organizes the extracted data into an easy-to-use JSON format**.  \n\nIn this template, the JSON is **designed for an e-commerce webpage**. Customize it to fit your specific needs.\n",
+      "## Split Out\n\nThis node **splits the array** created by the `Structured Output Parser` into **individual rows**, making them easy to append to the **subsequent Google Sheets node**.\n",
+      "## Google Sheets - Create Rows\n\nThis node **creates rows** in the **Results** sheet using the extracted data.  \n\nYou can use the **[example Google Sheet]({{ $env.WEBHOOK_URL }} as a template. However, ensure that the **columns in the Results sheet are aligned with the structure of the output** from the `Structured Output Parser node`.\n",
+      "## HTML-Scraping Tool Trigger\n\nThis **node serves as the entry point for the HTML scraping tool.  \n\nIt is triggered by the **AI Agent only when it fails to extract data** from the screenshot. The **URL** is sent as a **parameter for the query**.",
+      "## Set Fields - From AI Agent Query\n\nThis node sets the fields from the AI Agent’s query.  \n\nIn this template, the only field configured is **url**.\n",
+      "## ScrapingBee - Get Page HTML\n\nThis node utilizes the ScrapingBee API to **retrieve the HTML of the webpage**.\n",
+      "## HTML to Markdown\n\nThis node **converts the HTML from the previous node** into Markdown format, **helping to save tokens**.  \n\nThe converted **Markdown is then automatically sent to the AI Agent** through this node.\n",
+      "# ✨ Vision-Based AI Agent Scraper - with Google Sheets, ScrapingBee, and Gemini\n\n## Important notes :\n### Check legal regulations: \nThis workflow involves scraping, so make sure to check the legal regulations around scraping in your country before getting started. Better safe than sorry!\n\n## Workflow description\nThis workflow leverages a **vision-based AI Agent**, integrated with Google Sheets, ScrapingBee, and the Gemini-1.5-Pro model, to **extract structured data from webpages**. The AI Agent "
+    ],
+    "trigger_patterns": [
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "manualTrigger"
+      },
+      {
+        "name": "HTML-Scraping Tool",
+        "type": "executeWorkflowTrigger"
+      }
+    ],
+    "error_handling": [],
+    "settings": {
+      "executionOrder": "v1",
+      "saveManualExecutions": true,
+      "callerPolicy": "workflowsFromSameOwner",
+      "errorWorkflow": null,
+      "timezone": "UTC",
+      "executionTimeout": 3600,
+      "maxExecutions": 1000,
+      "retryOnFail": true,
+      "retryCount": 3,
+      "retryDelay": 1000
+    }
+  },
+  {
+    "name": "Vision-Based AI Agent Scraper - with Google Sheets, ScrapingBee, and Gemini",
+    "filepath": "/Users/bingo/CodeBuddy/namespace/n8n-workflows/AIGC_Files/workflows/Splitout/2041_Splitout_Manual_Automation_Webhook.json",
+    "tags": [
+      "automation",
+      "n8n",
+      "production-ready",
+      "excellent",
+      "optimized"
+    ],
+    "description": "Automated workflow: Vision-Based AI Agent Scraper - with Google Sheets, ScrapingBee, and Gemini. This workflow integrates 13 different services: stickyNote, httpRequest, markdown, lmChatGoogleGemini, agent. It contains 36 nodes and follows best practices for error handling and security.",
+    "node_count": 29,
+    "active": false,
+    "classification": {
+      "primary": "sub-workflow",
+      "primary_label": "子工作流调用 (Sub-Workflow)",
+      "secondary": [
+        "data-processing",
+        "automation-triggers",
+        "conditional-loop"
+      ],
+      "scores": {
+        "text-generation": 2,
+        "image-processing": 0,
+        "data-processing": 16,
+        "automation-triggers": 13,
+        "conditional-loop": 13,
+        "error-handling": 2,
+        "sub-workflow": 17
+      }
+    },
+    "trigger_nodes": [
+      {
+        "id": "90ac8845-342e-4fdb-ae09-cb9d169b4119",
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          160,
+          460
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "79f7b4db-57f1-4004-88b3-51cfcfe9884e",
+        "name": "HTML-Scraping Tool",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1,
+        "position": [
+          1480,
+          1360
+        ],
+        "has_credentials": false
+      }
+    ],
+    "ai_nodes": [],
+    "integration_nodes": [
+      {
+        "id": "7a2bfc41-1527-448d-a52c-794ca4c9e7ee",
+        "name": "ScrapingBee- Get page HTML",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          2280,
+          1360
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "1a59a962-f483-4a27-8686-607a7d375584",
+        "name": "Google Sheets - Get list of URLs",
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.5,
+        "position": [
+          620,
+          460
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "01cbc1eb-2910-49b1-89e6-d32d340e5273",
+        "name": "ScrapingBee - Get page screenshot",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          1440,
+          460
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "226520d1-2edb-4ade-9940-0bae461eb161",
+        "name": "Google Sheets - Create Rows",
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.5,
+        "position": [
+          3340,
+          460
+        ],
+        "has_credentials": true
+      }
+    ],
+    "data_nodes": [
+      {
+        "id": "2054612e-f3e1-4633-9c1a-0644ae07613c",
+        "name": "Split Out",
+        "type": "n8n-nodes-base.splitOut",
+        "typeVersion": 1,
+        "position": [
+          2880,
+          460
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "82dcdc23-3d71-4281-a3d0-fdbc27327dd0",
+        "name": "Set fields",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1040,
+          460
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "f2615921-d060-410b-aef4-cd484edb2897",
+        "name": "Set fields - from AI agent query",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1880,
+          1360
+        ],
+        "has_credentials": false
+      }
+    ],
+    "control_nodes": [
+      {
+        "id": "a0ab6dcb-ffad-40bf-8a22-f2e152e69b00",
+        "name": "Structured Output Parser",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.2,
+        "position": [
+          2480,
+          880
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "34f50603-a969-425d-8a1a-ec8031a5cdfd",
+        "name": "Google Gemini Chat Model",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          1800,
+          900
+        ],
+        "has_credentials": true
+      },
+      {
+        "id": "9fe8ee54-755a-44f2-a2bf-a695e3754b3d",
+        "name": "HTML-based Scraping Tool",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.2,
+        "position": [
+          2160,
+          900
+        ],
+        "has_credentials": false
+      },
+      {
+        "id": "2c142537-d8fe-4fc1-9758-6a3538c43fc0",
+        "name": "Vision-based Scraping Agent",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1.7,
+        "position": [
+          2040,
+          460
+        ],
+        "has_credentials": false
+      }
+    ],
+    "error_nodes": [],
+    "sticky_notes_count": 15,
+    "sticky_experiences": [
+      "## Trigger\nThe default trigger is **When clicking ‘Test workflow’**, meaning the workflow will **need to be triggered manually**. \n\nYou can replace this by selecting a **trigger of your choice**.\n",
+      "## Google Sheets - List of URLs\n\nThe Google Sheet will contain two sheets: \n- **List of URLs to** scrape \n- **Results** page, populated with the scraping results and AI-extracted data.\n\nHere is an **[example Google Sheet]({{ $env.WEBHOOK_URL }} you can use. The \"Results\" sheet is pre-configured for e-commerce website scraping. You can adapt it to your specific needs, but remember to adjust the `Structured Output Parser` node accordingly.\n",
+      "## Set Fields\n\nThis node allows you to **define the fields** that will be sent to the **ScrapingBee HTTP Node** and the AI Agent. \n\nIn this template, **only one field** is pre-configured: **url**. You can customize it by adding additional fields as needed.\n",
+      "## ScrapingBee - Get Page Screenshot\n\nThis node uses ScrapingBee, a powerful scraping tool, to capture a screenshot of the desired URL. \nYou can [try ScrapingBee]({{ $env.API_BASE_URL }} and enjoy 1,000 free requests (non-affiliate link). \n\nEnsure the `screenshot_full_page` parameter is set to *`true`* for a full-page screenshot. This is crucial for vision-based scraping with the AI Agent. \n\nAlternatively, you can **choose to screenshot only a specific part of the page**. However, keep in mind t",
+      "## Vision-Based Scraping AI Agent\n\nThis is the central node of the workflow, powered by an AI Agent with two key prompts:\n\n- **System Prompt**: Instructs the AI on how and what data to extract from the screenshot. You can customize this to suit your needs. It also includes fallback instructions to call a tool for retrieving the HTML page if data extraction from the screenshot fails. \n- **User Message**: Provides the page URL for context.\n\n### Sub-Nodes\n\n1. **Google Gemini Chat Model** \n Chosen b",
+      "### Google Gemini Chat Model\n\nThe **default model is gemini-1.5-pro**. It offers excellent performance for this use case, but **it’s not the most cost-effective option—use it judiciously**.\n\n",
+      "### HTML-Based Scraping Tool\n\nThis tool is **invoked when the AI Agent requires the HTML** (*converted to Markdown*) to extract data because the **screenshot alone wasn’t sufficient**.\n",
+      "### Structured Output Parser\n\nThis node **organizes the extracted data into an easy-to-use JSON format**. \n\nIn this template, the JSON is **designed for an e-commerce webpage**. Customize it to fit your specific needs.\n",
+      "## Split Out\n\nThis node **splits the array** created by the `Structured Output Parser` into **individual rows**, making them easy to append to the **subsequent Google Sheets node**.\n",
+      "## Google Sheets - Create Rows\n\nThis node **creates rows** in the **Results** sheet using the extracted data. \n\nYou can use the **[example Google Sheet]({{ $env.WEBHOOK_URL }} as a template. However, ensure that the **columns in the Results sheet are aligned with the structure of the output** from the `Structured Output Parser node`.\n",
+      "## HTML-Scraping Tool Trigger\n\nThis **node serves as the entry point for the HTML scraping tool. \n\nIt is triggered by the **AI Agent only when it fails to extract data** from the screenshot. The **URL** is sent as a **parameter for the query**.",
+      "## Set Fields - From AI Agent Query\n\nThis node sets the fields from the AI Agent’s query. \n\nIn this template, the only field configured is **url**.\n",
+      "## ScrapingBee - Get Page HTML\n\nThis node utilizes the ScrapingBee API to **retrieve the HTML of the webpage**.\n",
+      "## HTML to Markdown\n\nThis node **converts the HTML from the previous node** into Markdown format, **helping to save tokens**. \n\nThe converted **Markdown is then automatically sent to the AI Agent** through this node.\n",
+      "# ✨ Vision-Based AI Agent Scraper - with Google Sheets, ScrapingBee, and Gemini\n\n## Important notes :\n### Check legal regulations: \nThis workflow involves scraping, so make sure to check the legal regulations around scraping in your country before getting started. Better safe than sorry!\n\n## Workflow description\nThis workflow leverages a **vision-based AI Agent**, integrated with Google Sheets, ScrapingBee, and the Gemini-1.5-Pro model, to **extract structured data from webpages**. The AI Agent "
+    ],
+    "trigger_patterns": [
+      {
+        "name": "When clicking ‘Test workflow’",
+        "type": "manualTrigger"
+      },
+      {
+        "name": "HTML-Scraping Tool",
+        "type": "executeWorkflowTrigger"
+      }
+    ],
+    "error_handling": [],
+    "settings": {
+      "executionOrder": "v1",
+      "saveManualExecutions": true,
+      "callerPolicy": "workflowsFromSameOwner",
+      "errorWorkflow": null,
+      "timezone": "UTC",
+      "executionTimeout": 3600,
+      "maxExecutions": 1000,
+      "retryOnFail": true,
+      "retryCount": 3,
+      "retryDelay": 1000
+    }
+  }
+]
