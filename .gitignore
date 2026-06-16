@@ -62,3 +62,6 @@ yarn-error.log*
 dist/
 build/
 .cache/
+
+# MCP configuration (contains sensitive API keys)
+.mcp.json
