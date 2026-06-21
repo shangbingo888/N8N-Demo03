@@ -1,0 +1,88 @@
+{
+  "name": "[Webhook] 01-内容分析与分镜",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "storyboard",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "接收分镜请求",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [250, 300],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "language": "javaScript",
+        "mode": "runOnceForAllItems",
+        "jsCode": "const body = $input.first().json.body;\nconst topic = body.topic || '未指定主题';\nconst style = body.style || '现代简约';\nconst numScenes = body.num_scenes || 5;\nconst duration = body.duration || 60;\n\nconst systemPrompt = `你是一个专业的视频分镜师。你必须只返回有效的JSON，不要有任何其他文字。`;\n\nconst userPrompt = `根据以下信息生成分镜脚本：\n\n- 主题: ${topic}\n- 风格: ${style}\n- 分镜数量: ${numScenes}\n- 视频总时长: ${duration}秒\n\n输出JSON格式(严格按此格式，不要包装在markdown代码块中):\n{\n  \"scenes\": [\n    {\n      \"index\": 1,\n      \"description\": \"场景中文描述\",\n      \"prompt\": \"英文图片生成提示词，详细描述画面，适合AI文生图\",\n      \"narration\": \"中文配音文本，自然口语化\",\n      \"duration\": 12\n    }\n  ]\n}\n\n要求：\n1. prompt必须是英文、详细描述画面细节、灯光、构图、色彩等\n2. narration用中文，自然口语化\n3. 每个场景至少5秒\n4. 场景之间要有叙事连贯性\n5. 总时长尽量接近${duration}秒`;\n\nreturn [{\n  json: {\n    body: {\n      model: 'agnes-2.0-flash',\n      messages: [\n        { role: 'system', content: systemPrompt },\n        { role: 'user', content: userPrompt }\n      ],\n      response_format: { type: 'json_object' },\n      temperature: 0.7\n    },\n    originalInput: body\n  }\n}];"
+      },
+      "id": "build-prompt",
+      "name": "构建 AI Prompt",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [600, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.OPENAI_BASE_URL || 'https://apihub.agnes-ai.com/v1' }}/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Authorization", "value": "=Bearer {{ $env.OPENAI_API_KEY }}" },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify($json.body) }}",
+        "options": { "timeout": 120000 }
+      },
+      "id": "call-ai",
+      "name": "调用 AI API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [950, 300]
+    },
+    {
+      "parameters": {
+        "language": "javaScript",
+        "mode": "runOnceForAllItems",
+        "jsCode": "const response = $input.first().json;\n\nconst content = response?.choices?.[0]?.message?.content;\nif (!content) {\n  throw new Error('AI 返回内容为空: ' + JSON.stringify(response).substring(0, 500));\n}\n\nlet cleanContent = content.trim();\nif (cleanContent.startsWith('```')) {\n  cleanContent = cleanContent.replace(/^```(?:json)?\\n?/, '').replace(/\\n?```$/, '');\n}\n\nlet parsed;\ntry {\n  parsed = JSON.parse(cleanContent);\n} catch (e) {\n  throw new Error('无法解析 AI 返回的 JSON: ' + cleanContent.substring(0, 300));\n}\n\nconst scenes = (parsed.scenes || []).map((scene, i) => ({\n  index: scene.index || (i + 1),\n  description: scene.description || '',\n  prompt: scene.prompt || '',\n  narration: scene.narration || '',\n  duration: Math.max(5, scene.duration || 10)\n}));\n\nreturn [{\n  json: {\n    success: true,\n    scenes: scenes,\n    totalScenes: scenes.length,\n    totalDuration: scenes.reduce((sum, s) => sum + s.duration, 0),\n    generatedAt: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "parse-output",
+      "name": "解析并标准化输出",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1300, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "options": {}
+      },
+      "id": "respond",
+      "name": "返回结果",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [1650, 300]
+    }
+  ],
+  "connections": {
+    "接收分镜请求": { "main": [[{ "node": "构建 AI Prompt", "type": "main", "index": 0 }]] },
+    "构建 AI Prompt": { "main": [[{ "node": "调用 AI API", "type": "main", "index": 0 }]] },
+    "调用 AI API": { "main": [[{ "node": "解析并标准化输出", "type": "main", "index": 0 }]] },
+    "解析并标准化输出": { "main": [[{ "node": "返回结果", "type": "main", "index": 0 }]] }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Asia/Shanghai",
+    "saveManualExecutions": true
+  }
+}

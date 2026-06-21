@@ -1,0 +1,581 @@
+{
+  "name": "单人视频工作流-生成分镜图片",
+  "nodes": [
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "565c1e1b-70c2-403d-a35f-4f43cfd2c0ae",
+              "name": "prompt",
+              "value": "={{ JSON.stringify($json.prompt) }}",
+              "type": "string"
+            },
+            {
+              "id": "bce999ce-9040-4f70-a70a-6df392427116",
+              "name": "character_filepath",
+              "value": "={{ $json.character_filepath }}",
+              "type": "string"
+            },
+            {
+              "id": "b8e90af4-4af6-4a2a-9b2d-d75606073b29",
+              "name": "output_folder_path",
+              "value": "={{ $json.output_folder_path }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        240,
+        240
+      ],
+      "id": "72e343a5-18cc-468b-a1f6-3aa6dae5af2a",
+      "name": "配置字段"
+    },
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "character_filepath"
+            },
+            {
+              "name": "prompt"
+            },
+            {
+              "name": "output_folder_path"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        240
+      ],
+      "id": "491ef28e-f4aa-41f0-8c03-453d3e46fd6c",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "6491514e-d576-4ea9-bcfb-9d8aa5ab69fc",
+              "name": "character_filepath",
+              "value": "/root/ComfyUI/output/ComfyUI_00008_.png",
+              "type": "string"
+            },
+            {
+              "id": "de858876-b71d-4290-8aa1-5ac20bbd84a2",
+              "name": "prompt",
+              "value": "=",
+              "type": "string"
+            },
+            {
+              "id": "31bddccc-2b60-4677-b209-0c98f4e16162",
+              "name": "output_folder_path",
+              "value": "/root/n8n/custom_output/",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        240,
+        0
+      ],
+      "id": "23add76c-bc8a-4f53-a0bc-13b8e34237c8",
+      "name": "Edit Fields",
+      "disabled": true
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "6065143a-e602-4c2c-b4e4-deb6ebe08dc5",
+      "name": "When clicking ‘Execute workflow’",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "fileSelector": "={{ $json.character_filepath }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        432,
+        240
+      ],
+      "id": "b24e7662-038b-4a46-8df5-76b7c840ccbd",
+      "name": "Read/Write Files from Disk1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b56d373b-ce89-4280-bb76-745968f4d482",
+              "name": "images_filepath",
+              "value": "={{ $json.images_filepath }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3424,
+        208
+      ],
+      "id": "23f7f376-f6b5-4cd4-a9d1-ca288da4d04f",
+      "name": "执行结束返回字段"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://host.docker.internal:8188/prompt",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"prompt\": {\n  \"56\": {\n    \"inputs\": {\n      \"seed\": 213531736143127,\n      \"steps\": 4,\n      \"cfg\": 1,\n      \"sampler_name\": \"sa_solver\",\n      \"scheduler\": \"simple\",\n      \"denoise\": 1,\n      \"model\": [\n        \"109\",\n        0\n      ],\n      \"positive\": [\n        \"68\",\n        0\n      ],\n      \"negative\": [\n        \"61\",\n        0\n      ],\n      \"latent_image\": [\n        \"60\",\n        0\n      ]\n    },\n    \"class_type\": \"KSampler\",\n    \"_meta\": {\n      \"title\": \"K采样器\"\n    }\n  },\n  \"60\": {\n    \"inputs\": {\n      \"pixels\": [\n        \"91\",\n        0\n      ],\n      \"vae\": [\n        \"110\",\n        0\n      ]\n    },\n    \"class_type\": \"VAEEncode\",\n    \"_meta\": {\n      \"title\": \"VAE编码\"\n    }\n  },\n  \"61\": {\n    \"inputs\": {\n      \"prompt\": \"\",\n      \"clip\": [\n        \"107\",\n        0\n      ],\n      \"vae\": [\n        \"110\",\n        0\n      ],\n      \"image1\": [\n        \"91\",\n        0\n      ]\n    },\n    \"class_type\": \"TextEncodeQwenImageEditPlus\",\n    \"_meta\": {\n      \"title\": \"TextEncodeQwenImageEditPlus\"\n    }\n  },\n  \"68\": {\n    \"inputs\": {\n      \"prompt\": [\n        \"138\",\n        0\n      ],\n      \"clip\": [\n        \"107\",\n        0\n      ],\n      \"vae\": [\n        \"110\",\n        0\n      ],\n      \"image1\": [\n        \"91\",\n        0\n      ]\n    },\n    \"class_type\": \"TextEncodeQwenImageEditPlus\",\n    \"_meta\": {\n      \"title\": \"TextEncodeQwenImageEditPlus\"\n    }\n  },\n  \"69\": {\n    \"inputs\": {\n      \"samples\": [\n        \"56\",\n        0\n      ],\n      \"vae\": [\n        \"110\",\n        0\n      ]\n    },\n    \"class_type\": \"VAEDecode\",\n    \"_meta\": {\n      \"title\": \"VAE解码\"\n    }\n  },\n  \"74\": {\n    \"inputs\": {\n      \"image\": \"{{ $json.name }}\"\n    },\n    \"class_type\": \"LoadImage\",\n    \"_meta\": {\n      \"title\": \"加载图像\"\n    }\n  },\n  \"91\": {\n    \"inputs\": {\n      \"aspect_ratio\": \"original\",\n      \"proportional_width\": 1,\n      \"proportional_height\": 1,\n      \"fit\": \"letterbox\",\n      \"method\": \"lanczos\",\n      \"round_to_multiple\": \"8\",\n      \"scale_to_side\": \"shortest\",\n      \"scale_to_length\": [\n        \"104\",\n        0\n      ],\n      \"background_color\": \"#000000\",\n      \"image\": [\n        \"74\",\n        0\n      ]\n    },\n    \"class_type\": \"LayerUtility: ImageScaleByAspectRatio V2\",\n    \"_meta\": {\n      \"title\": \"LayerUtility: ImageScaleByAspectRatio V2\"\n    }\n  },\n  \"99\": {\n    \"inputs\": {\n      \"text\": \"\",\n      \"anything\": [\n        \"138\",\n        0\n      ]\n    },\n    \"class_type\": \"easy showAnything\",\n    \"_meta\": {\n      \"title\": \"展示任何\"\n    }\n  },\n  \"104\": {\n    \"inputs\": {\n      \"Number\": 1024\n    },\n    \"class_type\": \"Int\",\n    \"_meta\": {\n      \"title\": \"Int\"\n    }\n  },\n  \"105\": {\n    \"inputs\": {\n      \"filename_prefix\": \"ComfyUI\",\n      \"images\": [\n        \"69\",\n        0\n      ]\n    },\n    \"class_type\": \"SaveImage\",\n    \"_meta\": {\n      \"title\": \"保存图像\"\n    }\n  },\n  \"106\": {\n    \"inputs\": {\n      \"unet_name\": \"qwen_image_edit_2509_fp8_e4m3fn.safetensors\",\n      \"weight_dtype\": \"default\"\n    },\n    \"class_type\": \"UNETLoader\",\n    \"_meta\": {\n      \"title\": \"UNet加载器\"\n    }\n  },\n  \"107\": {\n    \"inputs\": {\n      \"clip_name\": \"qwen_2.5_vl_7b_fp8_scaled.safetensors\",\n      \"type\": \"qwen_image\",\n      \"device\": \"default\"\n    },\n    \"class_type\": \"CLIPLoader\",\n    \"_meta\": {\n      \"title\": \"加载CLIP\"\n    }\n  },\n  \"109\": {\n    \"inputs\": {\n      \"lora_name\": \"Qwen-Image-Lightning-4steps-V1.0.safetensors\",\n      \"strength_model\": 1.0000000000000002,\n      \"model\": [\n        \"133\",\n        0\n      ]\n    },\n    \"class_type\": \"LoraLoaderModelOnly\",\n    \"_meta\": {\n      \"title\": \"LoRA加载器（仅模型）\"\n    }\n  },\n  \"110\": {\n    \"inputs\": {\n      \"vae_name\": \"qwen_image_vae.safetensors\"\n    },\n    \"class_type\": \"VAELoader\",\n    \"_meta\": {\n      \"title\": \"加载VAE\"\n    }\n  },\n  \"133\": {\n    \"inputs\": {\n      \"lora_name\": \"next-scene_lora-v2-3000.safetensors\",\n      \"strength_model\": 0.8000000000000002,\n      \"model\": [\n        \"106\",\n        0\n      ]\n    },\n    \"class_type\": \"LoraLoaderModelOnly\",\n    \"_meta\": {\n      \"title\": \"LoRA加载器（仅模型）\"\n    }\n  },\n  \"138\": {\n    \"inputs\": {\n      \"prompt\": {{ $('配置字段').item.json.prompt }},\n      \"start_index\": 0,\n      \"max_rows\": 1000,\n      \"remove_empty_lines\": \"\"\n    },\n    \"class_type\": \"easy promptLine\",\n    \"_meta\": {\n      \"title\": \"提示词行\"\n    }\n  }\n}\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        928,
+        240
+      ],
+      "id": "1e8c1edd-dc0f-48b9-80df-e0768cd3166c",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1184,
+        240
+      ],
+      "id": "dce48119-c49a-415d-b0ae-a109e88dbeea",
+      "name": "Wait",
+      "webhookId": "0a4675d5-4a1b-48af-82f0-49903aa5c606"
+    },
+    {
+      "parameters": {
+        "url": "=http://host.docker.internal:8188/history/{{ $('HTTP Request').item.json.prompt_id }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1408,
+        240
+      ],
+      "id": "6c3a3efb-7dfb-47ee-8af2-86a01f17b8b4",
+      "name": "HTTP Request1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "95b5670e-5019-45a7-b701-08a608311038",
+              "leftValue": "={{ $json.values()[0].status.status_str }}",
+              "rightValue": "success",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1632,
+        240
+      ],
+      "id": "533e2700-f7bf-4513-a2c0-b06e50ba897b",
+      "name": "If",
+      "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "fileSelector": "=/comfyuidata/{{ $json.filename }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        2560,
+        240
+      ],
+      "id": "cb7d03d7-e99c-4a08-a687-034ad33090de",
+      "name": "Read/Write Files from Disk3"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://host.docker.internal:8188/upload/image",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "image",
+              "inputDataFieldName": "data"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        640,
+        240
+      ],
+      "id": "ceb79988-d29d-41d1-b0ea-71136b4f0634",
+      "name": "HTTP Request2"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "images",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        2064,
+        224
+      ],
+      "id": "59d203e3-1d06-4beb-8b30-7056a092df27",
+      "name": "Split Out1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "02866e68-1a03-4696-8c44-bdc9af560966",
+              "name": "images",
+              "value": "={{ $json.values()[0].outputs['105'].images }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1840,
+        224
+      ],
+      "id": "54c0e6e3-d8b1-42a4-adcb-dadaa5d2f2a0",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        2288,
+        224
+      ],
+      "id": "36b8cb43-1227-421d-a8f4-8afa9f550f5e",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "operation": "write",
+        "fileName": "={{ $('配置字段').item.json.output_folder_path }}image_{{ $now.format('yyyy-MM-dd_hh-mm-ss') }}_{{ Math.floor(Math.random() * 10000) }}.png",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        2784,
+        240
+      ],
+      "id": "c737b8f9-b6ff-4c74-9c30-0ae4a7be4acc",
+      "name": "Read/Write Files from Disk2"
+    },
+    {
+      "parameters": {
+        "fieldsToAggregate": {
+          "fieldToAggregate": [
+            {
+              "fieldToAggregate": "fileName",
+              "renameField": true,
+              "outputFieldName": "images_filepath"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        3232,
+        208
+      ],
+      "id": "4c8335bf-7161-44d9-beeb-25474a292d02",
+      "name": "Aggregate1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e58dd683-28f3-406b-84b6-3447331c8bb3",
+              "name": "fileName",
+              "value": "={{ $json.fileName }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3008,
+        240
+      ],
+      "id": "54b4b473-2b69-47aa-85f8-9b67d1a4cd71",
+      "name": "Edit Fields2"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "配置字段": {
+      "main": [
+        [
+          {
+            "node": "Read/Write Files from Disk1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "配置字段",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read/Write Files from Disk1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read/Write Files from Disk3": {
+      "main": [
+        [
+          {
+            "node": "Read/Write Files from Disk2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request2": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Split Out1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "Aggregate1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Read/Write Files from Disk3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read/Write Files from Disk2": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate1": {
+      "main": [
+        [
+          {
+            "node": "执行结束返回字段",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "cc114ca2-4383-4143-9f8c-38c96c163354",
+  "meta": {
+    "instanceId": "164b6258852a751ffad2d91c0ef2b3e746122b3f527005a8ac87036f847eae21"
+  },
+  "id": "9IZMwp90GUd6Te0w",
+  "tags": []
+}

@@ -1,0 +1,758 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"rationale\": \"\",\n  \"query\": [\"\"]\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        560,
+        224
+      ],
+      "id": "e072bbbc-94b7-418e-b582-f570b4bf6329",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "output.query",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        768,
+        0
+      ],
+      "id": "181f4eef-acbf-426a-93c9-a9aefe614a0d",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        976,
+        0
+      ],
+      "id": "eafa108c-3d1c-4cfd-a4c7-6ac13a465eac",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n\t\"summary\": \"\"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        1456,
+        224
+      ],
+      "id": "8730b1ad-8f57-4033-8439-d4de2a983309",
+      "name": "Structured Output Parser1"
+    },
+    {
+      "parameters": {
+        "model": "deepseek-reasoner",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+      "typeVersion": 1,
+      "position": [
+        1872,
+        48
+      ],
+      "id": "bbb93be1-ad96-4356-96cf-d66626d74f8d",
+      "name": "DeepSeek Chat Model1",
+      "credentials": {
+        "deepSeekApi": {
+          "id": "azKeo8dWCSJUyCgS",
+          "name": "DeepSeek account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n\"result\": [\n{\n\"text\": \"\",\n\"type\": \"man\"\n},\n{\n\"text\": \"\",\n\"type\": \"women\"\n},{\n\"text\": \"\",\n\"type\": \"man\"\n},\n{\n\"text\": \"\",\n\"type\": \"women\"\n}\n]\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        2048,
+        48
+      ],
+      "id": "7043273d-1932-4f94-b4bd-7df83ddd3994",
+      "name": "Structured Output Parser2"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "output.result",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        2224,
+        -128
+      ],
+      "id": "211edfc3-7485-4cd3-af7b-685157f4b550",
+      "name": "Split Out1"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        3088,
+        -128
+      ],
+      "id": "39cee53c-d87b-4a5f-a28d-9d1ca3bc7599",
+      "name": "Wait",
+      "webhookId": "8cc12ebe-b3fb-4233-9fc0-add0213fd380"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=你的目标是生成复杂且多样化的网络搜索查询。这些查询旨在用于一个先进的自动化网络研究工具，该工具能够分析复杂结果、跟踪链接并综合信息。\n\n**指示说明：**\n- 优先选择单一搜索查询，仅当原始问题涉及多个方面或元素且一个查询不足够时才添加另一个查询。\n- 每个查询应专注于原始问题的一个特定方面。\n- 生成的查询不要超过{{ $json.task_count }}个。\n- 查询应具有多样性，如果主题宽泛，则生成超过1个的查询。\n- 不要生成多个相似的查询，1个就足够了。\n- 查询应确保收集到最新的信息。当前日期是 {{ $now.format('yyyy-MM-dd') }}，如果用户未指定研究日期，应该优先查询当天的资讯信息，生成的问题中应该包含'{{ $now.format('yyyy-MM-dd') }}'，如果用户指定了，则查询用户指定的日期的资讯信息。\n\n**特别注意**：用户输入的主题如果没有明确说明研究方向，则说明用户想研究的是围绕主题的最新综合性资讯，不要试图向用户询问。直接开始围绕用户输入的主题，以研究综合性资讯为目的开始生成查询问题。\n\n**格式：**\n- 将你的回应格式化为一个JSON对象，该对象必须包含以下**所有**两个确切的键：\n   - \"rationale\": 简要解释这些查询为何相关\n   - \"query\": 一个搜索查询的列表\n\n**示例：**\n\n主题：去年是苹果公司的收入增长更多，还是购买iPhone的人数增长更多\n```json\n{\n\"rationale\": \"为了准确回答这个比较增长的问题，我们需要关于苹果公司股票表现和iPhone销售指标的具体数据点。这些查询旨在获取所需的确切财务信息：公司收入趋势、特定产品的单位销售数据，以及在同一财年内的股价变动，以便进行直接比较。\",\n\"query\": [\"苹果 2024财年总收入增长\", \"iPhone 2024财年销量增长\", \"苹果 2024财年股价增长\"]\n}\n```\n上下文：{{ $('On form submission').item.json[\"主题\"] }}",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        416,
+        0
+      ],
+      "id": "6d09094b-dbe7-453a-9905-e763b0262d44",
+      "name": "搜索任务拆分"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=根据关键词 \"{{ $('Split Out').item.json[\"output.query\"] }}\"进行搜索，获取搜索结果，并将关键信息总结为摘要。\n\n- 重点要求：第一次必须使用我提供的关键词进行搜索，搜索完成后，分析搜索结果，如果搜索结果能充分解答关键词蕴含的问题，则调用结束。如果不能，则分析不足之处，针对不足之处使用新的搜索词进行搜索。如此反复，直到搜索结果完全能解答关键词的问题。\n最多轮数不能超过{{ $('字段配置').item.json.websearch_count }}轮。\n\n- 查询应确保收集到最新的信息。当前日期是 {{ $now.format('yyyy-MM-dd') }}，如果用户未指定研究日期，应该优先查询当天的资讯信息，如果用户指定了，则查询用户指定的日期的资讯信息。\n\n- 你的输出格式要严格使用json格式，输出格式示例如下：\n{\n  \"summary\": \"\"\n}",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        1216,
+        16
+      ],
+      "id": "852f0ca9-b694-41f4-af20-52e1cdd23a9a",
+      "name": "搜索任务执行"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=你是一个播客编剧大师，你的任务是根据我给你的主题和资料，编写播客脚本。\n播客对话要求一男一女，以对话的形式呈现，对话风格要通俗易懂，不要包含对事实不知道、不确定的内容，不要胡编乱造。\n播客内容要尽可能全面的对主题进行讨论，脚本内容要足够吸引人并或足够有深度。\n要有合理的开头陈述和结尾总结\n对话轮数最多为{{ $('字段配置').first().json.talk_count }}轮，即数组长度最长为{{ $('字段配置').first().json.talk_count }}\n当前日期是：{{ $now.format('yyyy-MM-dd') }}\n主题：\n{{ $('On form submission').first().json[\"主题\"] }}\n资料：\n{{ $json.result }}\n\n你的输出格式要严格按照以下json格式，示例如下：\n{\n\"result\": [\n{\n\"text\": \"\",\n\"type\": \"man\"\n},\n{\n\"text\": \"\",\n\"type\": \"women\"\n},{\n\"text\": \"\",\n\"type\": \"man\"\n},\n{\n\"text\": \"\",\n\"type\": \"women\"\n}\n]\n}",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        1872,
+        -128
+      ],
+      "id": "08fd6823-21e1-449f-a23b-63d6aa1670cb",
+      "name": "播客脚本制作"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor (const item of $input.all()) {\n  console.log(item.json.output)\n}\n\nconst result = $input.all().map((item) => {\n  return item.json.output.summary\n})\n\nreturn {\n  result: result.join()\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1664,
+        -128
+      ],
+      "id": "1c48269f-6e55-4cc4-bb75-0a7685d333e7",
+      "name": "数据整理"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        2400,
+        -128
+      ],
+      "id": "7a3bef2c-87f8-48e5-8f8d-ea2a51398ab1",
+      "name": "生成多段音频"
+    },
+    {
+      "parameters": {
+        "jsCode": "return $input.all().map(item => {\n  return {\n    text: item.json.text,\n    type: item.json.type === 'man' ? $('字段配置').first().json.man_voice_id : $('字段配置').first().json.women_voice_id\n  }\n});"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2656,
+        -128
+      ],
+      "id": "d2856b93-2130-486d-bbd2-840621ed97d4",
+      "name": "生成音频数据准备"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.minimaxi.com/v1/t2a_v2",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n   \"model\": \"speech-2.5-hd-preview\",\n    \"text\": {{ JSON.stringify($json.text) }},\n    \"voice_setting\":{\n        \"voice_id\": \"{{ $json.type }}\"\n    }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2880,
+        -128
+      ],
+      "id": "0296e0ee-f3ff-4bc6-97f8-e5659aded809",
+      "name": "MiniMax生成音频",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "IOavfu6stEBtpE6v",
+          "name": "Bearer Auth account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// 获取前一个节点传入的 hex 字符串\nconst hexString = $json.data.audio;\n\n// --- 动态生成文件名(包含毫秒和随机数) ---\nconst now = new Date();\nconst timestamp = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}_${String(now.getHours()).padStart(2, '0')}-${String(now.getMinutes()).padStart(2, '0')}-${String(now.getSeconds()).padStart(2, '0')}-${String(now.getMilliseconds()).padStart(3, '0')}`;\nconst random = Math.floor(Math.random() * 1000);\nconst fileName = `audio_${timestamp}_${random}.mp3`;\n\n// --- 创建二进制数据 ---\nconst buffer = Buffer.from(hexString, 'hex');\n\nreturn {\n  json: {\n    fileName: fileName\n  },\n  binary: {\n    data: {\n      data: buffer.toString('base64'),\n      mimeType: 'audio/mpeg',\n      fileName: fileName\n    }\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3376,
+        -192
+      ],
+      "id": "49594d03-cc57-40db-b90f-831cba5ea4de",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "operation": "write",
+        "fileName": "={{ $('字段配置').first().json.audio_temp_path }}{{ $json.fileName }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        3600,
+        -192
+      ],
+      "id": "81e184c1-cf54-498b-a14d-d8b41da0b24f",
+      "name": "Read/Write Files from Disk"
+    },
+    {
+      "parameters": {
+        "audioFilePath": "={{ $json.fileName }}",
+        "outputPath": "={{ $('字段配置').first().json.audio_output_path }}{{ $now.format('yyyy-MM-dd_HH-mm-ss') }}.mp3"
+      },
+      "type": "n8n-nodes-media-composition.audioMerge",
+      "typeVersion": 1,
+      "position": [
+        3808,
+        -192
+      ],
+      "id": "f386712f-82a7-4737-9b61-ecc825104673",
+      "name": "Audio Merge"
+    },
+    {
+      "parameters": {
+        "formTitle": "一键生成关于主题的研究播客",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "主题"
+            }
+          ]
+        },
+        "options": {
+          "buttonLabel": "开始"
+        }
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.3,
+      "position": [
+        -96,
+        0
+      ],
+      "id": "da846e44-5226-4952-a430-0ae22651cad6",
+      "name": "On form submission",
+      "webhookId": "ed641c60-266c-4735-8f88-f689ac2e91e3"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "86501549-001e-4c93-bbd5-45592271b537",
+              "name": "task_count",
+              "value": 3,
+              "type": "number"
+            },
+            {
+              "id": "11fea76f-61cc-4f3d-9ffc-351943af5865",
+              "name": "websearch_count",
+              "value": 3,
+              "type": "number"
+            },
+            {
+              "id": "77e61d59-05ff-43d0-aa52-22b67e4edf44",
+              "name": "talk_count",
+              "value": 8,
+              "type": "number"
+            },
+            {
+              "id": "1c7fc7c8-bb81-4e30-ab4e-5a2a69c67494",
+              "name": "man_voice_id",
+              "value": "Chinese (Mandarin)_Radio_Host",
+              "type": "string"
+            },
+            {
+              "id": "1b242350-0986-46c5-bad0-fdfca0151873",
+              "name": "women_voice_id",
+              "value": "Arrogant_Miss",
+              "type": "string"
+            },
+            {
+              "id": "e7d00538-3a95-46c8-8f01-cc7ba2748436",
+              "name": "audio_temp_path",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "e2372947-e7d5-4a50-a089-9429a263de2e",
+              "name": "audio_output_path",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        128,
+        0
+      ],
+      "id": "05faf3dc-8e5b-48e2-9d96-8d6cd02c7c21",
+      "name": "字段配置"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolSerpApi",
+      "typeVersion": 1,
+      "position": [
+        1296,
+        240
+      ],
+      "id": "275fdce9-440d-41b1-8bc0-ff8738a2176c",
+      "name": "SerpAPI",
+      "credentials": {
+        "serpApi": {
+          "id": "JpNPi6ulxpdEna9u",
+          "name": "SerpAPI account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "规划搜索任务\n",
+        "height": 592,
+        "width": 560
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        336,
+        -144
+      ],
+      "typeVersion": 1,
+      "id": "62a0612d-9745-45d2-b880-a5525c3a21fe",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "使用SerpApi搜索，如果搜索结果不满足搜索意图，AI会换个问法继续搜索",
+        "height": 592,
+        "width": 688
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        928,
+        -144
+      ],
+      "typeVersion": 1,
+      "id": "e4d9b612-cc3a-4fec-8e21-79f613d169c9",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "生成播客脚本，并使用MiniMax生成多段音频，下载到本地",
+        "height": 592,
+        "width": 1392
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1840,
+        -288
+      ],
+      "typeVersion": 1,
+      "id": "995fb947-93f5-4008-b414-a5ef4362b43e",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "拼接多段音频文件并存储到本地",
+        "height": 304,
+        "width": 656
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        3328,
+        -288
+      ],
+      "typeVersion": 1,
+      "id": "6dfd4eee-3c8c-4c75-a1de-e0bdc667caf3",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+      "typeVersion": 1,
+      "position": [
+        400,
+        224
+      ],
+      "id": "d0dc7d3c-5a93-404a-a085-801e7ae11bac",
+      "name": "DeepSeek Chat Model",
+      "credentials": {
+        "deepSeekApi": {
+          "id": "azKeo8dWCSJUyCgS",
+          "name": "DeepSeek account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+      "typeVersion": 1,
+      "position": [
+        1136,
+        240
+      ],
+      "id": "5b3c8da1-4ccd-4f0e-80b9-a4b01c8f39da",
+      "name": "DeepSeek Chat Model2",
+      "credentials": {
+        "deepSeekApi": {
+          "id": "azKeo8dWCSJUyCgS",
+          "name": "DeepSeek account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "配置步骤：\n1.https://platform.deepseek.com/api_keys获取deepseek api key，填写到deepseek模型配置中。\n\n2.https://platform.minimaxi.com/user-center/basic-information/interface-key 获取minimax api key，填写到minimax节点配置中。\n\n3.https://serpapi.com/dashboard 获取serpapi apikey，填写到SerpAPI节点配置中。\n\n4.在'字段配置'节点设置audio_temp_path和audio_output_path，分别是临时音频文件的存储路径和成品音频文件存储路径，注意两者都需要时本地绝对路径，以斜杠结尾，windows上类似于D:\\audio\\，两个参数可以填相同的\n\n5.在'字段配置'节点还可以配置网络搜索最大次数（默认值3次）、音频对话最大轮数（默认值8轮），如果不想改可以保持默认\n\n6.在n8n安装目录下的custom文件夹内（如果没有custom文件夹则新建一个），执行以下命令安装音频拼接自定义节点：\nnpm init -y\nnpm install n8n-nodes-media-composition\n\n或者在 通过网盘分享的文件：custom.zip\n链接: https://pan.baidu.com/s/1N9tL1Q022p5sO3ud4yFQjg?pwd=5ayi\n直接下载压缩包，解压缩后将node_modules文件夹、package、package-lock文件一起放到custom下。\n\nn8n的安装目录一般为：\nwindows：C:\\Users\\用户名\\.n8n\nmac：~/.n8n\n\n7.确保本地安装了ffmpeg且在终端中ffmpeg命令有效\nwindows下ffmpeg安装方法：\n1）.打开官网：www.ffmpeg.org\n2）.点击Download\n3）.点击蓝色windows图标，然后点击下方的Windows builds by Btbn链接\n4）点击ffmpeg-master-latest-win64-gpl-shared.zip\n5）下载好并解压缩，点击进入bin文件夹，复制整个路径，例如D:\\ffmpeg-master-latest-win64-gpl-shared\\bin\n6）到桌面\"此电脑\"右键，选择'属性'，找到并点击\"高级系统设置\"。\n或者在桌面右键，弹出窗口中选择'个性化'，在弹出的设置页面左上角搜索'查看高级系统设置'\n7）在弹出窗口底部找到'环境变量'按钮，点击，在'系统变量'里找到'path'，双击编辑，将第'5)'步复制的路径粘贴进去，点击确定，注意一定要点击确定而不是直接关闭。\n8）Win+R，在弹出窗口输入cmd，输入回车打开终端，输入ffmpeg并回车，看到有大片信息输出说明安装成功。\n\n至此所有依赖安装完成，点击工作流的Execute workflow开始运行吧！",
+        "height": 896,
+        "width": 608
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -320,
+        -1072
+      ],
+      "typeVersion": 1,
+      "id": "d95c5337-8f06-4e54-a21a-0b94cb8e0d10",
+      "name": "Sticky Note4"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "搜索任务拆分",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "数据整理",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "搜索任务执行",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser1": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "搜索任务执行",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DeepSeek Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "播客脚本制作",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser2": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "播客脚本制作",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out1": {
+      "main": [
+        [
+          {
+            "node": "生成多段音频",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "生成多段音频",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "搜索任务拆分": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "搜索任务执行": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "播客脚本制作": {
+      "main": [
+        [
+          {
+            "node": "Split Out1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "数据整理": {
+      "main": [
+        [
+          {
+            "node": "播客脚本制作",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "生成多段音频": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "生成音频数据准备",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "生成音频数据准备": {
+      "main": [
+        [
+          {
+            "node": "MiniMax生成音频",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MiniMax生成音频": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Read/Write Files from Disk",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read/Write Files from Disk": {
+      "main": [
+        [
+          {
+            "node": "Audio Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "字段配置",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "字段配置": {
+      "main": [
+        [
+          {
+            "node": "搜索任务拆分",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SerpAPI": {
+      "ai_tool": [
+        [
+          {
+            "node": "搜索任务执行",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DeepSeek Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "搜索任务拆分",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DeepSeek Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "搜索任务执行",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "cae49cb7-697a-4e62-8e53-48b86e1795e4",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "164b6258852a751ffad2d91c0ef2b3e746122b3f527005a8ac87036f847eae21"
+  },
+  "id": "RT8Ssu49WxdmWgWU",
+  "tags": []
+}

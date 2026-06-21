@@ -1,0 +1,139 @@
+{
+  "name": "[Manual] 00-主编排-文生视频",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "manual-trigger",
+      "name": "手动触发",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://localhost:5678/webhook-test/storyboard",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify($json) }}",
+        "options": {
+          "timeout": 120000,
+          "response": { "response": { "responseFormat": "json" } }
+        }
+      },
+      "id": "call-storyboard",
+      "name": "1.生成分镜脚本",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [600, 300],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "language": "javaScript",
+        "mode": "runOnceForAllItems",
+        "jsCode": "const response = $input.first().json;\n\nif (!response.success) {\n  throw new Error('分镜生成失败: ' + JSON.stringify(response).substring(0, 300));\n}\n\nconst scenes = response.scenes || [];\nif (scenes.length === 0) throw new Error('未生成任何分镜');\n\n// 提取所有配音文本\nconst allNarration = scenes.map(s => s.narration).join(' ');\n\nreturn [{\n  json: {\n    scenes: scenes,\n    firstScene: scenes[0],\n    allNarration: allNarration,\n    totalScenes: scenes.length\n  }\n}];"
+      },
+      "id": "extract-scenes",
+      "name": "提取分镜数据",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [950, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://localhost:5678/webhook-test/image-gen",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={ \"provider\": \"agnes\", \"prompt\": $json.firstScene.prompt, \"size\": \"1024x1024\" }",
+        "options": {
+          "timeout": 60000,
+          "response": { "response": { "responseFormat": "json" } }
+        }
+      },
+      "id": "call-image-gen",
+      "name": "2.生成首张图片",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [1300, 300],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://localhost:5678/webhook-test/tts-gen",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={ \"provider\": \"mimo\", \"text\": $json.allNarration, \"voice\": \"冰糖\" }",
+        "options": {
+          "timeout": 60000,
+          "response": { "response": { "responseFormat": "json" } }
+        }
+      },
+      "id": "call-tts-gen",
+      "name": "3.生成配音音频",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [1650, 300],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "language": "javaScript",
+        "mode": "runOnceForAllItems",
+        "jsCode": "const allItems = $input.all();\n\nconst storyboardResult = $('提取分镜数据').first().json;\nconst imageResult = allItems.find(item => item.json?.success !== undefined && item.json?.provider === 'agnes');\nconst ttsResult = allItems.find(item => item.json?.success !== undefined && item.json?.provider === 'mimo');\n\nreturn [{\n  json: {\n    success: true,\n    pipeline: '文生视频流水线',\n    stages: {\n      storyboard: {\n        status: 'complete',\n        totalScenes: storyboardResult.totalScenes\n      },\n      imageGen: {\n        status: imageResult?.json?.success ? 'complete' : 'pending',\n        fileName: imageResult?.json?.fileName || null\n      },\n      ttsGen: {\n        status: ttsResult?.json?.success ? 'complete' : 'pending',\n        fileName: ttsResult?.json?.fileName || null\n      }\n    },\n    completedAt: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "merge-results",
+      "name": "汇总结果",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [2000, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "options": {}
+      },
+      "id": "respond",
+      "name": "输出最终结果",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [2350, 300]
+    }
+  ],
+  "connections": {
+    "手动触发": { "main": [[{ "node": "1.生成分镜脚本", "type": "main", "index": 0 }]] },
+    "1.生成分镜脚本": { "main": [[{ "node": "提取分镜数据", "type": "main", "index": 0 }]] },
+    "提取分镜数据": { "main": [[{ "node": "2.生成首张图片", "type": "main", "index": 0 }, { "node": "3.生成配音音频", "type": "main", "index": 0 }]] },
+    "2.生成首张图片": { "main": [[{ "node": "汇总结果", "type": "main", "index": 0 }]] },
+    "3.生成配音音频": { "main": [[{ "node": "汇总结果", "type": "main", "index": 0 }]] },
+    "汇总结果": { "main": [[{ "node": "输出最终结果", "type": "main", "index": 0 }]] }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Asia/Shanghai",
+    "saveManualExecutions": true
+  }
+}

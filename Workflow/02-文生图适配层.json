@@ -1,0 +1,123 @@
+{
+  "name": "[Webhook] 02-文生图适配层",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "image-gen",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "接收生图请求",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [250, 300],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "language": "javaScript",
+        "mode": "runOnceForAllItems",
+        "jsCode": "const body = $input.first().json.body || {};\n\n// 参数校验与默认值\nconst provider = body.provider || 'agnes';\nconst prompt = body.prompt;\nconst size = body.size || '1024x1024';\nconst n = body.n || 1;\n\nif (!prompt) {\n  throw new Error('缺少必填字段: prompt (图片生成提示词)');\n}\n\n// 支持的 provider\nconst supportedProviders = ['agnes'];\nif (!supportedProviders.includes(provider)) {\n  throw new Error(`不支持的 provider: ${provider}。当前支持: ${supportedProviders.join(', ')}`);\n}\n\n// 构建 Agnes AI 请求\nconst requestBody = {\n  provider: provider,\n  request: {\n    model: 'agnes-image-2.1-flash',\n    prompt: prompt,\n    size: size,\n    n: n\n  },\n  metadata: {\n    provider: provider,\n    prompt: prompt,\n    size: size,\n    requestedAt: new Date().toISOString()\n  }\n};\n\nreturn [{ json: requestBody }];"
+      },
+      "id": "validate-build",
+      "name": "校验并构建请求",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [600, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://apihub.agnes-ai.com/v1/images/generations",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Authorization", "value": "=Bearer {{ $env.AGNES_API_KEY }}" },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify($json.request) }}",
+        "options": {
+          "timeout": 60000,
+          "response": { "response": { "responseFormat": "json" } }
+        }
+      },
+      "id": "call-agnes",
+      "name": "调用 Agnes AI 生图",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [950, 300],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "language": "javaScript",
+        "mode": "runOnceForAllItems",
+        "jsCode": "const response = $input.first().json;\n\nif (response.error) {\n  throw new Error('Agnes AI 返回错误: ' + JSON.stringify(response.error).substring(0, 500));\n}\n\nconst imageData = response.data;\nif (!imageData || !imageData[0] || !imageData[0].url) {\n  throw new Error('未找到图片 URL: ' + JSON.stringify(response).substring(0, 500));\n}\n\nreturn [{ json: { imageUrl: imageData[0].url } }];"
+      },
+      "id": "extract-url",
+      "name": "提取图片 URL",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1300, 300]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{ $json.imageUrl }}",
+        "sendHeaders": false,
+        "options": {
+          "timeout": 30000,
+          "response": { "response": { "responseFormat": "file" } }
+        }
+      },
+      "id": "download-image",
+      "name": "下载图片文件",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [1650, 300],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "language": "javaScript",
+        "mode": "runOnceForAllItems",
+        "jsCode": "const item = $input.first();\n\nconst hasBinary = !!(item.binary && item.binary.data);\n\nif (!hasBinary) {\n  return [{\n    json: {\n      success: false,\n      error: '图片下载失败',\n      provider: 'agnes'\n    }\n  }];\n}\n\nconst binaryData = item.binary.data;\n\nreturn [{\n  json: {\n    success: true,\n    provider: 'agnes',\n    model: 'agnes-image-2.1-flash',\n    fileName: binaryData.fileName || `image_${Date.now()}.png`,\n    mimeType: binaryData.mimeType || 'image/png',\n    fileSize: binaryData.fileSize || 0,\n    generatedAt: new Date().toISOString()\n  },\n  binary: { data: binaryData }\n}];"
+      },
+      "id": "standardize",
+      "name": "标准化输出",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [2000, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "options": {}
+      },
+      "id": "respond",
+      "name": "返回结果",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [2350, 300]
+    }
+  ],
+  "connections": {
+    "接收生图请求": { "main": [[{ "node": "校验并构建请求", "type": "main", "index": 0 }]] },
+    "校验并构建请求": { "main": [[{ "node": "调用 Agnes AI 生图", "type": "main", "index": 0 }]] },
+    "调用 Agnes AI 生图": { "main": [[{ "node": "提取图片 URL", "type": "main", "index": 0 }]] },
+    "提取图片 URL": { "main": [[{ "node": "下载图片文件", "type": "main", "index": 0 }]] },
+    "下载图片文件": { "main": [[{ "node": "标准化输出", "type": "main", "index": 0 }]] },
+    "标准化输出": { "main": [[{ "node": "返回结果", "type": "main", "index": 0 }]] }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Asia/Shanghai",
+    "saveManualExecutions": true
+  }
+}

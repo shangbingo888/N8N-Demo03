@@ -1,0 +1,105 @@
+{
+  "name": "[Webhook] 03-文生音频适配层",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "tts-gen",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "接收TTS请求",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [250, 300],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "language": "javaScript",
+        "mode": "runOnceForAllItems",
+        "jsCode": "const body = $input.first().json.body || {};\n\nconst provider = body.provider || 'mimo';\nconst text = body.text;\nconst voice = body.voice || '冰糖';\nconst format = body.format || 'wav';\nconst instruction = body.instruction || '用自然亲切的语气播报';\n\nif (!text) {\n  throw new Error('缺少必填字段: text (配音文本)');\n}\n\nconst supportedProviders = ['mimo'];\nif (!supportedProviders.includes(provider)) {\n  throw new Error(`不支持的 provider: ${provider}。当前支持: ${supportedProviders.join(', ')}`);\n}\n\n// 构建 Mimo TTS 请求体\nconst requestBody = {\n  model: 'mimo-v2.5-tts',\n  messages: [\n    { role: 'user', content: instruction },\n    { role: 'assistant', content: text }\n  ],\n  audio: { format: format, voice: voice },\n  stream: false\n};\n\nreturn [{ json: requestBody }];"
+      },
+      "id": "validate-build",
+      "name": "校验并构建TTS请求",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [600, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.xiaomimimo.com/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "api-key", "value": "={{ $env.MIMO_API_KEY }}" },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify($json) }}",
+        "options": {
+          "timeout": 60000,
+          "response": { "response": { "responseFormat": "json" } }
+        }
+      },
+      "id": "call-mimo",
+      "name": "调用 Mimo TTS API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [950, 300],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "language": "javaScript",
+        "mode": "runOnceForAllItems",
+        "jsCode": "const response = $input.first().json;\nconst choice = response?.choices?.[0];\nconst audioData = choice?.message?.audio?.data;\n\nif (!audioData) {\n  throw new Error('Mimo TTS 响应异常: ' + JSON.stringify(response).substring(0, 300));\n}\n\nconst format = choice.message.audio.format || 'wav';\n\nreturn [{\n  json: {\n    status: 'success',\n    format: format\n  },\n  binary: {\n    data: {\n      data: Buffer.from(audioData, 'base64'),\n      mimeType: `audio/${format}`,\n      fileName: `tts-output.${format}`\n    }\n  }\n}];"
+      },
+      "id": "decode-base64",
+      "name": "Base64解码为音频",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1300, 300]
+    },
+    {
+      "parameters": {
+        "language": "javaScript",
+        "mode": "runOnceForAllItems",
+        "jsCode": "const item = $input.first();\nconst hasBinary = !!(item.binary && item.binary.data);\n\nif (!hasBinary) {\n  return [{\n    json: {\n      success: false,\n      error: '音频生成失败',\n      provider: 'mimo'\n    }\n  }];\n}\n\nconst binaryData = item.binary.data;\n\nreturn [{\n  json: {\n    success: true,\n    provider: 'mimo',\n    model: 'mimo-v2.5-tts',\n    fileName: binaryData.fileName || 'tts-output.wav',\n    mimeType: binaryData.mimeType || 'audio/wav',\n    fileSize: binaryData.fileSize || 0,\n    generatedAt: new Date().toISOString()\n  },\n  binary: { data: binaryData }\n}];"
+      },
+      "id": "standardize",
+      "name": "标准化输出",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1650, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "options": {}
+      },
+      "id": "respond",
+      "name": "返回音频结果",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [2000, 300]
+    }
+  ],
+  "connections": {
+    "接收TTS请求": { "main": [[{ "node": "校验并构建TTS请求", "type": "main", "index": 0 }]] },
+    "校验并构建TTS请求": { "main": [[{ "node": "调用 Mimo TTS API", "type": "main", "index": 0 }]] },
+    "调用 Mimo TTS API": { "main": [[{ "node": "Base64解码为音频", "type": "main", "index": 0 }]] },
+    "Base64解码为音频": { "main": [[{ "node": "标准化输出", "type": "main", "index": 0 }]] },
+    "标准化输出": { "main": [[{ "node": "返回音频结果", "type": "main", "index": 0 }]] }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Asia/Shanghai",
+    "saveManualExecutions": true
+  }
+}

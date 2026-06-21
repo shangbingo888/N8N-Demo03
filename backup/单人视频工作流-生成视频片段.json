@@ -1,0 +1,474 @@
+{
+  "name": "单人视频工作流-生成视频片段",
+  "nodes": [
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "565c1e1b-70c2-403d-a35f-4f43cfd2c0ae",
+              "name": "prompt",
+              "value": "={{ $json.prompt }}",
+              "type": "string"
+            },
+            {
+              "id": "bce999ce-9040-4f70-a70a-6df392427116",
+              "name": "image_filepath",
+              "value": "={{ $json.image_filepath }}",
+              "type": "string"
+            },
+            {
+              "id": "d36957ef-16da-4724-b3d9-199b7fa3a34b",
+              "name": "duration",
+              "value": "={{ $json.duration }}",
+              "type": "number"
+            },
+            {
+              "id": "77b39440-3503-46b9-9faa-58750f5b1106",
+              "name": "width",
+              "value": "={{ $json.width }}",
+              "type": "number"
+            },
+            {
+              "id": "7b40152f-de25-43b8-b339-b9a30c39d404",
+              "name": "height",
+              "value": "={{ $json.height }}",
+              "type": "number"
+            },
+            {
+              "id": "bc65e7b6-5c1a-4145-995f-548bc3350432",
+              "name": "output_folder_path",
+              "value": "={{ $json.output_folder_path }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        240,
+        240
+      ],
+      "id": "c20a95f8-c1b1-44a7-aeca-14bef85a8ca8",
+      "name": "配置字段"
+    },
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "image_filepath"
+            },
+            {
+              "name": "prompt"
+            },
+            {
+              "name": "duration",
+              "type": "number"
+            },
+            {
+              "name": "width",
+              "type": "number"
+            },
+            {
+              "name": "height",
+              "type": "number"
+            },
+            {
+              "name": "output_folder_path"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -16,
+        240
+      ],
+      "id": "c013f643-c37d-4fe3-b2be-46ce5475f373",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "6491514e-d576-4ea9-bcfb-9d8aa5ab69fc",
+              "name": "image_filepath",
+              "value": "/root/n8n/custom_output/2025-11-24_08-23-30/character_2025-11-24_07-25-33_8035.png",
+              "type": "string"
+            },
+            {
+              "id": "de858876-b71d-4290-8aa1-5ac20bbd84a2",
+              "name": "prompt",
+              "value": "人物向前方走来",
+              "type": "string"
+            },
+            {
+              "id": "9678b06a-6c7c-4328-a296-b23062c460b0",
+              "name": "duration",
+              "value": 2,
+              "type": "number"
+            },
+            {
+              "id": "ab8e0bfe-d2e1-418a-8ddb-4d5b0b176a73",
+              "name": "width",
+              "value": 360,
+              "type": "number"
+            },
+            {
+              "id": "a238f8ae-4a01-4fa0-af3f-67997bd3e3b9",
+              "name": "height",
+              "value": 480,
+              "type": "number"
+            },
+            {
+              "id": "b2a26b61-96de-4459-9748-7c9ade8aab37",
+              "name": "output_folder_path",
+              "value": "/root/n8n/custom_output/",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        240,
+        0
+      ],
+      "id": "02568d4e-95b5-445b-8d10-b157cca1f0f1",
+      "name": "Edit Fields",
+      "disabled": true
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "1643fd9d-f93b-46b1-bc4b-93798383cce0",
+      "name": "When clicking ‘Execute workflow’",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "fileSelector": "={{ $json.image_filepath }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        464,
+        240
+      ],
+      "id": "45299260-5f95-436a-b458-aa509d71d100",
+      "name": "Read/Write Files from Disk1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://host.docker.internal:8188/prompt",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"prompt\": {\n  \"1\": {\n    \"inputs\": {\n      \"add_noise\": \"disable\",\n      \"noise_seed\": 0,\n      \"steps\": 6,\n      \"cfg\": 1,\n      \"sampler_name\": \"euler_ancestral\",\n      \"scheduler\": \"simple\",\n      \"start_at_step\": 3,\n      \"end_at_step\": 10000,\n      \"return_with_leftover_noise\": \"disable\",\n      \"model\": [\n        \"6\",\n        0\n      ],\n      \"positive\": [\n        \"25\",\n        0\n      ],\n      \"negative\": [\n        \"25\",\n        1\n      ],\n      \"latent_image\": [\n        \"30\",\n        0\n      ]\n    },\n    \"class_type\": \"KSamplerAdvanced\",\n    \"_meta\": {\n      \"title\": \"K采样器（高级）\"\n    }\n  },\n  \"5\": {\n    \"inputs\": {\n      \"sage_attention\": \"auto\",\n      \"allow_compile\": false,\n      \"model\": [\n        \"10\",\n        0\n      ]\n    },\n    \"class_type\": \"PathchSageAttentionKJ\",\n    \"_meta\": {\n      \"title\": \"Patch Sage Attention KJ\"\n    }\n  },\n  \"6\": {\n    \"inputs\": {\n      \"enable_fp16_accumulation\": true,\n      \"model\": [\n        \"5\",\n        0\n      ]\n    },\n    \"class_type\": \"ModelPatchTorchSettings\",\n    \"_meta\": {\n      \"title\": \"Model Patch Torch Settings\"\n    }\n  },\n  \"8\": {\n    \"inputs\": {\n      \"sage_attention\": \"auto\",\n      \"allow_compile\": false,\n      \"model\": [\n        \"12\",\n        0\n      ]\n    },\n    \"class_type\": \"PathchSageAttentionKJ\",\n    \"_meta\": {\n      \"title\": \"Patch Sage Attention KJ\"\n    }\n  },\n  \"9\": {\n    \"inputs\": {\n      \"unet_name\": \"smoothMixWan22I2VT2V_i2vLow.safetensors\",\n      \"weight_dtype\": \"default\"\n    },\n    \"class_type\": \"UNETLoader\",\n    \"_meta\": {\n      \"title\": \"UNet加载器\"\n    }\n  },\n  \"10\": {\n    \"inputs\": {\n      \"shift\": 8,\n      \"model\": [\n        \"9\",\n        0\n      ]\n    },\n    \"class_type\": \"ModelSamplingSD3\",\n    \"_meta\": {\n      \"title\": \"采样算法（SD3）\"\n    }\n  },\n  \"11\": {\n    \"inputs\": {\n      \"unet_name\": \"smoothMixWan22I2VT2V_i2vHigh.safetensors\",\n      \"weight_dtype\": \"default\"\n    },\n    \"class_type\": \"UNETLoader\",\n    \"_meta\": {\n      \"title\": \"UNet加载器\"\n    }\n  },\n  \"12\": {\n    \"inputs\": {\n      \"shift\": 8,\n      \"model\": [\n        \"11\",\n        0\n      ]\n    },\n    \"class_type\": \"ModelSamplingSD3\",\n    \"_meta\": {\n      \"title\": \"采样算法（SD3）\"\n    }\n  },\n  \"13\": {\n    \"inputs\": {\n      \"clip_name\": \"umt5_xxl_fp8_e4m3fn_scaled.safetensors\",\n      \"type\": \"wan\",\n      \"device\": \"cpu\"\n    },\n    \"class_type\": \"CLIPLoader\",\n    \"_meta\": {\n      \"title\": \"加载CLIP\"\n    }\n  },\n  \"14\": {\n    \"inputs\": {\n      \"vae_name\": \"wan_2.1_vae.safetensors\"\n    },\n    \"class_type\": \"VAELoader\",\n    \"_meta\": {\n      \"title\": \"加载VAE\"\n    }\n  },\n  \"15\": {\n    \"inputs\": {\n      \"enable_fp16_accumulation\": true,\n      \"model\": [\n        \"8\",\n        0\n      ]\n    },\n    \"class_type\": \"ModelPatchTorchSettings\",\n    \"_meta\": {\n      \"title\": \"Model Patch Torch Settings\"\n    }\n  },\n  \"16\": {\n    \"inputs\": {\n      \"value\": 832\n    },\n    \"class_type\": \"ImpactInt\",\n    \"_meta\": {\n      \"title\": \"ImpactInt\"\n    }\n  },\n  \"17\": {\n    \"inputs\": {\n      \"value\": {{ $('配置字段').item.json.duration }}\n    },\n    \"class_type\": \"ImpactInt\",\n    \"_meta\": {\n      \"title\": \"ImpactInt\"\n    }\n  },\n  \"18\": {\n    \"inputs\": {\n      \"value\": 640\n    },\n    \"class_type\": \"ImpactInt\",\n    \"_meta\": {\n      \"title\": \"ImpactInt\"\n    }\n  },\n  \"19\": {\n    \"inputs\": {\n      \"seed\": -1\n    },\n    \"class_type\": \"Seed (rgthree)\",\n    \"_meta\": {\n      \"title\": \"Seed (rgthree)\"\n    }\n  },\n  \"20\": {\n    \"inputs\": {\n      \"frame_rate\": 16,\n      \"loop_count\": 0,\n      \"filename_prefix\": \"comfyui_\",\n      \"format\": \"video/h264-mp4\",\n      \"pix_fmt\": \"yuv420p\",\n      \"crf\": 19,\n      \"save_metadata\": true,\n      \"trim_to_audio\": false,\n      \"pingpong\": false,\n      \"save_output\": false,\n      \"images\": [\n        \"22\",\n        0\n      ]\n    },\n    \"class_type\": \"VHS_VideoCombine\",\n    \"_meta\": {\n      \"title\": \"Video Combine 🎥🅥🅗🅢\"\n    }\n  },\n  \"21\": {\n    \"inputs\": {\n      \"frame_rate\": 32,\n      \"loop_count\": 0,\n      \"filename_prefix\": \"comfyui_\",\n      \"format\": \"video/h264-mp4\",\n      \"pix_fmt\": \"yuv420p\",\n      \"crf\": 19,\n      \"save_metadata\": false,\n      \"trim_to_audio\": false,\n      \"pingpong\": false,\n      \"save_output\": true,\n      \"images\": [\n        \"23\",\n        0\n      ]\n    },\n    \"class_type\": \"VHS_VideoCombine\",\n    \"_meta\": {\n      \"title\": \"Video Combine 🎥🅥🅗🅢\"\n    }\n  },\n  \"22\": {\n    \"inputs\": {\n      \"samples\": [\n        \"26\",\n        0\n      ],\n      \"vae\": [\n        \"14\",\n        0\n      ]\n    },\n    \"class_type\": \"VAEDecode\",\n    \"_meta\": {\n      \"title\": \"VAE解码\"\n    }\n  },\n  \"23\": {\n    \"inputs\": {\n      \"ckpt_name\": \"rife49.pth\",\n      \"clear_cache_after_n_frames\": 10,\n      \"multiplier\": 2,\n      \"fast_mode\": false,\n      \"ensemble\": true,\n      \"scale_factor\": 1,\n      \"frames\": [\n        \"29\",\n        0\n      ]\n    },\n    \"class_type\": \"RIFE VFI\",\n    \"_meta\": {\n      \"title\": \"RIFE VFI (recommend rife47 and rife49)\"\n    }\n  },\n  \"24\": {\n    \"inputs\": {\n      \"value\": \"a*16+1\",\n      \"a\": [\n        \"17\",\n        0\n      ]\n    },\n    \"class_type\": \"SimpleMath+\",\n    \"_meta\": {\n      \"title\": \"🔧 Simple Math\"\n    }\n  },\n  \"25\": {\n    \"inputs\": {\n      \"width\": [\n        \"39\",\n        1\n      ],\n      \"height\": [\n        \"39\",\n        2\n      ],\n      \"length\": [\n        \"24\",\n        0\n      ],\n      \"batch_size\": 1,\n      \"positive\": [\n        \"28\",\n        0\n      ],\n      \"negative\": [\n        \"33\",\n        0\n      ],\n      \"vae\": [\n        \"14\",\n        0\n      ],\n      \"clip_vision_output\": [\n        \"40\",\n        0\n      ],\n      \"start_image\": [\n        \"39\",\n        0\n      ]\n    },\n    \"class_type\": \"WanImageToVideo\",\n    \"_meta\": {\n      \"title\": \"Wan图像到视频\"\n    }\n  },\n  \"26\": {\n    \"inputs\": {\n      \"anything\": [\n        \"1\",\n        0\n      ]\n    },\n    \"class_type\": \"easy cleanGpuUsed\",\n    \"_meta\": {\n      \"title\": \"清理显存占用\"\n    }\n  },\n  \"27\": {\n    \"inputs\": {\n      \"upscale_method\": \"lanczos\",\n      \"scale_by\": 2,\n      \"image\": [\n        \"22\",\n        0\n      ]\n    },\n    \"class_type\": \"ImageScaleBy\",\n    \"_meta\": {\n      \"title\": \"缩放图像（比例）\"\n    }\n  },\n  \"28\": {\n    \"inputs\": {\n      \"text\": [\n        \"36\",\n        0\n      ],\n      \"clip\": [\n        \"13\",\n        0\n      ]\n    },\n    \"class_type\": \"CLIPTextEncode\",\n    \"_meta\": {\n      \"title\": \"CLIP文本编码\"\n    }\n  },\n  \"29\": {\n    \"inputs\": {\n      \"anything\": [\n        \"27\",\n        0\n      ]\n    },\n    \"class_type\": \"easy cleanGpuUsed\",\n    \"_meta\": {\n      \"title\": \"清理显存占用\"\n    }\n  },\n  \"30\": {\n    \"inputs\": {\n      \"add_noise\": \"enable\",\n      \"noise_seed\": [\n        \"19\",\n        0\n      ],\n      \"steps\": 6,\n      \"cfg\": 1,\n      \"sampler_name\": \"euler_ancestral\",\n      \"scheduler\": \"simple\",\n      \"start_at_step\": 0,\n      \"end_at_step\": 3,\n      \"return_with_leftover_noise\": \"enable\",\n      \"model\": [\n        \"15\",\n        0\n      ],\n      \"positive\": [\n        \"25\",\n        0\n      ],\n      \"negative\": [\n        \"25\",\n        1\n      ],\n      \"latent_image\": [\n        \"25\",\n        2\n      ]\n    },\n    \"class_type\": \"KSamplerAdvanced\",\n    \"_meta\": {\n      \"title\": \"K采样器（高级）\"\n    }\n  },\n  \"33\": {\n    \"inputs\": {\n      \"text\": \"色调艳丽，过曝，静态，细节模糊不清，字幕，风格，作品，画作，画面，静止，整体发灰，最差质量，低质量，JPEG压缩残留，丑陋的，残缺的，多余的手指，画得不好的手部，画得不好的脸部，畸形的，毁容的，形态畸形的肢体，手指融合，静止不动的画面，杂乱的背景，三条腿，背景人很多，倒着走, censored, mosaic censoring, bar censor, pixelated, glowing, bloom, blurry, out of focus, low detail, bad anatomy, ugly, overexposed, underexposed, distorted face, extra limbs, cartoonish, 3d render artifacts, duplicate people, unnatural lighting, bad composition, missing shadows, low resolution, poorly textured, glitch, noise, grain, static, motionless, still frame, overall grayish, worst quality, low quality, JPEG compression artifacts, subtitles, stylized, artwork, painting, illustration, cluttered background, many people in background, three legs, walking backward, zoom out, zoom in, mouth speaking, moving mouth, talking, speaking, mute speaking, unnatural skin tone, discolored eyelid, red eyelids, red upper eyelids, no red eyeshadow, closed eyes, no wide-open innocent eyes, poorly drawn hands, extra fingers, fused fingers, poorly drawn face, deformed, disfigured, malformed limbs, thighs, fog, mist, voluminous eyelashes, blush,\",\n      \"clip\": [\n        \"13\",\n        0\n      ]\n    },\n    \"class_type\": \"CLIPTextEncode\",\n    \"_meta\": {\n      \"title\": \"CLIP文本编码\"\n    }\n  },\n  \"36\": {\n    \"inputs\": {\n      \"value\": \"{{ $('配置字段').item.json.prompt }}\"\n    },\n    \"class_type\": \"PrimitiveStringMultiline\",\n    \"_meta\": {\n      \"title\": \"Positive\"\n    }\n  },\n  \"37\": {\n    \"inputs\": {\n      \"image\": \"{{ $json.name }}\"\n    },\n    \"class_type\": \"LoadImage\",\n    \"_meta\": {\n      \"title\": \"加载图像\"\n    }\n  },\n  \"39\": {\n    \"inputs\": {\n      \"width\": [\n        \"18\",\n        0\n      ],\n      \"height\": [\n        \"16\",\n        0\n      ],\n      \"upscale_method\": \"nearest-exact\",\n      \"keep_proportion\": \"crop\",\n      \"pad_color\": \"0, 0, 0\",\n      \"crop_position\": \"center\",\n      \"divisible_by\": 2,\n      \"device\": \"cpu\",\n      \"image\": [\n        \"37\",\n        0\n      ]\n    },\n    \"class_type\": \"ImageResizeKJv2\",\n    \"_meta\": {\n      \"title\": \"Resize Image v2\"\n    }\n  },\n  \"40\": {\n    \"inputs\": {\n      \"crop\": \"none\",\n      \"clip_vision\": [\n        \"41\",\n        0\n      ],\n      \"image\": [\n        \"39\",\n        0\n      ]\n    },\n    \"class_type\": \"CLIPVisionEncode\",\n    \"_meta\": {\n      \"title\": \"CLIP视觉编码\"\n    }\n  },\n  \"41\": {\n    \"inputs\": {\n      \"clip_name\": \"clip_vision_h.safetensors\"\n    },\n    \"class_type\": \"CLIPVisionLoader\",\n    \"_meta\": {\n      \"title\": \"加载CLIP视觉\"\n    }\n  }\n}\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        960,
+        240
+      ],
+      "id": "94cdee1a-c9f6-4d7c-b204-00a80aeda6ae",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1232,
+        240
+      ],
+      "id": "ba2b304f-72a1-4752-a6cc-6682ffa52cc1",
+      "name": "Wait",
+      "webhookId": "0a4675d5-4a1b-48af-82f0-49903aa5c606"
+    },
+    {
+      "parameters": {
+        "url": "=http://host.docker.internal:8188/history/{{ $('HTTP Request').item.json.prompt_id }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1440,
+        240
+      ],
+      "id": "9ae0ea61-53f9-4771-9bab-b190c508a762",
+      "name": "HTTP Request1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "95b5670e-5019-45a7-b701-08a608311038",
+              "leftValue": "={{ $json.values()[0].status.status_str }}",
+              "rightValue": "success",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1664,
+        240
+      ],
+      "id": "dea8d5b8-5c4f-4cc1-8400-4634a4bf05ae",
+      "name": "If",
+      "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://host.docker.internal:8188/upload/image",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "image",
+              "inputDataFieldName": "data"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        688,
+        240
+      ],
+      "id": "4e4744d2-ee91-4b57-9c40-c52c9ad027c4",
+      "name": "HTTP Request2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b56d373b-ce89-4280-bb76-745968f4d482",
+              "name": "video_filepath",
+              "value": "={{ $json.fileName }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2320,
+        240
+      ],
+      "id": "62f2fbd1-030b-4e4f-b3bd-eaaf4a6ee863",
+      "name": "执行结束返回字段1"
+    },
+    {
+      "parameters": {
+        "operation": "write",
+        "fileName": "={{ $('配置字段').item.json.output_folder_path }}video_fragment_{{ $now.format('yyyy-MM-dd_hh-mm-ss') }}_{{ Math.floor(Math.random() * 10000) }}.mp4",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        2128,
+        240
+      ],
+      "id": "a74ceb38-ca9f-4b32-b9ae-f65abc8ab801",
+      "name": "Read/Write Files from Disk"
+    },
+    {
+      "parameters": {
+        "fileSelector": "=/comfyuidata/{{ $json.values()[0].outputs['21'].gifs[0].filename }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        1904,
+        240
+      ],
+      "id": "1bc56840-e849-44d5-a6ba-21e96b65501b",
+      "name": "Read/Write Files from Disk2"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "配置字段": {
+      "main": [
+        [
+          {
+            "node": "Read/Write Files from Disk1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "配置字段",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read/Write Files from Disk1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Read/Write Files from Disk2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request2": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read/Write Files from Disk2": {
+      "main": [
+        [
+          {
+            "node": "Read/Write Files from Disk",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read/Write Files from Disk": {
+      "main": [
+        [
+          {
+            "node": "执行结束返回字段1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "8c335e88-2646-426c-b4f5-15d9a46aafce",
+  "meta": {
+    "instanceId": "164b6258852a751ffad2d91c0ef2b3e746122b3f527005a8ac87036f847eae21"
+  },
+  "id": "qIP4ZignQIiV83vl",
+  "tags": []
+}

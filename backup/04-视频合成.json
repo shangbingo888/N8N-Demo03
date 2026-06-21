@@ -1,0 +1,133 @@
+{
+  "name": "[Webhook] 04-视频合成",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "compose-video",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "接收合成请求",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        250,
+        300
+      ],
+      "onError": "continueRegularOutput",
+      "webhookId": "fb84f18b-0665-47f9-8c00-4e929aa7bbb3"
+    },
+    {
+      "parameters": {
+        "language": "javaScript",
+        "mode": "runOnceForAllItems",
+        "jsCode": "const body = $input.first().json.body || {};\n\nconst images = body.images || [];\nconst audioPath = body.audio_path;\nconst outputName = body.output_name || `video_${Date.now()}.mp4`;\nconst fps = body.fps || 24;\nconst outputPath = `/files/${outputName}`;\nconst workDir = body.work_dir || '/tmp';\n\nif (images.length === 0) throw new Error('缺少图片列表 (images)');\nif (!audioPath) throw new Error('缺少音频路径 (audio_path)');\n\n// 构建 ffmpeg concat 文件内容\nlet concatContent = '';\nimages.forEach(img => {\n  concatContent += `file '${img.path}'\\n`;\n  concatContent += `duration ${img.duration || 5}\\n`;\n});\n// 最后一张图片需要再写一次 file 行 (ffmpeg concat 规范)\nif (images.length > 0) {\n  concatContent += `file '${images[images.length - 1].path}'\\n`;\n}\n\nconst concatFile = `${workDir}/concat_${Date.now()}.txt`;\n\n// FFmpeg 命令\nconst cmd = [\n  `echo '${concatContent.replace(/'/g, \"'\\\\''\")}' > ${concatFile}`,\n  `&&`,\n  `ffmpeg -y -f concat -safe 0 -i ${concatFile}`,\n  `-i '${audioPath}'`,\n  `-c:v libx264 -pix_fmt yuv420p -r ${fps}`,\n  `-c:a aac -shortest`,\n  `'${outputPath}'`,\n  `&&`,\n  `echo 'SUCCESS'`,\n  `||`,\n  `echo 'FAILED'`\n].join(' ');\n\nreturn [{\n  json: {\n    command: cmd,\n    outputPath: outputPath,\n    outputName: outputName,\n    imageCount: images.length,\n    hasAudio: !!audioPath\n  }\n}];"
+      },
+      "id": "build-ffmpeg",
+      "name": "构建FFmpeg命令",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        600,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "language": "javaScript",
+        "mode": "runOnceForAllItems",
+        "jsCode": "const { execSync } = require('child_process');\n\nconst command = $input.first().json.command;\n\ntry {\n  const stdout = execSync(command, {\n    timeout: 300000,\n    shell: '/bin/bash',\n    encoding: 'utf-8',\n    maxBuffer: 50 * 1024 * 1024\n  });\n  return [{\n    json: {\n      stdout: stdout,\n      stderr: '',\n      exitCode: 0\n    }\n  }];\n} catch (error) {\n  return [{\n    json: {\n      stdout: error.stdout || '',\n      stderr: error.stderr || error.message,\n      exitCode: error.status || 1\n    }\n  }];\n}"
+      },
+      "id": "run-ffmpeg",
+      "name": "执行 FFmpeg 合成",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        950,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "language": "javaScript",
+        "mode": "runOnceForAllItems",
+        "jsCode": "const output = $input.first().json.stdout || '';\nconst stderr = $input.first().json.stderr || '';\n\nif (!output.includes('SUCCESS')) {\n  return [{\n    json: {\n      success: false,\n      error: 'FFmpeg 合成失败',\n      output: output.substring(0, 500),\n      stderr: stderr.substring(0, 500)\n    }\n  }];\n}\n\nreturn [{\n  json: {\n    success: true,\n    message: '视频合成完成',\n    stdout: output.substring(0, 200),\n    generatedAt: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "check-result",
+      "name": "检查合成结果",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1300,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "options": {}
+      },
+      "id": "respond",
+      "name": "返回合成结果",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        1650,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "接收合成请求": {
+      "main": [
+        [
+          {
+            "node": "构建FFmpeg命令",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "构建FFmpeg命令": {
+      "main": [
+        [
+          {
+            "node": "执行 FFmpeg 合成",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "执行 FFmpeg 合成": {
+      "main": [
+        [
+          {
+            "node": "检查合成结果",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "检查合成结果": {
+      "main": [
+        [
+          {
+            "node": "返回合成结果",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Asia/Shanghai",
+    "saveManualExecutions": true
+  }
+}
