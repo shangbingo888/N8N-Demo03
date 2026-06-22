@@ -29,38 +29,7 @@
       "parameters": {
         "language": "javaScript",
         "mode": "runOnceForAllItems",
-        "jsCode": "const body = $input.first().json.body || {};\nconst errors = [];\n\n// prompt 是必填的内容输入\nif (!body.prompt || typeof body.prompt !== 'string' || body.prompt.trim().length === 0) {\n  errors.push('缺少必填参数: prompt（视频内容描述）');\n}\n\n// duration 必填，5-1800 秒\nif (!body.duration || !Number.isInteger(body.duration) || body.duration < 5 || body.duration > 1800) {\n  errors.push('缺少必填参数: duration（视频时长，5-1800 的整数秒）');\n}\n\nif (errors.length > 0) {\n  return [{ json: { _branch: 'error', success: false, statusCode: 400, errors } }];\n}\n\n// 校验通过，透传原始数据并标记分支\nconst output = $input.first().json;\noutput._branch = 'success';\nreturn [{ json: output }];"
-      }
-    },
-    {
-      "id": "validate-if",
-      "name": "校验分流",
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.3,
-      "position": [
-        512,
-        304
-      ],
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict"
-          },
-          "conditions": [
-            {
-              "id": "condition-0",
-              "leftValue": "={{ $json._branch }}",
-              "rightValue": "success",
-              "operator": {
-                "type": "string",
-                "operation": "equals"
-              }
-            }
-          ],
-          "combinator": "and"
-        }
+        "jsCode": "const body = $input.first().json.body || {};\nconst errors = [];\n\n// prompt 是必填的内容输入\nif (!body.prompt || typeof body.prompt !== 'string' || body.prompt.trim().length === 0) {\n  errors.push('缺少必填参数: prompt（视频内容描述）');\n}\n\n// duration 必填，5-1800 秒\nif (!body.duration || !Number.isInteger(body.duration) || body.duration < 5 || body.duration > 1800) {\n  errors.push('缺少必填参数: duration（视频时长，5-1800 的整数秒）');\n}\n\nif (errors.length > 0) {\n  return [{ json: { success: false, statusCode: 400, errors } }];\n}\n\n// 校验通过，透传原始数据\nreturn [{ json: $input.first().json }];"
       }
     },
     {
@@ -69,13 +38,13 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        768,
+        512,
         304
       ],
       "parameters": {
         "language": "javaScript",
         "mode": "runOnceForAllItems",
-        "jsCode": "const body = $input.first().json.body;\nconst prompt = body.prompt;\nconst duration = body.duration;\n\nconst systemPrompt = `你是一个专业的视频分镜师。你必须只返回有效的JSON，不要有任何其他文字。\\n\\n你会根据用户提供的内容，自动判断以下信息：\\n- 如果内容是简短描述（< 200字）：将其作为视频主题，自动补充风格和叙事结构\\n- 如果内容是长文本（≥ 200字）：从文本中提取核心主题和关键信息点\\n- 根据内容复杂度自动决定合理的分镜数量（3-8个）\\n- 根据内容调性自动判断视觉风格（如科技感、温馨、严肃、活泼等）\\n\\n核心原则：把创意决策交给AI，你全权负责视频的叙事节奏和视觉风格。`;\\n\\nconst userPrompt = `根据以下内容生成分镜脚本：\\n\\n用户输入：${prompt}\\n${duration ? `视频总时长目标：${duration}秒` : ''}\\n\\n输出JSON格式(严格按此格式，不要包装在markdown代码块中):\\n{\\n  \"scenes\": [\\n    {\\n      \"index\": 1,\\n      \"description\": \"场景中文描述\",\\n      \"prompt\": \"英文图片生成提示词，详细描述画面，适合AI文生图，包含风格、灯光、构图、色彩等\",\\n      \"narration\": \"中文配音文本，自然口语化\",\\n      \"duration\": 12\\n    }\\n  ]\\n}\\n\\n要求：\\n1. 根据内容复杂度自动决定分镜数量（3-8个），确保叙事完整\\n2. prompt必须是英文、详细描述画面细节、灯光、构图、色彩、风格\\n3. narration用中文，自然口语化，适合配音\\n4. 每个场景至少5秒\\n5. 场景之间要有叙事连贯性\\n6. 总时长尽量接近${duration}秒\\n7. 根据内容自动判断视觉风格并体现在prompt中`;\\n\\nreturn [{\\n  json: {\\n    body: {\\n      model: 'agnes-2.0-flash',\\n      messages: [\\n        { role: 'system', content: systemPrompt },\\n        { role: 'user', content: userPrompt }\\n      ],\\n      response_format: { type: 'json_object' },\\n      temperature: 0.7\\n    },\\n    originalInput: body\\n  }\\n}];"
+        "jsCode": "const body = $input.first().json.body;\nconst prompt = body.prompt;\nconst duration = body.duration;\n\nconst systemPrompt = `你是一个专业的视频分镜师。你必须只返回有效的JSON，不要有任何其他文字。\\n\\n你会根据用户提供的内容，自动判断以下信息：\\n- 如果内容是简短描述（< 200字）：将其作为视频主题，自动补充风格和叙事结构\\n- 如果内容是长文本（≥ 200字）：从文本中提取核心主题和关键信息点\\n- 根据内容复杂度自动决定合理的分镜数量（3-8个）\\n- 根据内容调性自动判断视觉风格（如科技感、温馨、严肃、活泼等）\\n\\n核心原则：把创意决策交给AI，你全权负责视频的叙事节奏和视觉风格。`;\\n\\nconst userPrompt = `根据以下内容生成分镜脚本：\\n\\n用户输入：${prompt}\\n${duration ? `视频总时长目标：${duration}秒` : ''}\\n\\n输出JSON格式(严格按此格式，不要包装在markdown代码块中):\\n{\\n  \"scenes\": [\\n    {\\n      \"index\": 1,\\n      \"description\": \"场景中文描述\",\\n      \"prompt\": \"英文图片生成提示词，详细描述画面，适合AI文生图，包含风格、灯光、构图、色彩等\",\\n      \"narration\": \"中文配音文本，自然口语化\",\\n      \"duration\": 12\\n    }\\n  ]\\n}\\n\\n要求：\\n1. 根据内容复杂度自动决定分镜数量（3-8个），确保叙事完整\\n2. prompt必须是英文、详细描述画面细节、灯光、构图、色彩、风格\\n3. narration用中文，自然口语化，适合配音\\n4. 每个场景至少5秒\\n5. 场景之间要有叙事连贯性\\n6. 总时长尽量接近${duration}秒\\n7. 根据内容自动判断视觉风格并体现在prompt中`;\\n\\nreturn [{\n  json: {\n    body: {\n      model: 'agnes-2.0-flash',\n      messages: [\n        { role: 'system', content: systemPrompt },\n        { role: 'user', content: userPrompt }\n      ],\n      response_format: { type: 'json_object' },\n      temperature: 0.7\n    },\n    originalInput: body\n  }\n}];"
       }
     },
     {
@@ -84,7 +53,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        1024,
+        768,
         304
       ],
       "parameters": {
@@ -123,7 +92,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1264,
+        1008,
         304
       ],
       "parameters": {
@@ -137,7 +106,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1520,
+        1264,
         160
       ]
     },
@@ -147,7 +116,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        1776,
+        1520,
         160
       ],
       "onError": "continueRegularOutput"
@@ -158,13 +127,9 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2016,
+        1760,
         160
-      ],
-      "parameters": {
-        "language": "javaScript",
-        "mode": "runOnceForAllItems"
-      }
+      ]
     },
     {
       "id": "download-img",
@@ -172,7 +137,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        2176,
+        1920,
         160
       ],
       "onError": "continueRegularOutput"
@@ -183,7 +148,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2512,
+        2256,
         160
       ]
     },
@@ -193,7 +158,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1520,
+        1264,
         464
       ]
     },
@@ -203,7 +168,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        1776,
+        1520,
         464
       ],
       "onError": "continueRegularOutput"
@@ -214,7 +179,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2016,
+        1760,
         464
       ]
     },
@@ -224,7 +189,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2528,
+        2272,
         464
       ]
     },
@@ -234,7 +199,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2768,
+        2512,
         304
       ]
     },
@@ -244,7 +209,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        3264,
+        3008,
         304
       ]
     },
@@ -254,7 +219,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        3616,
+        3360,
         304
       ]
     },
@@ -264,7 +229,7 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        3952,
+        3696,
         304
       ]
     }
@@ -276,35 +241,6 @@
           {
             "index": 0,
             "node": "校验输入参数",
-            "type": "main"
-          }
-        ]
-      ]
-    },
-    "校验输入参数": {
-      "main": [
-        [
-          {
-            "index": 0,
-            "node": "校验分流",
-            "type": "main"
-          }
-        ]
-      ]
-    },
-    "校验分流": {
-      "main": [
-        [
-          {
-            "index": 0,
-            "node": "构建AI分镜Prompt",
-            "type": "main"
-          }
-        ],
-        [
-          {
-            "index": 0,
-            "node": "返回结果",
             "type": "main"
           }
         ]
@@ -476,6 +412,17 @@
             "node": "返回结果",
             "type": "main",
             "index": 0
+          }
+        ]
+      ]
+    },
+    "校验输入参数": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "构建AI分镜Prompt",
+            "type": "main"
           }
         ]
       ]

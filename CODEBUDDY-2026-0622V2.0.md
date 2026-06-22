@@ -15,6 +15,7 @@ AI 是工作流的**构建者**，非理论顾问——通过 n8n MCP 工具直�
 ---
 
 ## 开发工作流
+
 > **新增工作流或功能需求时，严格遵循以下 5 步生命周期。所有操作通过 MCP 工具执行，禁止仅输出 JSON。**
 
 ### 1. 模板检索
@@ -76,10 +77,7 @@ search_nodes → get_node(mode:'info') → validate_node(mode:'full')
 Docker Task Runner 下，HTTP Request V4.4 下游 Code 节点收到的是 `Readable Stream`，不是 JSON。
 ```
 诊断：n8n_executions(mode='error') → 看 upstreamContext 有 _readableState → 确认
-修复：
-  方案A（纯JSON API）: _outBuffer + lastIndexOf('}') 截断 → 详见 project-memory 2.2.1 节
-  方案B（API返回含二进制尾）: _readableState.buffer chunks 优先（纯净JSON chunk），
-       _outBuffer 含混入的二进制垃圾（如 Agnes 生图 API 返回 JSON + gzip 图片数据）
+修复：_outBuffer + lastIndexOf('}') 截断 → 详见 project-memory 2.2.1 节
 ```
 
 ### Code 节点三大契约
